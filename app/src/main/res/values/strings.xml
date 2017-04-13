@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">SystemUI Tuner</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string-array name="wifi_strength">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="mobile_strength">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="mobile_type">
+        <item>lte</item>
+        <item>3g</item>
+        <item>2g</item>
+        <item>4g</item>
+    </string-array>
+
+    <string-array name="stat_bar_style">
+        <item>opaque</item>
+    </string-array>
+</resources>

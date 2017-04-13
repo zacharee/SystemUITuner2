@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_quick_settings"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="Quick Settings"
+            android:visible="false" />
+        <item
+            android:id="@+id/nav_statusbar"
+            android:icon="@drawable/ic_info_black_24dp"
+            android:title="Status bar" />
+        <item
+            android:id="@+id/nav_demo_mode"
+            android:icon="@drawable/ic_tv_black_24dp"
+            android:title="Demo mode" />
+    </group>
+
+</menu>

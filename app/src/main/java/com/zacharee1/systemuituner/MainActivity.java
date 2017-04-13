@@ -195,6 +195,10 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    public void sendBC(Intent intent) {
+        sendBroadcast(intent);
+    }
+
     public void sudo(String...strings) {
         try{
             Process su = Runtime.getRuntime().exec("su");

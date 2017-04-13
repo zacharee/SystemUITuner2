@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.zacharee1.systemuituner.NoRoot"
+    tools:showIn="@layout/activity_no_root">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintTop_creator="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:foregroundGravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Not rooted, huh?"
+                android:textAlignment="center"
+                android:textColor="@android:color/primary_text_light"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bummer..."
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="I guess it's a good thing that there's a workaround, then."
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="For this to work, you'll need a computer, a USB cable and ADB (look up how to set that up)."
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text='Remember to also enable "USB Debugging" in Developer Options, and authorize your computer.'
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="ADB all set up? Good. Now, let's get started."
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textView26"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Run the following command (with your phone connected) in CMD or Terminal:"
+                android:textAlignment="center" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:foregroundGravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <HorizontalScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:foregroundGravity="center_horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:background="#555"
+                        android:foregroundGravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:paddingBottom="16dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingTop="16dp">
+
+                        <TextView
+                            android:id="@+id/textView27"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="monospace"
+                            android:text="adb shell pm grant com.zacharee1.systemuituner android.permission.WRITE_SECURE_SETTINGS"
+                            android:textAlignment="textStart"
+                            android:textColor="#fff"
+                            android:textIsSelectable="true" />
+                    </LinearLayout>
+                </HorizontalScrollView>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Once that's done, go ahead and hit the back button, and use the app!"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

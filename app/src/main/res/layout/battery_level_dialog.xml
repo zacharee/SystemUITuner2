@@ -1,36 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
 
     <NumberPicker
         android:id="@+id/select_battery_level"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="64dp" />
 
-    <Button
-        android:id="@+id/button_cancel"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/select_battery_level"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="98dp"
-        android:layout_toRightOf="@+id/select_battery_level"
-        android:text="Cancel" />
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/button_set"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button_cancel"
-        android:layout_alignBottom="@+id/button_cancel"
-        android:layout_marginRight="16dp"
-        android:layout_toLeftOf="@+id/select_battery_level"
-        android:text="Set" />
+        <Button
+            android:id="@+id/button_cancel"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/select_battery_level"
+            android:layout_weight="1"
+            android:text="Cancel" />
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/button_set"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/button_cancel"
+            android:layout_alignBottom="@+id/button_cancel"
+            android:layout_toLeftOf="@+id/select_battery_level"
+            android:layout_weight="1"
+            android:text="Set" />
+    </LinearLayout>
+
+</LinearLayout>

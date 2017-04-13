@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -23,6 +24,8 @@ public class StatBarFragment extends Fragment {
     public View view;
     public MainActivity activity;
     public SharedPreferences.Editor editor;
+
+    boolean isRooted;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,6 +52,8 @@ public class StatBarFragment extends Fragment {
         Switch do_not_disturb = (Switch) view.findViewById(R.id.do_not_disturb);
 
         editor = activity.sharedPreferences.edit();
+
+        isRooted = activity.sharedPreferences.getBoolean("isRooted", false);
 
         sharedPrefs("bluetooth", bluetooth);
         sharedPrefs("wifi", wifi);
@@ -91,12 +96,9 @@ public class StatBarFragment extends Fragment {
     public void switches(Switch toggle, final String setting) {
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
                 String blacklist = Settings.Secure.getString(activity.getContentResolver(), "icon_blacklist");
 //                blacklist = Settings.System.getString(activity.getContentResolver(), "icon_blacklist");
-                if (blacklist != null && blacklist != "") {
-                    Log.i("blacklist", blacklist);
-                }
                 if (!isChecked) {
                     if (blacklist != null && blacklist != "") {
                         blacklist = blacklist.concat("," + setting);
@@ -121,9 +123,25 @@ public class StatBarFragment extends Fragment {
                     public void run() {
                         try {
                             if (blacklist2 != "" && blacklist2 != null) {
-                                sudo("settings put secure icon_blacklist " + blacklist2);
+                                if (isRooted) sudo("settings put secure icon_blacklist " + blacklist2);
+                                else {
+                                    try {
+                                        Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", blacklist2);
+                                    } catch (Exception e) {
+                                        Log.e("icon_blacklist", e.getMessage());
+                                        Toast.makeText(activity.getApplicationContext(), "Did you set up ADB?", Toast.LENGTH_LONG).show();
+                                    }
+                                }
                             } else {
-                                sudo("settings delete secure icon_blacklist");
+                                if (isRooted) sudo("settings delete secure icon_blacklist");
+                                else {
+                                    try {
+                                        Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", "");
+                                    } catch (Exception e) {
+                                        Log.e("icon_blacklist", e.getMessage());
+                                        Toast.makeText(activity.getApplicationContext(), "Did you set up ADB?", Toast.LENGTH_LONG).show();
+                                    }
+                                }
                             }
                         } catch (Exception e) {}
                     }

@@ -3,8 +3,11 @@ package com.zacharee1.systemuituner;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Looper;
 import android.preference.PreferenceFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,6 +57,8 @@ public class DemoFragment extends Fragment {
     public String showNotifs = "false";
     public String statBarStyle = "opaque";
 
+    boolean isRooted;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,6 +68,8 @@ public class DemoFragment extends Fragment {
         }
 
         view = inflater.inflate(R.layout.fragment_demo, container, false);
+
+        isRooted = activity.sharedPreferences.getBoolean("isRooted", false);
 
 //        enableDemo = (Switch) view.findViewById(R.id.enable_demo);
         showDemo = (Switch) view.findViewById(R.id.show_demo);
@@ -79,6 +86,11 @@ public class DemoFragment extends Fragment {
         setSpinnerAdaptors(mobile, R.array.mobile_strength);
         setSpinnerAdaptors(mobileTypeSpinner, R.array.mobile_type);
         setSpinnerAdaptors(statStyleSpinner, R.array.stat_bar_style);
+
+        wifi.setSelection(activity.sharedPreferences.getInt("wifiLevel", 3));
+        mobile.setSelection(activity.sharedPreferences.getInt("mobileLevel", 3));
+        mobileTypeSpinner.setSelection(activity.sharedPreferences.getInt("mobileType1", 0));
+        statStyleSpinner.setSelection(activity.sharedPreferences.getInt("statBarStyle1", 0));
 
         editor = activity.sharedPreferences.edit();
 
@@ -119,7 +131,7 @@ public class DemoFragment extends Fragment {
 //    }
 
     public void setSpinnerAdaptors(Spinner spinner, int arrayID) {
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(activity.getApplicationContext(),
                 arrayID, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -129,7 +141,7 @@ public class DemoFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                editor.putString("statBarStyle", String.valueOf(spinner.getItemAtPosition(position)));
+                editor.putInt("statBarStyle1", position);
                 editor.apply();
                 statBarStyle = String.valueOf(spinner.getItemAtPosition(position));
             }
@@ -178,7 +190,7 @@ public class DemoFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String value = String.valueOf(spinner.getItemAtPosition(position));
-                editor.putString("mobileType", value);
+                editor.putInt("mobileType1", position);
                 editor.apply();
                 mobileType = value;
             }
@@ -191,11 +203,11 @@ public class DemoFragment extends Fragment {
 
     }
 
-    public void selectBatteryLevel(Button button) {
+    public void selectBatteryLevel(final Button button) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Dialog d = new Dialog(getContext());
+                final Dialog d = new Dialog(button.getContext());
                 d.setTitle("NumberPicker");
                 d.setContentView(R.layout.battery_level_dialog);
                 Button b1 = (Button) d.findViewById(R.id.button_cancel);
@@ -205,6 +217,7 @@ public class DemoFragment extends Fragment {
                 np.setMinValue(0);
                 np.setValue(activity.sharedPreferences.getInt("batteryLevel", 50));
                 np.setWrapSelectorWheel(false);
+                np.setSelected(false);
                 np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
                     @Override
                     public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
@@ -234,7 +247,7 @@ public class DemoFragment extends Fragment {
         });
     }
 
-    public void selectTime(Button button) {
+    public void selectTime(final Button button) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -244,7 +257,7 @@ public class DemoFragment extends Fragment {
 
                 TimePickerDialog timePickerDialog;
 
-                timePickerDialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+                timePickerDialog = new TimePickerDialog(button.getContext(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         DemoFragment demo = new DemoFragment();
@@ -292,13 +305,35 @@ public class DemoFragment extends Fragment {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            sudo("am broadcast -a com.android.systemui.demo --es command enter" + " && " +
-                                    "am broadcast -a com.android.systemui.demo --es command clock -- es hhmm " + String.valueOf(hour) + String.valueOf(minute) + " && " +
-                                    "am broadcast -a com.android.systemui.demo --es command network --es mobile " + String.valueOf(showMobile) + " --es fully true --es level " + String.valueOf(mobileLevel) + " --es datatype " + mobileType +
-                                    " --es wifi " + String.valueOf(showWiFi) + " --es fully true --es level " + String.valueOf(wifiLevel) + " && " +
-                                    "am broadcast -a com.android.systemui.demo --es command battery --es level " + String.valueOf(batteryLevel) + " --es plugged " + String.valueOf(batteryPlugged) + " && " +
-                                    "am broadcast -a com.android.systemui.demo --es command notifications --es visible " + String.valueOf(showNotifs) + " && " +
-                                    "am broadcast -a com.android.systemui.demo --es command bars --es mode " + String.valueOf(statBarStyle));
+                            Looper.prepare();
+                            Intent intent = new Intent("com.android.systemui.demo");
+                            intent.putExtra("command", "enter");
+                            getActivity().sendBroadcast(intent);
+
+                            intent.putExtra("command", "clock");
+                            intent.putExtra("hhmm", String.valueOf(hour) + String.valueOf(minute));
+                            getActivity().sendBroadcast(intent);
+
+                            intent.putExtra("command", "network");
+                            intent.putExtra("mobile", String.valueOf(showMobile));
+                            intent.putExtra("fully", "true");
+                            intent.putExtra("level", String.valueOf(mobileLevel));
+                            intent.putExtra("datatype", String.valueOf(mobileType));
+                            intent.putExtra("wifi", String.valueOf(showWiFi));
+                            intent.putExtra("fully", "true");
+                            intent.putExtra("level", String.valueOf(wifiLevel));
+                            getActivity().sendBroadcast(intent);
+
+                            intent.putExtra("command", "battery");
+                            intent.putExtra("level", String.valueOf(batteryLevel));
+                            intent.putExtra("plugged", String.valueOf(batteryPlugged));
+                            getActivity().sendBroadcast(intent);
+
+                            intent.putExtra("command", "notifications");
+                            intent.putExtra("visible", String.valueOf(showNotifs));
+                            intent.putExtra("command", "bars");
+                            intent.putExtra("mode", statBarStyle);
+                            getActivity().sendBroadcast(intent);
                         }
                     }).start();
                 } else {

@@ -34,4 +34,6 @@
     <string-array name="stat_bar_style">
         <item>opaque</item>
     </string-array>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_no_root">NoRoot</string>
 </resources>

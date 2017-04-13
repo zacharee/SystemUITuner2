@@ -5,13 +5,13 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <TextView
                 android:id="@+id/textView6"
@@ -22,6 +22,16 @@
                 android:textAlignment="center"
                 android:textColor="@android:color/primary_text_light"
                 android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Networking &amp; Data"
+                android:textAlignment="center"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="18sp" />
 
             <Switch
                 android:id="@+id/bt_icon"
@@ -74,36 +84,6 @@
                 android:textSize="18sp" />
 
             <Switch
-                android:id="@+id/managed_profile_icon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checked="false"
-                android:switchMinWidth="50dp"
-                android:text="Managed Profile Icon"
-                android:textSize="18sp" />
-
-            <Switch
-                android:id="@+id/zen_icon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checked="false"
-                android:switchMinWidth="50dp"
-                android:text="Zen Icon"
-                android:textSize="18sp" />
-
-            <Switch
-                android:id="@+id/alarm_clock_icon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checked="false"
-                android:switchMinWidth="50dp"
-                android:text="Alarm Clock Icon"
-                android:textSize="18sp" />
-
-            <Switch
                 android:id="@+id/hotspot_icon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -121,6 +101,102 @@
                 android:checked="false"
                 android:switchMinWidth="50dp"
                 android:text="Data Saver Icon"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:alpha="0.75"
+                android:background="@color/colorPrimary"
+                android:elevation="0dp"
+                android:translationZ="0dp" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Sounds &amp; Alerts"
+                android:textAlignment="center"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/volume"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="Volume"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/zen_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="Zen Icon"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/do_not_disturb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="Do Not Disturb"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/alarm_clock_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="Alarm Clock Icon"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:alpha="0.75"
+                android:background="@color/colorPrimary"
+                android:elevation="0dp"
+                android:translationZ="0dp" />
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Miscellaneous"
+                android:textAlignment="center"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/managed_profile_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="Managed Profile Icon"
                 android:textSize="18sp" />
 
             <Switch
@@ -143,25 +219,6 @@
                 android:text="Clock"
                 android:textSize="18sp" />
 
-            <Switch
-                android:id="@+id/volume"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checked="false"
-                android:switchMinWidth="50dp"
-                android:text="Volume"
-                android:textSize="18sp" />
-
-            <Switch
-                android:id="@+id/do_not_disturb"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checked="false"
-                android:switchMinWidth="50dp"
-                android:text="Do Not Disturb"
-                android:textSize="18sp" />
         </LinearLayout>
     </ScrollView>
 

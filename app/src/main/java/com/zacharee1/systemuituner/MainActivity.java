@@ -19,6 +19,7 @@ import android.view.MenuItem;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -52,8 +53,18 @@ public class MainActivity extends AppCompatActivity
         editor = sharedPreferences.edit();
         int id = sharedPreferences.getInt("navpage", R.id.nav_home);
 
+        ArrayList<Integer> menuIDs = new ArrayList<Integer>() {{
+            add(R.id.nav_home);
+            add(R.id.nav_statusbar);
+            add(R.id.nav_demo_mode);
+            add(R.id.nav_about);
+        }};
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Menu navMenu = navigationView.getMenu();
+        if (menuIDs.contains(id)) navMenu.findItem(id).setChecked(true);
 
         if (id == R.id.nav_home) {
             final MainFragment fragment = new MainFragment();
@@ -69,6 +80,10 @@ public class MainActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
         } else if (id == R.id.nav_demo_mode) {
             final DemoFragment fragment = new DemoFragment();
+            final FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+        } else if (id == R.id.nav_about) {
+            final AboutFragment fragment = new AboutFragment();
             final FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
         }
@@ -162,14 +177,22 @@ public class MainActivity extends AppCompatActivity
                     fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
                 }
             }, 350);
+        } else if (id == R.id.nav_about) {
+            final AboutFragment fragment = new AboutFragment();
+            final FragmentManager fragmentManager = getFragmentManager();
+            final Handler handler = new Handler();
+
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+                }
+            }, 350);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public void sendBC() {
     }
 
     public void sudo(String...strings) {

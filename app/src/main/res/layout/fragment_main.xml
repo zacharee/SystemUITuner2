@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="(If you do have the stock SystemUI Tuner, this one does provide some extra goodies.)"
+                android:text="(If you do have the stock SystemUI Tuner, this one provides some extra goodies.)"
                 android:textAlignment="center" />
 
             <TextView

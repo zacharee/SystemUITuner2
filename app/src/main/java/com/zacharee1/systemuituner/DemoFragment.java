@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Looper;
 import android.preference.PreferenceFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,10 +34,11 @@ public class DemoFragment extends Fragment {
     public View view;
     public MainActivity activity;
     public SharedPreferences.Editor editor;
-    public Switch enableDemo;
+    public Button enableDemo;
     public Switch showDemo;
     public Switch batteryPluggedSwitch;
     public Switch showNotifSwitch;
+    public Switch airplaneMode;
     public Button selectTime;
     public Button selectBatteryLevel;
     public Spinner wifi;
@@ -52,6 +54,7 @@ public class DemoFragment extends Fragment {
 
     public String showMobile = "show";
     public String showWiFi = "show";
+    public String showAirplane = "hide";
     public String mobileType = "lte";
     public String batteryPlugged = "false";
     public String showNotifs = "false";
@@ -79,6 +82,7 @@ public class DemoFragment extends Fragment {
         mobile = (Spinner) view.findViewById(R.id.mobile_strength);
         mobileTypeSpinner = (Spinner) view.findViewById(R.id.mobile_type);
         batteryPluggedSwitch = (Switch) view.findViewById(R.id.battery_plugged);
+        airplaneMode = (Switch) view.findViewById(R.id.show_airplane);
         showNotifSwitch = (Switch) view.findViewById(R.id.show_notifs);
         statStyleSpinner = (Spinner) view.findViewById(R.id.stat_bar_style);
 
@@ -92,6 +96,30 @@ public class DemoFragment extends Fragment {
         mobileTypeSpinner.setSelection(activity.sharedPreferences.getInt("mobileType1", 0));
         statStyleSpinner.setSelection(activity.sharedPreferences.getInt("statBarStyle1", 0));
 
+        statBarStyle = (String)statStyleSpinner.getItemAtPosition(activity.sharedPreferences.getInt("statBarStyle1", 0));
+
+        showDemo.setChecked(activity.sharedPreferences.getBoolean("demoOn", false));
+        batteryPluggedSwitch.setChecked(activity.sharedPreferences.getBoolean("isCharging", false));
+        if (activity.sharedPreferences.getBoolean("isCharging", false)) {
+            batteryPlugged = "true";
+        }
+        airplaneMode.setChecked(activity.sharedPreferences.getBoolean("showAirplane", false));
+        if (activity.sharedPreferences.getBoolean("showAirplane", false)) {
+            showAirplane = "show";
+        }
+        showNotifSwitch.setChecked(activity.sharedPreferences.getBoolean("showNotifs", false));
+        if (activity.sharedPreferences.getBoolean("showNotifs", false)) {
+            showNotifs = "true";
+        }
+
+        mobileType = (String)mobileTypeSpinner.getItemAtPosition(activity.sharedPreferences.getInt("mobileType1", 0));
+
+        hour = activity.sharedPreferences.getInt("hour", 12);
+        minute = activity.sharedPreferences.getInt("minute", 00);
+        mobileLevel = activity.sharedPreferences.getInt("mobileLevel", 3);
+        wifiLevel = activity.sharedPreferences.getInt("wifiLevel", 3);
+        batteryLevel = activity.sharedPreferences.getInt("batteryLevel", 50);
+
         editor = activity.sharedPreferences.edit();
 
 //        enableDemo(enableDemo);
@@ -104,6 +132,7 @@ public class DemoFragment extends Fragment {
         setBatteryPlugged(batteryPluggedSwitch);
         setShowNotifs(showNotifSwitch);
         setStatBarStyle(statStyleSpinner);
+        setAirplaneMode(airplaneMode);
         return view;
     }
 
@@ -179,6 +208,22 @@ public class DemoFragment extends Fragment {
                 } else {
                     editor.putBoolean("isCharging", false);
                     batteryPlugged = "false";
+                }
+                editor.apply();
+            }
+        });
+    }
+
+    public void setAirplaneMode(Switch toggle) {
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    editor.putBoolean("showAirplane", true);
+                    showAirplane = "show";
+                } else {
+                    editor.putBoolean("showAirplane", false);
+                    showAirplane = "hide";
                 }
                 editor.apply();
             }
@@ -306,41 +351,58 @@ public class DemoFragment extends Fragment {
                         @Override
                         public void run() {
                             Looper.prepare();
-                            Intent intent = new Intent("com.android.systemui.demo");
-                            intent.putExtra("command", "enter");
-                            getActivity().sendBroadcast(intent);
+                            try {
+                                Intent intent = new Intent("com.android.systemui.demo");
+                                intent.putExtra("command", "enter");
+                                getActivity().sendBroadcast(intent);
 
-                            intent.putExtra("command", "clock");
-                            intent.putExtra("hhmm", String.valueOf(hour) + String.valueOf(minute));
-                            getActivity().sendBroadcast(intent);
+                                intent.putExtra("command", "clock");
+                                intent.putExtra("hhmm", String.valueOf(hour) + String.valueOf(minute));
+                                getActivity().sendBroadcast(intent);
 
-                            intent.putExtra("command", "network");
-                            intent.putExtra("mobile", String.valueOf(showMobile));
-                            intent.putExtra("fully", "true");
-                            intent.putExtra("level", String.valueOf(mobileLevel));
-                            intent.putExtra("datatype", String.valueOf(mobileType));
-                            intent.putExtra("wifi", String.valueOf(showWiFi));
-                            intent.putExtra("fully", "true");
-                            intent.putExtra("level", String.valueOf(wifiLevel));
-                            getActivity().sendBroadcast(intent);
+                                intent.putExtra("command", "network");
+                                intent.putExtra("mobile", String.valueOf(showMobile));
+                                intent.putExtra("fully", "true");
+                                intent.putExtra("level", String.valueOf(mobileLevel));
+                                intent.putExtra("datatype", String.valueOf(mobileType));
+                                getActivity().sendBroadcast(intent);
 
-                            intent.putExtra("command", "battery");
-                            intent.putExtra("level", String.valueOf(batteryLevel));
-                            intent.putExtra("plugged", String.valueOf(batteryPlugged));
-                            getActivity().sendBroadcast(intent);
+                                intent.removeExtra("mobile");
+                                intent.removeExtra("datatype");
+                                intent.putExtra("wifi", String.valueOf(showWiFi));
+                                intent.putExtra("fully", "true");
+                                intent.putExtra("level", String.valueOf(wifiLevel));
+                                getActivity().sendBroadcast(intent);
 
-                            intent.putExtra("command", "notifications");
-                            intent.putExtra("visible", String.valueOf(showNotifs));
-                            intent.putExtra("command", "bars");
-                            intent.putExtra("mode", statBarStyle);
-                            getActivity().sendBroadcast(intent);
+                                intent.putExtra("command", "battery");
+                                intent.putExtra("level", String.valueOf(batteryLevel));
+                                intent.putExtra("plugged", String.valueOf(batteryPlugged));
+                                getActivity().sendBroadcast(intent);
+
+                                intent.putExtra("command", "notifications");
+                                intent.putExtra("visible", showNotifs);
+                                getActivity().sendBroadcast(intent);
+
+                                intent.putExtra("command", "bars");
+                                intent.putExtra("mode", statBarStyle);
+                                getActivity().sendBroadcast(intent);
+
+                                editor.putBoolean("demoOn", true);
+                                editor.apply();
+                            } catch (Exception e) {
+                                Log.e("Demo", e.getMessage());
+                            }
                         }
                     }).start();
                 } else {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            sudo("am broadcast -a com.android.systemui.demo --es command exit");
+                            Intent intent = new Intent("com.android.systemui.demo");
+                            intent.putExtra("command", "exit");
+                            getActivity().sendBroadcast(intent);
+                            editor.putBoolean("demoOn", false);
+                            editor.apply();
                         }
                     }).start();
                 }

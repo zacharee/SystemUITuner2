@@ -78,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Run the following command (with your phone connected) in CMD or Terminal:"
+                android:text="Run the following commands (with your device connected) in CMD or Terminal:"
                 android:textAlignment="center" />
 
             <LinearLayout
@@ -99,7 +99,7 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="10dp"
                         android:background="#555"
                         android:foregroundGravity="center_horizontal"
                         android:gravity="center_horizontal"
@@ -114,7 +114,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="monospace"
-                            android:text="adb shell pm grant com.zacharee1.systemuituner android.permission.WRITE_SECURE_SETTINGS"
+                            android:text="adb shell pm grant com.zacharee1.systemuituner android.permission.WRITE_SECURE_SETTINGS\n\nadb shell pm grant com.zacharee1.systemuituner android.permission.DUMP"
                             android:textAlignment="textStart"
                             android:textColor="#fff"
                             android:textIsSelectable="true" />

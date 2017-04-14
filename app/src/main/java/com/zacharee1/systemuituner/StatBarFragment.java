@@ -123,24 +123,20 @@ public class StatBarFragment extends Fragment {
                     public void run() {
                         try {
                             if (blacklist2 != "" && blacklist2 != null) {
-                                if (isRooted) sudo("settings put secure icon_blacklist " + blacklist2);
-                                else {
-                                    try {
-                                        Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", blacklist2);
-                                    } catch (Exception e) {
-                                        Log.e("icon_blacklist", e.getMessage());
-                                        Toast.makeText(activity.getApplicationContext(), "Did you set up ADB?", Toast.LENGTH_LONG).show();
-                                    }
+//                                if (isRooted) sudo("settings put secure icon_blacklist " + blacklist2);
+                                try {
+                                    Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", blacklist2);
+                                } catch (Exception e) {
+                                    Log.e("icon_blacklist", e.getMessage());
+                                    Toast.makeText(activity.getApplicationContext(), "Did you set up ADB?", Toast.LENGTH_LONG).show();
                                 }
                             } else {
-                                if (isRooted) sudo("settings delete secure icon_blacklist");
-                                else {
-                                    try {
-                                        Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", "");
-                                    } catch (Exception e) {
-                                        Log.e("icon_blacklist", e.getMessage());
-                                        Toast.makeText(activity.getApplicationContext(), "Did you set up ADB?", Toast.LENGTH_LONG).show();
-                                    }
+//                                if (isRooted) sudo("settings delete secure icon_blacklist");
+                                try {
+                                    Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", "");
+                                } catch (Exception e) {
+                                    Log.e("icon_blacklist", e.getMessage());
+                                    Toast.makeText(activity.getApplicationContext(), "Did you set up ADB?", Toast.LENGTH_LONG).show();
                                 }
                             }
                         } catch (Exception e) {}

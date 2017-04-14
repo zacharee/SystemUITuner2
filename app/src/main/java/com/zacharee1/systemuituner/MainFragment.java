@@ -16,6 +16,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 /**
  * Created by Zacha on 4/2/2017.
  */
@@ -62,7 +65,7 @@ public class MainFragment extends Fragment {
             public void onClick(View v) {
                 if (button == rooted) {
                     try {
-                        Runtime.getRuntime().exec("su -");
+                        sudo("pm grant com.zacharee1.systemuituner android.permission.DUMP ; pm grant com.zacharee1.systemuituner android.permission.WRITE_SECURE_SETTINGS");
                         Toast.makeText(activity.getApplicationContext(), "Great! Go play around!", Toast.LENGTH_SHORT).show();
                         editor.putBoolean("isRooted", true);
                     } catch (Exception e) {
@@ -90,6 +93,29 @@ public class MainFragment extends Fragment {
         } else {
             rootStat.setText("FALSE");
             rootStat.setTextColor(Color.rgb(255, 0, 0));
+        }
+    }
+
+    public void sudo(String...strings) {
+        try{
+            Process su = Runtime.getRuntime().exec("su");
+            DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
+
+            for (String s : strings) {
+                outputStream.writeBytes(s+"\n");
+                outputStream.flush();
+            }
+
+            outputStream.writeBytes("exit\n");
+            outputStream.flush();
+            try {
+                su.waitFor();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            outputStream.close();
+        } catch(IOException e){
+            e.printStackTrace();
         }
     }
 }

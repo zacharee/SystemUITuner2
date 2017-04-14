@@ -27,16 +27,8 @@
                 android:id="@+id/textView7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="10dp"
                 android:text="The options here are experimental! They may not work correctly, so please be careful. After toggling Demo Mode, wait a bit; it takes a while to kick in."
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/textView18"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:text="Also, because I'm lazy, you'll need to grant the DUMP permission for this to work."
                 android:textAlignment="center" />
 
             <Switch
@@ -173,6 +165,16 @@
                 android:layout_marginBottom="10dp"
                 android:switchMinWidth="50dp"
                 android:text="Battery Charging"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/show_airplane"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:switchMinWidth="50dp"
+                android:text="Show Airplane Mode"
                 android:textColor="@android:color/secondary_text_light"
                 android:textSize="18sp" />
 

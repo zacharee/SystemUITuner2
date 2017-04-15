@@ -37,7 +37,6 @@
                 android:layout_marginBottom="16dp"
                 android:switchMinWidth="50dp"
                 android:text="Show Demo Mode"
-                android:textColor="@android:color/secondary_text_light"
                 android:textSize="18sp" />
 
             <Button

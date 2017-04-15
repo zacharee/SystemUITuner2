@@ -52,6 +52,10 @@ public class StatBarFragment extends Fragment {
         Switch do_not_disturb = (Switch) view.findViewById(R.id.do_not_disturb);
         Switch rotate = (Switch) view.findViewById(R.id.rotate);
         Switch battery = (Switch) view.findViewById(R.id.battery);
+        Switch speakerphone = (Switch) view.findViewById(R.id.speakerphone);
+        Switch cast = (Switch) view.findViewById(R.id.cast);
+        Switch headset = (Switch) view.findViewById(R.id.headset);
+        Switch location = (Switch) view.findViewById(R.id.location);
 
         editor = activity.sharedPreferences.edit();
 
@@ -73,6 +77,10 @@ public class StatBarFragment extends Fragment {
         sharedPrefs("do_not_disturb", do_not_disturb);
         sharedPrefs("rotate", rotate);
         sharedPrefs("battery", battery);
+        sharedPrefs("speakerphone", speakerphone);
+        sharedPrefs("cast", cast);
+        sharedPrefs("headset", headset);
+        sharedPrefs("location", location);
 
         switches(bluetooth, "bluetooth");
         switches(wifi, "wifi");
@@ -90,6 +98,10 @@ public class StatBarFragment extends Fragment {
         switches(do_not_disturb, "do_not_disturb");
         switches(rotate, "rotate");
         switches(battery, "battery");
+        switches(speakerphone, "speakerphone");
+        switches(cast, "cast");
+        switches(headset, "headset");
+        switches(location, "location");
         return view;
     }
 

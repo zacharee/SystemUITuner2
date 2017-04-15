@@ -179,6 +179,16 @@
                     android:text="Speakerphone Icon"
                     android:textSize="18sp" />
 
+                <Switch
+                    android:id="@+id/headset"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:checked="false"
+                    android:switchMinWidth="50dp"
+                    android:text="Headset Icon"
+                    android:textSize="18sp" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -247,6 +257,26 @@
                     android:checked="false"
                     android:switchMinWidth="50dp"
                     android:text="Managed Profile Icon"
+                    android:textSize="18sp" />
+
+                <Switch
+                    android:id="@+id/cast"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:checked="false"
+                    android:switchMinWidth="50dp"
+                    android:text="Cast Icon"
+                    android:textSize="18sp" />
+
+                <Switch
+                    android:id="@+id/location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:checked="false"
+                    android:switchMinWidth="50dp"
+                    android:text="Location Icon"
                     android:textSize="18sp" />
             </LinearLayout>
 

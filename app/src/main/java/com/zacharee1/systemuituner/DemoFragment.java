@@ -374,6 +374,9 @@ public class DemoFragment extends Fragment {
                                 intent.putExtra("level", String.valueOf(wifiLevel));
                                 getActivity().sendBroadcast(intent);
 
+                                intent.putExtra("airplane", String.valueOf(showAirplane));
+                                getActivity().sendBroadcast(intent);
+
                                 intent.putExtra("command", "battery");
                                 intent.putExtra("level", String.valueOf(batteryLevel));
                                 intent.putExtra("plugged", String.valueOf(batteryPlugged));

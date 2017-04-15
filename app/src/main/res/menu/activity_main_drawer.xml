@@ -32,4 +32,13 @@
             android:title="About" />
     </group>
 
+    <group
+        android:id="@+id/exitmenu"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_exit"
+            android:icon="@drawable/ic_close"
+            android:title="Exit App" />
+    </group>
+
 </menu>

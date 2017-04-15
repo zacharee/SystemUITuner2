@@ -20,21 +20,23 @@
                 android:text="SystemUI Tuner"
                 android:textAlignment="center"
                 android:textColor="@android:color/primary_text_light"
-                android:textSize="20sp" />
+                android:textSize="26sp" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="For Devices without this Activity"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Or for devices with it, I'm not your boss."
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textView13"
@@ -42,7 +44,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="(If you do have the stock SystemUI Tuner, this one provides some extra goodies.)"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textView14"
@@ -50,7 +53,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Before you use anything, though, I need to know... Are you rooted?"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textView17"
@@ -58,7 +62,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="Don't worry. It's fine if you aren't. There are just some extra things you need to do in that case."
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="16sp" />
 
             <LinearLayout
                 android:id="@+id/rootbox"

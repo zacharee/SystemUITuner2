@@ -50,6 +50,8 @@ public class StatBarFragment extends Fragment {
         Switch clock = (Switch) view.findViewById(R.id.clock);
         Switch volume = (Switch) view.findViewById(R.id.volume);
         Switch do_not_disturb = (Switch) view.findViewById(R.id.do_not_disturb);
+        Switch rotate = (Switch) view.findViewById(R.id.rotate);
+        Switch battery = (Switch) view.findViewById(R.id.battery);
 
         editor = activity.sharedPreferences.edit();
 
@@ -69,6 +71,8 @@ public class StatBarFragment extends Fragment {
         sharedPrefs("clock", clock);
         sharedPrefs("volume", volume);
         sharedPrefs("do_not_disturb", do_not_disturb);
+        sharedPrefs("rotate", rotate);
+        sharedPrefs("battery", battery);
 
         switches(bluetooth, "bluetooth");
         switches(wifi, "wifi");
@@ -84,6 +88,8 @@ public class StatBarFragment extends Fragment {
         switches(clock, "clock");
         switches(volume, "volume");
         switches(do_not_disturb, "do_not_disturb");
+        switches(rotate, "rotate");
+        switches(battery, "battery");
         return view;
     }
 

@@ -130,8 +130,10 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        editor.putInt("navpage", id);
-        editor.apply();
+        if (id != R.id.nav_exit) {
+            editor.putInt("navpage", id);
+            editor.apply();
+        }
 
         if (id == R.id.nav_home) {
             final MainFragment fragment = new MainFragment();
@@ -188,6 +190,8 @@ public class MainActivity extends AppCompatActivity
                     fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
                 }
             }, 350);
+        } else if (id == R.id.nav_exit) {
+            super.onBackPressed();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

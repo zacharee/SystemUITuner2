@@ -23,6 +23,7 @@
                 android:layout_height="wrap_content"
                 android:text="About"
                 android:textAlignment="center"
+                android:textColor="@android:color/primary_text_light"
                 android:textSize="26sp" />
 
             <TextView

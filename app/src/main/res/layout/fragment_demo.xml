@@ -14,13 +14,12 @@
             android:padding="16dp">
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/title_demo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:text="Demo Mode"
                 android:textAlignment="center"
-                android:textColor="@android:color/primary_text_light"
                 android:textSize="26sp" />
 
             <TextView
@@ -70,8 +69,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="10dp"
-                    android:text="WiFi Strength"
-                    android:textColor="@android:color/secondary_text_light" />
+                    android:text="WiFi Strength" />
 
                 <Spinner
                     android:id="@+id/wifi_strength"
@@ -93,8 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="10dp"
-                    android:text="Mobile Strength"
-                    android:textColor="@android:color/secondary_text_light" />
+                    android:text="Mobile Strength" />
 
                 <Spinner
                     android:id="@+id/mobile_strength"
@@ -116,8 +113,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="10dp"
-                    android:text="Mobile Type"
-                    android:textColor="@android:color/secondary_text_light" />
+                    android:text="Mobile Type" />
 
                 <Spinner
                     android:id="@+id/mobile_type"
@@ -139,8 +135,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="10dp"
-                    android:text="Status Bar Style"
-                    android:textColor="@android:color/secondary_text_light" />
+                    android:text="Status Bar Style" />
 
                 <Spinner
                     android:id="@+id/stat_bar_style"
@@ -155,7 +150,6 @@
                 android:layout_marginBottom="10dp"
                 android:switchMinWidth="50dp"
                 android:text="Show Notifications"
-                android:textColor="@android:color/secondary_text_light"
                 android:textSize="18sp" />
 
             <Switch
@@ -165,7 +159,6 @@
                 android:layout_marginBottom="10dp"
                 android:switchMinWidth="50dp"
                 android:text="Battery Charging"
-                android:textColor="@android:color/secondary_text_light"
                 android:textSize="18sp" />
 
             <Switch
@@ -175,7 +168,6 @@
                 android:layout_marginBottom="10dp"
                 android:switchMinWidth="50dp"
                 android:text="Show Airplane Mode"
-                android:textColor="@android:color/secondary_text_light"
                 android:textSize="18sp" />
 
         </LinearLayout>

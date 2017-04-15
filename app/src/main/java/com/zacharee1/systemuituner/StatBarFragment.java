@@ -2,6 +2,7 @@ package com.zacharee1.systemuituner;
 
 import android.app.Fragment;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
@@ -10,7 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.DataOutputStream;
@@ -26,6 +29,7 @@ public class StatBarFragment extends Fragment {
     public SharedPreferences.Editor editor;
 
     boolean isRooted;
+    boolean isDark;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,9 +61,31 @@ public class StatBarFragment extends Fragment {
         Switch headset = (Switch) view.findViewById(R.id.headset);
         Switch location = (Switch) view.findViewById(R.id.location);
 
+        LinearLayout network = (LinearLayout) view.findViewById(R.id.network);
+        LinearLayout sound = (LinearLayout) view.findViewById(R.id.sound);
+        LinearLayout misc = (LinearLayout) view.findViewById(R.id.misc);
+
+        TextView title = (TextView) view.findViewById(R.id.title_stat);
+
         editor = activity.sharedPreferences.edit();
 
         isRooted = activity.sharedPreferences.getBoolean("isRooted", false);
+
+        isDark = activity.sharedPreferences.getBoolean("isDark", false);
+
+        Drawable background;
+
+        if (isDark) {
+            background = activity.getDrawable(R.drawable.layout_bg_dark);
+            title.setTextColor(getResources().getColor(android.R.color.primary_text_dark));
+        } else {
+            background = activity.getDrawable(R.drawable.layout_bg_light);
+            title.setTextColor(getResources().getColor(android.R.color.primary_text_light));
+        }
+
+        network.setBackground(background);
+        sound.setBackground(background);
+        misc.setBackground(background);
 
         sharedPrefs("bluetooth", bluetooth);
         sharedPrefs("wifi", wifi);

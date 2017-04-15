@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -46,6 +48,14 @@ public class MainFragment extends Fragment {
 
         sharedPreferences = activity.sharedPreferences;
         editor = sharedPreferences.edit();
+
+        TextView title = (TextView) view.findViewById(R.id.title_main);
+
+        if (activity.sharedPreferences.getBoolean("isDark", false)) {
+            title.setTextColor(getResources().getColor(android.R.color.primary_text_dark));
+        } else {
+            title.setTextColor(getResources().getColor(android.R.color.primary_text_light));
+        }
 
         rooted = (Button) view.findViewById(R.id.rooted);
         no_root = (Button) view.findViewById(R.id.not_rooted);

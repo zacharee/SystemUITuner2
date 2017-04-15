@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp"
-            tools:ignore="UselessLeaf" >
+            tools:ignore="UselessLeaf">
 
             <TextView
                 android:id="@+id/abt_title"
@@ -23,7 +23,6 @@
                 android:layout_height="wrap_content"
                 android:text="About"
                 android:textAlignment="center"
-                android:textColor="@android:color/primary_text_light"
                 android:textSize="26sp" />
 
             <TextView

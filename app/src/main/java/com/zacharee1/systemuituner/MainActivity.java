@@ -30,6 +30,12 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences = getSharedPreferences("com.zacharee1.sysuituner", MODE_PRIVATE);
+        if (sharedPreferences.getBoolean("isDark", false)) {
+            setTheme(R.style.DARK_NoAppBar);
+        } else {
+            setTheme(R.style.AppTheme_NoActionBar);
+        }
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -49,7 +55,6 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        sharedPreferences = getSharedPreferences("com.zacharee1.sysuituner", MODE_PRIVATE);
         editor = sharedPreferences.edit();
         int id = sharedPreferences.getInt("navpage", R.id.nav_home);
 
@@ -84,6 +89,10 @@ public class MainActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
         } else if (id == R.id.nav_about) {
             final AboutFragment fragment = new AboutFragment();
+            final FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+        } else if (id == R.id.nav_settings) {
+            final SettingsFragment fragment = new SettingsFragment();
             final FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
         }
@@ -181,6 +190,17 @@ public class MainActivity extends AppCompatActivity
             }, 350);
         } else if (id == R.id.nav_about) {
             final AboutFragment fragment = new AboutFragment();
+            final FragmentManager fragmentManager = getFragmentManager();
+            final Handler handler = new Handler();
+
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+                }
+            }, 350);
+        } else if (id == R.id.nav_settings) {
+            final SettingsFragment fragment = new SettingsFragment();
             final FragmentManager fragmentManager = getFragmentManager();
             final Handler handler = new Handler();
 

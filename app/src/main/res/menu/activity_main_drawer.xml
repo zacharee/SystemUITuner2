@@ -27,6 +27,10 @@
         android:id="@+id/bottommenu"
         android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="Settings" />
+        <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_list_black"
             android:title="About" />

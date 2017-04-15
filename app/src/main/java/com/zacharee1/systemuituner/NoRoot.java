@@ -1,5 +1,6 @@
 package com.zacharee1.systemuituner;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +15,13 @@ public class NoRoot extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences sharedPreferences = getSharedPreferences("com.zacharee1.systemuituner", MODE_PRIVATE);
+
+        if (sharedPreferences.getBoolean("isDark", false)) {
+            setTheme(R.style.DARK_NoAppBar);
+        } else {
+            setTheme(R.style.AppTheme_NoActionBar);
+        }
         setContentView(R.layout.activity_no_root);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

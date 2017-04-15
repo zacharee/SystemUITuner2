@@ -20,7 +20,10 @@ import android.widget.CompoundButton;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.TimePicker;
+
+import org.w3c.dom.Text;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -85,6 +88,14 @@ public class DemoFragment extends Fragment {
         airplaneMode = (Switch) view.findViewById(R.id.show_airplane);
         showNotifSwitch = (Switch) view.findViewById(R.id.show_notifs);
         statStyleSpinner = (Spinner) view.findViewById(R.id.stat_bar_style);
+
+        TextView title = (TextView) view.findViewById(R.id.title_demo);
+
+        if (activity.sharedPreferences.getBoolean("isDark", false)) {
+            title.setTextColor(getResources().getColor(android.R.color.primary_text_dark));
+        } else {
+            title.setTextColor(getResources().getColor(android.R.color.primary_text_light));
+        }
 
         setSpinnerAdaptors(wifi, R.array.wifi_strength);
         setSpinnerAdaptors(mobile, R.array.mobile_strength);

@@ -41,6 +41,14 @@ public class AboutFragment extends Fragment {
             activity = (MainActivity) getActivity();
         }
 
+        TextView title = (TextView) view.findViewById(R.id.abt_title);
+
+        if (activity.sharedPreferences.getBoolean("isDark", false)) {
+            title.setTextColor(getResources().getColor(android.R.color.primary_text_dark));
+        } else {
+            title.setTextColor(getResources().getColor(android.R.color.primary_text_light));
+        }
+
         playStore = (Button) view.findViewById(R.id.play_store);
         labs = (Button) view.findViewById(R.id.xda_store);
         XDA = (Button) view.findViewById(R.id.xda_thread);

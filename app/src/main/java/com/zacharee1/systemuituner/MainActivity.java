@@ -36,6 +36,11 @@ public class MainActivity extends AppCompatActivity
         } else {
             setTheme(R.style.AppTheme_NoActionBar);
         }
+        if (!sharedPreferences.getBoolean("isSetup", false)) {
+            Intent intent = new Intent(getApplicationContext(), SetupActivity.class);
+            startActivity(intent);
+        }
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -63,11 +68,11 @@ public class MainActivity extends AppCompatActivity
             add(R.id.nav_statusbar);
             add(R.id.nav_demo_mode);
             add(R.id.nav_about);
+            add(R.id.nav_settings);
         }};
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
         Menu navMenu = navigationView.getMenu();
         if (menuIDs.contains(id)) navMenu.findItem(id).setChecked(true);
 
@@ -93,6 +98,10 @@ public class MainActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
         } else if (id == R.id.nav_settings) {
             final SettingsFragment fragment = new SettingsFragment();
+            final FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+        } else {
+            final MainFragment fragment = new MainFragment();
             final FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
         }

@@ -28,7 +28,22 @@
             android:label="@string/title_activity_no_root">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.zacharee1.systemuituner.MainActivity" />
+                android:value="com.zacharee1.systemuituner.SetupActivity" />
+        </activity>
+        <activity
+            android:name=".RootActivity"
+            android:label="@string/title_activity_root"
+            android:parentActivityName=".SetupActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.zacharee1.systemuituner.SetupActivity" />
+        </activity>
+        <activity
+            android:name=".SetupActivity"
+            android:label="Setup">
+            <!--<meta-data-->
+                <!--android:name="android.support.PARENT_ACTIVITY"-->
+                <!--android:value="com.zacharee1.systemuituner.MainActivity" />-->
         </activity>
     </application>
 

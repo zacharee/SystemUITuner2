@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.zacharee1.systemuituner.SetupActivity">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="You followed the setup, right? This app won't work unless you do."
+                android:text="Before you use anything, though, I need to know... Are you rooted?"
                 android:textAlignment="center"
                 android:textSize="16sp" />
 
@@ -60,19 +66,52 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="If you skipped it, or forgot, or your root status changed, here's a button:"
+                android:text="Don't worry. It's fine if you aren't. There are just some extra things you need to do in that case."
+                android:textAlignment="center"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:id="@+id/rootbox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/rooted"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="I am rooted" />
+
+                <Button
+                    android:id="@+id/not_rooted"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="I am not rooted" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Once you're done there, press the button below."
                 android:textAlignment="center"
                 android:textSize="16sp" />
 
             <Button
-                android:id="@+id/setup"
+                android:id="@+id/open_main"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Setup" />
+                android:layout_weight="1"
+                android:text="To the app!" />
 
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

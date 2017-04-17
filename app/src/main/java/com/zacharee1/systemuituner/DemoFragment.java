@@ -97,10 +97,10 @@ public class DemoFragment extends Fragment {
             title.setTextColor(getResources().getColor(android.R.color.primary_text_light));
         }
 
-        setSpinnerAdaptors(wifi, R.array.wifi_strength);
-        setSpinnerAdaptors(mobile, R.array.mobile_strength);
-        setSpinnerAdaptors(mobileTypeSpinner, R.array.mobile_type);
-        setSpinnerAdaptors(statStyleSpinner, R.array.stat_bar_style);
+        setSpinnerAdapters(wifi, R.array.wifi_strength);
+        setSpinnerAdapters(mobile, R.array.mobile_strength);
+        setSpinnerAdapters(mobileTypeSpinner, R.array.mobile_type);
+        setSpinnerAdapters(statStyleSpinner, R.array.stat_bar_style);
 
         wifi.setSelection(activity.sharedPreferences.getInt("wifiLevel", 3));
         mobile.setSelection(activity.sharedPreferences.getInt("mobileLevel", 3));
@@ -170,7 +170,7 @@ public class DemoFragment extends Fragment {
 //        });
 //    }
 
-    public void setSpinnerAdaptors(Spinner spinner, int arrayID) {
+    public void setSpinnerAdapters(Spinner spinner, int arrayID) {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(activity.getApplicationContext(),
                 arrayID, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

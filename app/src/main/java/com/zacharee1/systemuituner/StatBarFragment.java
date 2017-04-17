@@ -153,7 +153,9 @@ public class StatBarFragment extends Fragment {
         int timeSeconds = Settings.Secure.getInt(activity.getContentResolver(), key, 0);
         Switch clock_seconds = (Switch) view.findViewById(R.id.clock_seconds);
 
-        if (!blacklist.contains(key)) {
+        if (blacklist != null && !blacklist.contains(key)) {
+            toggle.setChecked(true);
+        } else if (blacklist == null) {
             toggle.setChecked(true);
         }
 

@@ -148,9 +148,15 @@ public class StatBarFragment extends Fragment {
     }
 
     public void sharedPrefs(String key, Switch toggle) {
-        if (activity.sharedPreferences.getBoolean(key, true)) {
+        String blacklist = Settings.Secure.getString(activity.getContentResolver(), "icon_blacklist");
+
+        if (!blacklist.contains(key)) {
             toggle.setChecked(true);
         }
+
+//        if (activity.sharedPreferences.getBoolean(key, true)) {
+//            toggle.setChecked(true);
+//        }
     }
 
     public void customSwitch(Switch toggle, final String string) {

@@ -3,6 +3,7 @@ package com.zacharee1.systemuituner;
 import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
@@ -60,6 +61,14 @@ public class StatBarFragment extends Fragment {
         Switch cast = (Switch) view.findViewById(R.id.cast);
         Switch headset = (Switch) view.findViewById(R.id.headset);
         Switch location = (Switch) view.findViewById(R.id.location);
+        Switch su = (Switch) view.findViewById(R.id.su);
+        Switch clock_seconds = (Switch) view.findViewById(R.id.clock_seconds);
+
+        if (Build.VERSION.SDK_INT > 23) {
+            clock_seconds.setVisibility(View.VISIBLE);
+        } else {
+            clock_seconds.setVisibility(View.GONE);
+        }
 
         LinearLayout network = (LinearLayout) view.findViewById(R.id.network);
         LinearLayout sound = (LinearLayout) view.findViewById(R.id.sound);
@@ -107,6 +116,8 @@ public class StatBarFragment extends Fragment {
         sharedPrefs("cast", cast);
         sharedPrefs("headset", headset);
         sharedPrefs("location", location);
+        sharedPrefs("su", su);
+        sharedPrefs("clock_seconds", clock_seconds);
 
         switches(bluetooth, "bluetooth");
         switches(wifi, "wifi");
@@ -115,7 +126,7 @@ public class StatBarFragment extends Fragment {
         switches(airplane, "airplane");
         switches(managed_profile, "managed_profile");
         switches(zen, "zen");
-        switches(alarm_clock, "alarm_clock");
+        switches(alarm_clock, "alarm_clock,alarm");
         switches(hotspot, "hotspot");
         switches(data_saver, "data_saver");
         switches(nfc, "nfc");
@@ -128,6 +139,9 @@ public class StatBarFragment extends Fragment {
         switches(cast, "cast");
         switches(headset, "headset");
         switches(location, "location");
+        switches(su, "su");
+
+        customSwitch(clock_seconds, "clock_settings");
         return view;
     }
 
@@ -137,6 +151,19 @@ public class StatBarFragment extends Fragment {
         }
     }
 
+    public void customSwitch(Switch toggle, final String string) {
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    Settings.Secure.putInt(activity.getContentResolver(), string, 1);
+                } else {
+                    Settings.Secure.putInt(activity.getContentResolver(), string, 0);
+                }
+            }
+        });
+    }
+
     public void switches(Switch toggle, final String setting) {
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -144,7 +171,7 @@ public class StatBarFragment extends Fragment {
                 String blacklist = Settings.Secure.getString(activity.getContentResolver(), "icon_blacklist");
 //                blacklist = Settings.System.getString(activity.getContentResolver(), "icon_blacklist");
                 if (!isChecked) {
-                    if (blacklist != null && blacklist != "") {
+                    if (blacklist != null && !blacklist.equals("")) {
                         blacklist = blacklist.concat("," + setting);
                     } else {
                         blacklist = setting;
@@ -166,7 +193,7 @@ public class StatBarFragment extends Fragment {
                     @Override
                     public void run() {
                         try {
-                            if (blacklist2 != "" && blacklist2 != null) {
+                            if (blacklist2 != null && !blacklist2.equals("")) {
 //                                if (isRooted) sudo("settings put secure icon_blacklist " + blacklist2);
                                 try {
                                     Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", blacklist2);

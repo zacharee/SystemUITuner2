@@ -1,5 +1,6 @@
 package com.zacharee1.systemuituner;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Activity;
@@ -9,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.DataOutputStream;
@@ -31,6 +33,14 @@ public class RootActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        TextView title = (TextView) findViewById(R.id.title_root);
+
+        if (sharedPreferences.getBoolean("isDark", false)) {
+            title.setTextColor(getResources().getColor(android.R.color.primary_text_dark));
+        } else {
+            title.setTextColor(getResources().getColor(android.R.color.primary_text_light));
+        }
+
         Button getPerms = (Button) findViewById(R.id.get_perms);
 
         buttons(getPerms);
@@ -44,7 +54,13 @@ public class RootActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Looper.prepare();
+                        SharedPreferences sharedPreferences = getSharedPreferences("com.zacharee1.sysuituner", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("isSetup", true);
+                        editor.commit();
                         sudo("pm grant com.zacharee1.systemuituner android.permission.DUMP ; pm grant com.zacharee1.systemuituner android.permission.WRITE_SECURE_SETTINGS");
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
                     }
                 }).start();
             }

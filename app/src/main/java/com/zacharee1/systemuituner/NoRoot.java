@@ -1,5 +1,6 @@
 package com.zacharee1.systemuituner;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,9 +10,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class NoRoot extends AppCompatActivity {
+
+    Button setupDone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,26 @@ public class NoRoot extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+            }
+        });
+
+        setupDone = (Button) findViewById(R.id.no_root_done);
+
+        buttons(setupDone);
+    }
+
+    private void buttons(final Button button) {
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (button == setupDone) {
+                    SharedPreferences sharedPreferences = getSharedPreferences("com.zacharee1.sysuituner", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("isSetup", true);
+                    editor.commit();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }

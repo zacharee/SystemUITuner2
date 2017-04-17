@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class SetupActivity extends AppCompatActivity {
 
@@ -24,6 +25,14 @@ public class SetupActivity extends AppCompatActivity {
             setTheme(R.style.AppTheme);
         }
         setContentView(R.layout.activity_setup);
+
+        TextView title = (TextView) findViewById(R.id.title_setup);
+
+        if (sharedPreferences.getBoolean("isDark", false)) {
+            title.setTextColor(getResources().getColor(android.R.color.primary_text_dark));
+        } else {
+            title.setTextColor(getResources().getColor(android.R.color.primary_text_light));
+        }
 
         rooted = (Button) findViewById(R.id.rooted);
         not_rooted = (Button) findViewById(R.id.not_rooted);

@@ -20,10 +20,10 @@
             android:padding="16dp">
 
             <TextView
-                android:id="@+id/title_main"
+                android:id="@+id/title_setup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="SystemUI Tuner"
+                android:text="Let's Get This Party Started!"
                 android:textAlignment="center"
                 android:textSize="26sp" />
 
@@ -31,24 +31,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="For Devices without this Activity"
-                android:textAlignment="center"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Or for devices with it, I'm not your boss."
-                android:textAlignment="center"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="(If you do have the stock SystemUI Tuner, this one provides some extra goodies.)"
+                android:text="Just need to do a few things....."
                 android:textAlignment="center"
                 android:textSize="16sp" />
 
@@ -57,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Before you use anything, though, I need to know... Are you rooted?"
+                android:text="So I need to know... Are you rooted?"
                 android:textAlignment="center"
                 android:textSize="16sp" />
 
@@ -101,7 +84,8 @@
                 android:layout_marginTop="5dp"
                 android:text="Once you're done there, press the button below."
                 android:textAlignment="center"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/open_main"
@@ -110,7 +94,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:text="To the app!" />
+                android:text="To the app!"
+                android:visibility="gone" />
 
         </LinearLayout>
     </ScrollView>

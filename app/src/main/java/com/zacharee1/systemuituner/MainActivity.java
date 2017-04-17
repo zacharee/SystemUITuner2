@@ -3,10 +3,13 @@ package com.zacharee1.systemuituner;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -36,14 +39,19 @@ public class MainActivity extends AppCompatActivity
         } else {
             setTheme(R.style.AppTheme_NoActionBar);
         }
-        if (!sharedPreferences.getBoolean("isSetup", false)) {
-            Intent intent = new Intent(getApplicationContext(), SetupActivity.class);
-            startActivity(intent);
-        }
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        boolean setupDone = sharedPreferences.getBoolean("isSetup", false);
+        Log.i("setup", String.valueOf(setupDone));
+
+        if (setupDone);
+        else {
+            Intent intent = new Intent(getApplicationContext(), SetupActivity.class);
+            startActivity(intent);
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +112,14 @@ public class MainActivity extends AppCompatActivity
             final MainFragment fragment = new MainFragment();
             final FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+        }
+
+        if (sharedPreferences.getBoolean("isDark", false)) {
+            navigationView.setItemTextColor(getResources().getColorStateList(R.color.drawer_item_dark));
+            navigationView.setItemIconTintList(getResources().getColorStateList(R.color.drawer_item_dark));
+        } else {
+            navigationView.setItemTextColor(getResources().getColorStateList(R.color.drawer_item_light));
+            navigationView.setItemIconTintList(getResources().getColorStateList(R.color.drawer_item_light));
         }
 
     }

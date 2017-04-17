@@ -112,17 +112,18 @@
                             android:textAlignment="textStart"
                             android:textColor="#fff"
                             android:textIsSelectable="true" />
+
                     </LinearLayout>
                 </HorizontalScrollView>
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView28"
+            <Button
+                android:id="@+id/no_root_done"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Once that's done, go ahead and hit the back button, and use the app!"
-                android:textAlignment="center" />
+                android:layout_marginTop="10dp"
+                android:text="OK! I'm done!" />
 
         </LinearLayout>
     </ScrollView>

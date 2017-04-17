@@ -73,6 +73,7 @@ public class StatBarFragment extends Fragment {
         LinearLayout network = (LinearLayout) view.findViewById(R.id.network);
         LinearLayout sound = (LinearLayout) view.findViewById(R.id.sound);
         LinearLayout misc = (LinearLayout) view.findViewById(R.id.misc);
+        LinearLayout time = (LinearLayout) view.findViewById(R.id.time);
 
         TextView title = (TextView) view.findViewById(R.id.title_stat);
 
@@ -95,6 +96,7 @@ public class StatBarFragment extends Fragment {
         network.setBackground(background);
         sound.setBackground(background);
         misc.setBackground(background);
+        time.setBackground(background);
 
         sharedPrefs("bluetooth", bluetooth);
         sharedPrefs("wifi", wifi);

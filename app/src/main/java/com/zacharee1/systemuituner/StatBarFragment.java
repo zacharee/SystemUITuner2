@@ -1,12 +1,21 @@
 package com.zacharee1.systemuituner;
 
 import android.app.Fragment;
+import android.content.ContentProvider;
+import android.content.ContentProviderOperation;
+import android.content.ContentValues;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.ContactsContract;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,6 +73,9 @@ public class StatBarFragment extends Fragment {
         Switch location = (Switch) view.findViewById(R.id.location);
         Switch su = (Switch) view.findViewById(R.id.su);
         Switch clock_seconds = (Switch) view.findViewById(R.id.clock_seconds);
+        Switch battery_percent = (Switch) view.findViewById(R.id.battery_percent);
+
+        battery_percent.setText(Html.fromHtml("Battery Percentage<br /><small> <font color=\"#777777\">(Reboot Required)</font></small>"));
 
         if (Build.VERSION.SDK_INT > 23) {
             clock_seconds.setVisibility(View.VISIBLE);
@@ -99,161 +111,168 @@ public class StatBarFragment extends Fragment {
         misc.setBackground(background);
         time.setBackground(background);
 
-        sharedPrefs("bluetooth", bluetooth);
-        sharedPrefs("wifi", wifi);
-        sharedPrefs("ethernet", ethernet);
-        sharedPrefs("mobile", mobile);
-        sharedPrefs("airplane", airplane);
-        sharedPrefs("managed_profile", managed_profile);
-        sharedPrefs("zen", zen);
-        sharedPrefs("alarm_clock", alarm_clock);
-        sharedPrefs("hotspot", hotspot);
-        sharedPrefs("data_saver", data_saver);
-        sharedPrefs("nfc", nfc);
-        sharedPrefs("clock", clock);
-        sharedPrefs("volume", volume);
-        sharedPrefs("do_not_disturb", do_not_disturb);
-        sharedPrefs("rotate", rotate);
-        sharedPrefs("battery", battery);
-        sharedPrefs("speakerphone", speakerphone);
-        sharedPrefs("cast", cast);
-        sharedPrefs("headset", headset);
-        sharedPrefs("location", location);
-        sharedPrefs("su", su);
-        sharedPrefs("clock_seconds", clock_seconds);
+        String bl = "icon_blacklist";
+        String sec = "secure";
+        String sys = "system";
+        String glob = "global";
 
-        switches(bluetooth, "bluetooth");
-        switches(wifi, "wifi");
-        switches(ethernet, "ethernet");
-        switches(mobile, "mobile");
-        switches(airplane, "airplane");
-        switches(managed_profile, "managed_profile");
-        switches(zen, "zen");
-        switches(alarm_clock, "alarm_clock,alarm");
-        switches(hotspot, "hotspot");
-        switches(data_saver, "data_saver");
-        switches(nfc, "nfc");
-        switches(clock, "clock");
-        switches(volume, "volume");
-        switches(do_not_disturb, "do_not_disturb");
-        switches(rotate, "rotate");
-        switches(battery, "battery");
-        switches(speakerphone, "speakerphone");
-        switches(cast, "cast");
-        switches(headset, "headset");
-        switches(location, "location");
-        switches(su, "su");
+        sharedPrefs("bluetooth", bluetooth, bl);
+        sharedPrefs("wifi", wifi, bl);
+        sharedPrefs("ethernet", ethernet, bl);
+        sharedPrefs("mobile", mobile, bl);
+        sharedPrefs("airplane", airplane, bl);
+        sharedPrefs("managed_profile", managed_profile, bl);
+        sharedPrefs("zen", zen, bl);
+        sharedPrefs("alarm_clock", alarm_clock, bl);
+        sharedPrefs("hotspot", hotspot, bl);
+        sharedPrefs("data_saver", data_saver, bl);
+        sharedPrefs("nfc", nfc, bl);
+        sharedPrefs("clock", clock, bl);
+        sharedPrefs("volume", volume, bl);
+        sharedPrefs("do_not_disturb", do_not_disturb, bl);
+        sharedPrefs("rotate", rotate, bl);
+        sharedPrefs("battery", battery, bl);
+        sharedPrefs("speakerphone", speakerphone, bl);
+        sharedPrefs("cast", cast, bl);
+        sharedPrefs("headset", headset, bl);
+        sharedPrefs("location", location, bl);
+        sharedPrefs("su", su, bl);
 
-        customSwitch(clock_seconds, "clock_seconds");
+        sharedPrefs("clock_seconds", clock_seconds, sec);
+
+        sharedPrefs("status_bar_show_battery_percent", battery_percent, sys);
+
+        switches(bluetooth, "bluetooth", bl);
+        switches(wifi, "wifi", bl);
+        switches(ethernet, "ethernet", bl);
+        switches(mobile, "mobile", bl);
+        switches(airplane, "airplane", bl);
+        switches(managed_profile, "managed_profile", bl);
+        switches(zen, "zen", bl);
+        switches(alarm_clock, "alarm_clock,alarm", bl);
+        switches(hotspot, "hotspot", bl);
+        switches(data_saver, "data_saver", bl);
+        switches(nfc, "nfc", bl);
+        switches(clock, "clock", bl);
+        switches(volume, "volume", bl);
+        switches(do_not_disturb, "do_not_disturb", bl);
+        switches(rotate, "rotate", bl);
+        switches(battery, "battery", bl);
+        switches(speakerphone, "speakerphone", bl);
+        switches(cast, "cast", bl);
+        switches(headset, "headset", bl);
+        switches(location, "location", bl);
+        switches(su, "su", bl);
+
+        switches(clock_seconds, "clock_seconds", sec);
+
+        switches(battery_percent, "status_bar_show_battery_percent", sys);
         return view;
     }
 
-    public void sharedPrefs(String key, Switch toggle) {
-        String blacklist = Settings.Secure.getString(activity.getContentResolver(), "icon_blacklist");
-        int timeSeconds = Settings.Secure.getInt(activity.getContentResolver(), key, 0);
-        Switch clock_seconds = (Switch) view.findViewById(R.id.clock_seconds);
-
-        if (blacklist != null && !blacklist.contains(key)) {
-            toggle.setChecked(true);
-        } else if (blacklist == null) {
-            toggle.setChecked(true);
+    public void sharedPrefs(String key, Switch toggle, String prefType) {
+        int enabled = 0;
+        switch (prefType) {
+            case "global":
+                break;
+            case "secure":
+                enabled = Settings.Secure.getInt(activity.getContentResolver(), key, 0);
+                break;
+            case "system":
+                enabled = Settings.System.getInt(activity.getContentResolver(), key, 0);
+                break;
+            case "icon_blacklist":
+                String blacklist = Settings.Secure.getString(activity.getContentResolver(), "icon_blacklist") != null ? Settings.Secure.getString(activity.getContentResolver(), "icon_blacklist") : "nada";
+                enabled = !blacklist.contains(key) ? 1 : 0;
+                break;
         }
-
-        if (toggle == clock_seconds) {
-            toggle.setChecked(timeSeconds == 1);
-        }
+        toggle.setChecked(enabled == 1);
 
 //        if (activity.sharedPreferences.getBoolean(key, true)) {
 //            toggle.setChecked(true);
 //        }
     }
 
-    public void customSwitch(Switch toggle, final String string) {
-        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    Settings.Secure.putInt(activity.getContentResolver(), string, 1);
-                } else {
-                    Settings.Secure.putInt(activity.getContentResolver(), string, 0);
-                }
-            }
-        });
-    }
-
-    public void switches(Switch toggle, final String setting) {
+    public void switches(Switch toggle, final String setting, final String type) {
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
-                String blacklist = Settings.Secure.getString(activity.getContentResolver(), "icon_blacklist");
+                switch (type) {
+                    case "icon_blacklist":
+                        String blacklist = Settings.Secure.getString(activity.getContentResolver(), "icon_blacklist");
 //                blacklist = Settings.System.getString(activity.getContentResolver(), "icon_blacklist");
-                if (!isChecked) {
-                    if (blacklist != null && !blacklist.equals("")) {
-                        blacklist = blacklist.concat("," + setting);
-                    } else {
-                        blacklist = setting;
-                    }
-                    editor.putBoolean(setting, false);
-//                    Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", blacklist);
-                } else {
-                    if (blacklist != null) {
-                        blacklist = blacklist.replace("," + setting, "");
-                        blacklist = blacklist.replace(setting, "");
-                    }
-                    editor.putBoolean(setting, true);
-//                    Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", blacklist);
-                }
-
-                editor.apply();
-                final String blacklist2 = blacklist;
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            if (blacklist2 != null && !blacklist2.equals("")) {
-//                                if (isRooted) sudo("settings put secure icon_blacklist " + blacklist2);
-                                try {
-                                    Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", blacklist2);
-                                } catch (Exception e) {
-                                    Log.e("icon_blacklist", e.getMessage());
-                                    Toast.makeText(activity.getApplicationContext(), "Did you set up ADB?", Toast.LENGTH_LONG).show();
-                                }
+                        if (!isChecked) {
+                            if (blacklist != null && !blacklist.equals("")) {
+                                blacklist = blacklist.concat("," + setting);
                             } else {
-//                                if (isRooted) sudo("settings delete secure icon_blacklist");
-                                try {
-                                    Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", "");
-                                } catch (Exception e) {
-                                    Log.e("icon_blacklist", e.getMessage());
-                                    Toast.makeText(activity.getApplicationContext(), "Did you set up ADB?", Toast.LENGTH_LONG).show();
-                                }
+                                blacklist = setting;
                             }
-                        } catch (Exception e) {}
-                    }
-                }).start();
+                            editor.putBoolean(setting, false);
+//                    Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", blacklist);
+                        } else {
+                            if (blacklist != null) {
+                                blacklist = blacklist.replace("," + setting, "");
+                                blacklist = blacklist.replace(setting, "");
+                            }
+                            editor.putBoolean(setting, true);
+//                    Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", blacklist);
+                        }
+
+                        editor.apply();
+                        final String blacklist2 = blacklist;
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    if (blacklist2 != null && !blacklist2.equals("")) {
+//                                if (isRooted) sudo("settings put secure icon_blacklist " + blacklist2);
+                                        try {
+                                            Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", blacklist2);
+                                        } catch (Exception e) {
+                                            Log.e("icon_blacklist", e.getMessage());
+                                            Toast.makeText(activity.getApplicationContext(), "Did you set up ADB?", Toast.LENGTH_LONG).show();
+                                        }
+                                    } else {
+//                                if (isRooted) sudo("settings delete secure icon_blacklist");
+                                        try {
+                                            Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", "");
+                                        } catch (Exception e) {
+                                            Log.e("icon_blacklist", e.getMessage());
+                                            Toast.makeText(activity.getApplicationContext(), "Did you set up ADB?", Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                } catch (Exception e) {}
+                            }
+                        }).start();
+                        break;
+                    case "system":
+                        if (isChecked) {
+                            try {
+                                Settings.System.putInt(activity.getContentResolver(), setting, 1);
+                                Runtime.getRuntime().exec("content insert --uri content://settings/system --bind name:s:" + setting + " --bind value:i:1");
+                            } catch (Exception e) {
+                                Log.e("System Settings", e.getMessage());
+                            }
+                        } else {
+                            try {
+                                Settings.System.putInt(activity.getContentResolver(), setting, 0);
+                                Runtime.getRuntime().exec("content insert --uri content://settings/system --bind name:s:" + setting + " --bind value:i:0");
+                            } catch (Exception e) {
+                                Log.e("System Settings", e.getMessage());
+                            }
+                        }
+                        break;
+                    case "secure":
+                        if (isChecked) {
+                            Settings.Secure.putInt(activity.getContentResolver(), setting, 1);
+                        } else {
+                            Settings.Secure.putInt(activity.getContentResolver(), setting, 0);
+                        }
+                        break;
+                    case "global":
+                        break;
+                }
             }
         });
-    }
-
-    public void sudo(String...strings) {
-        try{
-            Process su = Runtime.getRuntime().exec("su");
-            DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
-
-            for (String s : strings) {
-                outputStream.writeBytes(s+"\n");
-                outputStream.flush();
-            }
-
-            outputStream.writeBytes("exit\n");
-            outputStream.flush();
-            try {
-                su.waitFor();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            outputStream.close();
-        } catch(IOException e){
-            e.printStackTrace();
-        }
     }
 }

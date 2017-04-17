@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
@@ -143,15 +144,21 @@ public class StatBarFragment extends Fragment {
         switches(location, "location");
         switches(su, "su");
 
-        customSwitch(clock_seconds, "clock_settings");
+        customSwitch(clock_seconds, "clock_seconds");
         return view;
     }
 
     public void sharedPrefs(String key, Switch toggle) {
         String blacklist = Settings.Secure.getString(activity.getContentResolver(), "icon_blacklist");
+        int timeSeconds = Settings.Secure.getInt(activity.getContentResolver(), key, 0);
+        Switch clock_seconds = (Switch) view.findViewById(R.id.clock_seconds);
 
         if (!blacklist.contains(key)) {
             toggle.setChecked(true);
+        }
+
+        if (toggle == clock_seconds) {
+            toggle.setChecked(timeSeconds == 1);
         }
 
 //        if (activity.sharedPreferences.getBoolean(key, true)) {

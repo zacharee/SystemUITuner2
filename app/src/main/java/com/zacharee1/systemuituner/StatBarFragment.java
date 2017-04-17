@@ -197,80 +197,77 @@ public class StatBarFragment extends Fragment {
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
-                switch (type) {
-                    case "icon_blacklist":
-                        String blacklist = Settings.Secure.getString(activity.getContentResolver(), "icon_blacklist");
+                try {
+                    switch (type) {
+                        case "icon_blacklist":
+                            String blacklist = Settings.Secure.getString(activity.getContentResolver(), "icon_blacklist");
 //                blacklist = Settings.System.getString(activity.getContentResolver(), "icon_blacklist");
-                        if (!isChecked) {
-                            if (blacklist != null && !blacklist.equals("")) {
-                                blacklist = blacklist.concat("," + setting);
+                            if (!isChecked) {
+                                if (blacklist != null && !blacklist.equals("")) {
+                                    blacklist = blacklist.concat("," + setting);
+                                } else {
+                                    blacklist = setting;
+                                }
+                                editor.putBoolean(setting, false);
+//                    Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", blacklist);
                             } else {
-                                blacklist = setting;
-                            }
-                            editor.putBoolean(setting, false);
+                                if (blacklist != null) {
+                                    blacklist = blacklist.replace("," + setting, "");
+                                    blacklist = blacklist.replace(setting, "");
+                                }
+                                editor.putBoolean(setting, true);
 //                    Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", blacklist);
-                        } else {
-                            if (blacklist != null) {
-                                blacklist = blacklist.replace("," + setting, "");
-                                blacklist = blacklist.replace(setting, "");
                             }
-                            editor.putBoolean(setting, true);
-//                    Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", blacklist);
-                        }
 
-                        editor.apply();
-                        final String blacklist2 = blacklist;
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    if (blacklist2 != null && !blacklist2.equals("")) {
+                            editor.apply();
+                            final String blacklist2 = blacklist;
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        if (blacklist2 != null && !blacklist2.equals("")) {
 //                                if (isRooted) sudo("settings put secure icon_blacklist " + blacklist2);
-                                        try {
-                                            Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", blacklist2);
-                                        } catch (Exception e) {
-                                            Log.e("icon_blacklist", e.getMessage());
-                                            Toast.makeText(activity.getApplicationContext(), "Did you set up ADB?", Toast.LENGTH_LONG).show();
-                                        }
-                                    } else {
+                                            try {
+                                                Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", blacklist2);
+                                            } catch (Exception e) {
+                                                Log.e("icon_blacklist", e.getMessage());
+                                                Toast.makeText(activity.getApplicationContext(), "Did you set up ADB?", Toast.LENGTH_LONG).show();
+                                            }
+                                        } else {
 //                                if (isRooted) sudo("settings delete secure icon_blacklist");
-                                        try {
-                                            Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", "");
-                                        } catch (Exception e) {
-                                            Log.e("icon_blacklist", e.getMessage());
-                                            Toast.makeText(activity.getApplicationContext(), "Did you set up ADB?", Toast.LENGTH_LONG).show();
+                                            try {
+                                                Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", "");
+                                            } catch (Exception e) {
+                                                Log.e("icon_blacklist", e.getMessage());
+                                                Toast.makeText(activity.getApplicationContext(), "Did you set up ADB?", Toast.LENGTH_LONG).show();
+                                            }
                                         }
+                                    } catch (Exception e) {
                                     }
-                                } catch (Exception e) {}
-                            }
-                        }).start();
-                        break;
-                    case "system":
-                        if (isChecked) {
-                            try {
+                                }
+                            }).start();
+                            break;
+                        case "system":
+                            if (isChecked) {
                                 Settings.System.putInt(activity.getContentResolver(), setting, 1);
                                 Runtime.getRuntime().exec("content insert --uri content://settings/system --bind name:s:" + setting + " --bind value:i:1");
-                            } catch (Exception e) {
-                                Log.e("System Settings", e.getMessage());
-                            }
-                        } else {
-                            try {
+                            } else {
                                 Settings.System.putInt(activity.getContentResolver(), setting, 0);
                                 Runtime.getRuntime().exec("content insert --uri content://settings/system --bind name:s:" + setting + " --bind value:i:0");
-                            } catch (Exception e) {
-                                Log.e("System Settings", e.getMessage());
                             }
-                        }
-                        break;
-                    case "secure":
-                        if (isChecked) {
-                            Settings.Secure.putInt(activity.getContentResolver(), setting, 1);
-                        } else {
-                            Settings.Secure.putInt(activity.getContentResolver(), setting, 0);
-                        }
-                        break;
-                    case "global":
-                        break;
+                            break;
+                        case "secure":
+                            if (isChecked) {
+                                Settings.Secure.putInt(activity.getContentResolver(), setting, 1);
+                            } else {
+                                Settings.Secure.putInt(activity.getContentResolver(), setting, 0);
+                            }
+                            break;
+                        case "global":
+                            break;
+                    }
+                } catch (Exception e) {
+                    Log.e("Settings Error", e.getMessage());
                 }
             }
         });

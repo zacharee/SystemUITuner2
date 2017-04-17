@@ -51,6 +51,8 @@ public class StatBarFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_statbar, container, false);
 
+        if (Build.MANUFACTURER.toUpperCase().contains("SAMSUNG")) view.setVisibility(View.GONE);
+
         Switch bluetooth = (Switch) view.findViewById(R.id.bt_icon);
         Switch wifi = (Switch) view.findViewById(R.id.wifi_icon);
         Switch ethernet = (Switch) view.findViewById(R.id.ethernet_icon);

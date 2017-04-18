@@ -1,9 +1,12 @@
 package com.zacharee1.systemuituner;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.ContentProvider;
 import android.content.ContentProviderOperation;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
@@ -15,9 +18,11 @@ import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -42,6 +47,8 @@ public class StatBarFragment extends Fragment {
     boolean isRooted;
     boolean isDark;
 
+    int drawable;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -51,7 +58,38 @@ public class StatBarFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_statbar, container, false);
 
-        if (Build.MANUFACTURER.toUpperCase().contains("SAMSUNG")) view.setVisibility(View.GONE);
+        if (activity.sharedPreferences.getBoolean("isDark", false)) {
+            drawable = R.drawable.ic_warning_dark;
+        } else {
+            drawable = R.drawable.ic_warning_light;
+        }
+//        Build.MANUFACTURER.toUpperCase().contains("SAMSUNG")
+
+        if (Build.MANUFACTURER.toUpperCase().contains("SAMSUNG")) {
+            view.setVisibility(View.GONE);
+            new AlertDialog.Builder(view.getContext())
+                    .setIcon(drawable)
+                    .setTitle("WARNING")
+                    .setMessage("It seems you have a Samsung device. THIS APP MAY BREAK SYSTEMUI FOR YOU! If you understand the risk, and have backups, go ahead and continue. Are you sure you want to use this?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            view.setVisibility(View.VISIBLE);
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            MainFragment fragment = new MainFragment();
+                            FragmentManager fragmentManager = getFragmentManager();
+                            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+                            NavigationView navigationView = (NavigationView) activity.findViewById(R.id.nav_view);
+                            Menu navMenu = navigationView.getMenu();
+                            navMenu.findItem(R.id.nav_home).setChecked(true);
+                        }
+                    })
+                    .show();
+        }
 
         Switch bluetooth = (Switch) view.findViewById(R.id.bt_icon);
         Switch wifi = (Switch) view.findViewById(R.id.wifi_icon);

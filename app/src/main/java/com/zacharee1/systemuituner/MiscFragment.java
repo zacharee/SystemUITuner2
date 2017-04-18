@@ -48,7 +48,6 @@ public class MiscFragment extends Fragment {
         stuff.setBackground(background);
 
         show_full_zen = (Switch) view.findViewById(R.id.show_full_zen);
-        show_full_zen.setChecked(activity.sharedPreferences.getBoolean("sysui_show_full_zen", false));
 
         switches(show_full_zen, "sysui_show_full_zen", "secure");
 
@@ -56,6 +55,20 @@ public class MiscFragment extends Fragment {
     }
 
     private void switches(final Switch toggle, final String pref, final String settingType) {
+        int setting = 0;
+        switch (settingType) {
+            case "global":
+                setting = Settings.Global.getInt(activity.getContentResolver(), pref, 0);
+                break;
+            case "secure":
+                setting = Settings.Secure.getInt(activity.getContentResolver(), pref, 0);
+                break;
+            case "system":
+                setting = Settings.System.getInt(activity.getContentResolver(), pref, 0);
+                break;
+        }
+        toggle.setChecked(setting == 1);
+
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

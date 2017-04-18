@@ -29,9 +29,6 @@ public class MainFragment extends Fragment {
     public View view;
     public MainActivity activity;
 
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
-
     Button setup;
 
     @Override
@@ -43,16 +40,10 @@ public class MainFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_main, container, false);
 
-        sharedPreferences = activity.sharedPreferences;
-        editor = sharedPreferences.edit();
-
         TextView title = (TextView) view.findViewById(R.id.title_main);
 
-        if (activity.sharedPreferences.getBoolean("isDark", false)) {
-            title.setTextColor(getResources().getColor(android.R.color.primary_text_dark));
-        } else {
-            title.setTextColor(getResources().getColor(android.R.color.primary_text_light));
-        }
+        if (activity.sharedPreferences.getBoolean("isDark", false)) title.setTextColor(getResources().getColor(android.R.color.primary_text_dark));
+        else title.setTextColor(getResources().getColor(android.R.color.primary_text_light));
 
         setup = (Button) view.findViewById(R.id.setup);
 
@@ -71,28 +62,5 @@ public class MainFragment extends Fragment {
                 }
             }
         });
-    }
-
-    public void sudo(String...strings) {
-        try{
-            Process su = Runtime.getRuntime().exec("su");
-            DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
-
-            for (String s : strings) {
-                outputStream.writeBytes(s+"\n");
-                outputStream.flush();
-            }
-
-            outputStream.writeBytes("exit\n");
-            outputStream.flush();
-            try {
-                su.waitFor();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            outputStream.close();
-        } catch(IOException e){
-            e.printStackTrace();
-        }
     }
 }

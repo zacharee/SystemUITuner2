@@ -42,9 +42,7 @@ import java.io.IOException;
 public class StatBarFragment extends Fragment {
     public View view;
     public MainActivity activity;
-    public SharedPreferences.Editor editor;
 
-    boolean isRooted;
     boolean isDark;
 
     int drawable;
@@ -59,8 +57,8 @@ public class StatBarFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_statbar, container, false);
 
         drawable = R.drawable.ic_warning_red;
-//        Build.MANUFACTURER.toUpperCase().contains("SAMSUNG")
 
+        isDark = activity.sharedPreferences.getBoolean("isDark", false);
 
         if (Build.MANUFACTURER.toUpperCase().contains("SAMSUNG") && !activity.sharedPreferences.getBoolean("samsungRisk", false)) {
             view.setVisibility(View.GONE);
@@ -131,12 +129,6 @@ public class StatBarFragment extends Fragment {
         LinearLayout time = (LinearLayout) view.findViewById(R.id.time);
 
         TextView title = (TextView) view.findViewById(R.id.title_stat);
-
-        editor = activity.sharedPreferences.edit();
-
-        isRooted = activity.sharedPreferences.getBoolean("isRooted", false);
-
-        isDark = activity.sharedPreferences.getBoolean("isDark", false);
 
         Drawable background;
 
@@ -230,9 +222,6 @@ public class StatBarFragment extends Fragment {
         }
         toggle.setChecked(enabled == 1);
 
-//        if (activity.sharedPreferences.getBoolean(key, true)) {
-//            toggle.setChecked(true);
-//        }
     }
 
     public void switches(Switch toggle, final String setting, final String type) {
@@ -243,32 +232,28 @@ public class StatBarFragment extends Fragment {
                     switch (type) {
                         case "icon_blacklist":
                             String blacklist = Settings.Secure.getString(activity.getContentResolver(), "icon_blacklist");
-//                blacklist = Settings.System.getString(activity.getContentResolver(), "icon_blacklist");
                             if (!isChecked) {
                                 if (blacklist != null && !blacklist.equals("")) {
                                     blacklist = blacklist.concat("," + setting);
                                 } else {
                                     blacklist = setting;
                                 }
-                                editor.putBoolean(setting, false);
-//                    Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", blacklist);
+                                activity.editor.putBoolean(setting, false);
                             } else {
                                 if (blacklist != null) {
                                     blacklist = blacklist.replace("," + setting, "");
                                     blacklist = blacklist.replace(setting, "");
                                 }
-                                editor.putBoolean(setting, true);
-//                    Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", blacklist);
+                                activity.editor.putBoolean(setting, true);
                             }
 
-                            editor.apply();
+                            activity.editor.apply();
                             final String blacklist2 = blacklist;
                             new Thread(new Runnable() {
                                 @Override
                                 public void run() {
                                     try {
                                         if (blacklist2 != null && !blacklist2.equals("")) {
-//                                if (isRooted) sudo("settings put secure icon_blacklist " + blacklist2);
                                             try {
                                                 Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", blacklist2);
                                             } catch (Exception e) {
@@ -276,7 +261,6 @@ public class StatBarFragment extends Fragment {
                                                 Toast.makeText(activity.getApplicationContext(), "Did you set up ADB?", Toast.LENGTH_LONG).show();
                                             }
                                         } else {
-//                                if (isRooted) sudo("settings delete secure icon_blacklist");
                                             try {
                                                 Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", "");
                                             } catch (Exception e) {

@@ -73,14 +73,6 @@
                 android:layout_marginTop="10dp"
                 android:text="GET TEH PERMZ" />
 
-            <TextView
-                android:id="@+id/textView28"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Once that's done, go ahead and hit the back button, and use the app!"
-                android:textAlignment="center" />
-
         </LinearLayout>
     </ScrollView>
 

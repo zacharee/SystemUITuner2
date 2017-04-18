@@ -1,16 +1,12 @@
 package com.zacharee1.systemuituner;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -20,8 +16,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
@@ -34,6 +28,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sharedPreferences = getSharedPreferences("com.zacharee1.sysuituner", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
         if (sharedPreferences.getBoolean("isDark", false)) {
             setTheme(R.style.DARK_NoAppBar);
         } else {
@@ -44,84 +39,13 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        boolean setupDone = sharedPreferences.getBoolean("isSetup", false);
-        Log.i("setup", String.valueOf(setupDone));
-
-        if (setupDone);
-        else {
-            Intent intent = new Intent(getApplicationContext(), SetupActivity.class);
-            startActivity(intent);
-        }
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        editor = sharedPreferences.edit();
-        int id = sharedPreferences.getInt("navpage", R.id.nav_home);
-
-        ArrayList<Integer> menuIDs = new ArrayList<Integer>() {{
-            add(R.id.nav_home);
-            add(R.id.nav_statusbar);
-            add(R.id.nav_demo_mode);
-            add(R.id.nav_about);
-            add(R.id.nav_settings);
-        }};
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        Menu navMenu = navigationView.getMenu();
-        if (menuIDs.contains(id)) navMenu.findItem(id).setChecked(true);
-
-        if (id == R.id.nav_home) {
-            final MainFragment fragment = new MainFragment();
-            final FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-        } else if (id == R.id.nav_quick_settings) {
-            final QSFragment fragment = new QSFragment();
-            final FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-        } else if (id == R.id.nav_statusbar) {
-            final StatBarFragment fragment = new StatBarFragment();
-            final FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-        } else if (id == R.id.nav_demo_mode) {
-            final DemoFragment fragment = new DemoFragment();
-            final FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-        } else if (id == R.id.nav_about) {
-            final AboutFragment fragment = new AboutFragment();
-            final FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-        } else if (id == R.id.nav_settings) {
-            final SettingsFragment fragment = new SettingsFragment();
-            final FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-        } else {
-            final MainFragment fragment = new MainFragment();
-            final FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-        }
-
-        if (sharedPreferences.getBoolean("isDark", false)) {
-            navigationView.setItemTextColor(getResources().getColorStateList(R.color.drawer_item_dark));
-            navigationView.setItemIconTintList(getResources().getColorStateList(R.color.drawer_item_dark));
-        } else {
-            navigationView.setItemTextColor(getResources().getColorStateList(R.color.drawer_item_light));
-            navigationView.setItemIconTintList(getResources().getColorStateList(R.color.drawer_item_light));
-        }
-
+        setup();
     }
 
     @Override
@@ -164,110 +88,79 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        Fragment fragment = new Fragment();
+        final Fragment finalFragment;
+        final FragmentManager fragmentManager = getFragmentManager();
+        final Handler handler = new Handler();
+
         if (id != R.id.nav_exit) {
             editor.putInt("navpage", id);
             editor.apply();
         }
 
-        if (id == R.id.nav_home) {
-            final MainFragment fragment = new MainFragment();
-            final FragmentManager fragmentManager = getFragmentManager();
-            final Handler handler = new Handler();
+        if (id == R.id.nav_home) fragment = new MainFragment();
+        else if (id == R.id.nav_quick_settings) fragment = new QSFragment();
+        else if (id == R.id.nav_statusbar) fragment = new StatBarFragment();
+        else if (id == R.id.nav_demo_mode) fragment = new DemoFragment();
+        else if (id == R.id.nav_about) fragment = new AboutFragment();
+        else if (id == R.id.nav_settings) fragment = new SettingsFragment();
+        else if (id == R.id.nav_exit) super.onBackPressed();
 
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-                }
-            }, 350);
-        } else if (id == R.id.nav_quick_settings) {
-            final QSFragment fragment = new QSFragment();
-            final FragmentManager fragmentManager = getFragmentManager();
-            final Handler handler = new Handler();
-
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-                }
-            }, 350);
-        } else if (id == R.id.nav_statusbar) {
-            final StatBarFragment fragment = new StatBarFragment();
-            final FragmentManager fragmentManager = getFragmentManager();
-            final Handler handler = new Handler();
-
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-                }
-            }, 350);
-        } else if (id == R.id.nav_demo_mode) {
-            final DemoFragment fragment = new DemoFragment();
-            final FragmentManager fragmentManager = getFragmentManager();
-            final Handler handler = new Handler();
-
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-                }
-            }, 350);
-        } else if (id == R.id.nav_about) {
-            final AboutFragment fragment = new AboutFragment();
-            final FragmentManager fragmentManager = getFragmentManager();
-            final Handler handler = new Handler();
-
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-                }
-            }, 350);
-        } else if (id == R.id.nav_settings) {
-            final SettingsFragment fragment = new SettingsFragment();
-            final FragmentManager fragmentManager = getFragmentManager();
-            final Handler handler = new Handler();
-
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-                }
-            }, 350);
-        } else if (id == R.id.nav_exit) {
-            super.onBackPressed();
-        }
+        finalFragment = fragment;
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                fragmentManager.beginTransaction().replace(R.id.content_main, finalFragment).commit();
+            }
+        }, 350);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    public void sendBC(Intent intent) {
-        sendBroadcast(intent);
-    }
+    public void setup() {
+        boolean setupDone = sharedPreferences.getBoolean("isSetup", false);
+        Log.i("setup", String.valueOf(setupDone));
+        Intent intent = new Intent(getApplicationContext(), SetupActivity.class);
 
-    public void sudo(String...strings) {
-        try{
-            Process su = Runtime.getRuntime().exec("su");
-            DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
+        if (!setupDone) startActivity(intent);
 
-            for (String s : strings) {
-                outputStream.writeBytes(s+"\n");
-                outputStream.flush();
-            }
+        int id = sharedPreferences.getInt("navpage", R.id.nav_home);
 
-            outputStream.writeBytes("exit\n");
-            outputStream.flush();
-            try {
-                su.waitFor();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            outputStream.close();
-        } catch(IOException e){
-            e.printStackTrace();
+        ArrayList<Integer> menuIDs = new ArrayList<Integer>() {{
+            add(R.id.nav_home);
+            add(R.id.nav_statusbar);
+            add(R.id.nav_demo_mode);
+            add(R.id.nav_about);
+            add(R.id.nav_settings);
+        }};
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        Menu navMenu = navigationView.getMenu();
+        if (menuIDs.contains(id)) navMenu.findItem(id).setChecked(true);
+
+        FragmentManager fragmentManager = getFragmentManager();
+
+        Fragment fragment;
+
+        if (id == R.id.nav_home) fragment = new MainFragment();
+        else if (id == R.id.nav_quick_settings) fragment = new QSFragment();
+        else if (id == R.id.nav_statusbar) fragment = new StatBarFragment();
+        else if (id == R.id.nav_demo_mode) fragment = new DemoFragment();
+        else if (id == R.id.nav_about) fragment = new AboutFragment();
+        else if (id == R.id.nav_settings) fragment = new SettingsFragment();
+        else fragment = new MainFragment();
+
+        fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+
+        if (sharedPreferences.getBoolean("isDark", false)) {
+            navigationView.setItemTextColor(getResources().getColorStateList(R.color.drawer_item_dark));
+            navigationView.setItemIconTintList(getResources().getColorStateList(R.color.drawer_item_dark));
+        } else {
+            navigationView.setItemTextColor(getResources().getColorStateList(R.color.drawer_item_light));
+            navigationView.setItemIconTintList(getResources().getColorStateList(R.color.drawer_item_light));
         }
     }
 }

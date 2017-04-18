@@ -14,13 +14,16 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class NoRoot extends AppCompatActivity {
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     Button setupDone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferences sharedPreferences = getSharedPreferences("com.zacharee1.sysuituner", MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("com.zacharee1.sysuituner", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         if (sharedPreferences.getBoolean("isDark", false)) {
             setTheme(R.style.DARK_NoAppBar);
@@ -40,15 +43,6 @@ public class NoRoot extends AppCompatActivity {
             title.setTextColor(getResources().getColor(android.R.color.primary_text_light));
         }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         setupDone = (Button) findViewById(R.id.no_root_done);
 
         buttons(setupDone);
@@ -59,8 +53,6 @@ public class NoRoot extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (button == setupDone) {
-                    SharedPreferences sharedPreferences = getSharedPreferences("com.zacharee1.sysuituner", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("isSetup", true);
                     editor.commit();
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);

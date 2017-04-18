@@ -18,10 +18,14 @@ import java.io.IOException;
 
 public class RootActivity extends AppCompatActivity {
 
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferences sharedPreferences = getSharedPreferences("com.zacharee1.sysuituner", MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("com.zacharee1.sysuituner", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         if (sharedPreferences.getBoolean("isDark", false)) {
             setTheme(R.style.DARK_NoAppBar);
@@ -54,10 +58,8 @@ public class RootActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Looper.prepare();
-                        SharedPreferences sharedPreferences = getSharedPreferences("com.zacharee1.sysuituner", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putBoolean("isSetup", true);
-                        editor.commit();
+                        editor.apply();
                         sudo("pm grant com.zacharee1.systemuituner android.permission.DUMP ; pm grant com.zacharee1.systemuituner android.permission.WRITE_SECURE_SETTINGS");
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);

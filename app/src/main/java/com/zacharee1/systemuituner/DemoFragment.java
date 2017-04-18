@@ -6,9 +6,11 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Looper;
 import android.preference.PreferenceFragment;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,14 +38,16 @@ import java.util.Calendar;
 public class DemoFragment extends Fragment {
     public View view;
     public MainActivity activity;
-    public SharedPreferences.Editor editor;
-    public Button enableDemo;
+
     public Switch showDemo;
     public Switch batteryPluggedSwitch;
     public Switch showNotifSwitch;
     public Switch airplaneMode;
+
     public Button selectTime;
     public Button selectBatteryLevel;
+    public Button enableDemo;
+
     public Spinner wifi;
     public Spinner mobile;
     public Spinner mobileTypeSpinner;
@@ -63,6 +67,8 @@ public class DemoFragment extends Fragment {
     public String showNotifs = "false";
     public String statBarStyle = "opaque";
 
+    DemoFragment demo;
+
     boolean isRooted;
 
 
@@ -75,19 +81,23 @@ public class DemoFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_demo, container, false);
 
+        demo = new DemoFragment();
+
         isRooted = activity.sharedPreferences.getBoolean("isRooted", false);
 
-//        enableDemo = (Switch) view.findViewById(R.id.enable_demo);
-        showDemo = (Switch) view.findViewById(R.id.show_demo);
-        selectTime = (Button) view.findViewById(R.id.select_time);
-        selectBatteryLevel = (Button) view.findViewById(R.id.select_battery_level_button);
         wifi = (Spinner) view.findViewById(R.id.wifi_strength);
         mobile = (Spinner) view.findViewById(R.id.mobile_strength);
         mobileTypeSpinner = (Spinner) view.findViewById(R.id.mobile_type);
+        statStyleSpinner = (Spinner) view.findViewById(R.id.stat_bar_style);
+
+        showDemo = (Switch) view.findViewById(R.id.show_demo);
         batteryPluggedSwitch = (Switch) view.findViewById(R.id.battery_plugged);
         airplaneMode = (Switch) view.findViewById(R.id.show_airplane);
         showNotifSwitch = (Switch) view.findViewById(R.id.show_notifs);
-        statStyleSpinner = (Spinner) view.findViewById(R.id.stat_bar_style);
+
+        selectTime = (Button) view.findViewById(R.id.select_time);
+        enableDemo = (Button) view.findViewById(R.id.enable_demo);
+        selectBatteryLevel = (Button) view.findViewById(R.id.select_battery_level_button);
 
         TextView title = (TextView) view.findViewById(R.id.title_demo);
 
@@ -131,9 +141,7 @@ public class DemoFragment extends Fragment {
         wifiLevel = activity.sharedPreferences.getInt("wifiLevel", 3);
         batteryLevel = activity.sharedPreferences.getInt("batteryLevel", 50);
 
-        editor = activity.sharedPreferences.edit();
-
-//        enableDemo(enableDemo);
+        enableDemo(enableDemo);
         showDemo(showDemo);
         selectTime(selectTime);
         selectSignal(R.id.wifi_strength, wifi);
@@ -170,6 +178,15 @@ public class DemoFragment extends Fragment {
 //        });
 //    }
 
+    public void enableDemo(Button button) {
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Settings.Global.putInt(activity.getContentResolver(), "sysui_demo_allowed", 1);
+            }
+        });
+    }
+
     public void setSpinnerAdapters(Spinner spinner, int arrayID) {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(activity.getApplicationContext(),
                 arrayID, android.R.layout.simple_spinner_item);
@@ -181,8 +198,8 @@ public class DemoFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                editor.putInt("statBarStyle1", position);
-                editor.apply();
+                activity.editor.putInt("statBarStyle1", position);
+                activity.editor.apply();
                 statBarStyle = String.valueOf(spinner.getItemAtPosition(position));
             }
 
@@ -198,13 +215,13 @@ public class DemoFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    editor.putBoolean("showNotifs", true);
+                    activity.editor.putBoolean("showNotifs", true);
                     showNotifs = "true";
                 } else {
-                    editor.putBoolean("showNotifs", false);
+                    activity.editor.putBoolean("showNotifs", false);
                     showNotifs = "false";
                 }
-                editor.apply();
+                activity.editor.apply();
             }
         });
     }
@@ -214,13 +231,13 @@ public class DemoFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    editor.putBoolean("isCharging", true);
+                    activity.editor.putBoolean("isCharging", true);
                     batteryPlugged = "true";
                 } else {
-                    editor.putBoolean("isCharging", false);
+                    activity.editor.putBoolean("isCharging", false);
                     batteryPlugged = "false";
                 }
-                editor.apply();
+                activity.editor.apply();
             }
         });
     }
@@ -230,13 +247,13 @@ public class DemoFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    editor.putBoolean("showAirplane", true);
+                    activity.editor.putBoolean("showAirplane", true);
                     showAirplane = "show";
                 } else {
-                    editor.putBoolean("showAirplane", false);
+                    activity.editor.putBoolean("showAirplane", false);
                     showAirplane = "hide";
                 }
-                editor.apply();
+                activity.editor.apply();
             }
         });
     }
@@ -246,8 +263,8 @@ public class DemoFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String value = String.valueOf(spinner.getItemAtPosition(position));
-                editor.putInt("mobileType1", position);
-                editor.apply();
+                activity.editor.putInt("mobileType1", position);
+                activity.editor.apply();
                 mobileType = value;
             }
 
@@ -292,8 +309,8 @@ public class DemoFragment extends Fragment {
                 {
                     @Override
                     public void onClick(View v) {
-                        editor.putInt("batteryLevel", np.getValue());
-                        editor.apply();
+                        activity.editor.putInt("batteryLevel", np.getValue());
+                        activity.editor.apply();
                         batteryLevel = np.getValue();
                         d.dismiss();
                     }
@@ -316,12 +333,11 @@ public class DemoFragment extends Fragment {
                 timePickerDialog = new TimePickerDialog(button.getContext(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        DemoFragment demo = new DemoFragment();
                         demo.hour = hourOfDay;
-                        editor.putInt("hour", hourOfDay);
+                        activity.editor.putInt("hour", hourOfDay);
                         demo.minute = minute;
-                        editor.putInt("minute", minute);
-                        editor.apply();
+                        activity.editor.putInt("minute", minute);
+                        activity.editor.apply();
                     }
                 }, hour, minute, true);
                 timePickerDialog.setTitle("Choose Time to Display");
@@ -337,13 +353,13 @@ public class DemoFragment extends Fragment {
                 switch (signalID) {
                     case R.id.wifi_strength:
                         wifiLevel = Integer.decode(String.valueOf(spinner.getItemAtPosition(position)));
-                        editor.putInt("wifiLevel", wifiLevel);
+                        activity.editor.putInt("wifiLevel", wifiLevel);
                         break;
                     case R.id.mobile_strength:
                         mobileLevel = Integer.decode(String.valueOf(spinner.getItemAtPosition(position)));
-                        editor.putInt("mobileLevel", mobileLevel);
+                        activity.editor.putInt("mobileLevel", mobileLevel);
                 }
-                editor.apply();
+                activity.editor.apply();
             }
 
             @Override
@@ -368,7 +384,7 @@ public class DemoFragment extends Fragment {
                                 getActivity().sendBroadcast(intent);
 
                                 intent.putExtra("command", "clock");
-                                intent.putExtra("hhmm", String.valueOf(hour) + String.valueOf(minute));
+                                intent.putExtra("hhmm", String.valueOf(demo.hour) + String.valueOf(demo.minute));
                                 getActivity().sendBroadcast(intent);
 
                                 intent.putExtra("command", "network");
@@ -401,8 +417,8 @@ public class DemoFragment extends Fragment {
                                 intent.putExtra("mode", statBarStyle);
                                 getActivity().sendBroadcast(intent);
 
-                                editor.putBoolean("demoOn", true);
-                                editor.apply();
+                                activity.editor.putBoolean("demoOn", true);
+                                activity.editor.apply();
                             } catch (Exception e) {
                                 Log.e("Demo", e.getMessage());
                             }
@@ -415,35 +431,12 @@ public class DemoFragment extends Fragment {
                             Intent intent = new Intent("com.android.systemui.demo");
                             intent.putExtra("command", "exit");
                             getActivity().sendBroadcast(intent);
-                            editor.putBoolean("demoOn", false);
-                            editor.apply();
+                            activity.editor.putBoolean("demoOn", false);
+                            activity.editor.apply();
                         }
                     }).start();
                 }
             }
         });
-    }
-
-    public void sudo(String...strings) {
-        try{
-            Process su = Runtime.getRuntime().exec("su");
-            DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
-
-            for (String s : strings) {
-                outputStream.writeBytes(s+"\n");
-                outputStream.flush();
-            }
-
-            outputStream.writeBytes("exit\n");
-            outputStream.flush();
-            try {
-                su.waitFor();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            outputStream.close();
-        } catch(IOException e){
-            e.printStackTrace();
-        }
     }
 }

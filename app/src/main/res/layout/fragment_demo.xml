@@ -27,17 +27,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="The options here are experimental! They may not work correctly, so please be careful. After toggling Demo Mode, wait a bit; it takes a while to kick in."
+                android:text="The options here are experimental! They may not work correctly, so please be careful."
                 android:textAlignment="center" />
 
-            <Switch
-                android:id="@+id/show_demo"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:switchMinWidth="50dp"
-                android:text="Show Demo Mode"
-                android:textSize="18sp" />
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/enable_demo"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Enable" />
+
+                <Switch
+                    android:id="@+id/show_demo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:switchMinWidth="50dp"
+                    android:switchPadding="10dp"
+                    android:text="Show"
+                    android:textAlignment="textEnd"
+                    android:textSize="18sp" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/select_time"

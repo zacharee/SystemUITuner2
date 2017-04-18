@@ -37,27 +37,24 @@ public class SettingsFragment extends Fragment {
             title.setTextColor(getResources().getColor(android.R.color.primary_text_light));
         }
 
-        SharedPreferences sharedPrefs = activity.getSharedPreferences("com.zacharee1.sysuituner", MODE_PRIVATE);
-
         Switch darkMode = (Switch) view.findViewById(R.id.dark_mode);
 
-        if (sharedPrefs.getBoolean("isDark", false)) {
+        if (activity.sharedPreferences.getBoolean("isDark", false)) {
             darkMode.setChecked(true);
         }
 
         darkMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                SharedPreferences.Editor editor = activity.getSharedPreferences("com.zacharee1.sysuituner", MODE_PRIVATE).edit();
                 if (isChecked) {
-                    editor.putBoolean("isDark", true);
+                    activity.editor.putBoolean("isDark", true);
                     Utils.changeToTheme(activity, 1);
 
                 } else {
-                    editor.putBoolean("isDark", false);
+                    activity.editor.putBoolean("isDark", false);
                     Utils.changeToTheme(activity, 0);
                 }
-                editor.apply();
+                activity.editor.apply();
             }
         });
 

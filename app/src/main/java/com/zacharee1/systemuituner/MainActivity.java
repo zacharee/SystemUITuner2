@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.nav_demo_mode) fragment = new DemoFragment();
         else if (id == R.id.nav_about) fragment = new AboutFragment();
         else if (id == R.id.nav_settings) fragment = new SettingsFragment();
+        else if (id == R.id.nav_misc) fragment = new MiscFragment();
         else if (id == R.id.nav_exit) super.onBackPressed();
 
         finalFragment = fragment;
@@ -134,6 +135,7 @@ public class MainActivity extends AppCompatActivity
             add(R.id.nav_demo_mode);
             add(R.id.nav_about);
             add(R.id.nav_settings);
+            add(R.id.nav_misc);
         }};
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -151,6 +153,7 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.nav_demo_mode) fragment = new DemoFragment();
         else if (id == R.id.nav_about) fragment = new AboutFragment();
         else if (id == R.id.nav_settings) fragment = new SettingsFragment();
+        else if (id == R.id.nav_misc) fragment = new MiscFragment();
         else fragment = new MainFragment();
 
         fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();

@@ -21,6 +21,10 @@
             android:id="@+id/nav_demo_mode"
             android:icon="@drawable/ic_tv_black_24dp"
             android:title="Demo mode" />
+        <item
+            android:id="@+id/nav_misc"
+            android:icon="@drawable/ic_brush_black"
+            android:title="Miscellaneous" />
     </group>
 
     <group

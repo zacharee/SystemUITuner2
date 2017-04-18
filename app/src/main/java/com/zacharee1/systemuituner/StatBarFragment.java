@@ -58,22 +58,24 @@ public class StatBarFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_statbar, container, false);
 
-        if (activity.sharedPreferences.getBoolean("isDark", false)) {
-            drawable = R.drawable.ic_warning_dark;
-        } else {
-            drawable = R.drawable.ic_warning_light;
-        }
+        drawable = R.drawable.ic_warning_red;
 //        Build.MANUFACTURER.toUpperCase().contains("SAMSUNG")
 
-        if (Build.MANUFACTURER.toUpperCase().contains("SAMSUNG")) {
+
+        if (Build.MANUFACTURER.toUpperCase().contains("SAMSUNG") && !activity.sharedPreferences.getBoolean("samsungRisk", false)) {
             view.setVisibility(View.GONE);
             new AlertDialog.Builder(view.getContext())
                     .setIcon(drawable)
-                    .setTitle("WARNING")
-                    .setMessage("It seems you have a Samsung device. THIS APP MAY BREAK SYSTEMUI FOR YOU! If you understand the risk, and have backups, go ahead and continue. Are you sure you want to use this?")
+                    .setTitle(Html.fromHtml("<font color='#ff0000'>WARNING</font>"))
+                    .setMessage("It seems you are using a Samsung device. " +
+                            "If you are on Stock (TouchWiz), and you're rooted, SystemUI may break if you use this feature! " +
+                            "Unrooted users are safe. " +
+                            "Are you sure you want to continue?")
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            activity.editor.putBoolean("samsungRisk", true);
+                            activity.editor.apply();
                             view.setVisibility(View.VISIBLE);
                         }
                     })

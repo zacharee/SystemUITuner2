@@ -58,6 +58,8 @@ public class StatBarFragment extends Fragment {
             activity = (MainActivity) getActivity();
         }
 
+        activity.setTitle("Status Bar");
+
         view = inflater.inflate(R.layout.fragment_statbar, container, false);
 
         drawable = R.drawable.ic_warning_red;
@@ -289,10 +291,8 @@ public class StatBarFragment extends Fragment {
                             break;
                         case "system":
                             if (isChecked) {
-                                Settings.System.putInt(activity.getContentResolver(), setting, 1);
                                 Runtime.getRuntime().exec("content insert --uri content://settings/system --bind name:s:" + setting + " --bind value:i:1");
                             } else {
-                                Settings.System.putInt(activity.getContentResolver(), setting, 0);
                                 Runtime.getRuntime().exec("content insert --uri content://settings/system --bind name:s:" + setting + " --bind value:i:0");
                             }
                             break;

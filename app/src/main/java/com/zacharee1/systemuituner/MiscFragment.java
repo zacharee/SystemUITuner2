@@ -41,6 +41,8 @@ public class MiscFragment extends Fragment {
             activity = (MainActivity) getActivity();
         }
 
+        activity.setTitle("Miscellaneous");
+
         view = inflater.inflate(R.layout.fragment_misc, container, false);
 
         drawable = R.drawable.ic_warning_red;
@@ -94,7 +96,7 @@ public class MiscFragment extends Fragment {
                                 Settings.Secure.putInt(activity.getContentResolver(), pref, 1);
                                 break;
                             case "system":
-                                Settings.System.putInt(activity.getContentResolver(), pref, 1);
+                                Runtime.getRuntime().exec("content insert --uri content://settings/system --bind name:s:" + pref + " --bind value:i:1");
                                 break;
                         }
                     } else {
@@ -106,7 +108,7 @@ public class MiscFragment extends Fragment {
                                 Settings.Secure.putInt(activity.getContentResolver(), pref, 0);
                                 break;
                             case "system":
-                                Settings.System.putInt(activity.getContentResolver(), pref, 0);
+                                Runtime.getRuntime().exec("content insert --uri content://settings/system --bind name:s:" + pref + " --bind value:i:1");
                                 break;
                         }
                     }

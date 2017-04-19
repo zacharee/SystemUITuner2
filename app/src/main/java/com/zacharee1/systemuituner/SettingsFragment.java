@@ -2,11 +2,13 @@ package com.zacharee1.systemuituner;
 
 import android.app.Fragment;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -27,6 +29,8 @@ public class SettingsFragment extends Fragment {
             activity = (MainActivity) getActivity();
         }
 
+        activity.setTitle("Settings");
+
         view = inflater.inflate(R.layout.fragment_settings, container, false);
 
         TextView title = (TextView) view.findViewById(R.id.title_settings);
@@ -38,6 +42,7 @@ public class SettingsFragment extends Fragment {
         }
 
         Switch darkMode = (Switch) view.findViewById(R.id.dark_mode);
+        LinearLayout settings = (LinearLayout) view.findViewById(R.id.settings);
 
         if (activity.sharedPreferences.getBoolean("isDark", false)) {
             darkMode.setChecked(true);
@@ -57,6 +62,18 @@ public class SettingsFragment extends Fragment {
                 activity.editor.apply();
             }
         });
+
+        Drawable background;
+
+        if (activity.sharedPreferences.getBoolean("isDark", false)) {
+            background = activity.getDrawable(R.drawable.layout_bg_dark);
+            title.setTextColor(getResources().getColor(android.R.color.primary_text_dark));
+        } else {
+            background = activity.getDrawable(R.drawable.layout_bg_light);
+            title.setTextColor(getResources().getColor(android.R.color.primary_text_light));
+        }
+
+        settings.setBackground(background);
 
         return view;
     }

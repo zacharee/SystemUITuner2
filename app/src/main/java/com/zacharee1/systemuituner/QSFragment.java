@@ -20,6 +20,8 @@ public class QSFragment extends Fragment {
             activity = (MainActivity) getActivity();
         }
 
+        activity.setTitle("Quick Settings");
+
         view = inflater.inflate(R.layout.fragment_qs, container, false);
 
         return view;

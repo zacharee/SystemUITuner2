@@ -79,6 +79,8 @@ public class DemoFragment extends Fragment {
             activity = (MainActivity) getActivity();
         }
 
+        activity.setTitle("Demo Mode");
+
         view = inflater.inflate(R.layout.fragment_demo, container, false);
 
         demo = new DemoFragment();

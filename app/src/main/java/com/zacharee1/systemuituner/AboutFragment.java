@@ -41,6 +41,8 @@ public class AboutFragment extends Fragment {
             activity = (MainActivity) getActivity();
         }
 
+        activity.setTitle("About");
+
         TextView title = (TextView) view.findViewById(R.id.abt_title);
 
         if (activity.sharedPreferences.getBoolean("isDark", false)) {

@@ -69,8 +69,6 @@ public class DemoFragment extends Fragment {
 
     DemoFragment demo;
 
-    boolean isRooted;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -84,8 +82,6 @@ public class DemoFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_demo, container, false);
 
         demo = new DemoFragment();
-
-        isRooted = activity.sharedPreferences.getBoolean("isRooted", false);
 
         wifi = (Spinner) view.findViewById(R.id.wifi_strength);
         mobile = (Spinner) view.findViewById(R.id.mobile_strength);
@@ -102,48 +98,43 @@ public class DemoFragment extends Fragment {
         selectBatteryLevel = (Button) view.findViewById(R.id.select_battery_level_button);
 
         TextView title = (TextView) view.findViewById(R.id.title_demo);
-
-        if (activity.sharedPreferences.getBoolean("isDark", false)) {
-            title.setTextColor(getResources().getColor(android.R.color.primary_text_dark));
-        } else {
-            title.setTextColor(getResources().getColor(android.R.color.primary_text_light));
-        }
+        title.setTextColor(activity.setThings.titleText);
 
         setSpinnerAdapters(wifi, R.array.wifi_strength);
         setSpinnerAdapters(mobile, R.array.mobile_strength);
         setSpinnerAdapters(mobileTypeSpinner, R.array.mobile_type);
         setSpinnerAdapters(statStyleSpinner, R.array.stat_bar_style);
 
-        wifi.setSelection(activity.sharedPreferences.getInt("wifiLevel", 3));
-        mobile.setSelection(activity.sharedPreferences.getInt("mobileLevel", 3));
-        mobileTypeSpinner.setSelection(activity.sharedPreferences.getInt("mobileType1", 0));
-        statStyleSpinner.setSelection(activity.sharedPreferences.getInt("statBarStyle1", 0));
+        wifi.setSelection(activity.setThings.sharedPreferences.getInt("wifiLevel", 3));
+        mobile.setSelection(activity.setThings.sharedPreferences.getInt("mobileLevel", 3));
+        mobileTypeSpinner.setSelection(activity.setThings.sharedPreferences.getInt("mobileType1", 0));
+        statStyleSpinner.setSelection(activity.setThings.sharedPreferences.getInt("statBarStyle1", 0));
 
-        statBarStyle = (String)statStyleSpinner.getItemAtPosition(activity.sharedPreferences.getInt("statBarStyle1", 0));
+        statBarStyle = (String)statStyleSpinner.getItemAtPosition(activity.setThings.sharedPreferences.getInt("statBarStyle1", 0));
 
-        showDemo.setChecked(activity.sharedPreferences.getBoolean("demoOn", false));
-        batteryPluggedSwitch.setChecked(activity.sharedPreferences.getBoolean("isCharging", false));
-        if (activity.sharedPreferences.getBoolean("isCharging", false)) {
+        showDemo.setChecked(activity.setThings.sharedPreferences.getBoolean("demoOn", false));
+        batteryPluggedSwitch.setChecked(activity.setThings.sharedPreferences.getBoolean("isCharging", false));
+        if (activity.setThings.sharedPreferences.getBoolean("isCharging", false)) {
             batteryPlugged = "true";
         }
-        airplaneMode.setChecked(activity.sharedPreferences.getBoolean("showAirplane", false));
-        if (activity.sharedPreferences.getBoolean("showAirplane", false)) {
+        airplaneMode.setChecked(activity.setThings.sharedPreferences.getBoolean("showAirplane", false));
+        if (activity.setThings.sharedPreferences.getBoolean("showAirplane", false)) {
             showAirplane = "show";
         }
-        showNotifSwitch.setChecked(activity.sharedPreferences.getBoolean("showNotifs", false));
-        if (activity.sharedPreferences.getBoolean("showNotifs", false)) {
+        showNotifSwitch.setChecked(activity.setThings.sharedPreferences.getBoolean("showNotifs", false));
+        if (activity.setThings.sharedPreferences.getBoolean("showNotifs", false)) {
             showNotifs = "true";
         }
 
-        mobileType = (String)mobileTypeSpinner.getItemAtPosition(activity.sharedPreferences.getInt("mobileType1", 0));
+        mobileType = (String)mobileTypeSpinner.getItemAtPosition(activity.setThings.sharedPreferences.getInt("mobileType1", 0));
 
-        hour = activity.sharedPreferences.getInt("hour", 12);
-        minute = activity.sharedPreferences.getInt("minute", 00);
-        mobileLevel = activity.sharedPreferences.getInt("mobileLevel", 3);
-        wifiLevel = activity.sharedPreferences.getInt("wifiLevel", 3);
-        batteryLevel = activity.sharedPreferences.getInt("batteryLevel", 50);
+        hour = activity.setThings.sharedPreferences.getInt("hour", 12);
+        minute = activity.setThings.sharedPreferences.getInt("minute", 00);
+        mobileLevel = activity.setThings.sharedPreferences.getInt("mobileLevel", 3);
+        wifiLevel = activity.setThings.sharedPreferences.getInt("wifiLevel", 3);
+        batteryLevel = activity.setThings.sharedPreferences.getInt("batteryLevel", 50);
 
-        enableDemo(enableDemo);
+        activity.setThings.buttons(enableDemo, "enableDemo");
         showDemo(showDemo);
         selectTime(selectTime);
         selectSignal(R.id.wifi_strength, wifi);
@@ -157,38 +148,6 @@ public class DemoFragment extends Fragment {
         return view;
     }
 
-//    public void enableDemo(final Switch toggle) {
-//        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if (isChecked) {
-//                    new Thread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            sudo("am broadcast -a com.android.systemui.demo --es command enter");
-//                        }
-//                    }).start();
-//                } else {
-//                    new Thread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            sudo("am broadcast -a com.android.systemui.demo --es command exit");
-//                        }
-//                    }).start();
-//                }
-//            }
-//        });
-//    }
-
-    public void enableDemo(Button button) {
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Settings.Global.putInt(activity.getContentResolver(), "sysui_demo_allowed", 1);
-            }
-        });
-    }
-
     public void setSpinnerAdapters(Spinner spinner, int arrayID) {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(activity.getApplicationContext(),
                 arrayID, android.R.layout.simple_spinner_item);
@@ -200,8 +159,8 @@ public class DemoFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                activity.editor.putInt("statBarStyle1", position);
-                activity.editor.apply();
+                activity.setThings.editor.putInt("statBarStyle1", position);
+                activity.setThings.editor.apply();
                 statBarStyle = String.valueOf(spinner.getItemAtPosition(position));
             }
 
@@ -217,13 +176,13 @@ public class DemoFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    activity.editor.putBoolean("showNotifs", true);
+                    activity.setThings.editor.putBoolean("showNotifs", true);
                     showNotifs = "true";
                 } else {
-                    activity.editor.putBoolean("showNotifs", false);
+                    activity.setThings.editor.putBoolean("showNotifs", false);
                     showNotifs = "false";
                 }
-                activity.editor.apply();
+                activity.setThings.editor.apply();
             }
         });
     }
@@ -233,13 +192,13 @@ public class DemoFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    activity.editor.putBoolean("isCharging", true);
+                    activity.setThings.editor.putBoolean("isCharging", true);
                     batteryPlugged = "true";
                 } else {
-                    activity.editor.putBoolean("isCharging", false);
+                    activity.setThings.editor.putBoolean("isCharging", false);
                     batteryPlugged = "false";
                 }
-                activity.editor.apply();
+                activity.setThings.editor.apply();
             }
         });
     }
@@ -249,13 +208,13 @@ public class DemoFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    activity.editor.putBoolean("showAirplane", true);
+                    activity.setThings.editor.putBoolean("showAirplane", true);
                     showAirplane = "show";
                 } else {
-                    activity.editor.putBoolean("showAirplane", false);
+                    activity.setThings.editor.putBoolean("showAirplane", false);
                     showAirplane = "hide";
                 }
-                activity.editor.apply();
+                activity.setThings.editor.apply();
             }
         });
     }
@@ -265,8 +224,8 @@ public class DemoFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String value = String.valueOf(spinner.getItemAtPosition(position));
-                activity.editor.putInt("mobileType1", position);
-                activity.editor.apply();
+                activity.setThings.editor.putInt("mobileType1", position);
+                activity.setThings.editor.apply();
                 mobileType = value;
             }
 
@@ -290,7 +249,7 @@ public class DemoFragment extends Fragment {
                 final NumberPicker np = (NumberPicker) d.findViewById(R.id.select_battery_level);
                 np.setMaxValue(100);
                 np.setMinValue(0);
-                np.setValue(activity.sharedPreferences.getInt("batteryLevel", 50));
+                np.setValue(activity.setThings.sharedPreferences.getInt("batteryLevel", 50));
                 np.setWrapSelectorWheel(false);
                 np.setSelected(false);
                 np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
@@ -311,8 +270,8 @@ public class DemoFragment extends Fragment {
                 {
                     @Override
                     public void onClick(View v) {
-                        activity.editor.putInt("batteryLevel", np.getValue());
-                        activity.editor.apply();
+                        activity.setThings.editor.putInt("batteryLevel", np.getValue());
+                        activity.setThings.editor.apply();
                         batteryLevel = np.getValue();
                         d.dismiss();
                     }
@@ -336,10 +295,10 @@ public class DemoFragment extends Fragment {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         demo.hour = hourOfDay;
-                        activity.editor.putInt("hour", hourOfDay);
+                        activity.setThings.editor.putInt("hour", hourOfDay);
                         demo.minute = minute;
-                        activity.editor.putInt("minute", minute);
-                        activity.editor.apply();
+                        activity.setThings.editor.putInt("minute", minute);
+                        activity.setThings.editor.apply();
                     }
                 }, hour, minute, true);
                 timePickerDialog.setTitle("Choose Time to Display");
@@ -355,13 +314,13 @@ public class DemoFragment extends Fragment {
                 switch (signalID) {
                     case R.id.wifi_strength:
                         wifiLevel = Integer.decode(String.valueOf(spinner.getItemAtPosition(position)));
-                        activity.editor.putInt("wifiLevel", wifiLevel);
+                        activity.setThings.editor.putInt("wifiLevel", wifiLevel);
                         break;
                     case R.id.mobile_strength:
                         mobileLevel = Integer.decode(String.valueOf(spinner.getItemAtPosition(position)));
-                        activity.editor.putInt("mobileLevel", mobileLevel);
+                        activity.setThings.editor.putInt("mobileLevel", mobileLevel);
                 }
-                activity.editor.apply();
+                activity.setThings.editor.apply();
             }
 
             @Override
@@ -419,8 +378,8 @@ public class DemoFragment extends Fragment {
                                 intent.putExtra("mode", statBarStyle);
                                 getActivity().sendBroadcast(intent);
 
-                                activity.editor.putBoolean("demoOn", true);
-                                activity.editor.apply();
+                                activity.setThings.editor.putBoolean("demoOn", true);
+                                activity.setThings.editor.apply();
                             } catch (Exception e) {
                                 Log.e("Demo", e.getMessage());
                             }
@@ -433,8 +392,8 @@ public class DemoFragment extends Fragment {
                             Intent intent = new Intent("com.android.systemui.demo");
                             intent.putExtra("command", "exit");
                             getActivity().sendBroadcast(intent);
-                            activity.editor.putBoolean("demoOn", false);
-                            activity.editor.apply();
+                            activity.setThings.editor.putBoolean("demoOn", false);
+                            activity.setThings.editor.apply();
                         }
                     }).start();
                 }

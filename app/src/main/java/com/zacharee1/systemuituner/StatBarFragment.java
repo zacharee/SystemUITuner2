@@ -64,9 +64,9 @@ public class StatBarFragment extends Fragment {
 
         drawable = R.drawable.ic_warning_red;
 
-        isDark = activity.sharedPreferences.getBoolean("isDark", false);
+        isDark = activity.setThings.sharedPreferences.getBoolean("isDark", false);
 
-        if (Build.MANUFACTURER.toUpperCase().contains("SAMSUNG") && !activity.sharedPreferences.getBoolean("samsungRisk", false)) {
+        if (Build.MANUFACTURER.toUpperCase().contains("SAMSUNG") && !activity.setThings.sharedPreferences.getBoolean("samsungRisk", false)) {
             view.setVisibility(View.GONE);
             new AlertDialog.Builder(view.getContext())
                     .setIcon(drawable)
@@ -78,8 +78,8 @@ public class StatBarFragment extends Fragment {
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            activity.editor.putBoolean("samsungRisk", true);
-                            activity.editor.apply();
+                            activity.setThings.editor.putBoolean("samsungRisk", true);
+                            activity.setThings.editor.apply();
                             view.setVisibility(View.VISIBLE);
                         }
                     })
@@ -244,16 +244,16 @@ public class StatBarFragment extends Fragment {
                                 } else {
                                     blacklist = setting;
                                 }
-                                activity.editor.putBoolean(setting, false);
+                                activity.setThings.editor.putBoolean(setting, false);
                             } else {
                                 if (blacklist != null) {
                                     blacklist = blacklist.replace("," + setting, "");
                                     blacklist = blacklist.replace(setting, "");
                                 }
-                                activity.editor.putBoolean(setting, true);
+                                activity.setThings.editor.putBoolean(setting, true);
                             }
 
-                            activity.editor.apply();
+                            activity.setThings.editor.apply();
                             final String blacklist2 = blacklist;
                             new Thread(new Runnable() {
                                 @Override

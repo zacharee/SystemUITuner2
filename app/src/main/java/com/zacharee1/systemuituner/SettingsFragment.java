@@ -35,7 +35,7 @@ public class SettingsFragment extends Fragment {
 
         TextView title = (TextView) view.findViewById(R.id.title_settings);
 
-        if (activity.sharedPreferences.getBoolean("isDark", false)) {
+        if (activity.setThings.sharedPreferences.getBoolean("isDark", false)) {
             title.setTextColor(getResources().getColor(android.R.color.primary_text_dark));
         } else {
             title.setTextColor(getResources().getColor(android.R.color.primary_text_light));
@@ -44,7 +44,7 @@ public class SettingsFragment extends Fragment {
         Switch darkMode = (Switch) view.findViewById(R.id.dark_mode);
         LinearLayout settings = (LinearLayout) view.findViewById(R.id.settings);
 
-        if (activity.sharedPreferences.getBoolean("isDark", false)) {
+        if (activity.setThings.sharedPreferences.getBoolean("isDark", false)) {
             darkMode.setChecked(true);
         }
 
@@ -52,20 +52,20 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    activity.editor.putBoolean("isDark", true);
+                    activity.setThings.editor.putBoolean("isDark", true);
                     Utils.changeToTheme(activity, 1);
 
                 } else {
-                    activity.editor.putBoolean("isDark", false);
+                    activity.setThings.editor.putBoolean("isDark", false);
                     Utils.changeToTheme(activity, 0);
                 }
-                activity.editor.apply();
+                activity.setThings.editor.apply();
             }
         });
 
         Drawable background;
 
-        if (activity.sharedPreferences.getBoolean("isDark", false)) {
+        if (activity.setThings.sharedPreferences.getBoolean("isDark", false)) {
             background = activity.getDrawable(R.drawable.layout_bg_dark);
             title.setTextColor(getResources().getColor(android.R.color.primary_text_dark));
         } else {

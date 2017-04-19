@@ -34,35 +34,18 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        if (getActivity() instanceof MainActivity) {
-            activity = (MainActivity) getActivity();
-        }
+        if (getActivity() instanceof MainActivity) activity = (MainActivity) getActivity();
 
         activity.setTitle("SystemUI Tuner");
 
         view = inflater.inflate(R.layout.fragment_main, container, false);
 
         TextView title = (TextView) view.findViewById(R.id.title_main);
-
-        if (activity.sharedPreferences.getBoolean("isDark", false)) title.setTextColor(getResources().getColor(android.R.color.primary_text_dark));
-        else title.setTextColor(getResources().getColor(android.R.color.primary_text_light));
+        title.setTextColor(activity.setThings.titleText);
 
         setup = (Button) view.findViewById(R.id.setup);
-
-        buttons(setup);
+        activity.setThings.buttons(setup, "setup");
 
         return view;
-    }
-
-    private void buttons(final Button button) {
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (button == setup) {
-                    Intent intent = new Intent(activity.getApplicationContext(), SetupActivity.class);
-                    startActivity(intent);
-                }
-            }
-        });
     }
 }

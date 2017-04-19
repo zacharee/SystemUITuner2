@@ -51,7 +51,7 @@ public class MiscFragment extends Fragment {
         LinearLayout stuff = (LinearLayout) view.findViewById(R.id.stuff);
         Drawable background;
 
-        if (activity.sharedPreferences.getBoolean("isDark", false)) {
+        if (activity.setThings.sharedPreferences.getBoolean("isDark", false)) {
             background = activity.getDrawable(R.drawable.layout_bg_dark);
             title.setTextColor(getResources().getColor(android.R.color.primary_text_dark));
         } else {

@@ -45,7 +45,7 @@ public class AboutFragment extends Fragment {
 
         TextView title = (TextView) view.findViewById(R.id.abt_title);
 
-        if (activity.sharedPreferences.getBoolean("isDark", false)) {
+        if (activity.setThings.Dark) {
             title.setTextColor(getResources().getColor(android.R.color.primary_text_dark));
         } else {
             title.setTextColor(getResources().getColor(android.R.color.primary_text_light));

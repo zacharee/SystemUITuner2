@@ -21,19 +21,12 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public SharedPreferences sharedPreferences;
-    public SharedPreferences.Editor editor;
+    public SetThings setThings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedPreferences = getSharedPreferences("com.zacharee1.sysuituner", MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-        if (sharedPreferences.getBoolean("isDark", false)) {
-            setTheme(R.style.DARK_NoAppBar);
-        } else {
-            setTheme(R.style.AppTheme_NoActionBar);
-        }
+        setThings = new SetThings(this);
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -96,8 +89,8 @@ public class MainActivity extends AppCompatActivity
         final Handler handler = new Handler();
 
         if (id != R.id.nav_exit) {
-            editor.putInt("navpage", id);
-            editor.apply();
+            setThings.editor.putInt("navpage", id);
+            setThings.editor.apply();
         }
 
         if (id == R.id.nav_home) fragment = new MainFragment();
@@ -123,30 +116,18 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void setup() {
-        boolean setupDone = sharedPreferences.getBoolean("isSetup", false);
-        Log.i("setup", String.valueOf(setupDone));
         Intent intent = new Intent(getApplicationContext(), SetupActivity.class);
+        if (!setThings.setup) startActivity(intent);
 
-        if (!setupDone) startActivity(intent);
-
-        int id = sharedPreferences.getInt("navpage", R.id.nav_home);
-
-        ArrayList<Integer> menuIDs = new ArrayList<Integer>() {{
-            add(R.id.nav_home);
-            add(R.id.nav_statusbar);
-            add(R.id.nav_demo_mode);
-            add(R.id.nav_about);
-            add(R.id.nav_settings);
-            add(R.id.nav_misc);
-        }};
+        int id = setThings.sharedPreferences.getInt("navpage", R.id.nav_home);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         Menu navMenu = navigationView.getMenu();
-        if (menuIDs.contains(id)) navMenu.findItem(id).setChecked(true);
+
+        if (setThings.pages.contains(id)) navMenu.findItem(id).setChecked(true);
 
         FragmentManager fragmentManager = getFragmentManager();
-
         Fragment fragment;
 
         if (id == R.id.nav_home) fragment = new MainFragment();
@@ -160,12 +141,7 @@ public class MainActivity extends AppCompatActivity
 
         fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
 
-        if (sharedPreferences.getBoolean("isDark", false)) {
-            navigationView.setItemTextColor(getResources().getColorStateList(R.color.drawer_item_dark));
-            navigationView.setItemIconTintList(getResources().getColorStateList(R.color.drawer_item_dark));
-        } else {
-            navigationView.setItemTextColor(getResources().getColorStateList(R.color.drawer_item_light));
-            navigationView.setItemIconTintList(getResources().getColorStateList(R.color.drawer_item_light));
-        }
+        navigationView.setItemIconTintList(setThings.drawerItem);
+        navigationView.setItemTextColor(setThings.drawerItem);
     }
 }

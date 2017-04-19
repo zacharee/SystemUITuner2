@@ -7,6 +7,7 @@ import android.content.ContentProvider;
 import android.content.ContentProviderOperation;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
@@ -14,6 +15,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Looper;
 import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -46,6 +48,8 @@ public class StatBarFragment extends Fragment {
     boolean isDark;
 
     int drawable;
+
+    Exceptions exceptions = new Exceptions();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -252,23 +256,33 @@ public class StatBarFragment extends Fragment {
                             new Thread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    Looper.prepare();
                                     try {
                                         if (blacklist2 != null && !blacklist2.equals("")) {
                                             try {
                                                 Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", blacklist2);
-                                            } catch (Exception e) {
-                                                Log.e("icon_blacklist", e.getMessage());
-                                                Toast.makeText(activity.getApplicationContext(), "Did you set up ADB?", Toast.LENGTH_LONG).show();
+                                            } catch (final Exception e) {
+                                                activity.runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        exceptions.secureSettings(view.getContext(), activity.getApplicationContext(), e.getMessage(), "icon_blacklist");
+                                                    }
+                                                });
                                             }
                                         } else {
                                             try {
                                                 Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", "");
-                                            } catch (Exception e) {
-                                                Log.e("icon_blacklist", e.getMessage());
-                                                Toast.makeText(activity.getApplicationContext(), "Did you set up ADB?", Toast.LENGTH_LONG).show();
+                                            } catch (final Exception e) {
+                                                activity.runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        exceptions.secureSettings(view.getContext(), activity.getApplicationContext(), e.getMessage(), "icon_blacklist");
+                                                    }
+                                                });
                                             }
                                         }
                                     } catch (Exception e) {
+                                        Log.e("idk", e.getMessage());
                                     }
                                 }
                             }).start();
@@ -293,7 +307,8 @@ public class StatBarFragment extends Fragment {
                             break;
                     }
                 } catch (Exception e) {
-                    Log.e("Settings Error", e.getMessage());
+                    Exceptions exceptions = new Exceptions();
+                    exceptions.secureSettings(view.getContext(), activity.getApplicationContext(), e.getMessage(), "Status Bar");
                 }
             }
         });

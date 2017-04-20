@@ -1,4 +1,4 @@
-package com.zacharee1.systemuituner;
+package com.zacharee1.systemuituner.fragments;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -16,6 +16,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.zacharee1.systemuituner.MainActivity;
+import com.zacharee1.systemuituner.R;
+
 import org.w3c.dom.Text;
 
 import java.io.DataOutputStream;
@@ -25,7 +28,7 @@ import java.io.IOException;
  * Created by Zacha on 4/2/2017.
  */
 
-public class MainFragment extends Fragment {
+public class Main extends Fragment {
     public View view;
     public MainActivity activity;
 

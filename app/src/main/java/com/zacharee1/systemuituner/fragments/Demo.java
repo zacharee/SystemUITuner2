@@ -1,16 +1,11 @@
-package com.zacharee1.systemuituner;
+package com.zacharee1.systemuituner.fragments;
 
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Looper;
-import android.preference.PreferenceFragment;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,17 +20,16 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import org.w3c.dom.Text;
+import com.zacharee1.systemuituner.MainActivity;
+import com.zacharee1.systemuituner.R;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.Calendar;
 
 /**
  * Created by Zacha on 4/5/2017.
  */
 
-public class DemoFragment extends Fragment {
+public class Demo extends Fragment {
     public View view;
     public MainActivity activity;
 
@@ -67,7 +61,7 @@ public class DemoFragment extends Fragment {
     public String showNotifs = "false";
     public String statBarStyle = "opaque";
 
-    DemoFragment demo;
+    Demo demo;
 
 
     @Override
@@ -81,7 +75,7 @@ public class DemoFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_demo, container, false);
 
-        demo = new DemoFragment();
+        demo = new Demo();
 
         wifi = (Spinner) view.findViewById(R.id.wifi_strength);
         mobile = (Spinner) view.findViewById(R.id.mobile_strength);

@@ -1,25 +1,14 @@
-package com.zacharee1.systemuituner;
+package com.zacharee1.systemuituner.fragments;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.ContentProvider;
-import android.content.ContentProviderOperation;
-import android.content.ContentValues;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Looper;
-import android.provider.ContactsContract;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.text.Html;
 import android.util.Log;
@@ -27,21 +16,20 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
+import com.zacharee1.systemuituner.Exceptions;
+import com.zacharee1.systemuituner.MainActivity;
+import com.zacharee1.systemuituner.R;
 
 /**
  * Created by Zacha on 4/5/2017.
  */
 
-public class StatBarFragment extends Fragment {
+public class StatBar extends Fragment {
     public View view;
     public MainActivity activity;
 
@@ -86,7 +74,7 @@ public class StatBarFragment extends Fragment {
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            MainFragment fragment = new MainFragment();
+                            Main fragment = new Main();
                             FragmentManager fragmentManager = getFragmentManager();
                             fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
                             NavigationView navigationView = (NavigationView) activity.findViewById(R.id.nav_view);

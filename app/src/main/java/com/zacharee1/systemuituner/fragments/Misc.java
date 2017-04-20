@@ -1,4 +1,4 @@
-package com.zacharee1.systemuituner;
+package com.zacharee1.systemuituner.fragments;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -22,11 +22,15 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.zacharee1.systemuituner.Exceptions;
+import com.zacharee1.systemuituner.MainActivity;
+import com.zacharee1.systemuituner.R;
+
 /**
  * Created by Zacha on 4/18/2017.
  */
 
-public class MiscFragment extends Fragment {
+public class Misc extends Fragment {
     public View view;
     public MainActivity activity;
 

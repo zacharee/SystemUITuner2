@@ -3,10 +3,8 @@ package com.zacharee1.systemuituner;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,17 +14,34 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.ArrayList;
+import com.zacharee1.systemuituner.fragments.About;
+import com.zacharee1.systemuituner.fragments.Demo;
+import com.zacharee1.systemuituner.fragments.Main;
+import com.zacharee1.systemuituner.fragments.Misc;
+import com.zacharee1.systemuituner.fragments.QS;
+import com.zacharee1.systemuituner.fragments.Settings;
+import com.zacharee1.systemuituner.fragments.StatBar;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public SetThings setThings;
 
+    Fragment fragment;
+    FragmentManager fragmentManager;
+
+    NavigationView navigationView;
+    Menu navMenu;
+
+    Handler handler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setThings = new SetThings(this);
+        fragment = new Fragment();
+        fragmentManager = getFragmentManager();
+        handler = new Handler();
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -83,30 +98,24 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        Fragment fragment = new Fragment();
-        final Fragment finalFragment;
-        final FragmentManager fragmentManager = getFragmentManager();
-        final Handler handler = new Handler();
-
         if (id != R.id.nav_exit) {
             setThings.editor.putInt("navpage", id);
             setThings.editor.apply();
         }
 
-        if (id == R.id.nav_home) fragment = new MainFragment();
-        else if (id == R.id.nav_quick_settings) fragment = new QSFragment();
-        else if (id == R.id.nav_statusbar) fragment = new StatBarFragment();
-        else if (id == R.id.nav_demo_mode) fragment = new DemoFragment();
-        else if (id == R.id.nav_about) fragment = new AboutFragment();
-        else if (id == R.id.nav_settings) fragment = new SettingsFragment();
-        else if (id == R.id.nav_misc) fragment = new MiscFragment();
+        if (id == R.id.nav_home) fragment = new Main();
+        else if (id == R.id.nav_quick_settings) fragment = new QS();
+        else if (id == R.id.nav_statusbar) fragment = new StatBar();
+        else if (id == R.id.nav_demo_mode) fragment = new Demo();
+        else if (id == R.id.nav_about) fragment = new About();
+        else if (id == R.id.nav_settings) fragment = new Settings();
+        else if (id == R.id.nav_misc) fragment = new Misc();
         else if (id == R.id.nav_exit) super.onBackPressed();
 
-        finalFragment = fragment;
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                fragmentManager.beginTransaction().replace(R.id.content_main, finalFragment).commit();
+                fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
             }
         }, 350);
 
@@ -119,25 +128,22 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(getApplicationContext(), SetupActivity.class);
         if (!setThings.setup) startActivity(intent);
 
-        int id = setThings.sharedPreferences.getInt("navpage", R.id.nav_home);
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        Menu navMenu = navigationView.getMenu();
+        navMenu = navigationView.getMenu();
+
+        int id = setThings.sharedPreferences.getInt("navpage", R.id.nav_home);
 
         if (setThings.pages.contains(id)) navMenu.findItem(id).setChecked(true);
 
-        FragmentManager fragmentManager = getFragmentManager();
-        Fragment fragment;
-
-        if (id == R.id.nav_home) fragment = new MainFragment();
-        else if (id == R.id.nav_quick_settings) fragment = new QSFragment();
-        else if (id == R.id.nav_statusbar) fragment = new StatBarFragment();
-        else if (id == R.id.nav_demo_mode) fragment = new DemoFragment();
-        else if (id == R.id.nav_about) fragment = new AboutFragment();
-        else if (id == R.id.nav_settings) fragment = new SettingsFragment();
-        else if (id == R.id.nav_misc) fragment = new MiscFragment();
-        else fragment = new MainFragment();
+        if (id == R.id.nav_home) fragment = new Main();
+        else if (id == R.id.nav_quick_settings) fragment = new QS();
+        else if (id == R.id.nav_statusbar) fragment = new StatBar();
+        else if (id == R.id.nav_demo_mode) fragment = new Demo();
+        else if (id == R.id.nav_about) fragment = new About();
+        else if (id == R.id.nav_settings) fragment = new Settings();
+        else if (id == R.id.nav_misc) fragment = new Misc();
+        else fragment = new Main();
 
         fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
 

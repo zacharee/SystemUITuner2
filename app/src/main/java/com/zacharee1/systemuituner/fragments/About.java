@@ -1,4 +1,4 @@
-package com.zacharee1.systemuituner;
+package com.zacharee1.systemuituner.fragments;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -13,6 +13,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.zacharee1.systemuituner.BuildConfig;
+import com.zacharee1.systemuituner.MainActivity;
+import com.zacharee1.systemuituner.R;
+
 import org.w3c.dom.Text;
 
 import java.util.Date;
@@ -21,7 +25,7 @@ import java.util.Date;
  * Created by Zacha on 4/13/2017.
  */
 
-public class AboutFragment extends Fragment {
+public class About extends Fragment {
     View view;
     MainActivity activity;
 

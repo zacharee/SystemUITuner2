@@ -103,15 +103,7 @@ public class MainActivity extends AppCompatActivity
             setThings.editor.apply();
         }
 
-        if (id == R.id.nav_home) fragment = new Main();
-        else if (id == R.id.nav_quick_settings) fragment = new QS();
-        else if (id == R.id.nav_statusbar) fragment = new StatBar();
-        else if (id == R.id.nav_demo_mode) fragment = new Demo();
-        else if (id == R.id.nav_about) fragment = new About();
-        else if (id == R.id.nav_settings) fragment = new Settings();
-        else if (id == R.id.nav_misc) fragment = new Misc();
-        else if (id == R.id.nav_exit) super.onBackPressed();
-
+        fragment = chooseFrag(id);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -136,18 +128,45 @@ public class MainActivity extends AppCompatActivity
 
         if (setThings.pages.contains(id)) navMenu.findItem(id).setChecked(true);
 
-        if (id == R.id.nav_home) fragment = new Main();
-        else if (id == R.id.nav_quick_settings) fragment = new QS();
-        else if (id == R.id.nav_statusbar) fragment = new StatBar();
-        else if (id == R.id.nav_demo_mode) fragment = new Demo();
-        else if (id == R.id.nav_about) fragment = new About();
-        else if (id == R.id.nav_settings) fragment = new Settings();
-        else if (id == R.id.nav_misc) fragment = new Misc();
-        else fragment = new Main();
-
+        fragment = chooseFrag(id);
         fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
 
         navigationView.setItemIconTintList(setThings.drawerItem);
         navigationView.setItemTextColor(setThings.drawerItem);
+    }
+
+    public Fragment chooseFrag(int id) {
+        Fragment fragment = new Fragment();
+        switch (id) {
+            case R.id.nav_home:
+                fragment = new Main();
+                break;
+            case R.id.nav_quick_settings:
+                fragment = new QS();
+                break;
+            case R.id.nav_statusbar:
+                fragment = new StatBar();
+                break;
+            case R.id.nav_demo_mode:
+                fragment = new Demo();
+                break;
+            case R.id.nav_about:
+                fragment = new About();
+                break;
+            case R.id.nav_settings:
+                fragment = new Settings();
+                break;
+            case R.id.nav_misc:
+                fragment = new Misc();
+                break;
+            case R.id.nav_exit:
+                super.onBackPressed();
+                break;
+            default:
+                fragment = new Main();
+                break;
+        }
+
+        return fragment;
     }
 }

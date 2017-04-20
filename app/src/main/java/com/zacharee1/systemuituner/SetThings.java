@@ -8,11 +8,15 @@ import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -66,15 +70,23 @@ public class SetThings {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            switch (name) {
-                case "setup":
-                    Intent intent = new Intent(currentActivity.getApplicationContext(), SetupActivity.class);
-                    currentActivity.startActivity(intent);
-                    break;
-                case "enableDemo":
-                    settings("global", "sysui_demo_allowed", 1);
-                    break;
-            }
+                Intent intent;
+                switch (name) {
+                    case "setup":
+                        intent = new Intent(currentActivity.getApplicationContext(), SetupActivity.class);
+                        currentActivity.startActivity(intent);
+                        break;
+                    case "enableDemo":
+                        settings("global", "sysui_demo_allowed", 1);
+                        break;
+                    case "setupDone":
+                        editor.putBoolean("isSetup", true);
+                        editor.commit();
+                        sudo("pm grant com.zacharee1.systemuituner android.permission.DUMP ; pm grant com.zacharee1.systemuituner android.permission.WRITE_SECURE_SETTINGS");
+                        intent = new Intent(currentActivity.getApplicationContext(), MainActivity.class);
+                        currentActivity.startActivity(intent);
+                        break;
+                }
 
             }
         });
@@ -96,6 +108,42 @@ public class SetThings {
         } catch (Exception e) {
             Exceptions exceptions = new Exceptions();
             exceptions.secureSettings(context, currentActivity.getApplicationContext(), e.getMessage(), "Uh oh");
+        }
+    }
+
+    public void sudo(String...strings) {
+        try{
+            Process su = Runtime.getRuntime().exec("su");
+            DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
+
+            for (String s : strings) {
+                outputStream.writeBytes(s+"\n");
+                outputStream.flush();
+            }
+
+            outputStream.writeBytes("exit\n");
+            outputStream.flush();
+            try {
+                su.waitFor();
+                currentActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(currentActivity.getApplicationContext(), "Great! Go play around!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                Log.e("No Root?", e.getMessage());
+                currentActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(currentActivity.getApplicationContext(), "You sure you're rooted?", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+            outputStream.close();
+        } catch(IOException e){
+            e.printStackTrace();
         }
     }
 }

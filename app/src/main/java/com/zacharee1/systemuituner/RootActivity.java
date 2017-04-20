@@ -17,92 +17,22 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class RootActivity extends AppCompatActivity {
-
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
+    SetThings setThings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedPreferences = getSharedPreferences("com.zacharee1.sysuituner", MODE_PRIVATE);
-        editor = sharedPreferences.edit();
+        setThings = new SetThings(this);
 
-        if (sharedPreferences.getBoolean("isDark", false)) {
-            setTheme(R.style.DARK_NoAppBar);
-        } else {
-            setTheme(R.style.AppTheme_NoActionBar);
-        }
         setContentView(R.layout.activity_root);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         TextView title = (TextView) findViewById(R.id.title_root);
-
-        if (sharedPreferences.getBoolean("isDark", false)) {
-            title.setTextColor(getResources().getColor(android.R.color.primary_text_dark));
-        } else {
-            title.setTextColor(getResources().getColor(android.R.color.primary_text_light));
-        }
+        title.setTextColor(setThings.titleText);
 
         Button getPerms = (Button) findViewById(R.id.get_perms);
-
-        buttons(getPerms);
+        setThings.buttons(getPerms, "setupDone");
     }
-
-    public void buttons(Button button) {
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Looper.prepare();
-                        editor.putBoolean("isSetup", true);
-                        editor.apply();
-                        sudo("pm grant com.zacharee1.systemuituner android.permission.DUMP ; pm grant com.zacharee1.systemuituner android.permission.WRITE_SECURE_SETTINGS");
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent);
-                    }
-                }).start();
-            }
-        });
-    }
-
-    public void sudo(String...strings) {
-        try{
-            Process su = Runtime.getRuntime().exec("su");
-            DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
-
-            for (String s : strings) {
-                outputStream.writeBytes(s+"\n");
-                outputStream.flush();
-            }
-
-            outputStream.writeBytes("exit\n");
-            outputStream.flush();
-            try {
-                su.waitFor();
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getApplicationContext(), "Great! Go play around!", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                Log.e("No Root?", e.getMessage());
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getApplicationContext(), "You sure you're rooted?", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-            outputStream.close();
-        } catch(IOException e){
-            e.printStackTrace();
-        }
-    }
-
 }

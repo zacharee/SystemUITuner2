@@ -14,25 +14,17 @@ public class SetupActivity extends AppCompatActivity {
     Button not_rooted;
     Button to_main;
 
+    SetThings setThings;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferences sharedPreferences = getSharedPreferences("com.zacharee1.sysuituner", MODE_PRIVATE);
+        setThings = new SetThings(this);
 
-        if (sharedPreferences.getBoolean("isDark", false)) {
-            setTheme(R.style.DARK);
-        } else {
-            setTheme(R.style.AppTheme);
-        }
         setContentView(R.layout.activity_setup);
 
         TextView title = (TextView) findViewById(R.id.title_setup);
-
-        if (sharedPreferences.getBoolean("isDark", false)) {
-            title.setTextColor(getResources().getColor(android.R.color.primary_text_dark));
-        } else {
-            title.setTextColor(getResources().getColor(android.R.color.primary_text_light));
-        }
+        title.setTextColor(setThings.titleText);
 
         rooted = (Button) findViewById(R.id.rooted);
         not_rooted = (Button) findViewById(R.id.not_rooted);

@@ -14,22 +14,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class NoRoot extends AppCompatActivity {
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
+    SetThings setThings;
 
     Button setupDone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedPreferences = getSharedPreferences("com.zacharee1.sysuituner", MODE_PRIVATE);
-        editor = sharedPreferences.edit();
+        setThings = new SetThings(this);
 
-        if (sharedPreferences.getBoolean("isDark", false)) {
-            setTheme(R.style.DARK_NoAppBar);
-        } else {
-            setTheme(R.style.AppTheme_NoActionBar);
-        }
         setContentView(R.layout.activity_no_root);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -37,29 +30,11 @@ public class NoRoot extends AppCompatActivity {
 
         TextView title = (TextView) findViewById(R.id.noroot_title);
 
-        if (sharedPreferences.getBoolean("isDark", false)) {
-            title.setTextColor(getResources().getColor(android.R.color.primary_text_dark));
-        } else {
-            title.setTextColor(getResources().getColor(android.R.color.primary_text_light));
-        }
+        title.setTextColor(setThings.titleText);
 
         setupDone = (Button) findViewById(R.id.no_root_done);
 
-        buttons(setupDone);
-    }
-
-    private void buttons(final Button button) {
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (button == setupDone) {
-                    editor.putBoolean("isSetup", true);
-                    editor.commit();
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-                }
-            }
-        });
+        setThings.buttons(setupDone, "setupDone");
     }
 
 }

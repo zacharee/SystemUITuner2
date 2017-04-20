@@ -89,7 +89,12 @@ public class SetThings {
                             settings("global", "sysui_demo_allowed", 1);
                             break;
                         case "setupDoneRoot":
-                            sudo("pm grant com.zacharee1.systemuituner android.permission.DUMP ; pm grant com.zacharee1.systemuituner android.permission.WRITE_SECURE_SETTINGS");
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    sudo("pm grant com.zacharee1.systemuituner android.permission.DUMP ; pm grant com.zacharee1.systemuituner android.permission.WRITE_SECURE_SETTINGS");
+                                }
+                            }).start();
                         case "setupDone":
                             editor.putBoolean("isRooted", name.equals("setupDoneRoot"));
                             editor.putBoolean("isSetup", true);
@@ -125,7 +130,14 @@ public class SetThings {
                     Settings.Secure.putInt(currentActivity.getContentResolver(), pref, value);
                     break;
                 case "system":
-                    if (sharedPreferences.getBoolean("isRooted", true)) sudo("settings put system " + pref + " " + value);
+                    if (sharedPreferences.getBoolean("isRooted", true)) {
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                sudo("settings put system " + pref + " " + value);
+                            }
+                        }).start();
+                    }
                     else {
                         editor.putString("isSystemSwitchEnabled", String.valueOf(value));
                         editor.putString("systemSettingKey", pref);
@@ -154,21 +166,9 @@ public class SetThings {
             outputStream.flush();
             try {
                 su.waitFor();
-                currentActivity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(currentActivity.getApplicationContext(), "Great! Go play around!", Toast.LENGTH_SHORT).show();
-                    }
-                });
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 Log.e("No Root?", e.getMessage());
-                currentActivity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(currentActivity.getApplicationContext(), "You sure you're rooted?", Toast.LENGTH_SHORT).show();
-                    }
-                });
             }
             outputStream.close();
         } catch(IOException e){

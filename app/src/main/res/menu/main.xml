@@ -1,9 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+
+    <group
+        android:id="@+id/menu1">
+
+        <item
+            android:id="@+id/action_github"
+            android:orderInCategory="100"
+            android:title="Github"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/action_xda"
+            android:orderInCategory="100"
+            android:title="XDA Thread"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/action_labs"
+            android:orderInCategory="100"
+            android:title="XDA Labs"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/action_play"
+            android:orderInCategory="100"
+            android:title="Google Play"
+            app:showAsAction="never" />
+    </group>
+
+    <group
+        android:id="@+id/menu2">
+
+        <item
+            android:id="@+id/action_other_apps"
+            android:orderInCategory="100"
+            android:title="My Other Apps"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/action_donate"
+            android:orderInCategory="100"
+            android:title="Donate"
+            app:showAsAction="never" />
+
+    </group>
 </menu>

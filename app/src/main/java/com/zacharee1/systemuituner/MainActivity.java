@@ -3,8 +3,10 @@ package com.zacharee1.systemuituner;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.zacharee1.systemuituner.fragments.About;
 import com.zacharee1.systemuituner.fragments.Demo;
@@ -46,6 +49,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setPopupTheme(setThings.style);
 
         setTitle("SystemUI Tuner");
 
@@ -70,27 +74,60 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        Uri uri;
+        Intent intent = new Intent(Intent.ACTION_VIEW, null);
+        boolean tralse = false;
+        switch (id) {
+            case R.id.action_github:
+                uri = Uri.parse("https://github.com/zacharee/SystemUITuner2");
+                intent = new Intent(Intent.ACTION_VIEW, uri);
+                tralse = true;
+                break;
+            case R.id.action_xda:
+                uri = Uri.parse("https://forum.xda-developers.com/android/apps-games/app-systemui-tuner-t3588675");
+                intent = new Intent(Intent.ACTION_VIEW, uri);
+                tralse = true;
+                break;
+            case R.id.action_labs:
+                uri = Uri.parse("https://labs.xda-developers.com/store/app/com.zacharee1.systemuituner");
+                intent = new Intent(Intent.ACTION_VIEW, uri);
+                tralse = true;
+                break;
+            case R.id.action_play:
+                uri = Uri.parse("https://play.google.com/store/apps/details?id=com.zacharee1.systemuituner");
+                intent = new Intent(Intent.ACTION_VIEW, uri);
+                tralse = true;
+                break;
+            case R.id.action_other_apps:
+                uri = Uri.parse("https://play.google.com/store/apps/developer?id=Zachary+Wander");
+                intent = new Intent(Intent.ACTION_VIEW, uri);
+                tralse = true;
+                break;
+            case R.id.action_donate:
+                uri = Uri.parse("https://forum.xda-developers.com/donatetome.php?u=7055541");
+                intent = new Intent(Intent.ACTION_VIEW, uri);
+                tralse = true;
+                break;
+        }
+        startActivity(intent);
+
+        return tralse || super.onOptionsItemSelected(item);
+    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override

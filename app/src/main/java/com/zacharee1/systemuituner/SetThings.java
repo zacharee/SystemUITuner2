@@ -29,6 +29,7 @@ public class SetThings {
 
     public int layoutBackground;
     public int titleText;
+    public int style;
     public ColorStateList drawerItem;
 
     public SharedPreferences sharedPreferences;
@@ -50,7 +51,9 @@ public class SetThings {
         titleText = activity.getResources().getColor(Dark ? android.R.color.primary_text_dark : android.R.color.primary_text_light);
         drawerItem = Dark ? activity.getResources().getColorStateList(R.color.drawer_item_dark) : activity.getResources().getColorStateList(R.color.drawer_item_light);
 
-        activity.setTheme(Dark ? R.style.DARK_NoAppBar : R.style.AppTheme_NoActionBar);
+        activity.setTheme(SetupActivity.class == activity.getClass() ? Dark ? R.style.DARK : R.style.AppTheme : Dark ? R.style.DARK_NoAppBar : R.style.AppTheme_NoActionBar);
+
+        style = Dark ? R.style.DARK_NoAppBar : R.style.AppTheme_NoActionBar;
 
         pages = new ArrayList<Integer>() {{
                 add(R.id.nav_home);

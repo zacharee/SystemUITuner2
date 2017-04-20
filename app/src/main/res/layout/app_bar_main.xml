@@ -7,6 +7,7 @@
     tools:context="com.zacharee1.systemuituner.MainActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">

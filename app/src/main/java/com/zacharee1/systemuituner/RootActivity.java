@@ -33,6 +33,6 @@ public class RootActivity extends AppCompatActivity {
         title.setTextColor(setThings.titleText);
 
         Button getPerms = (Button) findViewById(R.id.get_perms);
-        setThings.buttons(getPerms, "setupDone");
+        setThings.buttons(getPerms, "setupDoneRoot");
     }
 }

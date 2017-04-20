@@ -2,6 +2,7 @@ package com.zacharee1.systemuituner;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity
 
     Handler handler;
 
+    public Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity
         fragment = new Fragment();
         fragmentManager = getFragmentManager();
         handler = new Handler();
+        context = this;
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -120,6 +124,11 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.action_donate:
                 uri = Uri.parse("https://forum.xda-developers.com/donatetome.php?u=7055541");
+                intent = new Intent(Intent.ACTION_VIEW, uri);
+                tralse = true;
+                break;
+            case R.id.action_telegram:
+                uri = Uri.parse("https://t.me/joinchat/AAAAAEIB6WKWL-yphJbZwg");
                 intent = new Intent(Intent.ACTION_VIEW, uri);
                 tralse = true;
                 break;

@@ -30,4 +30,14 @@ public class Exceptions {
                 .setNegativeButton("No", null)
                 .show();
     }
+
+    public void systemSettings(Context context, final Context appContext, String message, String page) {
+        Log.e(page, message);
+        new AlertDialog.Builder(context)
+                .setIcon(alertRed)
+                .setTitle(Html.fromHtml("<font color='#ff0000'>ERROR</font>"))
+                .setMessage("Didn't work :/. For reference, here's the error:\n\n\"" + message + "\"")
+                .setPositiveButton("OK", null)
+                .show();
+    }
 }

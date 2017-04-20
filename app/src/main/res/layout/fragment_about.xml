@@ -57,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="This is a beta app, though, so just keep that in mind. "
+                android:text="This app isn't going to work on every device, though, because manufacturers are annoying. Just keep that in mind when a toggle has no effect."
                 android:textAlignment="center"
                 android:textSize="18sp" />
 

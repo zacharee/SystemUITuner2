@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
@@ -15,9 +16,13 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
+import java.util.concurrent.RunnableFuture;
 
 /**
  * Created by Zacha on 4/19/2017.
@@ -51,7 +56,7 @@ public class SetThings {
         titleText = activity.getResources().getColor(Dark ? android.R.color.primary_text_dark : android.R.color.primary_text_light);
         drawerItem = Dark ? activity.getResources().getColorStateList(R.color.drawer_item_dark) : activity.getResources().getColorStateList(R.color.drawer_item_light);
 
-        activity.setTheme(SetupActivity.class == activity.getClass() ? Dark ? R.style.DARK : R.style.AppTheme : Dark ? R.style.DARK_NoAppBar : R.style.AppTheme_NoActionBar);
+        activity.setTheme(SetupActivity.class == activity.getClass() || NoRootSystemSettingsActivity.class == activity.getClass() ? Dark ? R.style.DARK : R.style.AppTheme : Dark ? R.style.DARK_NoAppBar : R.style.AppTheme_NoActionBar);
 
         style = Dark ? R.style.DARK_NoAppBar : R.style.AppTheme_NoActionBar;
 
@@ -66,7 +71,7 @@ public class SetThings {
 
         currentActivity = activity;
 
-        context = currentActivity.getApplicationContext();
+        context = currentActivity;
     }
 
     public void buttons(final Button button, final String name) {
@@ -74,23 +79,38 @@ public class SetThings {
             @Override
             public void onClick(View v) {
                 Intent intent;
-                switch (name) {
-                    case "setup":
-                        intent = new Intent(currentActivity.getApplicationContext(), SetupActivity.class);
-                        currentActivity.startActivity(intent);
-                        break;
-                    case "enableDemo":
-                        settings("global", "sysui_demo_allowed", 1);
-                        break;
-                    case "setupDone":
-                        editor.putBoolean("isSetup", true);
-                        editor.commit();
-                        sudo("pm grant com.zacharee1.systemuituner android.permission.DUMP ; pm grant com.zacharee1.systemuituner android.permission.WRITE_SECURE_SETTINGS");
-                        intent = new Intent(currentActivity.getApplicationContext(), MainActivity.class);
-                        currentActivity.startActivity(intent);
-                        break;
+                try {
+                    switch (name) {
+                        case "setup":
+                            intent = new Intent(currentActivity.getApplicationContext(), SetupActivity.class);
+                            currentActivity.startActivity(intent);
+                            break;
+                        case "enableDemo":
+                            settings("global", "sysui_demo_allowed", 1);
+                            break;
+                        case "setupDoneRoot":
+                            sudo("pm grant com.zacharee1.systemuituner android.permission.DUMP ; pm grant com.zacharee1.systemuituner android.permission.WRITE_SECURE_SETTINGS");
+                        case "setupDone":
+                            editor.putBoolean("isRooted", name.equals("setupDoneRoot"));
+                            editor.putBoolean("isSetup", true);
+                            editor.apply();
+                            intent = new Intent(currentActivity.getApplicationContext(), MainActivity.class);
+                            currentActivity.startActivity(intent);
+                            break;
+                        case "SystemSettingsPerms":
+                            intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
+                            intent.setData(Uri.parse("package:" + currentActivity.getPackageName()));
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            currentActivity.startActivity(intent);
+                            break;
+                        case "WriteSystemSettings":
+                            Settings.System.putInt(currentActivity.getContentResolver(), sharedPreferences.getString("systemSettingKey", ""), Integer.decode(sharedPreferences.getString("isSystemSwitchEnabled", "0")));
+                            break;
+                    }
+                } catch (Exception e) {
+                    Exceptions exceptions = new Exceptions();
+                    exceptions.systemSettings(context, currentActivity.getApplicationContext(), e.getMessage(), "SetThings");
                 }
-
             }
         });
     }
@@ -105,16 +125,22 @@ public class SetThings {
                     Settings.Secure.putInt(currentActivity.getContentResolver(), pref, value);
                     break;
                 case "system":
-                    Runtime.getRuntime().exec("content insert --uri content://settings/system --bind name:s:" + pref + " --bind value:i:" + value);
-                    break;
+                    if (sharedPreferences.getBoolean("isRooted", true)) sudo("settings put system " + pref + " " + value);
+                    else {
+                        editor.putString("isSystemSwitchEnabled", String.valueOf(value));
+                        editor.putString("systemSettingKey", pref);
+                        editor.apply();
+                        Intent intent = new Intent(currentActivity.getApplicationContext(), NoRootSystemSettingsActivity.class);
+                        currentActivity.startActivity(intent);
+                    }
             }
         } catch (Exception e) {
             Exceptions exceptions = new Exceptions();
-            exceptions.secureSettings(context, currentActivity.getApplicationContext(), e.getMessage(), "Uh oh");
+            exceptions.secureSettings(context, currentActivity.getApplicationContext(), e.getMessage(), "SetThings");
         }
     }
 
-    public void sudo(String...strings) {
+    private void sudo(String...strings) {
         try{
             Process su = Runtime.getRuntime().exec("su");
             DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());

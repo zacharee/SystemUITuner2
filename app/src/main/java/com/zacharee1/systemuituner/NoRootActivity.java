@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class NoRoot extends AppCompatActivity {
+public class NoRootActivity extends AppCompatActivity {
     SetThings setThings;
 
     Button setupDone;

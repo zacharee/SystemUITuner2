@@ -1,5 +1,6 @@
 package com.zacharee1.systemuituner.fragments;
 
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -24,6 +25,12 @@ import android.widget.TextView;
 import com.zacharee1.systemuituner.Exceptions;
 import com.zacharee1.systemuituner.MainActivity;
 import com.zacharee1.systemuituner.R;
+import com.zacharee1.systemuituner.SetThings;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+import static android.R.attr.process;
 
 /**
  * Created by Zacha on 4/5/2017.
@@ -200,19 +207,25 @@ public class StatBar extends Fragment {
 
     public void sharedPrefs(String key, Switch toggle, String prefType) {
         int enabled = 0;
-        switch (prefType) {
-            case "global":
-                break;
-            case "secure":
-                enabled = Settings.Secure.getInt(activity.getContentResolver(), key, 0);
-                break;
-            case "system":
-                enabled = Settings.System.getInt(activity.getContentResolver(), key, 0);
-                break;
-            case "icon_blacklist":
-                String blacklist = Settings.Secure.getString(activity.getContentResolver(), "icon_blacklist") != null ? Settings.Secure.getString(activity.getContentResolver(), "icon_blacklist") : "nada";
-                enabled = !blacklist.contains(key) ? 1 : 0;
-                break;
+        try {
+            switch (prefType) {
+                case "global":
+                    break;
+                case "secure":
+                    enabled = Settings.Secure.getInt(activity.getContentResolver(), key, 0);
+                    break;
+                case "system":
+                    enabled = Settings.System.getInt(activity.getContentResolver(), key, 0);
+                    Log.i("enabled", String.valueOf(enabled));
+                    break;
+                case "icon_blacklist":
+                    String blacklist = Settings.Secure.getString(activity.getContentResolver(), "icon_blacklist") != null ? Settings.Secure.getString(activity.getContentResolver(), "icon_blacklist") : "nada";
+                    enabled = !blacklist.contains(key) ? 1 : 0;
+                    break;
+            }
+        } catch (Exception e) {
+            Exceptions exceptions = new Exceptions();
+            exceptions.secureSettings(view.getContext(), activity.getApplicationContext(), e.getMessage(), "Status Bar");
         }
         toggle.setChecked(enabled == 1);
 
@@ -277,25 +290,11 @@ public class StatBar extends Fragment {
                                 }
                             }).start();
                             break;
-                        case "system":
-                            if (isChecked) {
-                                Runtime.getRuntime().exec("content insert --uri content://settings/system --bind name:s:" + setting + " --bind value:i:1");
-                            } else {
-                                Runtime.getRuntime().exec("content insert --uri content://settings/system --bind name:s:" + setting + " --bind value:i:0");
-                            }
-                            break;
-                        case "secure":
-                            if (isChecked) {
-                                Settings.Secure.putInt(activity.getContentResolver(), setting, 1);
-                            } else {
-                                Settings.Secure.putInt(activity.getContentResolver(), setting, 0);
-                            }
-                            break;
-                        case "global":
+                        default:
+                            activity.setThings.settings(type, setting, isChecked ? 1 : 0);
                             break;
                     }
                 } catch (Exception e) {
-                    Exceptions exceptions = new Exceptions();
                     exceptions.secureSettings(view.getContext(), activity.getApplicationContext(), e.getMessage(), "Status Bar");
                 }
             }

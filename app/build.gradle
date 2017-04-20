@@ -6,9 +6,9 @@ android {
     defaultConfig {
         applicationId "com.zacharee1.systemuituner"
         minSdkVersion 21
-        targetSdkVersion 25
-        versionCode 25
-        versionName "1.0.0"
+        targetSdkVersion 24
+        versionCode 26
+        versionName "1.1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
     }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.zacharee1.systemuituner.NoRoot"
+    tools:context="com.zacharee1.systemuituner.NoRootActivity"
     tools:showIn="@layout/activity_no_root">
 
     <ScrollView

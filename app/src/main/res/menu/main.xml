@@ -11,6 +11,11 @@
             android:title="Github"
             app:showAsAction="never" />
         <item
+            android:id="@+id/action_telegram"
+            android:orderInCategory="100"
+            android:title="Telegram"
+            app:showAsAction="never" />
+        <item
             android:id="@+id/action_xda"
             android:orderInCategory="100"
             android:title="XDA Thread"

@@ -2,9 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zacharee1.systemuituner">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
     <uses-permission android:name="android.permission.DUMP" />
+    <uses-permission android:name="android.permission.ACCESS_CONTENT_PROVIDERS_EXTERNALLY" />
 
     <application
         android:allowBackup="true"
@@ -23,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NoRoot"
+            android:name=".NoRootActivity"
             android:label="No-Root Setup">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -40,9 +42,15 @@
         <activity
             android:name=".SetupActivity"
             android:label="Setup">
-            <!--<meta-data-->
-                <!--android:name="android.support.PARENT_ACTIVITY"-->
-                <!--android:value="com.zacharee1.systemuituner.MainActivity" />-->
+
+            <!-- <meta-data -->
+            <!-- android:name="android.support.PARENT_ACTIVITY" -->
+            <!-- android:value="com.zacharee1.systemuituner.MainActivity" /> -->
+        </activity>
+        <activity android:name=".NoRootSystemSettingsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.zacharee1.systemuituner.MainActivity" />
         </activity>
     </application>
 

@@ -43,7 +43,7 @@ public class SetupActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), RootActivity.class);
                     startActivity(intent);
                 } else if (button == not_rooted) {
-                    Intent intent = new Intent(getApplicationContext(), NoRoot.class);
+                    Intent intent = new Intent(getApplicationContext(), NoRootActivity.class);
                     startActivity(intent);
                 } else if (button == to_main) {
                     SharedPreferences.Editor editor = getSharedPreferences("com.zacharee1.sysuituner", MODE_PRIVATE).edit();

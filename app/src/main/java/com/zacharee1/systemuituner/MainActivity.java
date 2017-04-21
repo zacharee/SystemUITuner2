@@ -132,6 +132,11 @@ public class MainActivity extends AppCompatActivity
                 intent = new Intent(Intent.ACTION_VIEW, uri);
                 tralse = true;
                 break;
+            case R.id.action_gplus:
+                uri = Uri.parse("https://plus.google.com/communities/113741695211107417994");
+                intent = new Intent(Intent.ACTION_VIEW, uri);
+                tralse = true;
+                break;
         }
         startActivity(intent);
 

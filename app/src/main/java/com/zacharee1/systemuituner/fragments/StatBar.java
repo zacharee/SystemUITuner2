@@ -115,6 +115,7 @@ public class StatBar extends Fragment {
         Switch su = (Switch) view.findViewById(R.id.su);
         Switch clock_seconds = (Switch) view.findViewById(R.id.clock_seconds);
         Switch battery_percent = (Switch) view.findViewById(R.id.battery_percent);
+        Switch vpn = (Switch) view.findViewById(R.id.vpn_icon);
 
         battery_percent.setText(Html.fromHtml("Battery Percentage<br /><small> <font color=\"#777777\">(Reboot Required)</font></small>"));
 
@@ -150,6 +151,7 @@ public class StatBar extends Fragment {
         sharedPrefs("headset", headset, bl);
         sharedPrefs("location", location, bl);
         sharedPrefs("su", su, bl);
+        sharedPrefs("vpn", vpn, bl);
 
         sharedPrefs("clock_seconds", clock_seconds, sec);
 
@@ -176,6 +178,7 @@ public class StatBar extends Fragment {
         switches(headset, "headset", bl);
         switches(location, "location", bl);
         switches(su, "su", bl);
+        switches(vpn, "vpn", bl);
 
         switches(clock_seconds, "clock_seconds", sec);
 
@@ -194,7 +197,6 @@ public class StatBar extends Fragment {
                     break;
                 case "system":
                     enabled = Settings.System.getInt(activity.getContentResolver(), key, 0);
-                    Log.i("enabled", String.valueOf(enabled));
                     break;
                 case "icon_blacklist":
                     String blacklist = Settings.Secure.getString(activity.getContentResolver(), "icon_blacklist") != null ? Settings.Secure.getString(activity.getContentResolver(), "icon_blacklist") : "nada";

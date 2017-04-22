@@ -85,4 +85,14 @@
         android:switchMinWidth="50dp"
         android:text="WiFi Icon"
         android:textSize="18sp" />
+
+    <Switch
+        android:id="@+id/vpn_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:checked="false"
+        android:switchMinWidth="50dp"
+        android:text="VPN Icon"
+        android:textSize="18sp" />
 </LinearLayout>

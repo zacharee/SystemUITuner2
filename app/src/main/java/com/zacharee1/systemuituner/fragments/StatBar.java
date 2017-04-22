@@ -124,28 +124,6 @@ public class StatBar extends Fragment {
             clock_seconds.setVisibility(View.GONE);
         }
 
-        LinearLayout network = (LinearLayout) view.findViewById(R.id.network);
-        LinearLayout sound = (LinearLayout) view.findViewById(R.id.sound);
-        LinearLayout misc = (LinearLayout) view.findViewById(R.id.misc);
-        LinearLayout time = (LinearLayout) view.findViewById(R.id.time);
-
-        TextView title = (TextView) view.findViewById(R.id.title_stat);
-
-        Drawable background;
-
-        if (isDark) {
-            background = activity.getDrawable(R.drawable.layout_bg_dark);
-            title.setTextColor(getResources().getColor(android.R.color.primary_text_dark));
-        } else {
-            background = activity.getDrawable(R.drawable.layout_bg_light);
-            title.setTextColor(getResources().getColor(android.R.color.primary_text_light));
-        }
-
-        network.setBackground(background);
-        sound.setBackground(background);
-        misc.setBackground(background);
-        time.setBackground(background);
-
         String bl = "icon_blacklist";
         String sec = "secure";
         String sys = "system";

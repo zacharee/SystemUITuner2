@@ -51,20 +51,6 @@ public class Misc extends Fragment {
 
         drawable = R.drawable.ic_warning_red;
 
-        TextView title = (TextView) view.findViewById(R.id.title_misc);
-        LinearLayout stuff = (LinearLayout) view.findViewById(R.id.stuff);
-        Drawable background;
-
-        if (activity.setThings.sharedPreferences.getBoolean("isDark", false)) {
-            background = activity.getDrawable(R.drawable.layout_bg_dark);
-            title.setTextColor(getResources().getColor(android.R.color.primary_text_dark));
-        } else {
-            background = activity.getDrawable(R.drawable.layout_bg_light);
-            title.setTextColor(getResources().getColor(android.R.color.primary_text_light));
-        }
-
-//        stuff.setBackground(background);
-
         show_full_zen = (Switch) view.findViewById(R.id.show_full_zen);
 
         switches(show_full_zen, "sysui_show_full_zen", "secure");

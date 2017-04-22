@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -10,385 +11,97 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
             android:orientation="vertical"
             android:padding="16dp">
 
             <TextView
-                android:id="@+id/title_stat"
+                android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:text="Status Bar"
+                android:text="ATTENTION: Not everything here will work on your device! Manufacturers, especially Samsung and LG, tend to remove the ability to hide certain icons."
                 android:textAlignment="center"
-                android:textSize="26sp"
-                android:visibility="gone" />
+                android:textSize="24sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
                     android:layout_weight="1"
+                    android:clipToPadding="false"
                     android:orientation="vertical">
 
-                    <LinearLayout
+                    <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:padding="10dp">
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="16dp"
+                        app:cardElevation="1dp"
+                        app:cardUseCompatPadding="true">
 
-                        <TextView
-                            android:id="@+id/textView19"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:text="Networking &amp; Data"
-                            android:textAlignment="textStart"
-                            android:textSize="18sp"
-                            android:textStyle="italic" />
-
-                        <Switch
-                            android:id="@+id/bt_icon"
+                        <include
+                            layout="@layout/switches_statbar_network"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:checked="false"
-                            android:switchMinWidth="50dp"
-                            android:text="Bluetooth Icon"
-                            android:textSize="18sp" />
+                            android:layout_height="wrap_content" />
+                    </android.support.v7.widget.CardView>
 
-                        <Switch
-                            android:id="@+id/data_saver"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:checked="false"
-                            android:switchMinWidth="50dp"
-                            android:text="Data Saver Icon"
-                            android:textSize="18sp" />
-
-                        <Switch
-                            android:id="@+id/ethernet_icon"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:checked="false"
-                            android:switchMinWidth="50dp"
-                            android:text="Ethernet Icon"
-                            android:textSize="18sp" />
-
-                        <Switch
-                            android:id="@+id/hotspot_icon"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:checked="false"
-                            android:switchMinWidth="50dp"
-                            android:text="Hotspot Icon"
-                            android:textSize="18sp" />
-
-                        <Switch
-                            android:id="@+id/mobile_icon"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:checked="false"
-                            android:switchMinWidth="50dp"
-                            android:text="Mobile Icon"
-                            android:textSize="18sp" />
-
-                        <Switch
-                            android:id="@+id/airplane_icon"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:checked="false"
-                            android:switchMinWidth="50dp"
-                            android:text="Airplane Icon"
-                            android:textSize="18sp" />
-
-                        <Switch
-                            android:id="@+id/wifi_icon"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:checked="false"
-                            android:switchMinWidth="50dp"
-                            android:text="WiFi Icon"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:padding="10dp">
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="16dp"
+                        app:cardElevation="1dp"
+                        app:cardUseCompatPadding="true">
 
-                        <TextView
-                            android:id="@+id/textView21"
+                        <include
+                            layout="@layout/switches_statbar_time"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:text="Time &amp; Such"
-                            android:textAlignment="textStart"
-                            android:textAllCaps="false"
-                            android:textSize="18sp"
-                            android:textStyle="italic" />
-
-                        <Switch
-                            android:id="@+id/clock"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:checked="false"
-                            android:switchMinWidth="50dp"
-                            android:text="Clock"
-                            android:textSize="18sp" />
-
-                        <Switch
-                            android:id="@+id/clock_seconds"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:checked="false"
-                            android:switchMinWidth="50dp"
-                            android:text="Show Clock Seconds"
-                            android:textSize="18sp" />
-
-                        <Switch
-                            android:id="@+id/alarm_clock_icon"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:checked="false"
-                            android:switchMinWidth="50dp"
-                            android:text="Alarm Clock Icon"
-                            android:textSize="18sp" />
-
-                        <Switch
-                            android:id="@+id/zen_icon"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:checked="false"
-                            android:switchMinWidth="50dp"
-                            android:text="Zen Icon"
-                            android:textSize="18sp" />
-
-                        <Switch
-                            android:id="@+id/do_not_disturb"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:checked="false"
-                            android:switchMinWidth="50dp"
-                            android:text="Do Not Disturb"
-                            android:textSize="18sp" />
-
-
-                    </LinearLayout>
+                            android:layout_height="wrap_content" />
+                    </android.support.v7.widget.CardView>
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginStart="20dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <LinearLayout
+                    <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:padding="10dp">
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="16dp"
+                        app:cardElevation="1dp"
+                        app:cardUseCompatPadding="true">
 
-                        <TextView
-                            android:id="@+id/textView16"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:text="Sounds &amp; Alerts"
-                            android:textAlignment="textStart"
-                            android:textSize="18sp"
-                            android:textStyle="italic" />
-
-                        <Switch
-                            android:id="@+id/volume"
+                        <include
+                            layout="@layout/switches_statbar_sound"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:checked="false"
-                            android:switchMinWidth="50dp"
-                            android:text="Volume"
-                            android:textSize="18sp" />
+                            android:layout_height="wrap_content" />
+                    </android.support.v7.widget.CardView>
 
-                        <Switch
-                            android:id="@+id/headset"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:checked="false"
-                            android:switchMinWidth="50dp"
-                            android:text="Headset Icon"
-                            android:textSize="18sp" />
-
-                        <Switch
-                            android:id="@+id/speakerphone"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:checked="false"
-                            android:switchMinWidth="50dp"
-                            android:text="Speakerphone Icon"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:padding="10dp">
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="16dp"
+                        app:cardElevation="1dp"
+                        app:cardUseCompatPadding="true">
 
-                        <TextView
-                            android:id="@+id/textView20"
+                        <include
+                            layout="@layout/switches_statbar_misc"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:text="Miscellaneous"
-                            android:textAlignment="textStart"
-                            android:textSize="18sp"
-                            android:textStyle="italic" />
-
-                        <Switch
-                            android:id="@+id/managed_profile_icon"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:checked="false"
-                            android:switchMinWidth="50dp"
-                            android:text="Managed Profile Icon"
-                            android:textSize="18sp" />
-
-                        <Switch
-                            android:id="@+id/battery"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:checked="false"
-                            android:switchMinWidth="50dp"
-                            android:text="Battery Icon"
-                            android:textSize="18sp" />
-
-                        <Switch
-                            android:id="@+id/battery_percent"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:checked="false"
-                            android:switchMinWidth="50dp"
-                            android:text="Battery Percentage"
-                            android:textSize="18sp" />
-
-                        <Switch
-                            android:id="@+id/cast"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:checked="false"
-                            android:switchMinWidth="50dp"
-                            android:text="Cast Icon"
-                            android:textSize="18sp" />
-
-                        <Switch
-                            android:id="@+id/rotate"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:checked="false"
-                            android:switchMinWidth="50dp"
-                            android:text="Rotation lock Icon"
-                            android:textSize="18sp" />
-
-                        <Switch
-                            android:id="@+id/nfc"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:checked="false"
-                            android:switchMinWidth="50dp"
-                            android:text="NFC Icon"
-                            android:textSize="18sp" />
-
-                        <Switch
-                            android:id="@+id/location"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:checked="false"
-                            android:switchMinWidth="50dp"
-                            android:text="Location Icon"
-                            android:textSize="18sp" />
-
-                        <Switch
-                            android:id="@+id/su"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:checked="false"
-                            android:switchMinWidth="50dp"
-                            android:text="SU Icon"
-                            android:textSize="18sp" />
-                    </LinearLayout>
+                            android:layout_height="wrap_content" />
+                    </android.support.v7.widget.CardView>
 
                 </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/network"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/sound"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/time"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
-                android:orientation="vertical">
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/misc"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
-                android:orientation="vertical"
-                android:visibility="gone">
 
             </LinearLayout>
 

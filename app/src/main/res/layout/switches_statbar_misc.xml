@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Miscellaneous"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="italic" />
+
+    <Switch
+        android:id="@+id/managed_profile_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:checked="false"
+        android:switchMinWidth="50dp"
+        android:text="Managed Profile Icon"
+        android:textSize="18sp" />
+
+    <Switch
+        android:id="@+id/battery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:checked="false"
+        android:switchMinWidth="50dp"
+        android:text="Battery Icon"
+        android:textSize="18sp" />
+
+    <Switch
+        android:id="@+id/battery_percent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:checked="false"
+        android:switchMinWidth="50dp"
+        android:text="Battery Percentage"
+        android:textSize="18sp" />
+
+    <Switch
+        android:id="@+id/cast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:checked="false"
+        android:switchMinWidth="50dp"
+        android:text="Cast Icon"
+        android:textSize="18sp" />
+
+    <Switch
+        android:id="@+id/rotate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:checked="false"
+        android:switchMinWidth="50dp"
+        android:text="Rotation lock Icon"
+        android:textSize="18sp" />
+
+    <Switch
+        android:id="@+id/nfc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:checked="false"
+        android:switchMinWidth="50dp"
+        android:text="NFC Icon"
+        android:textSize="18sp" />
+
+    <Switch
+        android:id="@+id/location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:checked="false"
+        android:switchMinWidth="50dp"
+        android:text="Location Icon"
+        android:textSize="18sp" />
+
+    <Switch
+        android:id="@+id/su"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:checked="false"
+        android:switchMinWidth="50dp"
+        android:text="SU Icon"
+        android:textSize="18sp" />
+</LinearLayout>

@@ -37,16 +37,7 @@ public class Settings extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        TextView title = (TextView) view.findViewById(R.id.title_settings);
-
-        if (activity.setThings.sharedPreferences.getBoolean("isDark", false)) {
-            title.setTextColor(getResources().getColor(android.R.color.primary_text_dark));
-        } else {
-            title.setTextColor(getResources().getColor(android.R.color.primary_text_light));
-        }
-
         Switch darkMode = (Switch) view.findViewById(R.id.dark_mode);
-        LinearLayout settings = (LinearLayout) view.findViewById(R.id.settings);
 
         if (activity.setThings.sharedPreferences.getBoolean("isDark", false)) {
             darkMode.setChecked(true);
@@ -66,18 +57,6 @@ public class Settings extends Fragment {
                 activity.setThings.editor.apply();
             }
         });
-
-        Drawable background;
-
-        if (activity.setThings.sharedPreferences.getBoolean("isDark", false)) {
-            background = activity.getDrawable(R.drawable.layout_bg_dark);
-            title.setTextColor(getResources().getColor(android.R.color.primary_text_dark));
-        } else {
-            background = activity.getDrawable(R.drawable.layout_bg_light);
-            title.setTextColor(getResources().getColor(android.R.color.primary_text_light));
-        }
-
-//        settings.setBackground(background);
 
         return view;
     }

@@ -32,7 +32,6 @@ public class SetThings {
     public boolean Dark;
     public boolean setup;
 
-    public int layoutBackground;
     public int titleText;
     public int style;
     public ColorStateList drawerItem;
@@ -52,7 +51,6 @@ public class SetThings {
         Dark = sharedPreferences.getBoolean("isDark", false);
         setup = sharedPreferences.getBoolean("isSetup", false);
 
-        layoutBackground = Dark ? R.drawable.layout_bg_dark : R.drawable.layout_bg_light;
         titleText = activity.getResources().getColor(Dark ? android.R.color.primary_text_dark : android.R.color.primary_text_light);
         drawerItem = Dark ? activity.getResources().getColorStateList(R.color.drawer_item_dark) : activity.getResources().getColorStateList(R.color.drawer_item_light);
 

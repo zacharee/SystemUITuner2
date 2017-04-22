@@ -91,9 +91,6 @@ public class Demo extends Fragment {
         enableDemo = (Button) view.findViewById(R.id.enable_demo);
         selectBatteryLevel = (Button) view.findViewById(R.id.select_battery_level_button);
 
-        TextView title = (TextView) view.findViewById(R.id.title_demo);
-        title.setTextColor(activity.setThings.titleText);
-
         setSpinnerAdapters(wifi, R.array.wifi_strength);
         setSpinnerAdapters(mobile, R.array.mobile_strength);
         setSpinnerAdapters(mobileTypeSpinner, R.array.mobile_type);

@@ -18,20 +18,11 @@
             tools:ignore="UselessLeaf">
 
             <TextView
-                android:id="@+id/abt_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="About"
-                android:textAlignment="center"
-                android:textSize="26sp" />
-
-            <TextView
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="App created by Zacharee1"
                 android:textAlignment="center"
-                android:textColor="@android:color/tertiary_text_dark"
                 android:textSize="18sp" />
 
             <TextView
@@ -40,7 +31,6 @@
                 android:layout_height="wrap_content"
                 android:text="Launcher image from material.io"
                 android:textAlignment="center"
-                android:textColor="@android:color/tertiary_text_dark"
                 android:textSize="18sp" />
 
             <TextView

@@ -77,7 +77,7 @@ public class Settings extends Fragment {
             title.setTextColor(getResources().getColor(android.R.color.primary_text_light));
         }
 
-        settings.setBackground(background);
+//        settings.setBackground(background);
 
         return view;
     }

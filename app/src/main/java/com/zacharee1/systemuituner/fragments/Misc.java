@@ -63,7 +63,7 @@ public class Misc extends Fragment {
             title.setTextColor(getResources().getColor(android.R.color.primary_text_light));
         }
 
-        stuff.setBackground(background);
+//        stuff.setBackground(background);
 
         show_full_zen = (Switch) view.findViewById(R.id.show_full_zen);
 

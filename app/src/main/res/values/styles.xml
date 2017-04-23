@@ -3,10 +3,11 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimary2</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark2</item>
+        <item name="colorAccent">@color/colorAccent2</item>
+        <item name="android:navigationBarColor">@color/colorPrimaryDark2</item>
+        <item name="android:statusBarColor">?android:attr/colorPrimaryDark</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -19,10 +20,10 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="DARK" parent="Theme.AppCompat" >
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary2</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark2</item>
+        <item name="android:navigationBarColor">@color/colorPrimaryDark2</item>
+        <item name="colorAccent">@color/colorAccent2</item>
     </style>
 
     <style name="DARK.NoAppBar" parent="DARK">

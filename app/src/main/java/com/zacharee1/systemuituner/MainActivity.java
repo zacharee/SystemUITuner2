@@ -213,7 +213,9 @@ public class MainActivity extends AppCompatActivity
                 fragment = new Misc();
                 break;
             case R.id.nav_exit:
-                this.finish();
+                try {
+                    finish();
+                } catch (IllegalStateException e) {}
                 break;
             default:
                 fragment = new Main();

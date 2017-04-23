@@ -8,10 +8,13 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.net.Uri;
+import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -23,7 +26,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings("ALL")
 public class SetThings {
-    private final boolean Dark;
+    public final boolean Dark;
     public final boolean setup;
 
     public final int titleText;
@@ -109,6 +112,97 @@ public class SetThings {
                 } catch (Exception e) {
                     Exceptions exceptions = new Exceptions();
                     exceptions.systemSettings(context, currentActivity.getApplicationContext(), e.getMessage(), "SetThings");
+                }
+            }
+        });
+    }
+
+    public void switches(final Switch toggle, final String pref, final String settingType, final View view) {
+        int setting = 0;
+        switch (settingType) {
+            case "global":
+                setting = Settings.Global.getInt(currentActivity.getContentResolver(), pref, 0);
+                break;
+            case "secure":
+                setting = Settings.Secure.getInt(currentActivity.getContentResolver(), pref, 0);
+                break;
+            case "system":
+                setting = Settings.System.getInt(currentActivity.getContentResolver(), pref, 0);
+                break;
+            case "icon_blacklist":
+                String blacklist = Settings.Secure.getString(currentActivity.getContentResolver(), "icon_blacklist") != null ? Settings.Secure.getString(currentActivity.getContentResolver(), "icon_blacklist") : "nada";
+                setting = !blacklist.contains(pref) ? 1 : 0;
+                break;
+        }
+        toggle.setChecked(setting == 1);
+
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
+                try {
+                    switch (settingType) {
+                        case "icon_blacklist":
+                            String blacklist = Settings.Secure.getString(currentActivity.getContentResolver(), "icon_blacklist");
+                            if (!isChecked) {
+                                if (blacklist != null && !blacklist.equals("")) {
+                                    blacklist = blacklist.concat("," + pref);
+                                } else {
+                                    blacklist = pref;
+                                }
+                                editor.putBoolean(pref, false);
+                            } else {
+                                if (blacklist != null) {
+                                    blacklist = blacklist.replace("," + pref, "");
+                                    blacklist = blacklist.replace(pref, "");
+                                }
+                                editor.putBoolean(pref, true);
+                            }
+
+                            editor.apply();
+                            final String blacklist2 = blacklist;
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Looper.prepare();
+                                    try {
+                                        if (blacklist2 != null && !blacklist2.equals("")) {
+                                            try {
+                                                Settings.Secure.putString(currentActivity.getContentResolver(), "icon_blacklist", blacklist2);
+                                            } catch (final Exception e) {
+                                                currentActivity.runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        Exceptions exceptions = new Exceptions();
+                                                        exceptions.secureSettings(view.getContext(), currentActivity.getApplicationContext(), e.getMessage(), "icon_blacklist");
+                                                    }
+                                                });
+                                            }
+                                        } else {
+                                            try {
+                                                Settings.Secure.putString(currentActivity.getContentResolver(), "icon_blacklist", "");
+                                            } catch (final Exception e) {
+                                                currentActivity.runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        Exceptions exceptions = new Exceptions();
+                                                        exceptions.secureSettings(view.getContext(), currentActivity.getApplicationContext(), e.getMessage(), "icon_blacklist");
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    } catch (Exception e) {
+                                        Log.e("idk", e.getMessage());
+                                    }
+                                }
+                            }).start();
+                            break;
+                        default:
+                            settings(settingType, pref, isChecked ? 1 : 0);
+                            break;
+                    }
+                } catch (Exception e) {
+                    Exceptions exceptions = new Exceptions();
+                    exceptions.secureSettings(view.getContext(), currentActivity.getApplicationContext(), e.getMessage(), "Status Bar");
                 }
             }
         });

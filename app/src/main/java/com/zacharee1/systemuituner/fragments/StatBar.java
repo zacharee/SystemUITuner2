@@ -16,11 +16,14 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import com.zacharee1.systemuituner.Exceptions;
 import com.zacharee1.systemuituner.MainActivity;
 import com.zacharee1.systemuituner.R;
+
+import java.util.ArrayList;
 
 /**
  * Created by Zacha on 4/5/2017.
@@ -121,154 +124,107 @@ public class StatBar extends Fragment {
         String sys = "system";
         String glob = "global";
 
-        sharedPrefs("bluetooth", bluetooth, bl);
-        sharedPrefs("wifi", wifi, bl);
-        sharedPrefs("ethernet", ethernet, bl);
-        sharedPrefs("mobile", mobile, bl);
-        sharedPrefs("airplane", airplane, bl);
-        sharedPrefs("managed_profile", managed_profile, bl);
-        sharedPrefs("zen", zen, bl);
-        sharedPrefs("alarm_clock", alarm_clock, bl);
-        sharedPrefs("hotspot", hotspot, bl);
-        sharedPrefs("data_saver", data_saver, bl);
-        sharedPrefs("nfc", nfc, bl);
-        sharedPrefs("clock", clock, bl);
-        sharedPrefs("volume", volume, bl);
-        sharedPrefs("do_not_disturb", do_not_disturb, bl);
-        sharedPrefs("rotate", rotate, bl);
-        sharedPrefs("battery", battery, bl);
-        sharedPrefs("speakerphone", speakerphone, bl);
-        sharedPrefs("cast", cast, bl);
-        sharedPrefs("headset", headset, bl);
-        sharedPrefs("location", location, bl);
-        sharedPrefs("su", su, bl);
-        sharedPrefs("vpn", vpn, bl);
+//        sharedPrefs("bluetooth", bluetooth, bl);
+//        sharedPrefs("wifi", wifi, bl);
+//        sharedPrefs("ethernet", ethernet, bl);
+//        sharedPrefs("mobile", mobile, bl);
+//        sharedPrefs("airplane", airplane, bl);
+//        sharedPrefs("managed_profile", managed_profile, bl);
+//        sharedPrefs("zen", zen, bl);
+//        sharedPrefs("alarm_clock", alarm_clock, bl);
+//        sharedPrefs("hotspot", hotspot, bl);
+//        sharedPrefs("data_saver", data_saver, bl);
+//        sharedPrefs("nfc", nfc, bl);
+//        sharedPrefs("clock", clock, bl);
+//        sharedPrefs("volume", volume, bl);
+//        sharedPrefs("do_not_disturb", do_not_disturb, bl);
+//        sharedPrefs("rotate", rotate, bl);
+//        sharedPrefs("battery", battery, bl);
+//        sharedPrefs("speakerphone", speakerphone, bl);
+//        sharedPrefs("cast", cast, bl);
+//        sharedPrefs("headset", headset, bl);
+//        sharedPrefs("location", location, bl);
+//        sharedPrefs("su", su, bl);
+//        sharedPrefs("vpn", vpn, bl);
+//
+//        sharedPrefs("clock_seconds", clock_seconds, sec);
+//
+//        sharedPrefs("status_bar_show_battery_percent", battery_percent, sys);
 
-        sharedPrefs("clock_seconds", clock_seconds, sec);
+//        LinearLayout layout = (LinearLayout) view.findViewById(R.id.statbar_ll);
+//
+//        ArrayList<Switch> switches = new ArrayList<>();
+//
+//        String[] switchNames = new String[]{};
+//
+//        switchNames[R.id.bt_icon] = "bluetooth";
+//        switchNames[R.id.wifi_icon] = "wifi";
+//        switchNames[R.id.ethernet_icon] = "ethernet";
+//        switchNames[R.id.mobile_icon] = "mobile";
+//        switchNames[R.id.airplane_icon] = "airplane";
+//
+//
+//        for (int i = 0; i < layout.getChildCount(); i++) {
+//            if (layout.getChildAt(i) instanceof Switch) {
+//                switches.add((Switch) layout.getChildAt(i));
+//            }
+//        }
+//
+//        for (Switch toggle : switches) {
+//            int id = toggle.getId();
+//            String type;
+//        }
 
-        sharedPrefs("status_bar_show_battery_percent", battery_percent, sys);
+        activity.setThings.switches(bluetooth, "bluetooth", bl, view);
+        activity.setThings.switches(wifi, "wifi", bl, view);
+        activity.setThings.switches(ethernet, "ethernet", bl, view);
+        activity.setThings.switches(mobile, "mobile", bl, view);
+        activity.setThings.switches(airplane, "airplane", bl, view);
+        activity.setThings.switches(managed_profile, "managed_profile", bl, view);
+        activity.setThings.switches(zen, "zen", bl, view);
+        activity.setThings.switches(alarm_clock, "alarm_clock,alarm", bl, view);
+        activity.setThings.switches(hotspot, "hotspot", bl, view);
+        activity.setThings.switches(data_saver, "data_saver", bl, view);
+        activity.setThings.switches(nfc, "nfc", bl, view);
+        activity.setThings.switches(clock, "clock", bl, view);
+        activity.setThings.switches(do_not_disturb, "do_not_disturb", bl, view);
+        activity.setThings.switches(rotate, "rotate", bl, view);
+        activity.setThings.switches(battery, "battery", bl, view);
+        activity.setThings.switches(speakerphone, "speakerphone", bl, view);
+        activity.setThings.switches(cast, "cast", bl, view);
+        activity.setThings.switches(headset, "headset", bl, view);
+        activity.setThings.switches(location, "location", bl, view);
+        activity.setThings.switches(su, "su", bl, view);
+        activity.setThings.switches(vpn, "vpn", bl, view);
 
-        switches(bluetooth, "bluetooth", bl);
-        switches(wifi, "wifi", bl);
-        switches(ethernet, "ethernet", bl);
-        switches(mobile, "mobile", bl);
-        switches(airplane, "airplane", bl);
-        switches(managed_profile, "managed_profile", bl);
-        switches(zen, "zen", bl);
-        switches(alarm_clock, "alarm_clock,alarm", bl);
-        switches(hotspot, "hotspot", bl);
-        switches(data_saver, "data_saver", bl);
-        switches(nfc, "nfc", bl);
-        switches(clock, "clock", bl);
-        switches(volume, "volume", bl);
-        switches(do_not_disturb, "do_not_disturb", bl);
-        switches(rotate, "rotate", bl);
-        switches(battery, "battery", bl);
-        switches(speakerphone, "speakerphone", bl);
-        switches(cast, "cast", bl);
-        switches(headset, "headset", bl);
-        switches(location, "location", bl);
-        switches(su, "su", bl);
-        switches(vpn, "vpn", bl);
+        activity.setThings.switches(clock_seconds, "clock_seconds", sec, view);
 
-        switches(clock_seconds, "clock_seconds", sec);
-
-        switches(battery_percent, "status_bar_show_battery_percent", sys);
+        activity.setThings.switches(battery_percent, "status_bar_show_battery_percent", sys, view);
         return view;
     }
 
-    private void sharedPrefs(String key, Switch toggle, String prefType) {
-        int enabled = 0;
-        try {
-            switch (prefType) {
-                case "global":
-                    break;
-                case "secure":
-                    enabled = Settings.Secure.getInt(activity.getContentResolver(), key, 0);
-                    break;
-                case "system":
-                    enabled = Settings.System.getInt(activity.getContentResolver(), key, 0);
-                    break;
-                case "icon_blacklist":
-                    String blacklist = Settings.Secure.getString(activity.getContentResolver(), "icon_blacklist") != null ? Settings.Secure.getString(activity.getContentResolver(), "icon_blacklist") : "nada";
-                    enabled = !blacklist.contains(key) ? 1 : 0;
-                    break;
-            }
-        } catch (Exception e) {
-            Exceptions exceptions = new Exceptions();
-            exceptions.secureSettings(view.getContext(), activity.getApplicationContext(), e.getMessage(), "Status Bar");
-        }
-        toggle.setChecked(enabled == 1);
-
-    }
-
-    private void switches(Switch toggle, final String setting, final String type) {
-        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
-                try {
-                    switch (type) {
-                        case "icon_blacklist":
-                            String blacklist = Settings.Secure.getString(activity.getContentResolver(), "icon_blacklist");
-                            if (!isChecked) {
-                                if (blacklist != null && !blacklist.equals("")) {
-                                    blacklist = blacklist.concat("," + setting);
-                                } else {
-                                    blacklist = setting;
-                                }
-                                activity.setThings.editor.putBoolean(setting, false);
-                            } else {
-                                if (blacklist != null) {
-                                    blacklist = blacklist.replace("," + setting, "");
-                                    blacklist = blacklist.replace(setting, "");
-                                }
-                                activity.setThings.editor.putBoolean(setting, true);
-                            }
-
-                            activity.setThings.editor.apply();
-                            final String blacklist2 = blacklist;
-                            new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Looper.prepare();
-                                    try {
-                                        if (blacklist2 != null && !blacklist2.equals("")) {
-                                            try {
-                                                Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", blacklist2);
-                                            } catch (final Exception e) {
-                                                activity.runOnUiThread(new Runnable() {
-                                                    @Override
-                                                    public void run() {
-                                                        exceptions.secureSettings(view.getContext(), activity.getApplicationContext(), e.getMessage(), "icon_blacklist");
-                                                    }
-                                                });
-                                            }
-                                        } else {
-                                            try {
-                                                Settings.Secure.putString(activity.getContentResolver(), "icon_blacklist", "");
-                                            } catch (final Exception e) {
-                                                activity.runOnUiThread(new Runnable() {
-                                                    @Override
-                                                    public void run() {
-                                                        exceptions.secureSettings(view.getContext(), activity.getApplicationContext(), e.getMessage(), "icon_blacklist");
-                                                    }
-                                                });
-                                            }
-                                        }
-                                    } catch (Exception e) {
-                                        Log.e("idk", e.getMessage());
-                                    }
-                                }
-                            }).start();
-                            break;
-                        default:
-                            activity.setThings.settings(type, setting, isChecked ? 1 : 0);
-                            break;
-                    }
-                } catch (Exception e) {
-                    exceptions.secureSettings(view.getContext(), activity.getApplicationContext(), e.getMessage(), "Status Bar");
-                }
-            }
-        });
-    }
+//    private void sharedPrefs(String key, Switch toggle, String prefType) {
+//        int enabled = 0;
+//        try {
+//            switch (prefType) {
+//                case "global":
+//                    break;
+//                case "secure":
+//                    enabled = Settings.Secure.getInt(activity.getContentResolver(), key, 0);
+//                    break;
+//                case "system":
+//                    enabled = Settings.System.getInt(activity.getContentResolver(), key, 0);
+//                    break;
+//                case "icon_blacklist":
+//                    String blacklist = Settings.Secure.getString(activity.getContentResolver(), "icon_blacklist") != null ? Settings.Secure.getString(activity.getContentResolver(), "icon_blacklist") : "nada";
+//                    enabled = !blacklist.contains(key) ? 1 : 0;
+//                    break;
+//            }
+//        } catch (Exception e) {
+//            Exceptions exceptions = new Exceptions();
+//            exceptions.secureSettings(view.getContext(), activity.getApplicationContext(), e.getMessage(), "Status Bar");
+//        }
+//        toggle.setChecked(enabled == 1);
+//
+//    }
 }

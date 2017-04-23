@@ -1,5 +1,6 @@
 package com.zacharee1.systemuituner;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
@@ -212,7 +213,7 @@ public class MainActivity extends AppCompatActivity
                 fragment = new Misc();
                 break;
             case R.id.nav_exit:
-                super.onBackPressed();
+                this.finish();
                 break;
             default:
                 fragment = new Main();

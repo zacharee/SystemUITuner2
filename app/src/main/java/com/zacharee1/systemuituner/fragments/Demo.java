@@ -126,7 +126,7 @@ public class Demo extends Fragment {
 
     private void setSpinnerAdapters(Spinner spinner, int arrayID) {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(activity.getApplicationContext(),
-                arrayID, android.R.layout.simple_spinner_item);
+                arrayID, activity.setThings.Dark ? R.layout.spinner_items_dark : R.layout.spinner_items_light);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }

@@ -40,13 +40,13 @@
     </string-array>
 
     <string name="about">About</string>
-    <string name="demo_mode">Demo mode</string>
+    <string name="demo_mode">Demo Mode</string>
     <string name="exit_app">Exit App</string>
     <string name="home">Home</string>
     <string name="miscellaneous">Miscellaneous</string>
     <string name="quick_settings">Quick Settings</string>
     <string name="settings">Settings</string>
-    <string name="status_bar">Status bar</string>
+    <string name="status_bar">Status Bar</string>
     <string name="go">GO</string>
     <string name="adb_workaround">However, just like in the setup, you can use ADB to work around it.</string>
     <string name="non_lp_bypass">If you aren\'t on Lollipop, but want to give it a shot anyway, first press the \"Grant Perms\" button, then press the \"GO\" Button.</string>
@@ -128,15 +128,15 @@
     <string name="wifi_icon">WiFi Icon</string>
     <string name="vpn_icon">VPN Icon</string>
     <string name="sounds_alerts"><![CDATA[Sounds & Alerts]]></string>
-    <string name="volume">Volume</string>
+    <string name="volume">Volume Icon</string>
     <string name="headset_icon">Headset Icon</string>
     <string name="speakerphone_icon">Speakerphone Icon</string>
     <string name="time_such"><![CDATA[Time & Such]]></string>
-    <string name="clock">Clock</string>
+    <string name="clock">Clock Icon</string>
     <string name="show_clock_seconds">Show Clock Seconds</string>
     <string name="alarm_clock_icon">Alarm Clock Icon</string>
     <string name="zen_icon">Zen Icon</string>
-    <string name="do_not_disturb">Do Not Disturb</string>
+    <string name="do_not_disturb">Do Not Disturb Icon</string>
     <string name="github">Github</string>
     <string name="donate">Donate</string>
     <string name="google_play">Google Play</string>

@@ -154,18 +154,20 @@ public class MainActivity extends AppCompatActivity
         if (id != R.id.nav_exit) {
             setThings.editor.putInt("navpage", id);
             setThings.editor.apply();
+
+            fragment = chooseFrag(id);
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+                }
+            }, 350);
+
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
         }
 
-        fragment = chooseFrag(id);
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-            }
-        }, 350);
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        if (id == R.id.nav_exit) super.onBackPressed();
         return true;
     }
 
@@ -211,11 +213,6 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_misc:
                 fragment = new Misc();
-                break;
-            case R.id.nav_exit:
-                try {
-                    finish();
-                } catch (IllegalStateException e) {}
                 break;
             default:
                 fragment = new Main();

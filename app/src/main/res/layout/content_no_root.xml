@@ -15,7 +15,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1">
+        tools:layout_constraintTop_creator="1"
+        tools:ignore="UselessParent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,7 +30,7 @@
                 android:id="@+id/noroot_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Not rooted, huh?"
+                android:text="@string/not_rooted_huh"
                 android:textAlignment="center"
                 android:textSize="26sp" />
 
@@ -37,7 +38,7 @@
                 android:id="@+id/textView21"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Bummer..."
+                android:text="@string/bummer"
                 android:textAlignment="center" />
 
             <TextView
@@ -45,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="I guess it's a good thing that there's a workaround, then."
+                android:text="@string/workaround"
                 android:textAlignment="center" />
 
             <TextView
@@ -53,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="For this to work, you'll need a computer, a USB cable and ADB (look up how to set that up)."
+                android:text="@string/adb_instructions"
                 android:textAlignment="center" />
 
             <TextView
@@ -61,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text='Remember to also enable "USB Debugging" in Developer Options, and authorize your computer.'
+                android:text="@string/adb_reminder"
                 android:textAlignment="center" />
 
             <TextView
@@ -69,7 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="ADB all set up? Good. Now, let's get started."
+                android:text="@string/adb_set_up"
                 android:textAlignment="center" />
 
             <TextView
@@ -77,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Run the following commands (with your device connected) in CMD or Terminal:"
+                android:text="@string/adb_perm_grant"
                 android:textAlignment="center" />
 
             <LinearLayout
@@ -91,7 +92,8 @@
 
                 <HorizontalScrollView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    tools:ignore="UselessParent">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -111,7 +113,8 @@
                             android:text="adb shell pm grant com.zacharee1.systemuituner android.permission.WRITE_SECURE_SETTINGS\n\nadb shell pm grant com.zacharee1.systemuituner android.permission.DUMP"
                             android:textAlignment="textStart"
                             android:textColor="#fff"
-                            android:textIsSelectable="true" />
+                            android:textIsSelectable="true"
+                            tools:ignore="HardcodedText" />
 
                     </LinearLayout>
                 </HorizontalScrollView>
@@ -123,7 +126,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="OK! I'm done!" />
+                android:text="@string/finished" />
 
         </LinearLayout>
     </ScrollView>

@@ -1,11 +1,9 @@
 package com.zacharee1.systemuituner.fragments;
 
-import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
@@ -18,33 +16,26 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
 import android.widget.Switch;
-import android.widget.TextView;
 
 import com.zacharee1.systemuituner.Exceptions;
 import com.zacharee1.systemuituner.MainActivity;
 import com.zacharee1.systemuituner.R;
-import com.zacharee1.systemuituner.SetThings;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
-import static android.R.attr.process;
 
 /**
  * Created by Zacha on 4/5/2017.
  */
 
+@SuppressWarnings("ALL")
 public class StatBar extends Fragment {
-    public View view;
-    public MainActivity activity;
+    private View view;
+    private MainActivity activity;
 
-    boolean isDark;
+    private boolean isDark;
 
-    int drawable;
+    private int drawable;
 
-    Exceptions exceptions = new Exceptions();
+    private final Exceptions exceptions = new Exceptions();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -186,7 +177,7 @@ public class StatBar extends Fragment {
         return view;
     }
 
-    public void sharedPrefs(String key, Switch toggle, String prefType) {
+    private void sharedPrefs(String key, Switch toggle, String prefType) {
         int enabled = 0;
         try {
             switch (prefType) {
@@ -211,7 +202,7 @@ public class StatBar extends Fragment {
 
     }
 
-    public void switches(Switch toggle, final String setting, final String type) {
+    private void switches(Switch toggle, final String setting, final String type) {
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {

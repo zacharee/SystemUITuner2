@@ -13,9 +13,9 @@ import com.zacharee1.systemuituner.R;
  * Created by Zacha on 4/5/2017.
  */
 
+@SuppressWarnings("ALL")
 public class QS extends Fragment {
-    public View view;
-    public MainActivity activity;
+    private MainActivity activity;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -25,7 +25,7 @@ public class QS extends Fragment {
 
         activity.setTitle("Quick Settings");
 
-        view = inflater.inflate(R.layout.fragment_qs, container, false);
+        View view = inflater.inflate(R.layout.fragment_qs, container, false);
 
         return view;
     }

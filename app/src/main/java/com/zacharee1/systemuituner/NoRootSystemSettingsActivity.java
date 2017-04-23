@@ -7,20 +7,15 @@ import android.widget.TextView;
 
 public class NoRootSystemSettingsActivity extends AppCompatActivity {
 
-    SetThings setThings;
-
-    String oneZero;
-    String setting;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setThings = new SetThings(this);
+        SetThings setThings = new SetThings(this);
         setContentView(R.layout.activity_no_root_system_settings);
         setTitle("System Settings");
 
-        oneZero = setThings.sharedPreferences.getString("isSystemSwitchEnabled", "EXAMPLE_VALUE");
-        setting = setThings.sharedPreferences.getString("systemSettingKey", "EXAMPLE_SETTING");
+        String oneZero = setThings.sharedPreferences.getString("isSystemSwitchEnabled", "EXAMPLE_VALUE");
+        String setting = setThings.sharedPreferences.getString("systemSettingKey", "EXAMPLE_SETTING");
 
         TextView title = (TextView) findViewById(R.id.system_settings_title);
         title.setTextColor(setThings.titleText);

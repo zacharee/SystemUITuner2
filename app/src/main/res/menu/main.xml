@@ -8,32 +8,32 @@
         <item
             android:id="@+id/action_github"
             android:orderInCategory="100"
-            android:title="Github"
+            android:title="@string/github"
             app:showAsAction="never" />
         <item
             android:id="@+id/action_telegram"
             android:orderInCategory="100"
-            android:title="Telegram"
+            android:title="@string/telegram"
             app:showAsAction="never" />
         <item
             android:id="@+id/action_gplus"
             android:orderInCategory="100"
-            android:title="Google+"
+            android:title="@string/google"
             app:showAsAction="never" />
         <item
             android:id="@+id/action_xda"
             android:orderInCategory="100"
-            android:title="XDA Thread"
+            android:title="@string/xda_thread"
             app:showAsAction="never" />
         <item
             android:id="@+id/action_labs"
             android:orderInCategory="100"
-            android:title="XDA Labs"
+            android:title="@string/xda_labs"
             app:showAsAction="never" />
         <item
             android:id="@+id/action_play"
             android:orderInCategory="100"
-            android:title="Google Play"
+            android:title="@string/google_play"
             app:showAsAction="never" />
     </group>
 
@@ -43,12 +43,12 @@
         <item
             android:id="@+id/action_other_apps"
             android:orderInCategory="100"
-            android:title="My Other Apps"
+            android:title="@string/my_other_apps"
             app:showAsAction="never" />
         <item
             android:id="@+id/action_donate"
             android:orderInCategory="100"
-            android:title="Donate"
+            android:title="@string/donate"
             app:showAsAction="never" />
 
     </group>

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:text="Networking &amp; Data"
+        android:text="@string/networking_data"
         android:textAlignment="textStart"
         android:textSize="18sp"
         android:textStyle="italic" />
@@ -23,7 +23,7 @@
         android:layout_marginBottom="10dp"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="Bluetooth Icon"
+        android:text="@string/bluetooth_icon"
         android:textSize="18sp" />
 
     <Switch
@@ -33,7 +33,7 @@
         android:layout_marginBottom="10dp"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="Data Saver Icon"
+        android:text="@string/data_saver_icon"
         android:textSize="18sp" />
 
     <Switch
@@ -43,7 +43,7 @@
         android:layout_marginBottom="10dp"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="Ethernet Icon"
+        android:text="@string/ethernet_icon"
         android:textSize="18sp" />
 
     <Switch
@@ -53,7 +53,7 @@
         android:layout_marginBottom="10dp"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="Hotspot Icon"
+        android:text="@string/hotspot_icon"
         android:textSize="18sp" />
 
     <Switch
@@ -63,7 +63,7 @@
         android:layout_marginBottom="10dp"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="Mobile Icon"
+        android:text="@string/mobile_icon"
         android:textSize="18sp" />
 
     <Switch
@@ -73,7 +73,7 @@
         android:layout_marginBottom="10dp"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="Airplane Icon"
+        android:text="@string/airplane_icon"
         android:textSize="18sp" />
 
     <Switch
@@ -83,7 +83,7 @@
         android:layout_marginBottom="10dp"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="WiFi Icon"
+        android:text="@string/wifi_icon"
         android:textSize="18sp" />
 
     <Switch
@@ -93,6 +93,6 @@
         android:layout_marginBottom="10dp"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="VPN Icon"
+        android:text="@string/vpn_icon"
         android:textSize="18sp" />
 </LinearLayout>

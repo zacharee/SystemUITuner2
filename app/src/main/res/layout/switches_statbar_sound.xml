@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:text="Sounds &amp; Alerts"
+        android:text="@string/sounds_alerts"
         android:textAlignment="textStart"
         android:textSize="18sp"
         android:textStyle="italic" />
@@ -23,7 +23,7 @@
         android:layout_marginBottom="10dp"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="Volume"
+        android:text="@string/volume"
         android:textSize="18sp" />
 
     <Switch
@@ -33,7 +33,7 @@
         android:layout_marginBottom="10dp"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="Headset Icon"
+        android:text="@string/headset_icon"
         android:textSize="18sp" />
 
     <Switch
@@ -43,6 +43,6 @@
         android:layout_marginBottom="10dp"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="Speakerphone Icon"
+        android:text="@string/speakerphone_icon"
         android:textSize="18sp" />
 </LinearLayout>

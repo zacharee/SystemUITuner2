@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.AppBarLayout;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,7 +16,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.zacharee1.systemuituner.fragments.About;
 import com.zacharee1.systemuituner.fragments.Demo;
@@ -26,20 +25,21 @@ import com.zacharee1.systemuituner.fragments.QS;
 import com.zacharee1.systemuituner.fragments.Settings;
 import com.zacharee1.systemuituner.fragments.StatBar;
 
+@SuppressWarnings("ALL")
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public SetThings setThings;
 
-    Fragment fragment;
-    FragmentManager fragmentManager;
+    private Fragment fragment;
+    private FragmentManager fragmentManager;
 
-    NavigationView navigationView;
-    Menu navMenu;
+    private NavigationView navigationView;
+    private Menu navMenu;
 
-    Handler handler;
+    private Handler handler;
 
-    public Context context;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,7 +123,8 @@ public class MainActivity extends AppCompatActivity
                 tralse = true;
                 break;
             case R.id.action_donate:
-                uri = Uri.parse("https://forum.xda-developers.com/donatetome.php?u=7055541");
+                boolean labsInstalled = setThings.isPackageInstalled("com.xda.labs", context.getPackageManager());
+                uri = Uri.parse(labsInstalled ? "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=andywander@yahoo.com" : "https://forum.xda-developers.com/donatetome.php?u=7055541");
                 intent = new Intent(Intent.ACTION_VIEW, uri);
                 tralse = true;
                 break;
@@ -145,7 +146,7 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -167,7 +168,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void setup() {
+    private void setup() {
         Intent intent = new Intent(getApplicationContext(), SetupActivity.class);
         if (!setThings.setup) startActivity(intent);
 
@@ -186,7 +187,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setItemTextColor(setThings.drawerItem);
     }
 
-    public Fragment chooseFrag(int id) {
+    private Fragment chooseFrag(int id) {
         Fragment fragment = new Fragment();
         switch (id) {
             case R.id.nav_home:

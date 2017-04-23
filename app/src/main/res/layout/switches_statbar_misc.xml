@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:text="Miscellaneous"
+        android:text="@string/miscellaneous"
         android:textAlignment="textStart"
         android:textSize="18sp"
         android:textStyle="italic" />
@@ -23,7 +23,7 @@
         android:layout_marginBottom="10dp"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="Managed Profile Icon"
+        android:text="@string/managed_profile_icon"
         android:textSize="18sp" />
 
     <Switch
@@ -33,7 +33,7 @@
         android:layout_marginBottom="10dp"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="Battery Icon"
+        android:text="@string/battery_icon"
         android:textSize="18sp" />
 
     <Switch
@@ -43,7 +43,7 @@
         android:layout_marginBottom="10dp"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="Battery Percentage"
+        android:text="@string/battery_percentage"
         android:textSize="18sp" />
 
     <Switch
@@ -53,7 +53,7 @@
         android:layout_marginBottom="10dp"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="Cast Icon"
+        android:text="@string/cast_icon"
         android:textSize="18sp" />
 
     <Switch
@@ -63,7 +63,7 @@
         android:layout_marginBottom="10dp"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="Rotation lock Icon"
+        android:text="@string/rotation_lock_icon"
         android:textSize="18sp" />
 
     <Switch
@@ -73,7 +73,7 @@
         android:layout_marginBottom="10dp"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="NFC Icon"
+        android:text="@string/nfc_icon"
         android:textSize="18sp" />
 
     <Switch
@@ -83,7 +83,7 @@
         android:layout_marginBottom="10dp"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="Location Icon"
+        android:text="@string/location_icon"
         android:textSize="18sp" />
 
     <Switch
@@ -93,6 +93,6 @@
         android:layout_marginBottom="10dp"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="SU Icon"
+        android:text="@string/su_icon"
         android:textSize="18sp" />
 </LinearLayout>

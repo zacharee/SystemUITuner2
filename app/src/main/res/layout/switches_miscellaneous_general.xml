@@ -11,6 +11,6 @@
         android:layout_height="wrap_content"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="DND Switch in Vol Slider"
+        android:text="@string/dnd_switch_in_vol_slider"
         android:textSize="18sp" />
 </LinearLayout>

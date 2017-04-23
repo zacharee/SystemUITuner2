@@ -15,7 +15,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1">
+        tools:layout_constraintTop_creator="1"
+        tools:ignore="UselessParent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,7 +30,7 @@
                 android:id="@+id/title_root"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Hey, you're rooted?"
+                android:text="@string/rooted_title"
                 android:textAlignment="center"
                 android:textSize="26sp" />
 
@@ -37,7 +38,7 @@
                 android:id="@+id/textView21"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="That's great!"
+                android:text="@string/great"
                 android:textAlignment="center" />
 
             <TextView
@@ -45,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="That makes things a lot easier."
+                android:text="@string/rooted_is_easier"
                 android:textAlignment="center" />
 
             <TextView
@@ -53,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="When you're ready, press the button."
+                android:text="@string/press_button_rooted"
                 android:textAlignment="center" />
 
             <TextView
@@ -61,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="You'll need to confirm root access."
+                android:text="@string/root_confirm"
                 android:textAlignment="center" />
 
             <Button
@@ -72,7 +73,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
-                android:text="GET TEH PERMZ" />
+                android:text="@string/get_perms_root" />
 
         </LinearLayout>
     </ScrollView>

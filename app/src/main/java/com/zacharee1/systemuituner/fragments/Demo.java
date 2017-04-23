@@ -17,7 +17,6 @@ import android.widget.CompoundButton;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.zacharee1.systemuituner.MainActivity;
@@ -29,39 +28,25 @@ import java.util.Calendar;
  * Created by Zacha on 4/5/2017.
  */
 
+@SuppressWarnings("ALL")
 public class Demo extends Fragment {
-    public View view;
-    public MainActivity activity;
+    private MainActivity activity;
 
-    public Switch showDemo;
-    public Switch batteryPluggedSwitch;
-    public Switch showNotifSwitch;
-    public Switch airplaneMode;
+    private int hour = 12;
+    private int minute = 00;
+    private int mobileLevel = 3;
+    private int wifiLevel = 3;
+    private int batteryLevel = 50;
 
-    public Button selectTime;
-    public Button selectBatteryLevel;
-    public Button enableDemo;
+    private final String showMobile = "show";
+    private final String showWiFi = "show";
+    private String showAirplane = "hide";
+    private String mobileType = "lte";
+    private String batteryPlugged = "false";
+    private String showNotifs = "false";
+    private String statBarStyle = "opaque";
 
-    public Spinner wifi;
-    public Spinner mobile;
-    public Spinner mobileTypeSpinner;
-    public Spinner statStyleSpinner;
-
-    public int hour = 12;
-    public int minute = 00;
-    public int mobileLevel = 3;
-    public int wifiLevel = 3;
-    public int batteryLevel = 50;
-
-    public String showMobile = "show";
-    public String showWiFi = "show";
-    public String showAirplane = "hide";
-    public String mobileType = "lte";
-    public String batteryPlugged = "false";
-    public String showNotifs = "false";
-    public String statBarStyle = "opaque";
-
-    Demo demo;
+    private Demo demo;
 
 
     @Override
@@ -73,23 +58,23 @@ public class Demo extends Fragment {
 
         activity.setTitle("Demo Mode");
 
-        view = inflater.inflate(R.layout.fragment_demo, container, false);
+        View view = inflater.inflate(R.layout.fragment_demo, container, false);
 
         demo = new Demo();
 
-        wifi = (Spinner) view.findViewById(R.id.wifi_strength);
-        mobile = (Spinner) view.findViewById(R.id.mobile_strength);
-        mobileTypeSpinner = (Spinner) view.findViewById(R.id.mobile_type);
-        statStyleSpinner = (Spinner) view.findViewById(R.id.stat_bar_style);
+        Spinner wifi = (Spinner) view.findViewById(R.id.wifi_strength);
+        Spinner mobile = (Spinner) view.findViewById(R.id.mobile_strength);
+        Spinner mobileTypeSpinner = (Spinner) view.findViewById(R.id.mobile_type);
+        Spinner statStyleSpinner = (Spinner) view.findViewById(R.id.stat_bar_style);
 
-        showDemo = (Switch) view.findViewById(R.id.show_demo);
-        batteryPluggedSwitch = (Switch) view.findViewById(R.id.battery_plugged);
-        airplaneMode = (Switch) view.findViewById(R.id.show_airplane);
-        showNotifSwitch = (Switch) view.findViewById(R.id.show_notifs);
+        Switch showDemo = (Switch) view.findViewById(R.id.show_demo);
+        Switch batteryPluggedSwitch = (Switch) view.findViewById(R.id.battery_plugged);
+        Switch airplaneMode = (Switch) view.findViewById(R.id.show_airplane);
+        Switch showNotifSwitch = (Switch) view.findViewById(R.id.show_notifs);
 
-        selectTime = (Button) view.findViewById(R.id.select_time);
-        enableDemo = (Button) view.findViewById(R.id.enable_demo);
-        selectBatteryLevel = (Button) view.findViewById(R.id.select_battery_level_button);
+        Button selectTime = (Button) view.findViewById(R.id.select_time);
+        Button enableDemo = (Button) view.findViewById(R.id.enable_demo);
+        Button selectBatteryLevel = (Button) view.findViewById(R.id.select_battery_level_button);
 
         setSpinnerAdapters(wifi, R.array.wifi_strength);
         setSpinnerAdapters(mobile, R.array.mobile_strength);
@@ -101,7 +86,7 @@ public class Demo extends Fragment {
         mobileTypeSpinner.setSelection(activity.setThings.sharedPreferences.getInt("mobileType1", 0));
         statStyleSpinner.setSelection(activity.setThings.sharedPreferences.getInt("statBarStyle1", 0));
 
-        statBarStyle = (String)statStyleSpinner.getItemAtPosition(activity.setThings.sharedPreferences.getInt("statBarStyle1", 0));
+        statBarStyle = (String) statStyleSpinner.getItemAtPosition(activity.setThings.sharedPreferences.getInt("statBarStyle1", 0));
 
         showDemo.setChecked(activity.setThings.sharedPreferences.getBoolean("demoOn", false));
         batteryPluggedSwitch.setChecked(activity.setThings.sharedPreferences.getBoolean("isCharging", false));
@@ -117,7 +102,7 @@ public class Demo extends Fragment {
             showNotifs = "true";
         }
 
-        mobileType = (String)mobileTypeSpinner.getItemAtPosition(activity.setThings.sharedPreferences.getInt("mobileType1", 0));
+        mobileType = (String) mobileTypeSpinner.getItemAtPosition(activity.setThings.sharedPreferences.getInt("mobileType1", 0));
 
         hour = activity.setThings.sharedPreferences.getInt("hour", 12);
         minute = activity.setThings.sharedPreferences.getInt("minute", 00);
@@ -139,14 +124,14 @@ public class Demo extends Fragment {
         return view;
     }
 
-    public void setSpinnerAdapters(Spinner spinner, int arrayID) {
+    private void setSpinnerAdapters(Spinner spinner, int arrayID) {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(activity.getApplicationContext(),
                 arrayID, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
 
-    public void setStatBarStyle(final Spinner spinner) {
+    private void setStatBarStyle(final Spinner spinner) {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -162,7 +147,7 @@ public class Demo extends Fragment {
         });
     }
 
-    public void setShowNotifs(Switch toggle) {
+    private void setShowNotifs(Switch toggle) {
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -178,7 +163,7 @@ public class Demo extends Fragment {
         });
     }
 
-    public void setBatteryPlugged(Switch toggle) {
+    private void setBatteryPlugged(Switch toggle) {
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -194,7 +179,7 @@ public class Demo extends Fragment {
         });
     }
 
-    public void setAirplaneMode(Switch toggle) {
+    private void setAirplaneMode(Switch toggle) {
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -210,7 +195,7 @@ public class Demo extends Fragment {
         });
     }
 
-    public void selectMobileType(final Spinner spinner) {
+    private void selectMobileType(final Spinner spinner) {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -228,7 +213,7 @@ public class Demo extends Fragment {
 
     }
 
-    public void selectBatteryLevel(final Button button) {
+    private void selectBatteryLevel(final Button button) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -272,7 +257,7 @@ public class Demo extends Fragment {
         });
     }
 
-    public void selectTime(final Button button) {
+    private void selectTime(final Button button) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -298,7 +283,7 @@ public class Demo extends Fragment {
         });
     }
 
-    public void selectSignal(final int signalID, final Spinner spinner) {
+    private void selectSignal(final int signalID, final Spinner spinner) {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -321,7 +306,7 @@ public class Demo extends Fragment {
         });
     }
 
-    public void showDemo(final Switch toggle) {
+    private void showDemo(final Switch toggle) {
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

@@ -7,24 +7,24 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home"
-            android:title="Home" />
+            android:title="@string/home" />
         <item
             android:id="@+id/nav_quick_settings"
             android:icon="@drawable/ic_settings"
-            android:title="Quick Settings"
+            android:title="@string/quick_settings"
             android:visible="false" />
         <item
             android:id="@+id/nav_statusbar"
             android:icon="@drawable/ic_info"
-            android:title="Status bar" />
+            android:title="@string/status_bar" />
         <item
             android:id="@+id/nav_demo_mode"
             android:icon="@drawable/ic_tv"
-            android:title="Demo mode" />
+            android:title="@string/demo_mode" />
         <item
             android:id="@+id/nav_misc"
             android:icon="@drawable/ic_brush"
-            android:title="Miscellaneous" />
+            android:title="@string/miscellaneous" />
     </group>
 
     <group
@@ -33,11 +33,11 @@
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings"
-            android:title="Settings" />
+            android:title="@string/settings" />
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_list"
-            android:title="About" />
+            android:title="@string/about" />
     </group>
 
     <group
@@ -46,7 +46,7 @@
         <item
             android:id="@+id/nav_exit"
             android:icon="@drawable/ic_close"
-            android:title="Exit App" />
+            android:title="@string/exit_app" />
     </group>
 
 </menu>

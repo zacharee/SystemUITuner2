@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -18,7 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="The options here are experimental! They may not work correctly, so please be careful."
+                android:text="@string/demo_warn"
                 android:textAlignment="center" />
 
             <LinearLayout
@@ -34,7 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Enable" />
+                    android:text="@string/enable" />
 
                 <Switch
                     android:id="@+id/show_demo"
@@ -43,7 +45,7 @@
                     android:layout_weight="1"
                     android:switchMinWidth="50dp"
                     android:switchPadding="10dp"
-                    android:text="Show"
+                    android:text="@string/show"
                     android:textAlignment="textEnd"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -60,7 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Select Time" />
+                    android:text="@string/select_time" />
 
                 <Button
                     android:id="@+id/select_battery_level_button"
@@ -69,14 +71,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:layout_weight="1"
-                    android:text="Select Battery Level" />
+                    android:text="@string/select_battery_level" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="600dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:baselineAligned="false">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -93,7 +96,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginEnd="10dp"
-                        android:text="WiFi Strength" />
+                        android:text="@string/wifi_strength" />
 
                     <Spinner
                         android:id="@+id/wifi_strength"
@@ -116,7 +119,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginEnd="10dp"
-                        android:text="Mobile Strength" />
+                        android:text="@string/mobile_strength" />
 
                     <Spinner
                         android:id="@+id/mobile_strength"
@@ -129,7 +132,8 @@
                 android:layout_width="600dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:baselineAligned="false">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -145,7 +149,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
-                        android:text="Mobile Type" />
+                        android:text="@string/mobile_type" />
 
                     <Spinner
                         android:id="@+id/mobile_type"
@@ -168,7 +172,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginEnd="10dp"
-                        android:text="Status Bar Style" />
+                        android:text="@string/status_bar_style" />
 
                     <Spinner
                         android:id="@+id/stat_bar_style"
@@ -184,7 +188,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:switchMinWidth="50dp"
-                android:text="Show Notifications"
+                android:text="@string/show_notifications"
                 android:textSize="18sp" />
 
             <Switch
@@ -194,7 +198,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:switchMinWidth="50dp"
-                android:text="Battery Charging"
+                android:text="@string/battery_charging"
                 android:textSize="18sp" />
 
             <Switch
@@ -204,7 +208,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:switchMinWidth="50dp"
-                android:text="Show Airplane Mode"
+                android:text="@string/show_airplane_mode"
                 android:textSize="18sp" />
 
         </LinearLayout>

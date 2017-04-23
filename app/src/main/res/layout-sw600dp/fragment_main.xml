@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -17,7 +19,7 @@
                 android:id="@+id/title_main"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="SystemUI Tuner"
+                android:text="@string/systemui_tuner"
                 android:textAlignment="center"
                 android:textSize="26sp" />
 
@@ -25,7 +27,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="For Devices without this Activity"
+                android:text="@string/home_desc"
                 android:textAlignment="center"
                 android:textSize="16sp" />
 
@@ -33,7 +35,7 @@
                 android:id="@+id/textView12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Or for devices with it, I'm not your boss."
+                android:text="@string/home_joke"
                 android:textAlignment="center"
                 android:textSize="16sp" />
 
@@ -42,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="(If you do have the stock SystemUI Tuner, this one provides some extra goodies.)"
+                android:text="@string/home_extra"
                 android:textAlignment="center"
                 android:textSize="16sp" />
 
@@ -51,7 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="You followed the setup, right? This app won't work unless you do."
+                android:text="@string/setup_ask"
                 android:textAlignment="center"
                 android:textSize="16sp" />
 
@@ -60,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="If you skipped it, or forgot, or your root status changed, here's a button:"
+                android:text="@string/resetup_instruction"
                 android:textAlignment="center"
                 android:textSize="16sp" />
 
@@ -71,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:text="Setup" />
+                android:text="@string/setup" />
 
         </LinearLayout>
     </ScrollView>

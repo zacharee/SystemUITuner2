@@ -1,53 +1,48 @@
 package com.zacharee1.systemuituner;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.NumberPicker;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
-import java.util.concurrent.RunnableFuture;
 
 /**
  * Created by Zacha on 4/19/2017.
  */
 
+@SuppressWarnings("ALL")
 public class SetThings {
-    public boolean Dark;
-    public boolean setup;
+    private final boolean Dark;
+    public final boolean setup;
 
-    public int titleText;
-    public int style;
-    public ColorStateList drawerItem;
+    public final int titleText;
+    public final int style;
+    public final ColorStateList drawerItem;
 
-    public SharedPreferences sharedPreferences;
-    public SharedPreferences.Editor editor;
+    public final SharedPreferences sharedPreferences;
+    public final SharedPreferences.Editor editor;
 
-    public ArrayList<Integer> pages;
+    public final ArrayList<Integer> pages;
 
-    public Activity currentActivity;
+    private final Activity currentActivity;
 
-    public Context context;
+    private final Context context;
 
     public SetThings(Activity activity) {
         sharedPreferences = activity.getSharedPreferences("com.zacharee1.sysuituner", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
+        editor.apply();
         Dark = sharedPreferences.getBoolean("isDark", false);
         setup = sharedPreferences.getBoolean("isSetup", false);
 
@@ -74,6 +69,7 @@ public class SetThings {
 
     public void buttons(final Button button, final String name) {
         button.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("InlinedApi")
             @Override
             public void onClick(View v) {
                 Intent intent;
@@ -147,6 +143,15 @@ public class SetThings {
         } catch (Exception e) {
             Exceptions exceptions = new Exceptions();
             exceptions.secureSettings(context, currentActivity.getApplicationContext(), e.getMessage(), "SetThings");
+        }
+    }
+
+    public boolean isPackageInstalled(String packagename, PackageManager packageManager) {
+        try {
+            packageManager.getPackageInfo(packagename, 0);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
         }
     }
 

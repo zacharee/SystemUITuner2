@@ -1,5 +1,4 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/credits_frame"
     android:layout_width="match_parent"
@@ -21,7 +20,7 @@
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="App created by Zacharee1"
+                android:text="@string/created_by"
                 android:textAlignment="center"
                 android:textSize="18sp" />
 
@@ -29,7 +28,7 @@
                 android:id="@+id/textView15"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Launcher image from material.io"
+                android:text="@string/images_from"
                 android:textAlignment="center"
                 android:textSize="18sp" />
 
@@ -38,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="The main screen already explained what this app does, so I'm not exactly sure what else to say."
+                android:text="@string/abt_desc"
                 android:textAlignment="center"
                 android:textSize="18sp" />
 
@@ -47,62 +46,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="This app isn't going to work on every device, though, because manufacturers are annoying. Just keep that in mind when a toggle has no effect."
+                android:text="@string/abt_warn"
                 android:textAlignment="center"
                 android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Some Links:"
-                android:textAlignment="center"
-                android:textSize="18sp"
-                android:visibility="gone" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <Button
-                    android:id="@+id/play_store"
-                    style="@style/Widget.AppCompat.Button.Colored"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Play Store" />
-
-                <Button
-                    android:id="@+id/xda_store"
-                    style="@style/Widget.AppCompat.Button.Colored"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="XDA Store" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <Button
-                    android:id="@+id/xda_thread"
-                    style="@style/Widget.AppCompat.Button.Colored"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="XDA Thread"
-                    android:textSize="14sp" />
-            </LinearLayout>
 
             <TextView
                 android:id="@+id/debug_info"
@@ -110,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="16dp"
-                android:text="Debug Info"
+                android:text="@string/debug_info"
                 android:textAlignment="center"
                 android:textSize="20sp" />
 
@@ -120,7 +66,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Version Name: "
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/vernum"
@@ -128,14 +75,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Version Code: "
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/build_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Build Date: "
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                tools:ignore="HardcodedText" />
 
         </LinearLayout>
     </ScrollView>

@@ -7,7 +7,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:text="ATTENTION: Not everything here will work on your device! Manufacturers, especially Samsung and LG, tend to remove the ability to hide certain icons."
+                android:text="@string/stat_bar_warn"
                 android:textAlignment="center"
                 android:textSize="20sp" />
 

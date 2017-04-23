@@ -11,8 +11,9 @@ import android.util.Log;
  * Created by Zacha on 4/18/2017.
  */
 
+@SuppressWarnings("ALL")
 public class Exceptions {
-    int alertRed = R.drawable.ic_warning_red;
+    private final int alertRed = R.drawable.ic_warning_red;
 
     public void secureSettings(Context context, final Context appContext, String message, String page) {
         Log.e(page, message);

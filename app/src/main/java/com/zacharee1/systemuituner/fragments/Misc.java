@@ -1,26 +1,13 @@
 package com.zacharee1.systemuituner.fragments;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.design.widget.NavigationView;
-import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
 import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.zacharee1.systemuituner.Exceptions;
 import com.zacharee1.systemuituner.MainActivity;
@@ -30,13 +17,12 @@ import com.zacharee1.systemuituner.R;
  * Created by Zacha on 4/18/2017.
  */
 
+@SuppressWarnings("ALL")
 public class Misc extends Fragment {
-    public View view;
-    public MainActivity activity;
+    private View view;
+    private MainActivity activity;
 
-    Switch show_full_zen;
-
-    int drawable;
+    private Switch show_full_zen;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,8 +34,6 @@ public class Misc extends Fragment {
         activity.setTitle("Miscellaneous");
 
         view = inflater.inflate(R.layout.fragment_misc, container, false);
-
-        drawable = R.drawable.ic_warning_red;
 
         show_full_zen = (Switch) view.findViewById(R.id.show_full_zen);
 

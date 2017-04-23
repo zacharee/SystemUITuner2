@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:text="Time &amp; Such"
+        android:text="@string/time_such"
         android:textAlignment="textStart"
         android:textSize="18sp"
         android:textStyle="italic" />
@@ -23,7 +23,7 @@
         android:layout_marginBottom="10dp"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="Clock"
+        android:text="@string/clock"
         android:textSize="18sp" />
 
     <Switch
@@ -33,7 +33,7 @@
         android:layout_marginBottom="10dp"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="Show Clock Seconds"
+        android:text="@string/show_clock_seconds"
         android:textSize="18sp" />
 
     <Switch
@@ -43,7 +43,7 @@
         android:layout_marginBottom="10dp"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="Alarm Clock Icon"
+        android:text="@string/alarm_clock_icon"
         android:textSize="18sp" />
 
     <Switch
@@ -53,7 +53,7 @@
         android:layout_marginBottom="10dp"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="Zen Icon"
+        android:text="@string/zen_icon"
         android:textSize="18sp" />
 
     <Switch
@@ -63,7 +63,7 @@
         android:layout_marginBottom="10dp"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="Do Not Disturb"
+        android:text="@string/do_not_disturb"
         android:textSize="18sp" />
 
 

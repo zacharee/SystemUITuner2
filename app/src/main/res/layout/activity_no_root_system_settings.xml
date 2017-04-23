@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,7 +8,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="Sorry..."
+                android:text="@string/sorry"
                 android:textAlignment="center"
                 android:textSize="26sp" />
 
@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:text="To use this toggle from the phone, you need root."
+                android:text="@string/root_needed_toggle"
                 android:textAlignment="center"
                 android:textSize="18sp" />
 
@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:text="This is an issue in Android itself, and I can't do anything about it."
+                android:text="@string/android_issue"
                 android:textAlignment="center"
                 android:textSize="18sp" />
 
@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:text="However, just like in the setup, you can use ADB to work around it."
+                android:text="@string/adb_workaround"
                 android:textAlignment="center"
                 android:textSize="18sp" />
 
@@ -58,54 +58,44 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:text="Run the command below in an ADB shell to do what the switch would:"
+                android:text="@string/adb_switch_replacement"
                 android:textAlignment="center"
                 android:textSize="18sp" />
 
-            <LinearLayout
+            <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="10dp"
-                android:foregroundGravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
+                android:layout_height="match_parent">
 
-                <HorizontalScrollView
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:background="#555"
+                    android:orientation="vertical"
+                    android:paddingBottom="16dp"
+                    android:paddingTop="16dp">
 
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/adb_system_setting"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="#555"
-                        android:orientation="vertical"
-                        android:paddingBottom="16dp"
-                        android:paddingTop="16dp">
+                        android:layout_height="wrap_content"
+                        android:fontFamily="monospace"
+                        android:paddingEnd="5dp"
+                        android:paddingStart="5dp"
+                        android:text="@string/example_settings_adb"
+                        android:textAlignment="textStart"
+                        android:textColor="#fff"
+                        android:textIsSelectable="true" />
 
-                        <TextView
-                            android:id="@+id/adb_system_setting"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="monospace"
-                            android:paddingEnd="5dp"
-                            android:paddingStart="5dp"
-                            android:text="adb shell settings put system SETTINGS_VALUE VALUE"
-                            android:textAlignment="textStart"
-                            android:textColor="#fff"
-                            android:textIsSelectable="true" />
-
-                    </LinearLayout>
-                </HorizontalScrollView>
-            </LinearLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
 
             <TextView
                 android:id="@+id/textView34"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:text="On Lollipop, it may be possible to do this without a computer or root."
+                android:text="@string/lp_info"
                 android:textAlignment="center"
                 android:textSize="18sp" />
 
@@ -114,7 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:text="If you aren't on Lollipop, but want to give it a shot anyway, first press the &quot;Grant Perms&quot; button, then press the &quot;GO&quot; Button."
+                android:text="@string/non_lp_bypass"
                 android:textAlignment="center"
                 android:textSize="18sp" />
 
@@ -129,7 +119,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Set Perms" />
+                    android:text="@string/set_perms" />
 
                 <Button
                     android:id="@+id/do_the_dirty"
@@ -137,7 +127,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="GO" />
+                    android:text="@string/go" />
             </LinearLayout>
 
         </LinearLayout>

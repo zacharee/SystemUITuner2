@@ -25,6 +25,7 @@ public class Exceptions {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(appContext, SetupActivity.class);
+                        intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
                         appContext.startActivity(intent);
                     }
                 })

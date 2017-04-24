@@ -200,6 +200,9 @@ public class StatBar extends Fragment {
         activity.setThings.switches(clock_seconds, "clock_seconds", sec, view);
 
         activity.setThings.switches(battery_percent, "status_bar_show_battery_percent", sys, view);
+
+        Exceptions exceptions = new Exceptions();
+        exceptions.secureSettings(view.getContext(), activity.getApplicationContext(), "test", "Status Bar");
         return view;
     }
 

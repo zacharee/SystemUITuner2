@@ -6,8 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary2</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark2</item>
         <item name="colorAccent">@color/colorAccent3</item>
-        <item name="android:navigationBarColor">@color/colorPrimaryDark2</item>
-        <item name="android:statusBarColor">?android:attr/colorPrimaryDark</item>
+        <item name="android:navigationBarColor">@color/colorPrimary2</item>
+        <item name="android:statusBarColor">@color/colorPrimary2</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -22,8 +22,9 @@
     <style name="DARK" parent="Theme.AppCompat" >
         <item name="colorPrimary">@color/colorPrimary2</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark2</item>
-        <item name="android:navigationBarColor">@color/colorPrimaryDark2</item>
-        <item name="colorAccent">@color/colorAccent3</item>
+        <item name="android:navigationBarColor">@color/colorPrimary2</item>
+        <item name="colorAccent">@color/colorAccent_Dark</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark2</item>
     </style>
 
     <style name="DARK.NoAppBar" parent="DARK">

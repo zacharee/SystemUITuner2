@@ -26,9 +26,9 @@ public class NoRootActivity extends AppCompatActivity {
         activity = this;
 
         setContentView(R.layout.activity_no_root);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         TextView title = (TextView) findViewById(R.id.noroot_title);
 

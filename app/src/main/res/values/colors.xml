@@ -4,11 +4,12 @@
     <color name="colorPrimaryDark">#7b1fa2</color>
     <color name="colorAccent">#009688</color>
     <color name="cardview_dark_background">#FF424242</color>
-    <color name="colorPrimary2">#673ab7</color>
-    <color name="colorPrimaryDark2">#512da8</color>
+    <color name="colorPrimary2">#3f51b5</color>
+    <color name="colorPrimaryDark2">#303f9f</color>
     <color name="colorAccent2">#ff5722</color>
-    <color name="colorPrimaryLight">#d1c4e9</color>
-    <color name="colorAccent3">#47a82d</color>
+    <color name="colorPrimaryLight">#b3e5fc</color>
+    <color name="colorAccent3">#009688</color>
     <color name="foreground_material_dark2">#ffccbc</color>
     <color name="primary_text_material_dark2">#ffccbc</color>
+    <color name="colorAccent_Dark">#00bcd4</color>
 </resources>

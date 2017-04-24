@@ -7,18 +7,26 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceActivity;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringDef;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.zacharee1.systemuituner.fragments.About;
 import com.zacharee1.systemuituner.fragments.Demo;
@@ -46,6 +54,9 @@ public class MainActivity extends AppCompatActivity
 
     public AppCompatActivity activity;
 
+    private DrawerLayout drawer;
+    private ActionBarDrawerToggle toggle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,16 +68,22 @@ public class MainActivity extends AppCompatActivity
         activity = this;
 
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setPopupTheme(setThings.style);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        toolbar.setPopupTheme(setThings.style);
+
+//        Toolbar toolbar = new Toolbar(this);
+
 
         setTitle("SystemUI Tuner"); //set default title just because
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toggle = new ActionBarDrawerToggle(
+                this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getColor(R.color.colorPrimary2)));
         toggle.syncState();
 
         //for "organization"
@@ -103,52 +120,60 @@ public class MainActivity extends AppCompatActivity
         Uri uri;
         Intent intent = new Intent(Intent.ACTION_VIEW, null);
         boolean tralse = false;
-        switch (id) {
-            case R.id.action_github:
-                uri = Uri.parse("https://github.com/zacharee/SystemUITuner2");
-                intent = new Intent(Intent.ACTION_VIEW, uri);
-                tralse = true;
-                break;
-            case R.id.action_xda:
-                uri = Uri.parse("https://forum.xda-developers.com/android/apps-games/app-systemui-tuner-t3588675");
-                intent = new Intent(Intent.ACTION_VIEW, uri);
-                tralse = true;
-                break;
-            case R.id.action_labs:
-                uri = Uri.parse("https://labs.xda-developers.com/store/app/com.zacharee1.systemuituner");
-                intent = new Intent(Intent.ACTION_VIEW, uri);
-                tralse = true;
-                break;
-            case R.id.action_play:
-                uri = Uri.parse("https://play.google.com/store/apps/details?id=com.zacharee1.systemuituner");
-                intent = new Intent(Intent.ACTION_VIEW, uri);
-                tralse = true;
-                break;
-            case R.id.action_other_apps:
-                uri = Uri.parse("https://play.google.com/store/apps/developer?id=Zachary+Wander");
-                intent = new Intent(Intent.ACTION_VIEW, uri);
-                tralse = true;
-                break;
-            case R.id.action_donate:
-                boolean labsInstalled = setThings.isPackageInstalled("com.xda.labs", context.getPackageManager());
-                uri = Uri.parse(labsInstalled ? "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=andywander@yahoo.com" : "https://forum.xda-developers.com/donatetome.php?u=7055541");
-                intent = new Intent(Intent.ACTION_VIEW, uri);
-                tralse = true;
-                break;
-            case R.id.action_telegram:
-                uri = Uri.parse("https://t.me/joinchat/AAAAAEIB6WKWL-yphJbZwg");
-                intent = new Intent(Intent.ACTION_VIEW, uri);
-                tralse = true;
-                break;
-            case R.id.action_gplus:
-                uri = Uri.parse("https://plus.google.com/communities/113741695211107417994");
-                intent = new Intent(Intent.ACTION_VIEW, uri);
-                tralse = true;
-                break;
-        }
-        startActivity(intent);
 
-        return tralse || super.onOptionsItemSelected(item);
+//        Log.i("OPTION", String.valueOf(id) + " " + String.valueOf(R.id.home));
+
+        if (id != 16908332) { //16908332 is the ID of the drawer toggle
+            switch (id) {
+                case R.id.action_github:
+                    uri = Uri.parse("https://github.com/zacharee/SystemUITuner2");
+                    intent = new Intent(Intent.ACTION_VIEW, uri);
+                    tralse = true;
+                    break;
+                case R.id.action_xda:
+                    uri = Uri.parse("https://forum.xda-developers.com/android/apps-games/app-systemui-tuner-t3588675");
+                    intent = new Intent(Intent.ACTION_VIEW, uri);
+                    tralse = true;
+                    break;
+                case R.id.action_labs:
+                    uri = Uri.parse("https://labs.xda-developers.com/store/app/com.zacharee1.systemuituner");
+                    intent = new Intent(Intent.ACTION_VIEW, uri);
+                    tralse = true;
+                    break;
+                case R.id.action_play:
+                    uri = Uri.parse("https://play.google.com/store/apps/details?id=com.zacharee1.systemuituner");
+                    intent = new Intent(Intent.ACTION_VIEW, uri);
+                    tralse = true;
+                    break;
+                case R.id.action_other_apps:
+                    uri = Uri.parse("https://play.google.com/store/apps/developer?id=Zachary+Wander");
+                    intent = new Intent(Intent.ACTION_VIEW, uri);
+                    tralse = true;
+                    break;
+                case R.id.action_donate:
+                    boolean labsInstalled = setThings.isPackageInstalled("com.xda.labs", context.getPackageManager());
+                    uri = Uri.parse(labsInstalled ? "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=andywander@yahoo.com" : "https://forum.xda-developers.com/donatetome.php?u=7055541");
+                    intent = new Intent(Intent.ACTION_VIEW, uri);
+                    tralse = true;
+                    break;
+                case R.id.action_telegram:
+                    uri = Uri.parse("https://t.me/joinchat/AAAAAEIB6WKWL-yphJbZwg");
+                    intent = new Intent(Intent.ACTION_VIEW, uri);
+                    tralse = true;
+                    break;
+                case R.id.action_gplus:
+                    uri = Uri.parse("https://plus.google.com/communities/113741695211107417994");
+                    intent = new Intent(Intent.ACTION_VIEW, uri);
+                    tralse = true;
+                    break;
+            }
+            startActivity(intent);
+
+            return tralse || super.onOptionsItemSelected(item);
+        } else {
+            toggle.onOptionsItemSelected(item);
+            return true;
+        }
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -196,7 +221,8 @@ public class MainActivity extends AppCompatActivity
 
         registerReceiver(broadcast_reciever, new IntentFilter("finish_activity"));
         Intent intent = new Intent(getApplicationContext(), SetupActivity.class);
-        if (!setThings.setup) startActivity(intent); //start setup activity if user hasn't run it (ie first launch)
+        if (!setThings.setup)
+            startActivity(intent); //start setup activity if user hasn't run it (ie first launch)
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -204,7 +230,8 @@ public class MainActivity extends AppCompatActivity
 
         int id = setThings.sharedPreferences.getInt("navpage", R.id.nav_home); //nav item that was selected before last app close
 
-        if (setThings.pages.contains(id)) navMenu.findItem(id).setChecked(true); //make sure the ID actually exists in the app
+        if (setThings.pages.contains(id))
+            navMenu.findItem(id).setChecked(true); //make sure the ID actually exists in the app
 
         fragment = chooseFrag(id);
         fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit(); //switch to that fragment
@@ -212,6 +239,11 @@ public class MainActivity extends AppCompatActivity
         //set proper nav drawer icon and text color
         navigationView.setItemIconTintList(setThings.drawerItem);
         navigationView.setItemTextColor(setThings.drawerItem);
+
+        View header = navigationView.getHeaderView(0);
+        View head = header.findViewById(R.id.nav_header);
+        head.setBackground(getDrawable(setThings.Dark ? R.drawable.side_nav_bar_dark : R.drawable.side_nav_bar_light));
+
     }
 
     private Fragment chooseFrag(int id) { //return fragment corresponding to nav drawer ID

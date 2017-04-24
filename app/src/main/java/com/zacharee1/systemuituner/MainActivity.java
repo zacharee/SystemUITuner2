@@ -1,9 +1,12 @@
 package com.zacharee1.systemuituner;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -41,6 +44,8 @@ public class MainActivity extends AppCompatActivity
 
     private Context context;
 
+    public AppCompatActivity activity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +54,7 @@ public class MainActivity extends AppCompatActivity
         fragmentManager = getFragmentManager();
         handler = new Handler();
         context = this;
+        activity = this;
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -167,11 +173,28 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         }
 
-        if (id == R.id.nav_exit) super.onBackPressed(); //if exit button pressed, quit app (needs to be at end of method to avoid exceptions)
+        if (id == R.id.nav_exit) { //if exit button pressed, quit app (needs to be at end of method to avoid exceptions)
+            Intent intent = new Intent("finish_activity");
+            sendBroadcast(intent);
+            super.onBackPressed();
+        }
         return true;
     }
 
     private void setup() {
+
+        BroadcastReceiver broadcast_reciever = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context arg0, Intent intent) {
+                String action = intent.getAction();
+                if (action.equals("finish_activity")) {
+                    finish();
+                }
+            }
+        };
+
+        registerReceiver(broadcast_reciever, new IntentFilter("finish_activity"));
         Intent intent = new Intent(getApplicationContext(), SetupActivity.class);
         if (!setThings.setup) startActivity(intent); //start setup activity if user hasn't run it (ie first launch)
 

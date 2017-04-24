@@ -11,7 +11,6 @@ import android.widget.Switch;
 
 import com.zacharee1.systemuituner.MainActivity;
 import com.zacharee1.systemuituner.R;
-import com.zacharee1.systemuituner.Utils;
 
 /**
  * Created by Zacha on 4/15/2017.

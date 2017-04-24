@@ -242,7 +242,7 @@ public class SetThings {
         }
     }
 
-    public boolean isPackageInstalled(String packagename, PackageManager packageManager) { //check to see if an app is installed
+    public boolean isPackageInstalled(String packagename, PackageManager packageManager) { //check to see if a
         try {
             packageManager.getPackageInfo(packagename, 0);
             return true;

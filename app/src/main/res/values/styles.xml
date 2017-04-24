@@ -5,7 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary2</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark2</item>
-        <item name="colorAccent">@color/colorAccent2</item>
+        <item name="colorAccent">@color/colorAccent3</item>
         <item name="android:navigationBarColor">@color/colorPrimaryDark2</item>
         <item name="android:statusBarColor">?android:attr/colorPrimaryDark</item>
     </style>
@@ -23,7 +23,7 @@
         <item name="colorPrimary">@color/colorPrimary2</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark2</item>
         <item name="android:navigationBarColor">@color/colorPrimaryDark2</item>
-        <item name="colorAccent">@color/colorAccent2</item>
+        <item name="colorAccent">@color/colorAccent3</item>
     </style>
 
     <style name="DARK.NoAppBar" parent="DARK">

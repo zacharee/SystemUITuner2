@@ -1,6 +1,9 @@
 package com.zacharee1.systemuituner;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,10 +15,13 @@ public class SetupActivity extends AppCompatActivity {
     private Button rooted;
     private Button not_rooted;
 
+    public static AppCompatActivity activity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SetThings setThings = new SetThings(this);
+        activity = this;
 
         setContentView(R.layout.activity_setup);
 
@@ -29,6 +35,18 @@ public class SetupActivity extends AppCompatActivity {
         /* TODO: move button listeners */
         buttons(rooted);
         buttons(not_rooted);
+
+        BroadcastReceiver broadcast_reciever = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context arg0, Intent intent) {
+                String action = intent.getAction();
+                if (action.equals("finish_activity")) {
+                    finish();
+                }
+            }
+        };
+        registerReceiver(broadcast_reciever, new IntentFilter("finish_activity"));
     }
 
     private void buttons(final Button button) {

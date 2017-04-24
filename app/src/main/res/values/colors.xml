@@ -8,4 +8,7 @@
     <color name="colorPrimaryDark2">#512da8</color>
     <color name="colorAccent2">#ff5722</color>
     <color name="colorPrimaryLight">#d1c4e9</color>
+    <color name="colorAccent3">#47a82d</color>
+    <color name="foreground_material_dark2">#ffccbc</color>
+    <color name="primary_text_material_dark2">#ffccbc</color>
 </resources>

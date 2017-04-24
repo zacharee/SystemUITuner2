@@ -1,5 +1,9 @@
 package com.zacharee1.systemuituner;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -7,12 +11,15 @@ import android.widget.TextView;
 
 public class NoRootSystemSettingsActivity extends AppCompatActivity {
 
+    public static AppCompatActivity activity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SetThings setThings = new SetThings(this);
         setContentView(R.layout.activity_no_root_system_settings);
         setTitle("System Settings");
+        activity = this;
 
         String oneZero = setThings.sharedPreferences.getString("isSystemSwitchEnabled", "EXAMPLE_VALUE");
         String setting = setThings.sharedPreferences.getString("systemSettingKey", "EXAMPLE_SETTING");
@@ -29,5 +36,17 @@ public class NoRootSystemSettingsActivity extends AppCompatActivity {
         //button listeners
         setThings.buttons(perms, "SystemSettingsPerms");
         setThings.buttons(go, "WriteSystemSettings");
+
+        BroadcastReceiver broadcast_reciever = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context arg0, Intent intent) {
+                String action = intent.getAction();
+                if (action.equals("finish_activity")) {
+                    finish();
+                }
+            }
+        };
+        registerReceiver(broadcast_reciever, new IntentFilter("finish_activity"));
     }
 }

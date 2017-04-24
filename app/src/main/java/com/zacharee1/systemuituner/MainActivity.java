@@ -1,6 +1,5 @@
 package com.zacharee1.systemuituner;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         toolbar.setPopupTheme(setThings.style);
 
-        setTitle("SystemUI Tuner");
+        setTitle("SystemUI Tuner"); //set default title just because
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -64,11 +63,12 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        //for "organization"
         setup();
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed() { //the drawer is annoying to drag out, so let's open it on back press instead
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -167,30 +167,31 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         }
 
-        if (id == R.id.nav_exit) super.onBackPressed();
+        if (id == R.id.nav_exit) super.onBackPressed(); //if exit button pressed, quit app (needs to be at end of method to avoid exceptions)
         return true;
     }
 
     private void setup() {
         Intent intent = new Intent(getApplicationContext(), SetupActivity.class);
-        if (!setThings.setup) startActivity(intent);
+        if (!setThings.setup) startActivity(intent); //start setup activity if user hasn't run it (ie first launch)
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navMenu = navigationView.getMenu();
 
-        int id = setThings.sharedPreferences.getInt("navpage", R.id.nav_home);
+        int id = setThings.sharedPreferences.getInt("navpage", R.id.nav_home); //nav item that was selected before last app close
 
-        if (setThings.pages.contains(id)) navMenu.findItem(id).setChecked(true);
+        if (setThings.pages.contains(id)) navMenu.findItem(id).setChecked(true); //make sure the ID actually exists in the app
 
         fragment = chooseFrag(id);
-        fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit(); //switch to that fragment
 
+        //set proper nav drawer icon and text color
         navigationView.setItemIconTintList(setThings.drawerItem);
         navigationView.setItemTextColor(setThings.drawerItem);
     }
 
-    private Fragment chooseFrag(int id) {
+    private Fragment chooseFrag(int id) { //return fragment corresponding to nav drawer ID
         Fragment fragment = new Fragment();
         switch (id) {
             case R.id.nav_home:
@@ -218,7 +219,6 @@ public class MainActivity extends AppCompatActivity
                 fragment = new Main();
                 break;
         }
-
         return fragment;
     }
 }

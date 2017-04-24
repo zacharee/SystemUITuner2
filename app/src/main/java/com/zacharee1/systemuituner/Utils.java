@@ -9,6 +9,8 @@ import android.content.Intent;
 
 @SuppressWarnings("ALL")
 public class Utils {
+
+    // TODO: move this to setThings
     private final static int THEME_DEFAULT = 0;
     private final static int THEME_DARK = 1;
     /**

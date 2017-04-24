@@ -21,11 +21,12 @@ public class NoRootSystemSettingsActivity extends AppCompatActivity {
         title.setTextColor(setThings.titleText);
 
         TextView command = (TextView) findViewById(R.id.adb_system_setting);
-        command.setText("adb shell settings put system " + " " + setting + " " + oneZero);
+        command.setText("adb shell settings put system " + " " + setting + " " + oneZero); //set TextView to System Settings value that was toggled
 
         Button perms = (Button) findViewById(R.id.set_sys_perm);
         Button go = (Button) findViewById(R.id.do_the_dirty);
 
+        //button listeners
         setThings.buttons(perms, "SystemSettingsPerms");
         setThings.buttons(go, "WriteSystemSettings");
     }

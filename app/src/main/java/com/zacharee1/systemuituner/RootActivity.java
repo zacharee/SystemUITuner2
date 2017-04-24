@@ -21,9 +21,9 @@ public class RootActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         TextView title = (TextView) findViewById(R.id.title_root);
-        title.setTextColor(setThings.titleText);
+        title.setTextColor(setThings.titleText); //set proper title text color
 
         Button getPerms = (Button) findViewById(R.id.get_perms);
-        setThings.buttons(getPerms, "setupDoneRoot");
+        setThings.buttons(getPerms, "setupDoneRoot"); //button listener
     }
 }

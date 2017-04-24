@@ -56,36 +56,42 @@ public class Demo extends Fragment {
             activity = (MainActivity) getActivity();
         }
 
-        activity.setTitle("Demo Mode");
+        activity.setTitle("Demo Mode"); //set proper fragment title
 
         View view = inflater.inflate(R.layout.fragment_demo, container, false);
 
         demo = new Demo();
 
+        //spinners
         Spinner wifi = (Spinner) view.findViewById(R.id.wifi_strength);
         Spinner mobile = (Spinner) view.findViewById(R.id.mobile_strength);
         Spinner mobileTypeSpinner = (Spinner) view.findViewById(R.id.mobile_type);
         Spinner statStyleSpinner = (Spinner) view.findViewById(R.id.stat_bar_style);
 
+        //switches
         Switch showDemo = (Switch) view.findViewById(R.id.show_demo);
         Switch batteryPluggedSwitch = (Switch) view.findViewById(R.id.battery_plugged);
         Switch airplaneMode = (Switch) view.findViewById(R.id.show_airplane);
         Switch showNotifSwitch = (Switch) view.findViewById(R.id.show_notifs);
 
+        //buttons
         Button selectTime = (Button) view.findViewById(R.id.select_time);
         Button enableDemo = (Button) view.findViewById(R.id.enable_demo);
         Button selectBatteryLevel = (Button) view.findViewById(R.id.select_battery_level_button);
 
+        //set spinner adapters
         setSpinnerAdapters(wifi, R.array.wifi_strength);
         setSpinnerAdapters(mobile, R.array.mobile_strength);
         setSpinnerAdapters(mobileTypeSpinner, R.array.mobile_type);
         setSpinnerAdapters(statStyleSpinner, R.array.stat_bar_style);
 
+        //set spinner selections from sharedPrefs
         wifi.setSelection(activity.setThings.sharedPreferences.getInt("wifiLevel", 3));
         mobile.setSelection(activity.setThings.sharedPreferences.getInt("mobileLevel", 3));
         mobileTypeSpinner.setSelection(activity.setThings.sharedPreferences.getInt("mobileType1", 0));
         statStyleSpinner.setSelection(activity.setThings.sharedPreferences.getInt("statBarStyle1", 0));
 
+        //set proper values from sharedPrefs
         statBarStyle = (String) statStyleSpinner.getItemAtPosition(activity.setThings.sharedPreferences.getInt("statBarStyle1", 0));
 
         showDemo.setChecked(activity.setThings.sharedPreferences.getBoolean("demoOn", false));
@@ -110,6 +116,9 @@ public class Demo extends Fragment {
         wifiLevel = activity.setThings.sharedPreferences.getInt("wifiLevel", 3);
         batteryLevel = activity.setThings.sharedPreferences.getInt("batteryLevel", 50);
 
+        //button and switch listeners
+
+        /* TODO: clean up listeners */
         activity.setThings.buttons(enableDemo, "enableDemo");
         showDemo(showDemo);
         selectTime(selectTime);
@@ -126,7 +135,7 @@ public class Demo extends Fragment {
 
     private void setSpinnerAdapters(Spinner spinner, int arrayID) {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(activity.getApplicationContext(),
-                arrayID, activity.setThings.Dark ? R.layout.spinner_items_dark : R.layout.spinner_items_light);
+                arrayID, activity.setThings.Dark ? R.layout.spinner_items_dark : R.layout.spinner_items_light); //set correct spinner text color
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
@@ -316,6 +325,8 @@ public class Demo extends Fragment {
                         public void run() {
                             Looper.prepare();
                             try {
+
+                                //create new Intent and add relevant data to show Demo Mode with specified options
                                 Intent intent = new Intent("com.android.systemui.demo");
                                 intent.putExtra("command", "enter");
                                 getActivity().sendBroadcast(intent);
@@ -365,6 +376,8 @@ public class Demo extends Fragment {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
+
+                            //turn Demo Mode off
                             Intent intent = new Intent("com.android.systemui.demo");
                             intent.putExtra("command", "exit");
                             getActivity().sendBroadcast(intent);

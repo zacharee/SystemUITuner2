@@ -2,14 +2,11 @@ package com.zacharee1.systemuituner.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.Switch;
 
-import com.zacharee1.systemuituner.Exceptions;
 import com.zacharee1.systemuituner.MainActivity;
 import com.zacharee1.systemuituner.R;
 
@@ -31,13 +28,13 @@ public class Misc extends Fragment {
             activity = (MainActivity) getActivity();
         }
 
-        activity.setTitle("Miscellaneous");
+        activity.setTitle("Miscellaneous"); //set proper fragment title
 
         view = inflater.inflate(R.layout.fragment_misc, container, false);
 
         show_full_zen = (Switch) view.findViewById(R.id.show_full_zen);
 
-        activity.setThings.switches(show_full_zen, "sysui_show_full_zen", "secure", view);
+        activity.setThings.switches(show_full_zen, "sysui_show_full_zen", "secure", view); //switch listener
 
         return view;
     }

@@ -24,11 +24,11 @@ public class NoRootActivity extends AppCompatActivity {
 
         TextView title = (TextView) findViewById(R.id.noroot_title);
 
-        title.setTextColor(setThings.titleText);
+        title.setTextColor(setThings.titleText); //make sure title text color is right
 
         setupDone = (Button) findViewById(R.id.no_root_done);
 
-        setThings.buttons(setupDone, "setupDone");
+        setThings.buttons(setupDone, "setupDone"); //button listener
     }
 
 }

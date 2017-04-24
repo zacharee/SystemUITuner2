@@ -6,24 +6,16 @@ import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Looper;
-import android.provider.Settings;
 import android.support.design.widget.NavigationView;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
-import android.widget.LinearLayout;
 import android.widget.Switch;
 
-import com.zacharee1.systemuituner.Exceptions;
 import com.zacharee1.systemuituner.MainActivity;
 import com.zacharee1.systemuituner.R;
-
-import java.util.ArrayList;
 
 /**
  * Created by Zacha on 4/5/2017.
@@ -38,8 +30,6 @@ public class StatBar extends Fragment {
 
     private int drawable;
 
-    private final Exceptions exceptions = new Exceptions();
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -47,7 +37,7 @@ public class StatBar extends Fragment {
             activity = (MainActivity) getActivity();
         }
 
-        activity.setTitle("Status Bar");
+        activity.setTitle("Status Bar"); //set proper fragment title
 
         view = inflater.inflate(R.layout.fragment_statbar, container, false);
 
@@ -55,7 +45,7 @@ public class StatBar extends Fragment {
 
         isDark = activity.setThings.sharedPreferences.getBoolean("isDark", false);
 
-        if (Build.MANUFACTURER.toUpperCase().contains("SAMSUNG") && !activity.setThings.sharedPreferences.getBoolean("samsungRisk", false)) {
+        if (Build.MANUFACTURER.toUpperCase().contains("SAMSUNG") && !activity.setThings.sharedPreferences.getBoolean("samsungRisk", false)) { //show warning for Samsung users
             view.setVisibility(View.GONE);
             new AlertDialog.Builder(view.getContext())
                     .setIcon(drawable)
@@ -86,6 +76,7 @@ public class StatBar extends Fragment {
                     .show();
         }
 
+        //define switches
         Switch bluetooth = (Switch) view.findViewById(R.id.bt_icon);
         Switch wifi = (Switch) view.findViewById(R.id.wifi_icon);
         Switch ethernet = (Switch) view.findViewById(R.id.ethernet_icon);
@@ -111,70 +102,22 @@ public class StatBar extends Fragment {
         Switch battery_percent = (Switch) view.findViewById(R.id.battery_percent);
         Switch vpn = (Switch) view.findViewById(R.id.vpn_icon);
 
+        //custom switch text
         battery_percent.setText(Html.fromHtml("Battery Percentage<br /><small> <font color=\"#777777\">(Reboot Required)</font></small>"));
 
-        if (Build.VERSION.SDK_INT > 23) {
+        if (Build.VERSION.SDK_INT > 23) { //only show switch if user is on Nougat or later
             clock_seconds.setVisibility(View.VISIBLE);
         } else {
             clock_seconds.setVisibility(View.GONE);
         }
 
+        //strings because I'm lazy
         String bl = "icon_blacklist";
         String sec = "secure";
         String sys = "system";
         String glob = "global";
 
-//        sharedPrefs("bluetooth", bluetooth, bl);
-//        sharedPrefs("wifi", wifi, bl);
-//        sharedPrefs("ethernet", ethernet, bl);
-//        sharedPrefs("mobile", mobile, bl);
-//        sharedPrefs("airplane", airplane, bl);
-//        sharedPrefs("managed_profile", managed_profile, bl);
-//        sharedPrefs("zen", zen, bl);
-//        sharedPrefs("alarm_clock", alarm_clock, bl);
-//        sharedPrefs("hotspot", hotspot, bl);
-//        sharedPrefs("data_saver", data_saver, bl);
-//        sharedPrefs("nfc", nfc, bl);
-//        sharedPrefs("clock", clock, bl);
-//        sharedPrefs("volume", volume, bl);
-//        sharedPrefs("do_not_disturb", do_not_disturb, bl);
-//        sharedPrefs("rotate", rotate, bl);
-//        sharedPrefs("battery", battery, bl);
-//        sharedPrefs("speakerphone", speakerphone, bl);
-//        sharedPrefs("cast", cast, bl);
-//        sharedPrefs("headset", headset, bl);
-//        sharedPrefs("location", location, bl);
-//        sharedPrefs("su", su, bl);
-//        sharedPrefs("vpn", vpn, bl);
-//
-//        sharedPrefs("clock_seconds", clock_seconds, sec);
-//
-//        sharedPrefs("status_bar_show_battery_percent", battery_percent, sys);
-
-//        LinearLayout layout = (LinearLayout) view.findViewById(R.id.statbar_ll);
-//
-//        ArrayList<Switch> switches = new ArrayList<>();
-//
-//        String[] switchNames = new String[]{};
-//
-//        switchNames[R.id.bt_icon] = "bluetooth";
-//        switchNames[R.id.wifi_icon] = "wifi";
-//        switchNames[R.id.ethernet_icon] = "ethernet";
-//        switchNames[R.id.mobile_icon] = "mobile";
-//        switchNames[R.id.airplane_icon] = "airplane";
-//
-//
-//        for (int i = 0; i < layout.getChildCount(); i++) {
-//            if (layout.getChildAt(i) instanceof Switch) {
-//                switches.add((Switch) layout.getChildAt(i));
-//            }
-//        }
-//
-//        for (Switch toggle : switches) {
-//            int id = toggle.getId();
-//            String type;
-//        }
-
+        //set switch listeners
         activity.setThings.switches(bluetooth, "bluetooth", bl, view);
         activity.setThings.switches(wifi, "wifi", bl, view);
         activity.setThings.switches(ethernet, "ethernet", bl, view);
@@ -200,34 +143,7 @@ public class StatBar extends Fragment {
         activity.setThings.switches(clock_seconds, "clock_seconds", sec, view);
 
         activity.setThings.switches(battery_percent, "status_bar_show_battery_percent", sys, view);
-
-        Exceptions exceptions = new Exceptions();
-        exceptions.secureSettings(view.getContext(), activity.getApplicationContext(), "test", "Status Bar");
         return view;
     }
 
-//    private void sharedPrefs(String key, Switch toggle, String prefType) {
-//        int enabled = 0;
-//        try {
-//            switch (prefType) {
-//                case "global":
-//                    break;
-//                case "secure":
-//                    enabled = Settings.Secure.getInt(activity.getContentResolver(), key, 0);
-//                    break;
-//                case "system":
-//                    enabled = Settings.System.getInt(activity.getContentResolver(), key, 0);
-//                    break;
-//                case "icon_blacklist":
-//                    String blacklist = Settings.Secure.getString(activity.getContentResolver(), "icon_blacklist") != null ? Settings.Secure.getString(activity.getContentResolver(), "icon_blacklist") : "nada";
-//                    enabled = !blacklist.contains(key) ? 1 : 0;
-//                    break;
-//            }
-//        } catch (Exception e) {
-//            Exceptions exceptions = new Exceptions();
-//            exceptions.secureSettings(view.getContext(), activity.getApplicationContext(), e.getMessage(), "Status Bar");
-//        }
-//        toggle.setChecked(enabled == 1);
-//
-//    }
 }

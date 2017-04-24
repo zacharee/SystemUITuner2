@@ -23,15 +23,15 @@ public class Main extends Fragment {
 
         if (getActivity() instanceof MainActivity) activity = (MainActivity) getActivity();
 
-        activity.setTitle("SystemUI Tuner");
+        activity.setTitle("SystemUI Tuner"); //set proper fragment title
 
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
         TextView title = (TextView) view.findViewById(R.id.title_main);
-        title.setTextColor(activity.setThings.titleText);
+        title.setTextColor(activity.setThings.titleText); //set title text to the correct color for dark/light mode
 
         Button setup = (Button) view.findViewById(R.id.setup);
-        activity.setThings.buttons(setup, "setup");
+        activity.setThings.buttons(setup, "setup"); //button listener
 
         return view;
     }

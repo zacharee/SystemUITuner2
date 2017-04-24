@@ -25,6 +25,8 @@ public class SetupActivity extends AppCompatActivity {
         rooted = (Button) findViewById(R.id.rooted);
         not_rooted = (Button) findViewById(R.id.not_rooted);
 
+        //button listeners (need to be moved to setThings eventually)
+        /* TODO: move button listeners */
         buttons(rooted);
         buttons(not_rooted);
     }

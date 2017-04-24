@@ -1,6 +1,7 @@
 package com.zacharee1.systemuituner.fragments;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,28 +27,21 @@ public class Settings extends Fragment {
             activity = (MainActivity) getActivity();
         }
 
-        activity.setTitle("Settings");
+        activity.setTitle("Settings"); //set correct title for fragment
 
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
         Switch darkMode = (Switch) view.findViewById(R.id.dark_mode);
+        darkMode.setChecked(activity.setThings.Dark);
 
-        if (activity.setThings.sharedPreferences.getBoolean("isDark", false)) {
-            darkMode.setChecked(true);
-        }
-
+        // TODO: move to setThings
         darkMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    activity.setThings.editor.putBoolean("isDark", true);
-                    Utils.changeToTheme(activity, 1);
-
-                } else {
-                    activity.setThings.editor.putBoolean("isDark", false);
-                    Utils.changeToTheme(activity, 0);
-                }
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { //handle dark mode switch
+                activity.setThings.editor.putBoolean("isDark", isChecked);
                 activity.setThings.editor.apply();
+                activity.finish();
+                activity.startActivity(new Intent(activity, activity.getClass()));
             }
         });
 

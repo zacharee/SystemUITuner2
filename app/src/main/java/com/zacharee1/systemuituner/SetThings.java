@@ -42,21 +42,25 @@ public class SetThings {
 
     private final Context context;
 
+    public final Exceptions exceptions;
+
     public SetThings(Activity activity) {
+        //set all variables
         sharedPreferences = activity.getSharedPreferences("com.zacharee1.sysuituner", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         editor.apply();
         Dark = sharedPreferences.getBoolean("isDark", false);
         setup = sharedPreferences.getBoolean("isSetup", false);
+        exceptions = new Exceptions();
 
         titleText = activity.getResources().getColor(Dark ? android.R.color.primary_text_dark : android.R.color.primary_text_light);
         drawerItem = Dark ? activity.getResources().getColorStateList(R.color.drawer_item_dark) : activity.getResources().getColorStateList(R.color.drawer_item_light);
 
         activity.setTheme(SetupActivity.class == activity.getClass() || NoRootSystemSettingsActivity.class == activity.getClass() ? Dark ? R.style.DARK : R.style.AppTheme : Dark ? R.style.DARK_NoAppBar : R.style.AppTheme_NoActionBar);
 
-        style = Dark ? R.style.DARK_NoAppBar : R.style.AppTheme_NoActionBar;
+        style = Dark ? R.style.DARK_NoAppBar : R.style.AppTheme_NoActionBar; //is dark mode on?
 
-        pages = new ArrayList<Integer>() {{
+        pages = new ArrayList<Integer>() {{ //all (currently used) fragments
                 add(R.id.nav_home);
                 add(R.id.nav_statusbar);
                 add(R.id.nav_demo_mode);
@@ -67,10 +71,10 @@ public class SetThings {
 
         currentActivity = activity;
 
-        context = currentActivity;
+        context = currentActivity; //kinda pointless...
     }
 
-    public void buttons(final Button button, final String name) {
+    public void buttons(final Button button, final String name) { //set button listeners
         button.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("InlinedApi")
             @Override
@@ -110,14 +114,15 @@ public class SetThings {
                             break;
                     }
                 } catch (Exception e) {
-                    Exceptions exceptions = new Exceptions();
                     exceptions.systemSettings(context, currentActivity.getApplicationContext(), e.getMessage(), "SetThings");
                 }
             }
         });
     }
 
-    public void switches(final Switch toggle, final String pref, final String settingType, final View view) {
+    public void switches(final Switch toggle, final String pref, final String settingType, final View view) { //set switch listeners
+
+        //check to see if switch should be toggled
         int setting = 0;
         switch (settingType) {
             case "global":
@@ -136,6 +141,7 @@ public class SetThings {
         }
         toggle.setChecked(setting == 1);
 
+        //set switch listeners
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
@@ -172,7 +178,6 @@ public class SetThings {
                                                 currentActivity.runOnUiThread(new Runnable() {
                                                     @Override
                                                     public void run() {
-                                                        Exceptions exceptions = new Exceptions();
                                                         exceptions.secureSettings(view.getContext(), currentActivity.getApplicationContext(), e.getMessage(), "icon_blacklist");
                                                     }
                                                 });
@@ -184,7 +189,6 @@ public class SetThings {
                                                 currentActivity.runOnUiThread(new Runnable() {
                                                     @Override
                                                     public void run() {
-                                                        Exceptions exceptions = new Exceptions();
                                                         exceptions.secureSettings(view.getContext(), currentActivity.getApplicationContext(), e.getMessage(), "icon_blacklist");
                                                     }
                                                 });
@@ -201,14 +205,13 @@ public class SetThings {
                             break;
                     }
                 } catch (Exception e) {
-                    Exceptions exceptions = new Exceptions();
                     exceptions.secureSettings(view.getContext(), currentActivity.getApplicationContext(), e.getMessage(), "Status Bar");
                 }
             }
         });
     }
 
-    public void settings(final String type, final String pref, final int value) {
+    public void settings(final String type, final String pref, final int value) { //write to settings
         try {
             switch (type) {
                 case "global":
@@ -235,12 +238,11 @@ public class SetThings {
                     }
             }
         } catch (Exception e) {
-            Exceptions exceptions = new Exceptions();
             exceptions.secureSettings(context, currentActivity.getApplicationContext(), e.getMessage(), "SetThings");
         }
     }
 
-    public boolean isPackageInstalled(String packagename, PackageManager packageManager) {
+    public boolean isPackageInstalled(String packagename, PackageManager packageManager) { //check to see if an app is installed
         try {
             packageManager.getPackageInfo(packagename, 0);
             return true;

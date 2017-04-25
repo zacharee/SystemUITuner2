@@ -39,8 +39,10 @@ public class About extends Fragment {
         TextView versionNum = (TextView) view.findViewById(R.id.vernum);
         TextView buildDate = (TextView) view.findViewById(R.id.build_date);
         TextView imageCredit = (TextView) view.findViewById(R.id.image_credit);
+        TextView appCredit = (TextView) view.findViewById(R.id.app_credit);
 
         imageCredit.setMovementMethod(LinkMovementMethod.getInstance());
+        appCredit.setMovementMethod(LinkMovementMethod.getInstance());
 
         try { //add version info to TextViews
             PackageInfo pInfo = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);

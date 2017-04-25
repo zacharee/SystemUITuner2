@@ -203,6 +203,7 @@ public class StatBar extends Fragment {
         activity.setThings.switches(location, "location", bl, view);
         activity.setThings.switches(su, "su", bl, view);
         activity.setThings.switches(vpn, "vpn", bl, view);
+        activity.setThings.switches(volume, "volume", bl, view);
 
         activity.setThings.switches(clock_seconds, "clock_seconds", sec, view);
 

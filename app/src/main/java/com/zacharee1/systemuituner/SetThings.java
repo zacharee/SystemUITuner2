@@ -169,7 +169,7 @@ public class SetThings {
                                 else blacklist = pref;
                             } else {
                                 if (blacklist != null) {
-                                    blacklist = blacklist.replace("," + pref + ",", ",");
+                                    blacklist = blacklist.replace("," + pref, ",");
                                     blacklist = blacklist.replace(pref + ",", ",");
                                 }
                             }

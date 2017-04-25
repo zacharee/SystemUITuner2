@@ -3,19 +3,27 @@ package com.zacharee1.systemuituner.fragments;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Switch;
 
 import com.zacharee1.systemuituner.MainActivity;
 import com.zacharee1.systemuituner.R;
+
+import java.util.ArrayList;
 
 /**
  * Created by Zacha on 4/5/2017.
@@ -29,6 +37,35 @@ public class StatBar extends Fragment {
     private boolean isDark;
 
     private int drawable;
+
+    private Switch bluetooth;
+    private Switch wifi;
+    private Switch ethernet;
+    private Switch mobile;
+    private Switch airplane;
+    private Switch managed_profile;
+    private Switch zen;
+    private Switch alarm_clock;
+    private Switch hotspot;
+    private Switch data_saver;
+    private Switch nfc;
+    private Switch clock;
+    private Switch volume;
+    private Switch do_not_disturb;
+    private Switch rotate;
+    private Switch battery;
+    private Switch speakerphone;
+    private Switch cast;
+    private Switch headset;
+    private Switch location;
+    private Switch su;
+    private Switch clock_seconds;
+    private Switch battery_percent;
+    private Switch vpn;
+
+    private Button reset_blacklist;
+
+    private ArrayList<Switch> switches = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,7 +89,7 @@ public class StatBar extends Fragment {
                     .setTitle(Html.fromHtml("<font color='#ff0000'>WARNING</font>"))
                     .setMessage("It seems you are using a Samsung device. " +
                             "If you are on Stock (TouchWiz), and you're rooted, SystemUI may break if you use this feature! " +
-                            "Unrooted users are safe. " +
+                            "Unrooted users are most likely safe, but there's no guarantee! " +
                             "Are you sure you want to continue?")
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
@@ -77,30 +114,57 @@ public class StatBar extends Fragment {
         }
 
         //define switches
-        Switch bluetooth = (Switch) view.findViewById(R.id.bt_icon);
-        Switch wifi = (Switch) view.findViewById(R.id.wifi_icon);
-        Switch ethernet = (Switch) view.findViewById(R.id.ethernet_icon);
-        Switch mobile = (Switch) view.findViewById(R.id.mobile_icon);
-        Switch airplane = (Switch) view.findViewById(R.id.airplane_icon);
-        Switch managed_profile = (Switch) view.findViewById(R.id.managed_profile_icon);
-        Switch zen = (Switch) view.findViewById(R.id.zen_icon);
-        Switch alarm_clock = (Switch) view.findViewById(R.id.alarm_clock_icon);
-        Switch hotspot = (Switch) view.findViewById(R.id.hotspot_icon);
-        Switch data_saver = (Switch) view.findViewById(R.id.data_saver);
-        Switch nfc = (Switch) view.findViewById(R.id.nfc);
-        Switch clock = (Switch) view.findViewById(R.id.clock);
-        Switch volume = (Switch) view.findViewById(R.id.volume);
-        Switch do_not_disturb = (Switch) view.findViewById(R.id.do_not_disturb);
-        Switch rotate = (Switch) view.findViewById(R.id.rotate);
-        Switch battery = (Switch) view.findViewById(R.id.battery);
-        Switch speakerphone = (Switch) view.findViewById(R.id.speakerphone);
-        Switch cast = (Switch) view.findViewById(R.id.cast);
-        Switch headset = (Switch) view.findViewById(R.id.headset);
-        Switch location = (Switch) view.findViewById(R.id.location);
-        Switch su = (Switch) view.findViewById(R.id.su);
-        Switch clock_seconds = (Switch) view.findViewById(R.id.clock_seconds);
-        Switch battery_percent = (Switch) view.findViewById(R.id.battery_percent);
-        Switch vpn = (Switch) view.findViewById(R.id.vpn_icon);
+        bluetooth = (Switch) view.findViewById(R.id.bt_icon);
+        wifi = (Switch) view.findViewById(R.id.wifi_icon);
+        ethernet = (Switch) view.findViewById(R.id.ethernet_icon);
+        mobile = (Switch) view.findViewById(R.id.mobile_icon);
+        airplane = (Switch) view.findViewById(R.id.airplane_icon);
+        managed_profile = (Switch) view.findViewById(R.id.managed_profile_icon);
+        zen = (Switch) view.findViewById(R.id.zen_icon);
+        alarm_clock = (Switch) view.findViewById(R.id.alarm_clock_icon);
+        hotspot = (Switch) view.findViewById(R.id.hotspot_icon);
+        data_saver = (Switch) view.findViewById(R.id.data_saver);
+        nfc = (Switch) view.findViewById(R.id.nfc);
+        clock = (Switch) view.findViewById(R.id.clock);
+        volume = (Switch) view.findViewById(R.id.volume);
+        do_not_disturb = (Switch) view.findViewById(R.id.do_not_disturb);
+        rotate = (Switch) view.findViewById(R.id.rotate);
+        battery = (Switch) view.findViewById(R.id.battery);
+        speakerphone = (Switch) view.findViewById(R.id.speakerphone);
+        cast = (Switch) view.findViewById(R.id.cast);
+        headset = (Switch) view.findViewById(R.id.headset);
+        location = (Switch) view.findViewById(R.id.location);
+        su = (Switch) view.findViewById(R.id.su);
+        clock_seconds = (Switch) view.findViewById(R.id.clock_seconds);
+        battery_percent = (Switch) view.findViewById(R.id.battery_percent);
+        vpn = (Switch) view.findViewById(R.id.vpn_icon);
+
+        switches.add(bluetooth);
+        switches.add(wifi);
+        switches.add(ethernet);
+        switches.add(mobile);
+        switches.add(airplane);
+        switches.add(managed_profile);
+        switches.add(zen);
+        switches.add(alarm_clock);
+        switches.add(hotspot);
+        switches.add(data_saver);
+        switches.add(nfc);
+        switches.add(clock);
+        switches.add(volume);
+        switches.add(do_not_disturb);
+        switches.add(rotate);
+        switches.add(battery);
+        switches.add(speakerphone);
+        switches.add(cast);
+        switches.add(headset);
+        switches.add(location);
+        switches.add(su);
+        switches.add(clock_seconds);
+        switches.add(battery_percent);
+        switches.add(vpn);
+
+        reset_blacklist = (Button) view.findViewById(R.id.reset_blacklist);
 
         //custom switch text
         battery_percent.setText(Html.fromHtml("Battery Percentage<br /><small> <font color=\"#777777\">(Reboot Required)</font></small>"));
@@ -128,7 +192,7 @@ public class StatBar extends Fragment {
         activity.setThings.switches(alarm_clock, "alarm_clock,alarm", bl, view);
         activity.setThings.switches(hotspot, "hotspot", bl, view);
         activity.setThings.switches(data_saver, "data_saver", bl, view);
-        activity.setThings.switches(nfc, "nfc", bl, view);
+        activity.setThings.switches(nfc, "nfc,nfc_on", bl, view);
         activity.setThings.switches(clock, "clock", bl, view);
         activity.setThings.switches(do_not_disturb, "do_not_disturb", bl, view);
         activity.setThings.switches(rotate, "rotate", bl, view);
@@ -143,7 +207,28 @@ public class StatBar extends Fragment {
         activity.setThings.switches(clock_seconds, "clock_seconds", sec, view);
 
         activity.setThings.switches(battery_percent, "status_bar_show_battery_percent", sys, view);
+
+        activity.setThings.buttons(reset_blacklist, "reset_blacklist");
+
+        BroadcastReceiver broadcast_reciever = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context arg0, Intent intent) {
+                String action = intent.getAction();
+                if (action.equals("check_statbar_toggles")) {
+                    checkBL(true);
+                }
+            }
+        };
+        activity.registerReceiver(broadcast_reciever, new IntentFilter("check_statbar_toggles"));
+
         return view;
+    }
+
+    private void checkBL(boolean tralse) {
+        for (Switch toggle : switches) {
+            if (toggle != battery_percent) toggle.setChecked(tralse);
+        }
     }
 
 }

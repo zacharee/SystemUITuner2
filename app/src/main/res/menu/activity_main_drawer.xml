@@ -15,7 +15,7 @@
             android:visible="false" />
         <item
             android:id="@+id/nav_statusbar"
-            android:icon="@drawable/ic_info"
+            android:icon="@drawable/ic_visibility_off"
             android:title="@string/status_bar" />
         <item
             android:id="@+id/nav_demo_mode"

@@ -79,8 +79,8 @@
     <string name="press_button_rooted">When you\'re ready, press the button.</string>
     <string name="root_confirm">You\'ll need to confirm root access.</string>
     <string name="get_perms_root">GET TEH PERMZ</string>
-    <string name="created_by">App created by Zacharee1</string>
-    <string name="images_from">Launcher image from material.io</string>
+    <string name="created_by">App created by <a href='https://forum.xda-developers.com/member.php?u=7055541'>Zacharee1</a></string>
+    <string name="images_from">Launcher icon made by <a href='https://forum.xda-developers.com/member.php?u=7385240'>immarcel</a></string>
     <string name="abt_desc">The main screen already explained what this app does, so I\'m not exactly sure what else to say.</string>
     <string name="abt_warn">This app isn\'t going to work on every device, though, because manufacturers are annoying. Just keep that in mind when a toggle has no effect.</string>
     <string name="debug_info">Debug Info</string>

@@ -57,6 +57,14 @@ public class MainActivity extends AppCompatActivity
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
 
+    public static Fragment main;
+    public static Fragment qs;
+    public static Fragment statbar;
+    public static Fragment demo;
+    public static Fragment about;
+    public static Fragment settings;
+    public static Fragment misc;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +74,14 @@ public class MainActivity extends AppCompatActivity
         handler = new Handler();
         context = this;
         activity = this;
+
+        main = new Main();
+        qs = new QS();
+        statbar = new StatBar();
+        demo = new Demo();
+        about = new About();
+        settings = new Settings();
+        misc = new Misc();
 
         setContentView(R.layout.activity_main);
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -218,8 +234,8 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         };
-
         registerReceiver(broadcast_reciever, new IntentFilter("finish_activity"));
+
         Intent intent = new Intent(getApplicationContext(), SetupActivity.class);
         if (!setThings.setup)
             startActivity(intent); //start setup activity if user hasn't run it (ie first launch)
@@ -247,33 +263,21 @@ public class MainActivity extends AppCompatActivity
     }
 
     private Fragment chooseFrag(int id) { //return fragment corresponding to nav drawer ID
-        Fragment fragment = new Fragment();
         switch (id) {
-            case R.id.nav_home:
-                fragment = new Main();
-                break;
             case R.id.nav_quick_settings:
-                fragment = new QS();
-                break;
+                return qs;
             case R.id.nav_statusbar:
-                fragment = new StatBar();
-                break;
+                return statbar;
             case R.id.nav_demo_mode:
-                fragment = new Demo();
-                break;
+                return demo;
             case R.id.nav_about:
-                fragment = new About();
-                break;
+                return about;
             case R.id.nav_settings:
-                fragment = new Settings();
-                break;
+                return settings;
             case R.id.nav_misc:
-                fragment = new Misc();
-                break;
+                return misc;
             default:
-                fragment = new Main();
-                break;
+                return main;
         }
-        return fragment;
     }
 }

@@ -2,6 +2,8 @@ package com.zacharee1.systemuituner;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,11 +12,18 @@ import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Looper;
 import android.provider.Settings;
+import android.support.v7.widget.CardView;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Switch;
+
+import com.zacharee1.systemuituner.fragments.Main;
+import com.zacharee1.systemuituner.fragments.StatBar;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -57,7 +66,6 @@ public class SetThings {
         drawerItem = Dark ? activity.getResources().getColorStateList(R.color.drawer_item_dark) : activity.getResources().getColorStateList(R.color.drawer_item_light);
 
 //        activity.setTheme(SetupActivity.class == activity.getClass() || NoRootSystemSettingsActivity.class == activity.getClass() ? Dark ? R.style.DARK : R.style.AppTheme : Dark ? R.style.DARK_NoAppBar : R.style.AppTheme_NoActionBar);
-
         activity.setTheme(Dark ? R.style.DARK : R.style.AppTheme);
 
         style = Dark ? R.style.DARK_NoAppBar : R.style.AppTheme_NoActionBar; //is dark mode on?
@@ -114,6 +122,11 @@ public class SetThings {
                         case "WriteSystemSettings":
                             Settings.System.putInt(currentActivity.getContentResolver(), sharedPreferences.getString("systemSettingKey", ""), Integer.decode(sharedPreferences.getString("isSystemSwitchEnabled", "0")));
                             break;
+                        case "reset_blacklist":
+                            Settings.Secure.putString(currentActivity.getContentResolver(), "icon_blacklist", "");
+                            intent = new Intent("check_statbar_toggles");
+                            currentActivity.sendBroadcast(intent);
+                            break;
                     }
                 } catch (Exception e) {
                     exceptions.systemSettings(context, currentActivity.getApplicationContext(), e.getMessage(), "SetThings");
@@ -152,21 +165,15 @@ public class SetThings {
                         case "icon_blacklist":
                             String blacklist = Settings.Secure.getString(currentActivity.getContentResolver(), "icon_blacklist");
                             if (!isChecked) {
-                                if (blacklist != null && !blacklist.equals("")) {
-                                    blacklist = blacklist.concat("," + pref);
-                                } else {
-                                    blacklist = pref;
-                                }
-                                editor.putBoolean(pref, false);
+                                if (blacklist != null && !blacklist.equals("")) blacklist = blacklist.concat("," + pref);
+                                else blacklist = pref;
                             } else {
                                 if (blacklist != null) {
-                                    blacklist = blacklist.replace("," + pref, "");
-                                    blacklist = blacklist.replace(pref, "");
+                                    blacklist = blacklist.replace("," + pref + ",", ",");
+                                    blacklist = blacklist.replace(pref + ",", ",");
                                 }
-                                editor.putBoolean(pref, true);
                             }
 
-                            editor.apply();
                             final String blacklist2 = blacklist;
                             new Thread(new Runnable() {
                                 @Override

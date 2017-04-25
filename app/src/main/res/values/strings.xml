@@ -145,4 +145,5 @@
     <string name="telegram">Telegram</string>
     <string name="xda_labs">XDA Labs</string>
     <string name="xda_thread">XDA Thread</string>
+    <string name="reset_blacklist">Reset Blacklist</string>
 </resources>

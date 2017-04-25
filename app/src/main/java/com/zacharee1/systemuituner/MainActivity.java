@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getColor(R.color.colorPrimary2)));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary2)));
         toggle.syncState();
 
         //for "organization"

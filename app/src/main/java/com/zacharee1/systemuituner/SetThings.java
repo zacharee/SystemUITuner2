@@ -12,6 +12,7 @@ import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Looper;
 import android.provider.Settings;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.CardView;
 import android.text.Layout;
 import android.util.Log;

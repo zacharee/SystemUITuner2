@@ -146,4 +146,12 @@
     <string name="xda_labs">XDA Labs</string>
     <string name="xda_thread">XDA Thread</string>
     <string name="reset_blacklist">Reset Blacklist</string>
+    <string name="apply">Apply</string>
+    <string name="animator_duration_scale">Animator Duration Scale</string>
+    <string name="transition_animation_scale">Transition Animation Scale</string>
+    <string name="window_animation_scale">Window Animation Scale</string>
+    <string name="animation_speeds">Animation Speeds</string>
+    <string name="general">General</string>
+    <string name="heads_up_notifications">Heads-Up Notifications</string>
+    <string name="headphone_volume_warning">Headphone Volume Warning</string>
 </resources>

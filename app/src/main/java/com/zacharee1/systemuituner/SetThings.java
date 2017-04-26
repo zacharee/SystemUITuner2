@@ -98,7 +98,7 @@ public class SetThings {
                             currentActivity.startActivity(intent);
                             break;
                         case "enableDemo":
-                            settings("global", "sysui_demo_allowed", 1);
+                            settings("global", "sysui_demo_allowed", "1");
                             break;
                         case "setupDoneRoot":
                             new Thread(new Runnable() {
@@ -211,7 +211,7 @@ public class SetThings {
                             }).start();
                             break;
                         default:
-                            settings(settingType, pref, isChecked ? 1 : 0);
+                            settings(settingType, pref, isChecked ? "1" : "0");
                             break;
                     }
                 } catch (Exception e) {
@@ -221,14 +221,14 @@ public class SetThings {
         });
     }
 
-    public void settings(final String type, final String pref, final int value) { //write to settings
+    public void settings(final String type, final String pref, final String value) { //write to settings
         try {
             switch (type) {
                 case "global":
-                    Settings.Global.putInt(currentActivity.getContentResolver(), pref, value);
+                    Settings.Global.putString(currentActivity.getContentResolver(), pref, value);
                     break;
                 case "secure":
-                    Settings.Secure.putInt(currentActivity.getContentResolver(), pref, value);
+                    Settings.Secure.putString(currentActivity.getContentResolver(), pref, value);
                     break;
                 case "system":
                     if (sharedPreferences.getBoolean("isRooted", true)) {
@@ -240,7 +240,7 @@ public class SetThings {
                         }).start();
                     }
                     else {
-                        editor.putString("isSystemSwitchEnabled", String.valueOf(value));
+                        editor.putString("isSystemSwitchEnabled", value);
                         editor.putString("systemSettingKey", pref);
                         editor.apply();
                         Intent intent = new Intent(currentActivity.getApplicationContext(), NoRootSystemSettingsActivity.class);

@@ -56,14 +56,13 @@ public class Misc extends Fragment {
     private TextInputEditText custom_secure;
     private TextInputEditText custom_system;
 
-    private float animScale;
-    private float transScale;
-    private float winScale;
-
     private LinearLayout custom_settings;
 
     private final int alertRed = R.drawable.ic_warning_red;
 
+    private String animScale;
+    private String transScale;
+    private String winScale;
     private String global;
     private String secure;
     private String system;
@@ -111,9 +110,9 @@ public class Misc extends Fragment {
         custom_secure = (TextInputEditText) view.findViewById(R.id.secure_settings);
         custom_system = (TextInputEditText) view.findViewById(R.id.system_settings);
 
-        animScale = Settings.Global.getFloat(activity.getContentResolver(), "animator_duration_scale", (float)1.0);
-        transScale = Settings.Global.getFloat(activity.getContentResolver(), "transition_animation_scale", (float)1.0);
-        winScale = Settings.Global.getFloat(activity.getContentResolver(), "window_animation_scale", (float)1.0);
+        animScale = Settings.Global.getString(activity.getContentResolver(), "animator_duration_scale");
+        transScale = Settings.Global.getString(activity.getContentResolver(), "transition_animation_scale");
+        winScale = Settings.Global.getString(activity.getContentResolver(), "window_animation_scale");
 
         anim.setHint(getResources().getText(R.string.animator_duration_scale) + " (" + String.valueOf(animScale) + ")");
         trans.setHint(getResources().getText(R.string.transition_animation_scale) + " (" + String.valueOf(transScale) + ")");
@@ -190,15 +189,10 @@ public class Misc extends Fragment {
             public void afterTextChanged(Editable s) {
                 if (textInputEditText.getText().length() > 0) {
                     final String value = textInputEditText.getText().toString();
-                    float val = (float)1.0;
 
-                    try {
-                        val = Float.valueOf(value);
-                    } catch (NumberFormatException e) {}
-
-                    if (textInputEditText == anim) animScale = val;
-                    else if (textInputEditText == trans) transScale = val;
-                    else if (textInputEditText == win) winScale = val;
+                    if (textInputEditText == anim) animScale = value;
+                    else if (textInputEditText == trans) transScale = value;
+                    else if (textInputEditText == win) winScale = value;
                     else if (textInputEditText == custom_global) global = value;
                     else if (textInputEditText == custom_secure) secure = value;
                     else if (textInputEditText == custom_system) system = value;
@@ -213,52 +207,51 @@ public class Misc extends Fragment {
             public void onClick(View v) {
                 final String pref;
                 final String val;
+                final String type;
 
                 if (button == animApply) {
                     pref = "animator_duration_scale";
-                    val = String.valueOf(animScale);
+                    if (animScale.contains("0.")) val = animScale;
+                    else if (animScale.contains(".")) val = "0" + animScale;
+                    else val = animScale;
+                    type = "global";
                 } else if (button == transApply) {
                     pref = "transition_animation_scale";
-                    val = String.valueOf(transScale);
+                    if (transScale.contains("0.")) val = transScale;
+                    else if (transScale.contains(".")) val = "0" + transScale;
+                    else val = transScale;
+                    type = "global";
                 } else if (button == winApply) {
                     pref = "window_animation_scale";
-                    val = String.valueOf(winScale);
+                    if (winScale.contains("0.")) val = winScale;
+                    else if (winScale.contains(".")) val = "0" + winScale;
+                    else val = winScale;
+                    type = "global";
                 } else if (button == globalApply) {
                     String[] parsedString = global.split("[ ]");
                     pref = parsedString[0];
                     if (parsedString.length > 1) val = parsedString[1];
                     else val = "";
-                    Settings.Global.putString(activity.getContentResolver(), pref, val);
+                    type = "global";
                 } else if (button == secureApply) {
                     String[] parsedString = secure.split("[ ]");
                     pref = parsedString[0];
                     if (parsedString.length > 1) val = parsedString[1];
                     else val = "";
-                    Settings.Secure.putString(activity.getContentResolver(), pref, val);
+                    type = "secure";
                 } else if (button == systemApply) {
                     String[] parsedString = system.split("[ ]");
                     pref = parsedString[0];
                     if (parsedString.length > 1) val = parsedString[1];
                     else val = "";
-                    if (activity.setThings.sharedPreferences.getBoolean("isRooted", true)) {
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                activity.setThings.sudo("settings put system " + pref + " " + val);
-                            }
-                        }).start();
-                    }
-                    else {
-                        activity.setThings.editor.putString("isSystemSwitchEnabled", val);
-                        activity.setThings.editor.putString("systemSettingKey", pref);
-                        activity.setThings.editor.apply();
-                        Intent intent = new Intent(activity.getApplicationContext(), NoRootSystemSettingsActivity.class);
-                        activity.startActivity(intent);
-                    }
+                    type = "system";
                 } else {
                     pref = new String();
                     val = new String();
+                    type = "";
                 }
+
+                activity.setThings.settings(type, pref, val);
             }
         });
     }

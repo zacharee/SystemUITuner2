@@ -111,7 +111,7 @@ public class Misc extends Fragment {
         battery_percent = (Switch) view.findViewById(R.id.battery_percent);
 
         //custom switch text
-        battery_percent.setText(Html.fromHtml("Battery Percentage<br /><small> <font color=\"#777777\">(Reboot Required)</font></small>"));
+        battery_percent.setText(Html.fromHtml(getResources().getText(R.string.battery_percentage) + "<br /><small> <font color=\"#777777\">" + getResources().getText(R.string.reboot_required) + "</font></small>"));
 
         if (Build.VERSION.SDK_INT > 23) { //only show switch if user is on Nougat or later
             clock_seconds.setVisibility(View.VISIBLE);

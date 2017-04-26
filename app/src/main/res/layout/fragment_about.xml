@@ -33,6 +33,14 @@
                 android:textSize="18sp" />
 
             <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/spanish_from"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <TextView
                 android:id="@+id/textView7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -65,26 +73,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Version Name: "
-                android:textAlignment="center"
-                tools:ignore="HardcodedText" />
+                android:text="@string/version_name"
+                android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/vernum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Version Code: "
-                android:textAlignment="center"
-                tools:ignore="HardcodedText" />
+                android:text="@string/version_code"
+                android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/build_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Build Date: "
-                android:textAlignment="center"
-                tools:ignore="HardcodedText" />
+                android:text="@string/build_date"
+                android:textAlignment="center" />
 
         </LinearLayout>
     </ScrollView>

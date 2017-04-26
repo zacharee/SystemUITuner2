@@ -26,6 +26,7 @@ import com.zacharee1.systemuituner.R;
 import com.zacharee1.systemuituner.SetupActivity;
 
 import java.io.BufferedReader;
+import java.util.Arrays;
 
 /**
  * Created by Zacha on 4/18/2017.
@@ -223,14 +224,22 @@ public class Misc extends Fragment {
                     pref = "window_animation_scale";
                     val = String.valueOf(winScale);
                 } else if (button == globalApply) {
-                    pref = global.substring(0, global.indexOf(" "));
-                    val = global.substring(global.indexOf(" ") + 1);
+                    String[] parsedString = global.split("[ ]");
+                    pref = parsedString[0];
+                    if (parsedString.length > 1) val = parsedString[1];
+                    else val = "";
+                    Settings.Global.putString(activity.getContentResolver(), pref, val);
                 } else if (button == secureApply) {
-                    pref = secure.substring(0, secure.indexOf(" "));
-                    val = secure.substring(secure.indexOf(" ") + 1);
+                    String[] parsedString = secure.split("[ ]");
+                    pref = parsedString[0];
+                    if (parsedString.length > 1) val = parsedString[1];
+                    else val = "";
+                    Settings.Secure.putString(activity.getContentResolver(), pref, val);
                 } else if (button == systemApply) {
-                    pref = system.substring(0, system.indexOf(" "));
-                    val = system.substring(system.indexOf(" ") + 1);
+                    String[] parsedString = system.split("[ ]");
+                    pref = parsedString[0];
+                    if (parsedString.length > 1) val = parsedString[1];
+                    else val = "";
                     if (activity.setThings.sharedPreferences.getBoolean("isRooted", true)) {
                         new Thread(new Runnable() {
                             @Override
@@ -250,8 +259,6 @@ public class Misc extends Fragment {
                     pref = new String();
                     val = new String();
                 }
-
-                Settings.Global.putString(activity.getContentResolver(), pref, val);
             }
         });
     }

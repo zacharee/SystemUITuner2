@@ -121,7 +121,7 @@ public class SetThings {
                             currentActivity.startActivity(intent);
                             break;
                         case "WriteSystemSettings":
-                            Settings.System.putInt(currentActivity.getContentResolver(), sharedPreferences.getString("systemSettingKey", ""), Integer.decode(sharedPreferences.getString("isSystemSwitchEnabled", "0")));
+                            Settings.System.putString(currentActivity.getContentResolver(), sharedPreferences.getString("systemSettingKey", ""), sharedPreferences.getString("isSystemSwitchEnabled", "0"));
                             break;
                         case "reset_blacklist":
                             Settings.Secure.putString(currentActivity.getContentResolver(), "icon_blacklist", "");

@@ -56,7 +56,7 @@
     <string name="sorry">Sorry…</string>
     <string name="android_issue">This is an issue in Android itself, and I can\'t do anything about it.</string>
     <string name="root_needed_toggle">To use this toggle from the phone, you need root.</string>
-    <string name="example_settings_adb" tools:ignore="Typos">adb shell settings put system SETTINGS_VALUE VALUE</string>
+    <string name="example_settings_adb" tools:ignore="Typos" translatable="false">adb shell settings put system SETTINGS_VALUE VALUE</string>
     <string name="non_root_info">Don\'t worry. It\'s fine if you aren\'t. There are just some extra things you need to do in that case.</string>
     <string name="i_am_not_rooted">I am not rooted</string>
     <string name="i_am_rooted">I am rooted</string>
@@ -96,7 +96,7 @@
     <string name="show_airplane_mode">Show Airplane Mode</string>
     <string name="show_notifications">Show Notifications</string>
     <string name="status_bar_style">Status Bar Style</string>
-    <string name="systemui_tuner">SystemUI Tuner</string>
+    <string name="systemui_tuner" translatable="false">SystemUI Tuner</string>
     <string name="home_desc">For Devices without this Activity</string>
     <string name="home_joke">Or for devices with it, I\'m not your boss.</string>
     <string name="home_extra">(If you do have the stock SystemUI Tuner, this one provides some extra goodies.)</string>
@@ -106,7 +106,7 @@
     <string name="misc_desc">Some random things that didn\'t fit anywhere else, but are probably useful.</string>
     <string name="misc_warn">I don\'t know if every device supports these.</string>
     <string name="stat_bar_warn">ATTENTION: Not everything here will work on your device! Manufacturers, especially Samsung and LG, tend to remove the ability to hide certain icons.</string>
-    <string name="email">zachary.wander@gmail.com</string>
+    <string name="email" translatable="false">zachary.wander@gmail.com</string>
     <string name="launcher_image">Launcher Image</string>
     <string name="dnd_switch_in_vol_slider">DND Switch in Vol Slider</string>
     <string name="dark_mode">Dark Mode</string>
@@ -137,14 +137,14 @@
     <string name="alarm_clock_icon">Alarm Clock Icon</string>
     <string name="zen_icon">Zen Icon</string>
     <string name="do_not_disturb">Do Not Disturb Icon</string>
-    <string name="github">Github</string>
+    <string name="github" translatable="false">Github</string>
     <string name="donate">Donate</string>
-    <string name="google_play">Google Play</string>
-    <string name="google">Google+</string>
+    <string name="google_play" translatable="false">Google Play</string>
+    <string name="google" translatable="false">Google+</string>
     <string name="my_other_apps">My Other Apps</string>
-    <string name="telegram">Telegram</string>
-    <string name="xda_labs">XDA Labs</string>
-    <string name="xda_thread">XDA Thread</string>
+    <string name="telegram" translatable="false">Telegram</string>
+    <string name="xda_labs" translatable="false">XDA Labs</string>
+    <string name="xda_thread" translatable="false">XDA Thread</string>
     <string name="reset_blacklist">Reset Blacklist</string>
     <string name="apply">Apply</string>
     <string name="animator_duration_scale">Animator Duration Scale</string>

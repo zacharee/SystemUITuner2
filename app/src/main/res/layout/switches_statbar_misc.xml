@@ -37,16 +37,6 @@
         android:textSize="18sp" />
 
     <Switch
-        android:id="@+id/battery_percent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:checked="false"
-        android:switchMinWidth="50dp"
-        android:text="@string/battery_percentage"
-        android:textSize="18sp" />
-
-    <Switch
         android:id="@+id/cast"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

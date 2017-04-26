@@ -59,8 +59,6 @@ public class StatBar extends Fragment {
     private Switch headset;
     private Switch location;
     private Switch su;
-    private Switch clock_seconds;
-    private Switch battery_percent;
     private Switch vpn;
 
     private Button reset_blacklist;
@@ -135,8 +133,7 @@ public class StatBar extends Fragment {
         headset = (Switch) view.findViewById(R.id.headset);
         location = (Switch) view.findViewById(R.id.location);
         su = (Switch) view.findViewById(R.id.su);
-        clock_seconds = (Switch) view.findViewById(R.id.clock_seconds);
-        battery_percent = (Switch) view.findViewById(R.id.battery_percent);
+
         vpn = (Switch) view.findViewById(R.id.vpn_icon);
 
         switches.add(bluetooth);
@@ -160,20 +157,9 @@ public class StatBar extends Fragment {
         switches.add(headset);
         switches.add(location);
         switches.add(su);
-        switches.add(clock_seconds);
-        switches.add(battery_percent);
         switches.add(vpn);
 
         reset_blacklist = (Button) view.findViewById(R.id.reset_blacklist);
-
-        //custom switch text
-        battery_percent.setText(Html.fromHtml("Battery Percentage<br /><small> <font color=\"#777777\">(Reboot Required)</font></small>"));
-
-        if (Build.VERSION.SDK_INT > 23) { //only show switch if user is on Nougat or later
-            clock_seconds.setVisibility(View.VISIBLE);
-        } else {
-            clock_seconds.setVisibility(View.GONE);
-        }
 
         //strings because I'm lazy
         String bl = "icon_blacklist";
@@ -205,10 +191,6 @@ public class StatBar extends Fragment {
         activity.setThings.switches(vpn, "vpn", bl, view);
         activity.setThings.switches(volume, "volume", bl, view);
 
-        activity.setThings.switches(clock_seconds, "clock_seconds", sec, view);
-
-        activity.setThings.switches(battery_percent, "status_bar_show_battery_percent", sys, view);
-
         activity.setThings.buttons(reset_blacklist, "reset_blacklist");
 
         BroadcastReceiver broadcast_reciever = new BroadcastReceiver() {
@@ -228,7 +210,7 @@ public class StatBar extends Fragment {
 
     private void checkBL(boolean tralse) {
         for (Switch toggle : switches) {
-            if (toggle != battery_percent) toggle.setChecked(tralse);
+            toggle.setChecked(tralse);
         }
     }
 

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.*;
 import android.provider.Settings;
@@ -48,6 +49,9 @@ public class Misc extends Fragment {
     private Button globalApply;
     private Button secureApply;
     private Button systemApply;
+
+    private Switch clock_seconds;
+    private Switch battery_percent;
 
     private TextInputEditText anim;
     private TextInputEditText trans;
@@ -103,6 +107,18 @@ public class Misc extends Fragment {
         secureApply = (Button) view.findViewById(R.id.apply_secure);
         systemApply = (Button) view.findViewById(R.id.apply_system);
 
+        clock_seconds = (Switch) view.findViewById(R.id.clock_seconds);
+        battery_percent = (Switch) view.findViewById(R.id.battery_percent);
+
+        //custom switch text
+        battery_percent.setText(Html.fromHtml("Battery Percentage<br /><small> <font color=\"#777777\">(Reboot Required)</font></small>"));
+
+        if (Build.VERSION.SDK_INT > 23) { //only show switch if user is on Nougat or later
+            clock_seconds.setVisibility(View.VISIBLE);
+        } else {
+            clock_seconds.setVisibility(View.GONE);
+        }
+
         anim = (TextInputEditText) view.findViewById(R.id.anim_text);
         trans = (TextInputEditText) view.findViewById(R.id.trans_text);
         win = (TextInputEditText) view.findViewById(R.id.win_text);
@@ -124,6 +140,9 @@ public class Misc extends Fragment {
         activity.setThings.switches(show_full_zen, "sysui_show_full_zen", "secure", view); //switch listener
         activity.setThings.switches(hu_notif, "heads_up_notifications_enabled", "global", view);
         activity.setThings.switches(vol_warn, "audio_safe_volume_state", "global", view);
+
+        activity.setThings.switches(clock_seconds, "clock_seconds", "secure", view);
+        activity.setThings.switches(battery_percent, "status_bar_show_battery_percent", "system", view);
 
         buttons(animApply);
         buttons(transApply);
@@ -205,42 +224,43 @@ public class Misc extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String pref;
-                final String val;
-                final String type;
+                String pref;
+                String val;
+                String type;
+                String[] parsedString;
 
                 if (button == animApply) {
                     pref = "animator_duration_scale";
-                    if (animScale.contains("0.")) val = animScale;
-                    else if (animScale.contains(".")) val = "0" + animScale;
-                    else val = animScale;
+                    if (animScale.contains(".") && !animScale.contains("0.")) animScale = "0" + animScale;
+                    if (animScale.indexOf(".") == animScale.length()) animScale = animScale + "0";
+                    val = animScale;
                     type = "global";
                 } else if (button == transApply) {
                     pref = "transition_animation_scale";
-                    if (transScale.contains("0.")) val = transScale;
-                    else if (transScale.contains(".")) val = "0" + transScale;
-                    else val = transScale;
+                    if (transScale.contains(".") && !transScale.contains("0.")) transScale = "0" + transScale;
+                    if (transScale.indexOf(".") == transScale.length()) transScale = transScale + "0";
+                    val = transScale;
                     type = "global";
                 } else if (button == winApply) {
                     pref = "window_animation_scale";
-                    if (winScale.contains("0.")) val = winScale;
-                    else if (winScale.contains(".")) val = "0" + winScale;
-                    else val = winScale;
+                    if (winScale.contains(".") && !winScale.contains("0.")) winScale = "0" + winScale;
+                    if (winScale.indexOf(".") == winScale.length()) winScale = winScale + "0";
+                    val = winScale;
                     type = "global";
                 } else if (button == globalApply) {
-                    String[] parsedString = global.split("[ ]");
+                    parsedString = global.split("[ ]");
                     pref = parsedString[0];
                     if (parsedString.length > 1) val = parsedString[1];
                     else val = "";
                     type = "global";
                 } else if (button == secureApply) {
-                    String[] parsedString = secure.split("[ ]");
+                    parsedString = secure.split("[ ]");
                     pref = parsedString[0];
                     if (parsedString.length > 1) val = parsedString[1];
                     else val = "";
                     type = "secure";
                 } else if (button == systemApply) {
-                    String[] parsedString = system.split("[ ]");
+                    parsedString = system.split("[ ]");
                     pref = parsedString[0];
                     if (parsedString.length > 1) val = parsedString[1];
                     else val = "";

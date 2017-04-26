@@ -261,7 +261,7 @@ public class SetThings {
         }
     }
 
-    private void sudo(String...strings) {
+    public void sudo(String...strings) {
         try{
             Process su = Runtime.getRuntime().exec("su");
             DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());

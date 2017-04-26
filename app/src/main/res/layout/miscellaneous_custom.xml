@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="@string/custom_settings_values"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="italic" />
+
+    <Switch
+        android:id="@+id/enable_custom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:checked="false"
+        android:switchMinWidth="50dp"
+        android:text="@string/enable"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:id="@+id/custom_settings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/global_settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/apply_global"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="@string/apply" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/secure_settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/apply_secure"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="@string/apply" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/system_settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/apply_system"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="@string/apply" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

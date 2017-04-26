@@ -154,4 +154,8 @@
     <string name="general">General</string>
     <string name="heads_up_notifications">Heads-Up Notifications</string>
     <string name="headphone_volume_warning">Headphone Volume Warning</string>
+    <string name="custom_settings_values">Custom Settings Values</string>
+    <string name="global">Global</string>
+    <string name="secure">Secure</string>
+    <string name="system">System</string>
 </resources>

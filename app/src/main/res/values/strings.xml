@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">SystemUI Tuner</string>
+    <string name="app_name" translatable="false">SystemUI Tuner</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -176,4 +176,5 @@
     <string name="no">No</string>
     <string name="samsung_warning_message">It seems you are using a Samsung device. If you are on Stock (TouchWiz), and you\'re rooted, SystemUI may break if you use this feature! Unrooted users are most likely safe, but there\'s no guarantee! Are you sure you want to continue?</string>
     <string name="select_time_title">Choose Time to Display</string>
+    <string name="custom_settings_warning">What lies ahead holds many dangers. I take no responsibility if you mess your device up using this feature. Please be cautious! Continue?</string>
 </resources>

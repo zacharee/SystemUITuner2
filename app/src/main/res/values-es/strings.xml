@@ -6,7 +6,6 @@
         <item>semi-transparent</item>
         <item>default</item>
     </string-array>
-    <string name="app_name">SystemUI Tuner</string>
     <string name="about">Descripción</string>
     <string name="abt_desc"> La primer página dice todo lo que hace esta app,(entonces no sé exactamente qué decir)?.</string>
     <string name="abt_warn">Esta app no funciona en todos los dispositivos. Recuerda esto cuando algo no tenga algún efecto.</string>
@@ -137,4 +136,5 @@
     <string name="system_settings_failed">Falló :/. Aquí es el error:</string>
     <string name="warning">CUIDADO</string>
     <string name="yes">Sí</string>
+    <string name="custom_settings_warning">El contenido siguiente puede ser muy peligroso. No soy responsable si tu dispositivo se te rompe. Por favor, ten cuidado! Continuar?</string>
 </resources>

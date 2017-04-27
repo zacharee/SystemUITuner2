@@ -168,22 +168,23 @@ public class Misc extends Fragment {
                 activity.setThings.editor.putBoolean("customSettingsEnabled", isChecked);
                 activity.setThings.editor.apply();
                 if (isChecked) {
-                    new AlertDialog.Builder(view.getContext()) //show a dialog with the error and prompt user to set up permissions again
+                    new AlertDialog.Builder(view.getContext()) //warn about dangers of custom settings
                             .setIcon(alertRed)
-                            .setTitle(Html.fromHtml("<font color='#ff0000'>WRANING</font>"))
-                            .setMessage("What lies ahead holds many dangers. I take no responsibility if you mess your device up using this feature. Please be cautious! Continue?")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            .setTitle(Html.fromHtml("<font color='#ff0000'>" + getResources().getText(R.string.warning) + "</font>"))
+                            .setMessage(getResources().getText(R.string.custom_settings_warning))
+                            .setPositiveButton(getResources().getText(R.string.yes), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     custom_settings.setVisibility(View.VISIBLE);
                                 }
                             })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            .setNegativeButton(getResources().getText(R.string.no), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     enable_custom_settings.setChecked(false);
                                 }
                             })
+                            .setCancelable(false)
                             .show();
                 } else custom_settings.setVisibility(View.GONE);
             }

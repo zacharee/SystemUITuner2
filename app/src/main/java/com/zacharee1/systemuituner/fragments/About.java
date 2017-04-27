@@ -40,19 +40,21 @@ public class About extends Fragment {
         TextView buildDate = (TextView) view.findViewById(R.id.build_date);
         TextView imageCredit = (TextView) view.findViewById(R.id.image_credit);
         TextView appCredit = (TextView) view.findViewById(R.id.app_credit);
+        TextView spanishCredit = (TextView) view.findViewById(R.id.spanish_credit);
 
         imageCredit.setMovementMethod(LinkMovementMethod.getInstance());
         appCredit.setMovementMethod(LinkMovementMethod.getInstance());
+        spanishCredit.setMovementMethod(LinkMovementMethod.getInstance());
 
         try { //add version info to TextViews
             PackageInfo pInfo = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
             String version = pInfo.versionName;
             int verCode = pInfo.versionCode;
-            versionName.append(version);
-            versionNum.append(String.valueOf(verCode));
+            versionName.append(" " + version);
+            versionNum.append(String.valueOf(" " + verCode));
 
             Date buildD = new Date(BuildConfig.TIMESTAMP);
-            buildDate.append(String.valueOf(buildD));
+            buildDate.append(" " + String.valueOf(buildD));
         } catch (Exception e) {
             Log.e("SysUITuner/E", e.getMessage());
         }

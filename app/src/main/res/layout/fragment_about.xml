@@ -33,7 +33,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/spanish_credit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/spanish_from"

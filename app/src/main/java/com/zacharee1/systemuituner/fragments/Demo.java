@@ -284,7 +284,7 @@ public class Demo extends Fragment {
                         activity.setThings.editor.apply();
                     }
                 }, hour, minute, true);
-                timePickerDialog.setTitle("Choose Time to Display");
+                timePickerDialog.setTitle(getResources().getText(R.string.select_time_title));
                 timePickerDialog.show();
             }
         });

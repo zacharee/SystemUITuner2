@@ -19,9 +19,9 @@ public class Exceptions {
         Log.e(page, message); //log the error
         new AlertDialog.Builder(context) //show a dialog with the error and prompt user to set up permissions again
                 .setIcon(alertRed)
-                .setTitle(Html.fromHtml("<font color='#ff0000'>ERROR</font>"))
-                .setMessage("Looks like you may not have set up permissions correctly. For reference, here's the error:\n\n\"" + message + "\"\n\nWould you like to enter setup now?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setTitle(Html.fromHtml("<font color='#ff0000'>" + context.getResources().getText(R.string.error) + "</font>"))
+                .setMessage(context.getResources().getText(R.string.perms_not_set) + "\n\n\"" + message + "\"\n\n" + context.getResources().getText(R.string.prompt_setup))
+                .setPositiveButton(context.getResources().getText(R.string.yes), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(appContext, SetupActivity.class);
@@ -29,7 +29,7 @@ public class Exceptions {
                         appContext.startActivity(intent);
                     }
                 })
-                .setNegativeButton("No", null)
+                .setNegativeButton(context.getResources().getText(R.string.no), null)
                 .show();
     }
 
@@ -37,9 +37,9 @@ public class Exceptions {
         Log.e(page, message); //log error
         new AlertDialog.Builder(context) //show details dialog
                 .setIcon(alertRed)
-                .setTitle(Html.fromHtml("<font color='#ff0000'>ERROR</font>"))
-                .setMessage("Didn't work :/. For reference, here's the error:\n\n\"" + message + "\"")
-                .setPositiveButton("OK", null)
+                .setTitle(Html.fromHtml("<font color='#ff0000'>" + context.getResources().getText(R.string.error) + "</font>"))
+                .setMessage(context.getResources().getText(R.string.system_settings_failed) + "\n\n\"" + message + "\"")
+                .setPositiveButton(context.getResources().getText(R.string.ok), null)
                 .show();
     }
 }

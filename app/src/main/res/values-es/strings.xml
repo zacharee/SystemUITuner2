@@ -80,7 +80,7 @@
     <string name="nfc_icon">Icono NFC</string>
     <string name="non_lp_bypass">Si no está en Lollipop, puede usar esta característica. Toque \"Conceder Perms\", y luego \"CONTINUAR\".</string>
     <string name="non_root_info">No preocupe. Es bueno si no es usuario root. Solamente hay algunas medidas extras en este caso.</string>
-    <string name="not_rooted_huh">No es usuario root, eh?</string>
+    <string name="not_rooted_huh">No eres usuario root, eh?</string>
     <string name="press_button_rooted">Cuando esté listo, toca el botón.</string>
     <string name="quick_settings">Preferencias Listas</string>
     <string name="reset_blacklist">Reajustar Lista Negra</string>
@@ -127,4 +127,14 @@
     <string name="no_root_setup">Configuración Sin Root</string>
     <string name="root_setup">Configuración Con Root</string>
     <string name="system_settings">Preferencias de Sistema</string>
+    <string name="error">ERROR</string>
+    <string name="no">No</string>
+    <string name="ok">OK</string>
+    <string name="perms_not_set">Se parece que los permisos no son configurados correctamente. Aquí es el error:</string>
+    <string name="prompt_setup">Quieres entrar en la configuración ahora?</string>
+    <string name="samsung_warning_message">Se parece que estás usando un Samsung. Si tienes Stock (TouchWiz) y eres usuario de root, SystemUI puede romper si usas esta caracterista! Usuarios sin root son probablamente seguros, pero no puedo decirlo con certitumbre. Estás seguro que quieres continuar?</string>
+    <string name="select_time_title">Seleccionar Tiempo para Exponer</string>
+    <string name="system_settings_failed">Falló :/. Aquí es el error:</string>
+    <string name="warning">CUIDADO</string>
+    <string name="yes">Sí</string>
 </resources>

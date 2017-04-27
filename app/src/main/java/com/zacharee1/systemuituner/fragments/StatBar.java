@@ -85,12 +85,9 @@ public class StatBar extends Fragment {
             view.setVisibility(View.GONE);
             new AlertDialog.Builder(view.getContext())
                     .setIcon(drawable)
-                    .setTitle(Html.fromHtml("<font color='#ff0000'>WARNING</font>"))
-                    .setMessage("It seems you are using a Samsung device. " +
-                            "If you are on Stock (TouchWiz), and you're rooted, SystemUI may break if you use this feature! " +
-                            "Unrooted users are most likely safe, but there's no guarantee! " +
-                            "Are you sure you want to continue?")
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    .setTitle(Html.fromHtml("<font color='#ff0000'>" + getResources().getText(R.string.warning) + "</font>"))
+                    .setMessage(getResources().getText(R.string.samsung_warning_message))
+                    .setPositiveButton(getResources().getText(R.string.yes), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             activity.setThings.editor.putBoolean("samsungRisk", true);
@@ -98,7 +95,7 @@ public class StatBar extends Fragment {
                             view.setVisibility(View.VISIBLE);
                         }
                     })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    .setNegativeButton(getResources().getText(R.string.no), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Main fragment = new Main();

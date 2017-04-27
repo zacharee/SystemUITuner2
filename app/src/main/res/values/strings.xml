@@ -166,4 +166,14 @@
     <string name="version_name">Version Name:</string>
     <string name="version_code">Version Code:</string>
     <string name="build_date">Build Date:</string>
+    <string name="error">ERROR</string>
+    <string name="warning">WARNING</string>
+    <string name="perms_not_set">Looks like you may not have set up permissions correctly. For reference, here\'s the error:</string>
+    <string name="prompt_setup">Would you like to enter setup now?</string>
+    <string name="system_settings_failed">Didn\'t work :/. For reference, here\'s the error:</string>
+    <string name="ok">OK</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="samsung_warning_message">It seems you are using a Samsung device. If you are on Stock (TouchWiz), and you\'re rooted, SystemUI may break if you use this feature! Unrooted users are most likely safe, but there\'s no guarantee! Are you sure you want to continue?</string>
+    <string name="select_time_title">Choose Time to Display</string>
 </resources>

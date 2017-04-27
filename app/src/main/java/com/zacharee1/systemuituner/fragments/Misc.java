@@ -86,8 +86,6 @@ public class Misc extends Fragment {
         secure = new String();
         system = new String();
 
-        activity.setTitle("Miscellaneous"); //set proper fragment title
-
         view = inflater.inflate(R.layout.fragment_misc, container, false);
 
         show_full_zen = (Switch) view.findViewById(R.id.show_full_zen);

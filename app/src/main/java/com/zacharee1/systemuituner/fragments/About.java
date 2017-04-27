@@ -32,8 +32,6 @@ public class About extends Fragment {
             activity = (MainActivity) getActivity();
         }
 
-        activity.setTitle("About"); //set correct title for fragment
-
         //define version TextViews
         TextView versionName = (TextView) view.findViewById(R.id.vername);
         TextView versionNum = (TextView) view.findViewById(R.id.vernum);

@@ -18,7 +18,6 @@ public class NoRootSystemSettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         SetThings setThings = new SetThings(this);
         setContentView(R.layout.activity_no_root_system_settings);
-        setTitle("System Settings");
         activity = this;
 
         String oneZero = setThings.sharedPreferences.getString("isSystemSwitchEnabled", "EXAMPLE_VALUE");

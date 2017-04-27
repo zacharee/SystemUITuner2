@@ -99,6 +99,9 @@
     <string name="show_notifications">Show Notifications</string>
     <string name="status_bar_style">Status Bar Style</string>
     <string name="systemui_tuner" translatable="false">SystemUI Tuner</string>
+    <string name="system_settings">System Settings</string>
+    <string name="no_root_setup">No-Root Setup</string>
+    <string name="root_setup">Root Setup</string>
     <string name="home_desc">For Devices without this Activity</string>
     <string name="home_joke">Or for devices with it, I\'m not your boss.</string>
     <string name="home_extra">(If you do have the stock SystemUI Tuner, this one provides some extra goodies.)</string>

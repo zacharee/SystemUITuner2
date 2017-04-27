@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity
     public static Fragment settings;
     public static Fragment misc;
 
+    private CharSequence title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,9 +91,9 @@ public class MainActivity extends AppCompatActivity
 //        toolbar.setPopupTheme(setThings.style);
 
 //        Toolbar toolbar = new Toolbar(this);
+        title = getResources().getText(R.string.app_name);
 
-
-        setTitle("SystemUI Tuner"); //set default title just because
+        setTitle(title); //set default title just because
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
@@ -207,6 +209,7 @@ public class MainActivity extends AppCompatActivity
                 @Override
                 public void run() {
                     fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+                    setTitle(title);
                 }
             }, 350);
 
@@ -265,18 +268,25 @@ public class MainActivity extends AppCompatActivity
     private Fragment chooseFrag(int id) { //return fragment corresponding to nav drawer ID
         switch (id) {
             case R.id.nav_quick_settings:
+                title = getResources().getText(R.string.quick_settings);
                 return qs;
             case R.id.nav_statusbar:
+                title = getResources().getText(R.string.status_bar);
                 return statbar;
             case R.id.nav_demo_mode:
+                title = getResources().getText(R.string.demo_mode);
                 return demo;
             case R.id.nav_about:
+                title = getResources().getText(R.string.about);
                 return about;
             case R.id.nav_settings:
+                title = getResources().getText(R.string.settings);
                 return settings;
             case R.id.nav_misc:
+                title = getResources().getText(R.string.miscellaneous);
                 return misc;
             default:
+                title = getResources().getText(R.string.app_name);
                 return main;
         }
     }

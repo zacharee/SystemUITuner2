@@ -23,8 +23,6 @@ public class Main extends Fragment {
 
         if (getActivity() instanceof MainActivity) activity = (MainActivity) getActivity();
 
-        activity.setTitle("SystemUI Tuner"); //set proper fragment title
-
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
         TextView title = (TextView) view.findViewById(R.id.title_main);

@@ -23,8 +23,6 @@ public class QS extends Fragment {
             activity = (MainActivity) getActivity();
         }
 
-        activity.setTitle("Quick Settings");
-
         View view = inflater.inflate(R.layout.fragment_qs, container, false);
 
         return view;

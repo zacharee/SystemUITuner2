@@ -75,8 +75,6 @@ public class StatBar extends Fragment {
             activity = (MainActivity) getActivity();
         }
 
-        activity.setTitle("Status Bar"); //set proper fragment title
-
         view = inflater.inflate(R.layout.fragment_statbar, container, false);
 
         drawable = R.drawable.ic_warning_red;

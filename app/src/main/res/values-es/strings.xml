@@ -124,4 +124,7 @@
     <string name="version_name">Nombre de Versión:</string>
     <string name="build_date">Fecha de Construcción:</string>
     <string name="reboot_required">(Se Necesita Reboot)</string>
+    <string name="no_root_setup">Configuración Sin Root</string>
+    <string name="root_setup">Configuración Con Root</string>
+    <string name="system_settings">Preferencias de Sistema</string>
 </resources>

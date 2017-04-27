@@ -30,14 +30,14 @@
         </activity>
         <activity
             android:name=".NoRootActivity"
-            android:label="No-Root Setup">
+            android:label="@string/no_root_setup">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.zacharee1.systemuituner.SetupActivity" />
         </activity>
         <activity
             android:name=".RootActivity"
-            android:label="Root Setup"
+            android:label="@string/root_setup"
             android:parentActivityName=".SetupActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -45,13 +45,15 @@
         </activity>
         <activity
             android:name=".SetupActivity"
-            android:label="Setup">
+            android:label="@string/setup">
 
             <!-- <meta-data -->
             <!-- android:name="android.support.PARENT_ACTIVITY" -->
             <!-- android:value="com.zacharee1.systemuituner.MainActivity" /> -->
         </activity>
-        <activity android:name=".NoRootSystemSettingsActivity">
+        <activity
+            android:name=".NoRootSystemSettingsActivity"
+            android:label="@string/system_settings">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.zacharee1.systemuituner.MainActivity" />

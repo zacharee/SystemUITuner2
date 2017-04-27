@@ -26,8 +26,6 @@ public class Settings extends Fragment {
             activity = (MainActivity) getActivity();
         }
 
-        activity.setTitle("Settings"); //set correct title for fragment
-
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
         Switch darkMode = (Switch) view.findViewById(R.id.dark_mode);

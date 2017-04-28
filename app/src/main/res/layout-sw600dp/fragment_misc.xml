@@ -33,46 +33,68 @@
                 android:textAlignment="center"
                 android:textSize="20sp" />
 
-            <android.support.v7.widget.CardView
-                android:layout_width="400dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp"
-                app:cardElevation="1dp"
-                app:cardUseCompatPadding="true">
+                android:orientation="horizontal">
 
-                <include
-                    layout="@layout/switches_miscellaneous_general"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </android.support.v7.widget.CardView>
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-            <android.support.v7.widget.CardView
-                android:layout_width="400dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp"
-                app:cardElevation="1dp"
-                app:cardUseCompatPadding="true">
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        app:cardElevation="1dp"
+                        app:cardUseCompatPadding="true">
 
-                <include
-                    layout="@layout/miscellaneous_animation_scales"
+                        <include
+                            layout="@layout/switches_miscellaneous_general"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.v7.widget.CardView>
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </android.support.v7.widget.CardView>
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-            <android.support.v7.widget.CardView
-                android:layout_width="400dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                app:cardElevation="1dp"
-                app:cardUseCompatPadding="true">
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="16dp"
+                        app:cardElevation="1dp"
+                        app:cardUseCompatPadding="true">
 
-                <include
-                    layout="@layout/miscellaneous_custom"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </android.support.v7.widget.CardView>
+                        <include
+                            layout="@layout/miscellaneous_animation_scales"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        app:cardElevation="1dp"
+                        app:cardUseCompatPadding="true">
+
+                        <include
+                            layout="@layout/miscellaneous_custom"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.v7.widget.CardView>
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

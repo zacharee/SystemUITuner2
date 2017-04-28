@@ -10,12 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+@SuppressWarnings("ALL")
 public class SetupActivity extends AppCompatActivity {
 
     private Button rooted;
     private Button not_rooted;
 
-    public static AppCompatActivity activity;
+    private AppCompatActivity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,7 @@ public class SetupActivity extends AppCompatActivity {
         buttons(rooted);
         buttons(not_rooted);
 
-        BroadcastReceiver broadcast_reciever = new BroadcastReceiver() {
+        BroadcastReceiver broadcast_receiver = new BroadcastReceiver() {
 
             @Override
             public void onReceive(Context arg0, Intent intent) {
@@ -46,7 +47,7 @@ public class SetupActivity extends AppCompatActivity {
                 }
             }
         };
-        registerReceiver(broadcast_reciever, new IntentFilter("finish_activity"));
+        registerReceiver(broadcast_receiver, new IntentFilter("finish_activity"));
     }
 
     private void buttons(final Button button) {

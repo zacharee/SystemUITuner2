@@ -6,6 +6,16 @@
     android:padding="10dp">
 
 
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="@string/general"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="italic" />
+
     <Switch
         android:id="@+id/dark_mode"
         android:layout_width="match_parent"

@@ -118,7 +118,7 @@
     <string name="window_animation_scale">Duración de Animaciones de Ventanas</string>
     <string name="workaround">Creo que es bueno que exista un método alternativo</string>
     <string name="zen_icon">Icono Zen</string>
-    <string name="spanish_from">Traducción español por <a href="https://es.stackoverflow.com/users/28567/aaron-romero">Aaron Romero</a> and <a href="https://forum.xda-developers.com/member.php?u=7055541">Zacharee1</a></string>
+    <string name="spanish_from">Traducción español hecho por <a href="https://es.stackoverflow.com/users/28567/aaron-romero">Aaron Romero</a> y <a href="https://forum.xda-developers.com/member.php?u=7055541">Zacharee1</a></string>
     <string name="version_code">Código de Versión:</string>
     <string name="version_name">Nombre de Versión:</string>
     <string name="build_date">Fecha de Construcción:</string>

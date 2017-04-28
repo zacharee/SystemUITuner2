@@ -9,9 +9,10 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
+@SuppressWarnings("ALL")
 public class NoRootSystemSettingsActivity extends AppCompatActivity {
 
-    public static AppCompatActivity activity;
+    private AppCompatActivity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,7 @@ public class NoRootSystemSettingsActivity extends AppCompatActivity {
         setThings.buttons(perms, "SystemSettingsPerms");
         setThings.buttons(go, "WriteSystemSettings");
 
-        BroadcastReceiver broadcast_reciever = new BroadcastReceiver() {
+        BroadcastReceiver broadcast_receiver = new BroadcastReceiver() {
 
             @Override
             public void onReceive(Context arg0, Intent intent) {
@@ -46,6 +47,6 @@ public class NoRootSystemSettingsActivity extends AppCompatActivity {
                 }
             }
         };
-        registerReceiver(broadcast_reciever, new IntentFilter("finish_activity"));
+        registerReceiver(broadcast_receiver, new IntentFilter("finish_activity"));
     }
 }

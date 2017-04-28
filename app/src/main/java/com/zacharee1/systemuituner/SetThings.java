@@ -2,8 +2,6 @@ package com.zacharee1.systemuituner;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,19 +10,11 @@ import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Looper;
 import android.provider.Settings;
-import android.support.design.widget.TextInputEditText;
-import android.support.v7.widget.CardView;
-import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.Switch;
-
-import com.zacharee1.systemuituner.fragments.Main;
-import com.zacharee1.systemuituner.fragments.StatBar;
 
 import java.io.DataOutputStream;
 import java.io.IOException;

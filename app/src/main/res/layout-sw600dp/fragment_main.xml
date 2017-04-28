@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/systemui_tuner"
                 android:textAlignment="center"
-                android:textSize="26sp" />
+                android:textSize="40sp" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/home_desc"
                 android:textAlignment="center"
-                android:textSize="16sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textView12"
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/home_joke"
                 android:textAlignment="center"
-                android:textSize="16sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textView13"
@@ -47,7 +47,7 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/home_extra"
                 android:textAlignment="center"
-                android:textSize="16sp" />
+                android:textSize="20sp" />
 
             <android.support.v7.widget.CardView
                 android:layout_width="400dp"
@@ -69,7 +69,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/setup_ask"
                         android:textAlignment="center"
-                        android:textSize="16sp" />
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/textView17"
@@ -78,7 +78,7 @@
                         android:layout_marginTop="5dp"
                         android:text="@string/resetup_instruction"
                         android:textAlignment="center"
-                        android:textSize="16sp" />
+                        android:textSize="18sp" />
 
                     <Button
                         android:id="@+id/setup"

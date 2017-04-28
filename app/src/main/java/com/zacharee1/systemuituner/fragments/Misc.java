@@ -3,16 +3,13 @@ package com.zacharee1.systemuituner.fragments;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.*;
 import android.provider.Settings;
 import android.support.design.widget.TextInputEditText;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,12 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import com.zacharee1.systemuituner.MainActivity;
-import com.zacharee1.systemuituner.NoRootSystemSettingsActivity;
 import com.zacharee1.systemuituner.R;
-import com.zacharee1.systemuituner.SetupActivity;
-
-import java.io.BufferedReader;
-import java.util.Arrays;
 
 /**
  * Created by Zacha on 4/18/2017.
@@ -125,8 +117,11 @@ public class Misc extends Fragment {
         custom_system = (TextInputEditText) view.findViewById(R.id.system_settings);
 
         animScale = Settings.Global.getString(activity.getContentResolver(), "animator_duration_scale");
+        if (animScale == null) animScale = "1.0";
         transScale = Settings.Global.getString(activity.getContentResolver(), "transition_animation_scale");
+        if (transScale == null) transScale = "1.0";
         winScale = Settings.Global.getString(activity.getContentResolver(), "window_animation_scale");
+        if (winScale == null) winScale = "1.0";
 
         anim.setHint(getResources().getText(R.string.animator_duration_scale) + " (" + String.valueOf(animScale) + ")");
         trans.setHint(getResources().getText(R.string.transition_animation_scale) + " (" + String.valueOf(transScale) + ")");
@@ -231,19 +226,22 @@ public class Misc extends Fragment {
                 if (button == animApply) {
                     pref = "animator_duration_scale";
                     if (animScale.contains(".") && !animScale.contains("0.")) animScale = "0" + animScale;
-                    if (animScale.indexOf(".") == animScale.length()) animScale = animScale + "0";
+                    if (animScale.indexOf(".") == animScale.length() - 1) animScale = animScale + "0";
+                    if (Float.valueOf(animScale) > 10) animScale = "10";
                     val = animScale;
                     type = "global";
                 } else if (button == transApply) {
                     pref = "transition_animation_scale";
                     if (transScale.contains(".") && !transScale.contains("0.")) transScale = "0" + transScale;
-                    if (transScale.indexOf(".") == transScale.length()) transScale = transScale + "0";
+                    if (transScale.indexOf(".") == transScale.length() - 1) transScale = transScale + "0";
+                    if (Float.valueOf(transScale) > 10) transScale = "10";
                     val = transScale;
                     type = "global";
                 } else if (button == winApply) {
                     pref = "window_animation_scale";
                     if (winScale.contains(".") && !winScale.contains("0.")) winScale = "0" + winScale;
-                    if (winScale.indexOf(".") == winScale.length()) winScale = winScale + "0";
+                    if (winScale.indexOf(".") == winScale.length() - 1) winScale = winScale + "0";
+                    if (Float.valueOf(winScale) > 10) winScale = "10";
                     val = winScale;
                     type = "global";
                 } else if (button == globalApply) {

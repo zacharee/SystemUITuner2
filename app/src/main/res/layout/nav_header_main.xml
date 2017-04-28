@@ -17,7 +17,7 @@
         android:layout_height="70dp"
         android:contentDescription="@string/launcher_image"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:tint="@color/colorPrimaryLight"
+        android:tint="@android:color/primary_text_dark"
         app:srcCompat="@drawable/ic_settings" />
 
     <TextView

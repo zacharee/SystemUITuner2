@@ -3,7 +3,6 @@ package com.zacharee1.systemuituner.fragments;
 import android.app.Fragment;
 import android.content.pm.PackageInfo;
 import android.os.Bundle;
-import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;

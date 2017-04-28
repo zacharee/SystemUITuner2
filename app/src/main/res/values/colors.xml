@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="colorPrimary">#9c27b0</color>
-    <color name="colorPrimaryDark">#7b1fa2</color>
-    <color name="colorAccent">#009688</color>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="colorPrimary" tools:ignore="UnusedResources">#9c27b0</color>
+    <color name="colorPrimaryDark" tools:ignore="UnusedResources">#7b1fa2</color>
+    <color name="colorAccent" tools:ignore="UnusedResources">#009688</color>
     <color name="cardview_dark_background">#FF424242</color>
     <color name="colorPrimary2">#3f51b5</color>
     <color name="colorPrimaryDark2">#303f9f</color>
-    <color name="colorAccent2">#ff5722</color>
+    <color name="colorAccent2" tools:ignore="UnusedResources">#ff5722</color>
     <color name="colorPrimaryLight">#b3e5fc</color>
     <color name="colorAccent3">#009688</color>
-    <color name="foreground_material_dark2">#ffccbc</color>
-    <color name="primary_text_material_dark2">#ffccbc</color>
+    <color name="foreground_material_dark2" tools:ignore="UnusedResources">#ffccbc</color>
+    <color name="primary_text_material_dark2" tools:ignore="UnusedResources">#ffccbc</color>
     <color name="colorAccent_Dark">#00bcd4</color>
 </resources>

@@ -21,7 +21,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:text="@string/demo_warn"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
             <LinearLayout
                 android:layout_width="600dp"

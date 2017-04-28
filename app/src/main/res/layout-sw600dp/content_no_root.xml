@@ -32,14 +32,15 @@
                 android:layout_height="wrap_content"
                 android:text="@string/not_rooted_huh"
                 android:textAlignment="center"
-                android:textSize="26sp" />
+                android:textSize="40sp" />
 
             <TextView
                 android:id="@+id/textView21"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/bummer"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textView22"
@@ -47,7 +48,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/workaround"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textView23"
@@ -55,7 +57,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/adb_instructions"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textView24"
@@ -63,7 +66,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/adb_reminder"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textView25"
@@ -71,7 +75,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/adb_set_up"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textView26"
@@ -79,7 +84,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/adb_perm_grant"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"

@@ -1,32 +1,24 @@
 package com.zacharee1.systemuituner;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceActivity;
 import android.support.annotation.NonNull;
-import android.support.annotation.StringDef;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import com.zacharee1.systemuituner.fragments.About;
 import com.zacharee1.systemuituner.fragments.Demo;
@@ -141,7 +133,7 @@ public class MainActivity extends AppCompatActivity
 
 //        Log.i("OPTION", String.valueOf(id) + " " + String.valueOf(R.id.home));
 
-        if (id != 16908332) { //16908332 is the ID of the drawer toggle
+        if (id == R.menu.main) { //16908332 is the ID of the drawer toggle
             switch (id) {
                 case R.id.action_github:
                     uri = Uri.parse("https://github.com/zacharee/SystemUITuner2");
@@ -262,7 +254,6 @@ public class MainActivity extends AppCompatActivity
         View header = navigationView.getHeaderView(0);
         View head = header.findViewById(R.id.nav_header);
         head.setBackground(getDrawable(setThings.Dark ? R.drawable.side_nav_bar_dark : R.drawable.side_nav_bar_light));
-
     }
 
     private Fragment chooseFrag(int id) { //return fragment corresponding to nav drawer ID

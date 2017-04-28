@@ -118,6 +118,14 @@ public class SetThings {
                             intent = new Intent("check_statbar_toggles");
                             currentActivity.sendBroadcast(intent);
                             break;
+                        case "root_setup:":
+                            intent = new Intent(currentActivity.getApplicationContext(), RootActivity.class);
+                            currentActivity.startActivity(intent);
+                            break;
+                        case "no_root_setup":
+                            intent = new Intent(currentActivity.getApplicationContext(), NoRootActivity.class);
+                            currentActivity.startActivity(intent);
+                            break;
                     }
                 } catch (Exception e) {
                     exceptions.systemSettings(context, currentActivity.getApplicationContext(), e.getMessage(), "SetThings");
@@ -143,6 +151,9 @@ public class SetThings {
             case "icon_blacklist":
                 String blacklist = Settings.Secure.getString(currentActivity.getContentResolver(), "icon_blacklist") != null ? Settings.Secure.getString(currentActivity.getContentResolver(), "icon_blacklist") : "nada";
                 setting = !blacklist.contains(pref) ? 1 : 0;
+                break;
+            case "dark_mode":
+                setting = Dark ? 1 : 0;
                 break;
         }
         toggle.setChecked(setting == 1);
@@ -199,6 +210,12 @@ public class SetThings {
                                     }
                                 }
                             }).start();
+                            break;
+                        case "dark_mode":
+                            editor.putBoolean("isDark", isChecked);
+                            editor.apply();
+                            currentActivity.finish();
+                            currentActivity.startActivity(new Intent(currentActivity, currentActivity.getClass()));
                             break;
                         default:
                             settings(settingType, pref, isChecked ? "1" : "0");

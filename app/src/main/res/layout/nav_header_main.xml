@@ -18,7 +18,7 @@
         android:contentDescription="@string/launcher_image"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:tint="@android:color/primary_text_dark"
-        app:srcCompat="@drawable/ic_settings" />
+        app:srcCompat="@drawable/ic_settings_black" />
 
     <TextView
         android:layout_width="match_parent"

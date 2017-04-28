@@ -7,7 +7,7 @@
     <color name="colorPrimary2">#3f51b5</color>
     <color name="colorPrimaryDark2">#303f9f</color>
     <color name="colorAccent2" tools:ignore="UnusedResources">#ff5722</color>
-    <color name="colorPrimaryLight">#b3e5fc</color>
+    <color name="colorPrimaryLight" tools:ignore="UnusedResources">#b3e5fc</color>
     <color name="colorAccent3">#009688</color>
     <color name="foreground_material_dark2" tools:ignore="UnusedResources">#ffccbc</color>
     <color name="primary_text_material_dark2" tools:ignore="UnusedResources">#ffccbc</color>

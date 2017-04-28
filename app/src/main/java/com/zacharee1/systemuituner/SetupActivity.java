@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -18,11 +17,15 @@ public class SetupActivity extends AppCompatActivity {
 
     private AppCompatActivity activity;
 
+    private SetThings setThings;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SetThings setThings = new SetThings(this);
         activity = this;
+
+        setThings = new SetThings(this);
 
         setContentView(R.layout.activity_setup);
 
@@ -32,10 +35,9 @@ public class SetupActivity extends AppCompatActivity {
         rooted = (Button) findViewById(R.id.rooted);
         not_rooted = (Button) findViewById(R.id.not_rooted);
 
-        //button listeners (need to be moved to setThings eventually)
-        /* TODO: move button listeners */
-        buttons(rooted);
-        buttons(not_rooted);
+        //button listeners
+        setThings.buttons(rooted, "root_setup");
+        setThings.buttons(not_rooted, "no_root_setup");
 
         BroadcastReceiver broadcast_receiver = new BroadcastReceiver() {
 
@@ -48,20 +50,5 @@ public class SetupActivity extends AppCompatActivity {
             }
         };
         registerReceiver(broadcast_receiver, new IntentFilter("finish_activity"));
-    }
-
-    private void buttons(final Button button) {
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (button == rooted) {
-                    Intent intent = new Intent(getApplicationContext(), RootActivity.class);
-                    startActivity(intent);
-                } else if (button == not_rooted) {
-                    Intent intent = new Intent(getApplicationContext(), NoRootActivity.class);
-                    startActivity(intent);
-                }
-            }
-        });
     }
 }

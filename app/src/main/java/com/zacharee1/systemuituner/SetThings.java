@@ -185,6 +185,7 @@ public class SetThings {
                                         if (blacklist2 != null && !blacklist2.equals("")) {
                                             try {
                                                 Settings.Secure.putString(currentActivity.getContentResolver(), "icon_blacklist", blacklist2);
+                                                Settings.Secure.putString(currentActivity.getContentResolver(), "icon_blacklist2", blacklist2);
                                             } catch (final Exception e) {
                                                 currentActivity.runOnUiThread(new Runnable() {
                                                     @Override
@@ -196,6 +197,7 @@ public class SetThings {
                                         } else {
                                             try {
                                                 Settings.Secure.putString(currentActivity.getContentResolver(), "icon_blacklist", "");
+                                                Settings.Secure.putString(currentActivity.getContentResolver(), "icon_blacklist2", "");
                                             } catch (final Exception e) {
                                                 currentActivity.runOnUiThread(new Runnable() {
                                                     @Override

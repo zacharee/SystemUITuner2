@@ -177,4 +177,5 @@
     <string name="samsung_warning_message">It seems you are using a Samsung device. If you are on Stock (TouchWiz), and you\'re rooted, SystemUI may break if you use this feature! Unrooted users are most likely safe, but there\'s no guarantee! Are you sure you want to continue?</string>
     <string name="select_time_title">Choose Time to Display</string>
     <string name="custom_settings_warning">What lies ahead holds many dangers. I take no responsibility if you mess your device up using this feature. Please be cautious! Continue?</string>
+    <string name="boot_message_icon_blacklist">SystemUI Tuner has restored proper Status Bar state.</string>
 </resources>

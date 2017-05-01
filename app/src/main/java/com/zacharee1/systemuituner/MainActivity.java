@@ -77,6 +77,10 @@ public class MainActivity extends AppCompatActivity
         settings = new Settings();
         misc = new Misc();
 
+        IntentFilter filter = new IntentFilter(Intent.ACTION_SHUTDOWN);
+        BroadcastReceiver mReceiver = new ShutDownReceiver();
+        registerReceiver(mReceiver, filter);
+
         setContentView(R.layout.activity_main);
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);

@@ -137,4 +137,5 @@
     <string name="warning">CUIDADO</string>
     <string name="yes">Sí</string>
     <string name="custom_settings_warning">El contenido siguiente puede ser muy peligroso. No soy responsable si tu dispositivo se te rompe. Por favor, ten cuidado! Continuar?</string>
+    <string name="boot_message_icon_blacklist">SystemUI Tuner ha restablecido estado de Barra de Estado apropiado.</string>
 </resources>

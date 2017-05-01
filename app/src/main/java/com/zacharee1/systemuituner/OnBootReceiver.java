@@ -17,7 +17,7 @@ public class OnBootReceiver extends WakefulBroadcastReceiver {
 
         String blacklist_bak = Settings.Secure.getString(context.getContentResolver(), "icon_blacklist2");
         Settings.Secure.putString(context.getContentResolver(), "icon_blacklist", blacklist_bak);
-        Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, context.getResources().getText(R.string.boot_message_icon_blacklist), Toast.LENGTH_SHORT).show();
         startWakefulService(context, new Intent(context, ShutDownListen.class));
     }
 }

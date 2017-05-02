@@ -34,6 +34,9 @@ public class Misc extends Fragment {
     private Switch hu_notif;
     private Switch vol_warn;
     private Switch enable_custom_settings;
+    private Switch clock_seconds;
+    private Switch battery_percent;
+    private Switch power_notifs;
 
     private Button animApply;
     private Button transApply;
@@ -41,9 +44,6 @@ public class Misc extends Fragment {
     private Button globalApply;
     private Button secureApply;
     private Button systemApply;
-
-    private Switch clock_seconds;
-    private Switch battery_percent;
 
     private TextInputEditText anim;
     private TextInputEditText trans;
@@ -84,6 +84,7 @@ public class Misc extends Fragment {
         hu_notif = (Switch) view.findViewById(R.id.hu_notif);
         vol_warn = (Switch) view.findViewById(R.id.vol_warn);
         enable_custom_settings = (Switch) view.findViewById(R.id.enable_custom);
+        power_notifs = (Switch) view.findViewById(R.id.power_notifications);
 
         enable_custom_settings.setChecked(customSettingsEnabled);
 
@@ -136,6 +137,8 @@ public class Misc extends Fragment {
 
         activity.setThings.switches(clock_seconds, "clock_seconds", "secure", view);
         activity.setThings.switches(battery_percent, "status_bar_show_battery_percent", "system", view);
+
+        activity.setThings.switches(power_notifs, "show_importance_slider", "secure", view);
 
         buttons(animApply);
         buttons(transApply);

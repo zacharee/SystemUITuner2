@@ -118,7 +118,7 @@ public class SetThings {
                             intent = new Intent("check_statbar_toggles");
                             currentActivity.sendBroadcast(intent);
                             break;
-                        case "root_setup:":
+                        case "root_setup":
                             intent = new Intent(currentActivity.getApplicationContext(), RootActivity.class);
                             currentActivity.startActivity(intent);
                             break;

@@ -40,7 +40,7 @@
     <string name="dnd_switch_in_vol_slider">Interruptor No Molestar en Slider Vol</string>
     <string name="do_not_disturb">Icono No Molestar</string>
     <string name="donate">Donar</string>
-    <string name="enable">Permitir</string>
+    <string name="enabled">Permitido</string>
     <string name="ethernet_icon">Icono Ethernet</string>
     <string name="exit_app">Salir</string>
     <string name="finished">OK! Estoy listo!</string>
@@ -138,4 +138,20 @@
     <string name="yes">Sí</string>
     <string name="custom_settings_warning">El contenido siguiente puede ser muy peligroso. No soy responsable si tu dispositivo se te rompe. Por favor, ten cuidado! Continuar?</string>
     <string name="boot_message_icon_blacklist">SystemUI Tuner ha restablecido estado de Barra de Estado apropiado.</string>
+    <string name="power_notification_controls">Control de Importancia de Notificaciones</string>
+    <string name="allow_full_screen_interruption">- Permitir interrupción en pantalla completa</string>
+    <string name="always_peek">- Mostrar siempre</string>
+    <string name="block_all_app_notifications">- Bloquear todas notificaciones de app</string>
+    <string name="level_0">Nivel 0</string>
+    <string name="level_1">Nivel 1</string>
+    <string name="level_2">Nivel 2</string>
+    <string name="level_3">Nivel 3</string>
+    <string name="level_4">Nivel 4</string>
+    <string name="level_5">Nivel 5</string>
+    <string name="never_peek">- No mostrar</string>
+    <string name="no_full_screen_interruption">- No permitir interrupción en pantalla completa</string>
+    <string name="no_sound_or_vibration">- No sonas ni vibraciones</string>
+    <string name="not_on_lockscreen_or_in_status_bar">- Ocultar de pantalla bloqueada y barra de estado</string>
+    <string name="show_at_bottom_of_notification_list">- Mostrar al final de lista de notificaciones</string>
+    <string name="show_at_top_of_notification_list">- Mostrar en parte superior de lista de notificaciones</string>
 </resources>

@@ -22,7 +22,7 @@
         android:layout_marginBottom="10dp"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="@string/enable"
+        android:text="@string/enabled"
         android:textSize="18sp" />
 
     <LinearLayout

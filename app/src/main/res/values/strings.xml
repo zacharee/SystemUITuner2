@@ -87,7 +87,7 @@
     <string name="abt_warn">This app isn\'t going to work on every device, though, because manufacturers are annoying. Just keep that in mind when a toggle has no effect.</string>
     <string name="debug_info">Debug Info</string>
     <string name="demo_warn">The options here are experimental! They may not work correctly, so please be careful.</string>
-    <string name="enable">Enable</string>
+    <string name="enabled">Enabled</string>
     <string name="show">Show</string>
     <string name="select_time">Select Time</string>
     <string name="select_battery_level">Select Battery Level</string>
@@ -178,4 +178,20 @@
     <string name="select_time_title">Choose Time to Display</string>
     <string name="custom_settings_warning">What lies ahead holds many dangers. I take no responsibility if you mess your device up using this feature. Please be cautious! Continue?</string>
     <string name="boot_message_icon_blacklist">SystemUI Tuner has restored proper Status Bar state.</string>
+    <string name="power_notification_controls">Power Notification Controls</string>
+    <string name="level_5">Level 5</string>
+    <string name="allow_full_screen_interruption">- Allow full screen interruption</string>
+    <string name="always_peek">- Always peek</string>
+    <string name="level_4">Level 4</string>
+    <string name="block_all_app_notifications">- Block all app notifications</string>
+    <string name="never_peek">- Never peek</string>
+    <string name="no_full_screen_interruption">- No full screen interruption</string>
+    <string name="level_1">Level 1</string>
+    <string name="no_sound_or_vibration">- No sound or vibration</string>
+    <string name="not_on_lockscreen_or_in_status_bar">- Not on lockscreen or in status bar</string>
+    <string name="show_at_bottom_of_notification_list">- Show at bottom of notification list</string>
+    <string name="show_at_top_of_notification_list">- Show at top of notification list</string>
+    <string name="level_0">Level 0</string>
+    <string name="level_2">Level 2</string>
+    <string name="level_3">Level 3</string>
 </resources>

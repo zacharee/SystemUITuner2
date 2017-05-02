@@ -12,6 +12,7 @@ import android.support.v4.content.WakefulBroadcastReceiver;
 public class ShutDownReceiver extends WakefulBroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        Settings.Secure.putString(context.getContentResolver(), "icon_blacklist", "");
+        if (intent.getAction().equals(Intent.ACTION_SHUTDOWN) || intent.getAction().equals("android.intent.action.QUICKBOOT_POWEROFF"))
+            Settings.Secure.putString(context.getContentResolver(), "icon_blacklist", "");
     }
 }

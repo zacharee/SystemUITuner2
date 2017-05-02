@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
@@ -62,6 +63,8 @@ public class Misc extends Fragment {
     private String global;
     private String secure;
     private String system;
+
+    private CardView power_notif_controls;
 
     private boolean customSettingsEnabled;
 
@@ -130,6 +133,10 @@ public class Misc extends Fragment {
         custom_global.setHint(getResources().getText(R.string.global));
         custom_secure.setHint(getResources().getText(R.string.secure));
         custom_system.setHint(getResources().getText(R.string.system));
+
+        power_notif_controls = (CardView) view.findViewById(R.id.power_notification_controls_card);
+        if (Build.VERSION.SDK_INT > 23) power_notif_controls.setVisibility(View.VISIBLE);
+        else power_notif_controls.setVisibility(View.GONE);
 
         activity.setThings.switches(show_full_zen, "sysui_show_full_zen", "secure", view); //switch listener
         activity.setThings.switches(hu_notif, "heads_up_notifications_enabled", "global", view);

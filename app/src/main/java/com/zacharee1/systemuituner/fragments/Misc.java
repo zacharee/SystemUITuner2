@@ -135,7 +135,7 @@ public class Misc extends Fragment {
         custom_system.setHint(getResources().getText(R.string.system));
 
         power_notif_controls = (CardView) view.findViewById(R.id.power_notification_controls_card);
-        if (Build.VERSION.SDK_INT > 23) power_notif_controls.setVisibility(View.VISIBLE);
+        if (Build.VERSION.SDK_INT > 23) power_notif_controls.setVisibility(View.VISIBLE); //this is a Nougat feature; only show it on Nougat devices
         else power_notif_controls.setVisibility(View.GONE);
 
         activity.setThings.switches(show_full_zen, "sysui_show_full_zen", "secure", view); //switch listener

@@ -133,62 +133,62 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         Uri uri;
-        Intent intent = new Intent(Intent.ACTION_VIEW, null);
+        Intent intent = null;
         boolean tralse = false;
 
 //        Log.i("OPTION", String.valueOf(id) + " " + String.valueOf(R.id.home));
 
-        if (id == R.menu.main) { //16908332 is the ID of the drawer toggle
-            switch (id) {
-                case R.id.action_github:
-                    uri = Uri.parse("https://github.com/zacharee/SystemUITuner2");
-                    intent = new Intent(Intent.ACTION_VIEW, uri);
-                    tralse = true;
-                    break;
-                case R.id.action_xda:
-                    uri = Uri.parse("https://forum.xda-developers.com/android/apps-games/app-systemui-tuner-t3588675");
-                    intent = new Intent(Intent.ACTION_VIEW, uri);
-                    tralse = true;
-                    break;
-                case R.id.action_labs:
-                    uri = Uri.parse("https://labs.xda-developers.com/store/app/com.zacharee1.systemuituner");
-                    intent = new Intent(Intent.ACTION_VIEW, uri);
-                    tralse = true;
-                    break;
-                case R.id.action_play:
-                    uri = Uri.parse("https://play.google.com/store/apps/details?id=com.zacharee1.systemuituner");
-                    intent = new Intent(Intent.ACTION_VIEW, uri);
-                    tralse = true;
-                    break;
-                case R.id.action_other_apps:
-                    uri = Uri.parse("https://play.google.com/store/apps/developer?id=Zachary+Wander");
-                    intent = new Intent(Intent.ACTION_VIEW, uri);
-                    tralse = true;
-                    break;
-                case R.id.action_donate:
-                    boolean labsInstalled = setThings.isPackageInstalled("com.xda.labs", context.getPackageManager());
-                    uri = Uri.parse(labsInstalled ? "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=andywander@yahoo.com" : "https://forum.xda-developers.com/donatetome.php?u=7055541");
-                    intent = new Intent(Intent.ACTION_VIEW, uri);
-                    tralse = true;
-                    break;
-                case R.id.action_telegram:
-                    uri = Uri.parse("https://t.me/joinchat/AAAAAEIB6WKWL-yphJbZwg");
-                    intent = new Intent(Intent.ACTION_VIEW, uri);
-                    tralse = true;
-                    break;
-                case R.id.action_gplus:
-                    uri = Uri.parse("https://plus.google.com/communities/113741695211107417994");
-                    intent = new Intent(Intent.ACTION_VIEW, uri);
-                    tralse = true;
-                    break;
-            }
-            startActivity(intent);
-
-            return tralse || super.onOptionsItemSelected(item);
-        } else {
-            toggle.onOptionsItemSelected(item);
-            return true;
+        //16908332 is the ID of the drawer toggle
+        switch (id) {
+            case R.id.action_github:
+                uri = Uri.parse("https://github.com/zacharee/SystemUITuner2");
+                intent = new Intent(Intent.ACTION_VIEW, uri);
+                tralse = true;
+                break;
+            case R.id.action_xda:
+                uri = Uri.parse("https://forum.xda-developers.com/android/apps-games/app-systemui-tuner-t3588675");
+                intent = new Intent(Intent.ACTION_VIEW, uri);
+                tralse = true;
+                break;
+            case R.id.action_labs:
+                uri = Uri.parse("https://labs.xda-developers.com/store/app/com.zacharee1.systemuituner");
+                intent = new Intent(Intent.ACTION_VIEW, uri);
+                tralse = true;
+                break;
+            case R.id.action_play:
+                uri = Uri.parse("https://play.google.com/store/apps/details?id=com.zacharee1.systemuituner");
+                intent = new Intent(Intent.ACTION_VIEW, uri);
+                tralse = true;
+                break;
+            case R.id.action_other_apps:
+                uri = Uri.parse("https://play.google.com/store/apps/developer?id=Zachary+Wander");
+                intent = new Intent(Intent.ACTION_VIEW, uri);
+                tralse = true;
+                break;
+            case R.id.action_donate:
+                boolean labsInstalled = setThings.isPackageInstalled("com.xda.labs", context.getPackageManager());
+                uri = Uri.parse(labsInstalled ? "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=andywander@yahoo.com" : "https://forum.xda-developers.com/donatetome.php?u=7055541");
+                intent = new Intent(Intent.ACTION_VIEW, uri);
+                tralse = true;
+                break;
+            case R.id.action_telegram:
+                uri = Uri.parse("https://t.me/joinchat/AAAAAEIB6WKWL-yphJbZwg");
+                intent = new Intent(Intent.ACTION_VIEW, uri);
+                tralse = true;
+                break;
+            case R.id.action_gplus:
+                uri = Uri.parse("https://plus.google.com/communities/113741695211107417994");
+                intent = new Intent(Intent.ACTION_VIEW, uri);
+                tralse = true;
+                break;
+            default:
+                toggle.onOptionsItemSelected(item);
+                break;
         }
+
+        if (intent != null) startActivity(intent);
+
+        return tralse || super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

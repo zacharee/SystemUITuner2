@@ -150,7 +150,9 @@ public class SetThings {
                 break;
             case "icon_blacklist":
                 String blacklist = Settings.Secure.getString(currentActivity.getContentResolver(), "icon_blacklist") != null ? Settings.Secure.getString(currentActivity.getContentResolver(), "icon_blacklist") : "nada";
-                setting = !blacklist.contains(pref) ? 1 : 0;
+                if (!blacklist.contains("," + pref + ",") && !blacklist.contains("," + pref)) {
+                    setting = 1;
+                } else setting = 0;
                 break;
             case "dark_mode":
                 setting = Dark ? 1 : 0;
@@ -172,7 +174,7 @@ public class SetThings {
                             } else {
                                 if (blacklist != null) {
                                     blacklist = blacklist.replace("," + pref, ",");
-                                    blacklist = blacklist.replace(pref + ",", ",");
+                                    blacklist = blacklist.replace("," + pref + ",", ",");
                                 }
                             }
 

@@ -16,6 +16,23 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/misc_desc"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/misc_warn"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -31,6 +48,21 @@
 
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="16dp"
+                        app:cardElevation="1dp"
+                        app:cardUseCompatPadding="true">
+
+                        <include
+                            layout="@layout/switches_miscellaneous_general"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/power_notification_controls_card"
+                        android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_weight="1"
@@ -39,33 +71,45 @@
                         tools:ignore="NestedWeights">
 
                         <include
-                            layout="@layout/switches_settings_general"
+                            layout="@layout/miscellaneous_power_notifs"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </android.support.v7.widget.CardView>
-
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="16dp"
                         app:cardElevation="1dp"
-                        app:cardUseCompatPadding="true"
-                        tools:ignore="NestedWeights">
+                        app:cardUseCompatPadding="true">
 
                         <include
-                            layout="@layout/switches_settings_danger"
+                            layout="@layout/miscellaneous_animation_scales"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
+                    </android.support.v7.widget.CardView>
 
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/custom_settings"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        app:cardElevation="1dp"
+                        app:cardUseCompatPadding="true">
+
+                        <include
+                            layout="@layout/miscellaneous_custom"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
                     </android.support.v7.widget.CardView>
                 </LinearLayout>
 

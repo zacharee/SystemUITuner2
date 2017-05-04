@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="@string/danger_zone"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="italic" />
+
+    <Switch
+        android:id="@+id/safe_statbar_method"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:switchMinWidth="50dp"
+        android:text="@string/use_safer_statusbar_hide"
+        android:textSize="18sp" />
+
+    <Switch
+        android:id="@+id/custom_settings_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:switchMinWidth="50dp"
+        android:text="@string/enable_custom_settings_input"
+        android:textSize="18sp" />
+</LinearLayout>

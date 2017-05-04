@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -236,8 +237,17 @@ public class MainActivity extends AppCompatActivity
         registerReceiver(broadcast_reciever, new IntentFilter("finish_activity"));
 
         Intent intent = new Intent(getApplicationContext(), SetupActivity.class);
-        if (!setThings.setup)
+        if (!setThings.setup) {
             startActivity(intent); //start setup activity if user hasn't run it (ie first launch)
+        }
+
+        if (Build.MANUFACTURER.toLowerCase().contains("samsung")) {
+            if (!setThings.sharedPreferences.getBoolean("samsungInitialized", false)) {
+                setThings.editor.putBoolean("safeStatbar", true);
+                setThings.editor.putBoolean("samsungInitialized", true);
+                setThings.editor.apply();
+            }
+        }
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);

@@ -194,4 +194,8 @@
     <string name="level_0">Level 0</string>
     <string name="level_2">Level 2</string>
     <string name="level_3">Level 3</string>
+    <string name="danger_zone">Danger Zone</string>
+    <string name="use_safer_statusbar_hide">Use Safer Statusbar Hide</string>
+    <string name="enable_custom_settings_input">Enable Custom Settings Input</string>
+    <string name="sharedprefs_id" translatable="false">com.zacharee1.sysuituner</string>
 </resources>

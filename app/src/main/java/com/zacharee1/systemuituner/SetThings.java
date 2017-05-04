@@ -46,7 +46,7 @@ public class SetThings {
 
     public SetThings(Activity activity) {
         //set all variables
-        sharedPreferences = activity.getSharedPreferences("com.zacharee1.sysuituner", Context.MODE_PRIVATE);
+        sharedPreferences = activity.getSharedPreferences(activity.getResources().getText(R.string.sharedprefs_id).toString(), Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         editor.apply();
         Dark = sharedPreferences.getBoolean("isDark", false);

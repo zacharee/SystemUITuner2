@@ -34,7 +34,6 @@ public class Misc extends Fragment {
     private Switch show_full_zen;
     private Switch hu_notif;
     private Switch vol_warn;
-    private Switch enable_custom_settings;
     private Switch clock_seconds;
     private Switch battery_percent;
     private Switch power_notifs;
@@ -53,7 +52,7 @@ public class Misc extends Fragment {
     private TextInputEditText custom_secure;
     private TextInputEditText custom_system;
 
-    private LinearLayout custom_settings;
+    private CardView custom_settings;
 
     private final int alertRed = R.drawable.ic_warning_red;
 
@@ -75,7 +74,7 @@ public class Misc extends Fragment {
             activity = (MainActivity) getActivity();
         }
 
-        customSettingsEnabled = activity.setThings.sharedPreferences.getBoolean("customSettingsEnabled", false);
+        customSettingsEnabled = activity.setThings.sharedPreferences.getBoolean("customSettings", false);
 
         global = new String();
         secure = new String();
@@ -86,12 +85,9 @@ public class Misc extends Fragment {
         show_full_zen = (Switch) view.findViewById(R.id.show_full_zen);
         hu_notif = (Switch) view.findViewById(R.id.hu_notif);
         vol_warn = (Switch) view.findViewById(R.id.vol_warn);
-        enable_custom_settings = (Switch) view.findViewById(R.id.enable_custom);
         power_notifs = (Switch) view.findViewById(R.id.power_notifications);
 
-        enable_custom_settings.setChecked(customSettingsEnabled);
-
-        custom_settings = (LinearLayout) view.findViewById(R.id.custom_settings);
+        custom_settings = (CardView) view.findViewById(R.id.custom_settings);
         custom_settings.setVisibility(customSettingsEnabled ? View.VISIBLE : View.GONE);
 
         animApply = (Button) view.findViewById(R.id.apply_anim);
@@ -161,39 +157,7 @@ public class Misc extends Fragment {
         textFields(custom_secure);
         textFields(custom_system);
 
-        switches(enable_custom_settings);
-
         return view;
-    }
-
-    private void switches(final Switch toggle) {
-        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                activity.setThings.editor.putBoolean("customSettingsEnabled", isChecked);
-                activity.setThings.editor.apply();
-                if (isChecked) {
-                    new AlertDialog.Builder(view.getContext()) //warn about dangers of custom settings
-                            .setIcon(alertRed)
-                            .setTitle(Html.fromHtml("<font color='#ff0000'>" + getResources().getText(R.string.warning) + "</font>"))
-                            .setMessage(getResources().getText(R.string.custom_settings_warning))
-                            .setPositiveButton(getResources().getText(R.string.yes), new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    custom_settings.setVisibility(View.VISIBLE);
-                                }
-                            })
-                            .setNegativeButton(getResources().getText(R.string.no), new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    enable_custom_settings.setChecked(false);
-                                }
-                            })
-                            .setCancelable(false)
-                            .show();
-                } else custom_settings.setVisibility(View.GONE);
-            }
-        });
     }
 
     private void textFields(final TextInputEditText textInputEditText) {

@@ -154,4 +154,7 @@
     <string name="not_on_lockscreen_or_in_status_bar">- Ocultar de pantalla bloqueada y barra de estado</string>
     <string name="show_at_bottom_of_notification_list">- Mostrar al final de lista de notificaciones</string>
     <string name="show_at_top_of_notification_list">- Mostrar en parte superior de lista de notificaciones</string>
+    <string name="danger_zone">Zona Peligrosa</string>
+    <string name="enable_custom_settings_input">Permitir Input para Preferencias a Medidas</string>
+    <string name="use_safer_statusbar_hide">Usar Ocultador de Barra de Estado Seguro</string>
 </resources>

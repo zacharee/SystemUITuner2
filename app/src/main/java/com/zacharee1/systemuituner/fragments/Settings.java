@@ -77,7 +77,7 @@ public class Settings extends Fragment {
                                     .setCancelable(false)
                                     .show();
                         } else {
-                            activity.setThings.editor.putBoolean("safeStatbar", true);
+                            activity.setThings.editor.putBoolean("safeStatbar", isChecked);
                         }
                         break;
                     case R.id.custom_settings_input:

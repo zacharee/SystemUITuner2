@@ -103,10 +103,14 @@ public class Misc extends Fragment {
         //custom switch text
         battery_percent.setText(Html.fromHtml(getResources().getText(R.string.battery_percentage) + "<br /><small> <font color=\"#777777\">" + getResources().getText(R.string.reboot_required) + "</font></small>"));
 
-        if (Build.VERSION.SDK_INT > 23) { //only show switch if user is on Nougat or later
-            clock_seconds.setVisibility(View.VISIBLE);
+        power_notif_controls = (CardView) view.findViewById(R.id.power_notification_controls_card);
+
+        if (Build.VERSION.SDK_INT > 23) {
+            clock_seconds.setVisibility(View.VISIBLE); //only show switch if user is on Nougat or later
+            power_notif_controls.setVisibility(View.VISIBLE); //this is a Nougat feature; only show it on Nougat devices
         } else {
             clock_seconds.setVisibility(View.GONE);
+            power_notif_controls.setVisibility(View.GONE);
         }
 
         anim = (TextInputEditText) view.findViewById(R.id.anim_text);
@@ -129,10 +133,6 @@ public class Misc extends Fragment {
         custom_global.setHint(getResources().getText(R.string.global));
         custom_secure.setHint(getResources().getText(R.string.secure));
         custom_system.setHint(getResources().getText(R.string.system));
-
-        power_notif_controls = (CardView) view.findViewById(R.id.power_notification_controls_card);
-        if (Build.VERSION.SDK_INT > 23) power_notif_controls.setVisibility(View.VISIBLE); //this is a Nougat feature; only show it on Nougat devices
-        else power_notif_controls.setVisibility(View.GONE);
 
         activity.setThings.switches(show_full_zen, "sysui_show_full_zen", "secure", view); //switch listener
         activity.setThings.switches(hu_notif, "heads_up_notifications_enabled", "global", view);

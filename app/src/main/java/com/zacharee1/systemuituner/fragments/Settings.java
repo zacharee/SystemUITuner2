@@ -56,7 +56,7 @@ public class Settings extends Fragment {
                 int id = toggle.getId();
 
                 switch (id) {
-                    case R.id.safe_statbar_method:
+                     case R.id.safe_statbar_method:
                         if (!isChecked && Build.MANUFACTURER.toLowerCase().contains("samsung")) {
                             new AlertDialog.Builder(view.getContext()) //warn about dangers of custom settings
                                     .setIcon(R.drawable.ic_warning_red)

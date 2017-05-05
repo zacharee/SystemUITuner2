@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity
     public static Fragment misc;
 
     private CharSequence title;
+    private BroadcastReceiver finish_activity;
+    private BroadcastReceiver shutDownReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,8 +81,8 @@ public class MainActivity extends AppCompatActivity
         misc = new Misc();
 
         IntentFilter filter = new IntentFilter(Intent.ACTION_SHUTDOWN);
-        BroadcastReceiver mReceiver = new ShutDownReceiver();
-        registerReceiver(mReceiver, filter);
+        shutDownReceiver = new ShutDownReceiver();
+        registerReceiver(shutDownReceiver, filter);
 
         setContentView(R.layout.activity_main);
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -122,6 +124,14 @@ public class MainActivity extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    @Override
+    protected void onStop()
+    {
+        unregisterReceiver(finish_activity);
+        unregisterReceiver(shutDownReceiver);
+        super.onStop();
     }
 
     @Override
@@ -224,7 +234,7 @@ public class MainActivity extends AppCompatActivity
 
     private void setup() {
 
-        BroadcastReceiver broadcast_reciever = new BroadcastReceiver() {
+        finish_activity = new BroadcastReceiver() {
 
             @Override
             public void onReceive(Context arg0, Intent intent) {
@@ -234,7 +244,7 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         };
-        registerReceiver(broadcast_reciever, new IntentFilter("finish_activity"));
+        registerReceiver(finish_activity, new IntentFilter("finish_activity"));
 
         Intent intent = new Intent(getApplicationContext(), SetupActivity.class);
         if (!setThings.setup) {

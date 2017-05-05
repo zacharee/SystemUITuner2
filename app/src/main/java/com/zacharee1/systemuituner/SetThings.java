@@ -218,8 +218,9 @@ public class SetThings {
                         case "dark_mode":
                             editor.putBoolean("isDark", isChecked);
                             editor.apply();
-                            currentActivity.finish();
-                            currentActivity.startActivity(new Intent(currentActivity, currentActivity.getClass()));
+//                            currentActivity.finish();
+//                            currentActivity.startActivity(new Intent(currentActivity, currentActivity.getClass()));
+                            currentActivity.recreate();
                             break;
                         default:
                             settings(settingType, pref, isChecked ? "1" : "0");

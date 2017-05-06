@@ -103,6 +103,9 @@ public class SetThings {
                                 editor.putBoolean("isRooted", true);
                                 editor.putBoolean("isSetup", true);
                                 editor.apply();
+                                intent = new Intent(currentActivity.getApplicationContext(), MainActivity.class);
+                                currentActivity.startActivity(intent);
+                                currentActivity.finish();
                                 break;
                             } else {
                                 intent = new Intent(currentActivity.getApplicationContext(), NoRootActivity.class);

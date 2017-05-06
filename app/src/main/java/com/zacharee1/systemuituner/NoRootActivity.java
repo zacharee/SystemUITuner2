@@ -9,13 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.TextView;
 
-@SuppressWarnings("ALL")
 public class NoRootActivity extends AppCompatActivity {
     private SetThings setThings;
 
     private Button setupDone;
 
-    public static AppCompatActivity activity;
+    public AppCompatActivity activity;
     private BroadcastReceiver finish_activity;
 
     @Override
@@ -51,10 +50,16 @@ public class NoRootActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
-        try {
+    protected void onStop()
+    {
+        try
+        {
             unregisterReceiver(finish_activity);
-        } catch (IllegalArgumentException e) {}
+        }
+        catch (IllegalArgumentException e)
+        {
+            e.printStackTrace();
+        }
 
         super.onStop();
     }

@@ -9,13 +9,12 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
-@SuppressWarnings("ALL")
 public class SetupActivity extends AppCompatActivity {
 
     private Button rooted;
     private Button not_rooted;
 
-    private AppCompatActivity activity;
+    //private AppCompatActivity activity;
 
     private SetThings setThings;
     private BroadcastReceiver finish_activity;
@@ -24,7 +23,7 @@ public class SetupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SetThings setThings = new SetThings(this);
-        activity = this;
+        //activity = this;
 
         setThings = new SetThings(this);
 
@@ -54,10 +53,17 @@ public class SetupActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
-        try {
+    protected void onStop()
+    {
+        try
+        {
             unregisterReceiver(finish_activity);
-        } catch (IllegalArgumentException e) {}
+        }
+
+        catch (IllegalArgumentException e)
+        {
+            e.printStackTrace();
+        }
 
         super.onStop();
     }

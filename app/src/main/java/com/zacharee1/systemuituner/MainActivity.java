@@ -31,7 +31,6 @@ import com.zacharee1.systemuituner.fragments.QS;
 import com.zacharee1.systemuituner.fragments.Settings;
 import com.zacharee1.systemuituner.fragments.StatBar;
 
-@SuppressWarnings("ALL")
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -52,13 +51,13 @@ public class MainActivity extends AppCompatActivity
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
 
-    public static Fragment main;
-    public static Fragment qs;
-    public static Fragment statbar;
-    public static Fragment demo;
-    public static Fragment about;
-    public static Fragment settings;
-    public static Fragment misc;
+    public Fragment main;
+    public Fragment qs;
+    public Fragment statbar;
+    public Fragment demo;
+    public Fragment about;
+    public Fragment settings;
+    public Fragment misc;
 
     private CharSequence title;
     private BroadcastReceiver finish_activity;
@@ -87,11 +86,11 @@ public class MainActivity extends AppCompatActivity
         registerReceiver(shutDownReceiver, filter);
 
         setContentView(R.layout.activity_main);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        toolbar.setPopupTheme(setThings.style);
+        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setPopupTheme(setThings.style);
 
-//        Toolbar toolbar = new Toolbar(this);
+        Toolbar toolbar = new Toolbar(this);*/
         title = getResources().getText(R.string.app_name);
 
         setTitle(title); //set default title just because
@@ -129,14 +128,27 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onStop() {
-        try {
+    protected void onStop()
+    {
+        try
+        {
             unregisterReceiver(finish_activity);
-        } catch (IllegalArgumentException e) {}
+        }
 
-        try {
+        catch (IllegalArgumentException e)
+        {
+            e.printStackTrace();
+        }
+
+        try
+        {
             unregisterReceiver(shutDownReceiver);
-        } catch (IllegalArgumentException e) {}
+        }
+
+        catch (IllegalArgumentException e)
+        {
+            e.printStackTrace();
+        }
 
         super.onStop();
     }
@@ -153,7 +165,7 @@ public class MainActivity extends AppCompatActivity
         Intent intent = null;
         boolean tralse = false;
 
-//        Log.i("OPTION", String.valueOf(id) + " " + String.valueOf(R.id.home));
+        //Log.i("OPTION", String.valueOf(id) + " " + String.valueOf(R.id.home));
 
         //16908332 is the ID of the drawer toggle
         switch (id) {

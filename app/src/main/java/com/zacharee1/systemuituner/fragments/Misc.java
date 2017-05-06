@@ -26,7 +26,6 @@ import com.zacharee1.systemuituner.R;
  * Created by Zacha on 4/18/2017.
  */
 
-@SuppressWarnings("ALL")
 public class Misc extends Fragment {
     private View view;
     private MainActivity activity;
@@ -76,9 +75,9 @@ public class Misc extends Fragment {
 
         customSettingsEnabled = activity.setThings.sharedPreferences.getBoolean("customSettings", false);
 
-        global = new String();
-        secure = new String();
-        system = new String();
+        global = "";
+        secure = "";
+        system = "";
 
         view = inflater.inflate(R.layout.fragment_misc, container, false);
 

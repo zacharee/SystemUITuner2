@@ -9,10 +9,9 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
-@SuppressWarnings("ALL")
 public class NoRootSystemSettingsActivity extends AppCompatActivity {
 
-    private AppCompatActivity activity;
+    //private AppCompatActivity activity;
     private BroadcastReceiver finish_activity;
 
     @Override
@@ -20,7 +19,7 @@ public class NoRootSystemSettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         SetThings setThings = new SetThings(this);
         setContentView(R.layout.activity_no_root_system_settings);
-        activity = this;
+        //activity = this;
 
         String oneZero = setThings.sharedPreferences.getString("isSystemSwitchEnabled", "EXAMPLE_VALUE");
         String setting = setThings.sharedPreferences.getString("systemSettingKey", "EXAMPLE_SETTING");
@@ -52,10 +51,17 @@ public class NoRootSystemSettingsActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
-        try {
+    protected void onStop()
+    {
+        try
+        {
             unregisterReceiver(finish_activity);
-        } catch (IllegalArgumentException e) {}
+        }
+
+        catch (IllegalArgumentException e)
+        {
+            e.printStackTrace();
+        }
 
         super.onStop();
     }

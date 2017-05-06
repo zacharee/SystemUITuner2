@@ -28,7 +28,7 @@ import java.util.ArrayList;
  * Created by Zacha on 4/5/2017.
  */
 
-@SuppressWarnings("ALL")
+//@SuppressWarnings("ALL")
 public class StatBar extends Fragment {
     private View view;
     private MainActivity activity;

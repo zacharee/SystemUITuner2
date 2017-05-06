@@ -25,27 +25,26 @@ import java.util.ArrayList;
  * Created by Zacha on 4/19/2017.
  */
 
-@SuppressWarnings("ALL")
 public class SetThings {
     public final boolean Dark;
     public final boolean setup;
 
     public final int titleText;
     public final int style;
-    public final ColorStateList drawerItem;
+    final ColorStateList drawerItem;
 
     public final SharedPreferences sharedPreferences;
     public final SharedPreferences.Editor editor;
 
-    public final ArrayList<Integer> pages;
+    final ArrayList<Integer> pages;
 
     private final Activity currentActivity;
 
     private final Context context;
 
-    public final Exceptions exceptions;
+    private final Exceptions exceptions;
 
-    public SetThings(Activity activity) {
+    SetThings(Activity activity) {
         //set all variables
         sharedPreferences = activity.getSharedPreferences(activity.getResources().getText(R.string.sharedprefs_id).toString(), Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -290,7 +289,7 @@ public class SetThings {
         }
     }
 
-    public boolean isPackageInstalled(String packagename, PackageManager packageManager) { //check to see if a
+    boolean isPackageInstalled(String packagename, PackageManager packageManager) { //check to see if a
         try {
             packageManager.getPackageInfo(packagename, 0);
             return true;
@@ -299,7 +298,7 @@ public class SetThings {
         }
     }
 
-    public void sudo(String...strings) {
+    private void sudo(String... strings) {
         try{
             Process su = Runtime.getRuntime().exec("su");
             DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
@@ -323,7 +322,7 @@ public class SetThings {
         }
     }
 
-    public boolean testSudo() {
+    private boolean testSudo() {
         StackTraceElement[] stackTrace = new StackTraceElement[] { null };
         try{
             Process su = Runtime.getRuntime().exec("su");

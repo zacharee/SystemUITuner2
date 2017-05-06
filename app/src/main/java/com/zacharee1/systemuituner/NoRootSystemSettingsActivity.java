@@ -13,6 +13,7 @@ import android.widget.TextView;
 public class NoRootSystemSettingsActivity extends AppCompatActivity {
 
     private AppCompatActivity activity;
+    private BroadcastReceiver finish_activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class NoRootSystemSettingsActivity extends AppCompatActivity {
         setThings.buttons(perms, "SystemSettingsPerms");
         setThings.buttons(go, "WriteSystemSettings");
 
-        BroadcastReceiver broadcast_receiver = new BroadcastReceiver() {
+        finish_activity = new BroadcastReceiver() {
 
             @Override
             public void onReceive(Context arg0, Intent intent) {
@@ -47,6 +48,15 @@ public class NoRootSystemSettingsActivity extends AppCompatActivity {
                 }
             }
         };
-        registerReceiver(broadcast_receiver, new IntentFilter("finish_activity"));
+        registerReceiver(finish_activity, new IntentFilter("finish_activity"));
+    }
+
+    @Override
+    protected void onStop() {
+        try {
+            unregisterReceiver(finish_activity);
+        } catch (IllegalArgumentException e) {}
+
+        super.onStop();
     }
 }

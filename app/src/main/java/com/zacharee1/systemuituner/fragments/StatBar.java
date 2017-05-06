@@ -60,6 +60,35 @@ public class StatBar extends Fragment {
     private Switch su;
     private Switch vpn;
 
+    private String SLOT_BLUETOOTH = "bluetooth";
+    private String SLOT_DATA_SAVER = "data_saver";
+    private String SLOT_ETHERNET = "ethernet";
+    private String SLOT_HOTSPOT = "hotspot";
+    private String SLOT_MOBILE = "mobile";
+    private String SLOT_AIRPLANE = "airplane";
+    private String SLOT_WIFI = "wifi";
+    private String SLOT_VPN = "vpn";
+
+    private String SLOT_VOLUME = "volume";
+    private String SLOT_HEADSET = "headset";
+    private String SLOT_SPEAKERPHONE = "speakerphone";
+
+    private String SLOT_CLOCK = "clock";
+    private String SLOT_ALARM = "alarm_clock,alarm";
+    private String SLOT_ZEN = "zen";
+    private String SLOT_DND = "do_not_disturb";
+
+    private String SLOT_MAN_PROFILE = "managed_profile";
+    private String SLOT_BATTERY = "battery";
+    private String SLOT_CAST = "cast";
+    private String SLOT_ROTATION = "rotate";
+    private String SLOT_NFC = "nfc,nfc_on";
+    private String SLOT_LOCATION = "location";
+    private String SLOT_SU = "su";
+
+    private String ICON_BLACKLIST = "icon_blacklist";
+    private String RESET_BLACKLIST = "reset_blacklist";
+
     private Button reset_blacklist;
 
     private ArrayList<Switch> switches = new ArrayList<>();
@@ -155,37 +184,31 @@ public class StatBar extends Fragment {
 
         reset_blacklist = (Button) view.findViewById(R.id.reset_blacklist);
 
-        //strings because I'm lazy
-        String bl = "icon_blacklist";
-        String sec = "secure";
-        String sys = "system";
-        String glob = "global";
-
         //set switch listeners
-        activity.setThings.switches(bluetooth, "bluetooth", bl, view);
-        activity.setThings.switches(wifi, "wifi", bl, view);
-        activity.setThings.switches(ethernet, "ethernet", bl, view);
-        activity.setThings.switches(mobile, "mobile", bl, view);
-        activity.setThings.switches(airplane, "airplane", bl, view);
-        activity.setThings.switches(managed_profile, "managed_profile", bl, view);
-        activity.setThings.switches(zen, "zen", bl, view);
-        activity.setThings.switches(alarm_clock, "alarm_clock,alarm", bl, view);
-        activity.setThings.switches(hotspot, "hotspot", bl, view);
-        activity.setThings.switches(data_saver, "data_saver", bl, view);
-        activity.setThings.switches(nfc, "nfc,nfc_on", bl, view);
-        activity.setThings.switches(clock, "clock", bl, view);
-        activity.setThings.switches(do_not_disturb, "do_not_disturb", bl, view);
-        activity.setThings.switches(rotate, "rotate", bl, view);
-        activity.setThings.switches(battery, "battery", bl, view);
-        activity.setThings.switches(speakerphone, "speakerphone", bl, view);
-        activity.setThings.switches(cast, "cast", bl, view);
-        activity.setThings.switches(headset, "headset", bl, view);
-        activity.setThings.switches(location, "location", bl, view);
-        activity.setThings.switches(su, "su", bl, view);
-        activity.setThings.switches(vpn, "vpn", bl, view);
-        activity.setThings.switches(volume, "volume", bl, view);
+        activity.setThings.switches(bluetooth, SLOT_BLUETOOTH, ICON_BLACKLIST, view);
+        activity.setThings.switches(wifi, SLOT_WIFI, ICON_BLACKLIST, view);
+        activity.setThings.switches(ethernet, SLOT_ETHERNET, ICON_BLACKLIST, view);
+        activity.setThings.switches(mobile, SLOT_MOBILE, ICON_BLACKLIST, view);
+        activity.setThings.switches(airplane, SLOT_AIRPLANE, ICON_BLACKLIST, view);
+        activity.setThings.switches(managed_profile, SLOT_MAN_PROFILE, ICON_BLACKLIST, view);
+        activity.setThings.switches(zen, SLOT_ZEN, ICON_BLACKLIST, view);
+        activity.setThings.switches(alarm_clock, SLOT_ALARM, ICON_BLACKLIST, view);
+        activity.setThings.switches(hotspot, SLOT_HOTSPOT, ICON_BLACKLIST, view);
+        activity.setThings.switches(data_saver, SLOT_DATA_SAVER, ICON_BLACKLIST, view);
+        activity.setThings.switches(nfc, SLOT_NFC, ICON_BLACKLIST, view);
+        activity.setThings.switches(clock, SLOT_CLOCK, ICON_BLACKLIST, view);
+        activity.setThings.switches(do_not_disturb, SLOT_DND, ICON_BLACKLIST, view);
+        activity.setThings.switches(rotate, SLOT_ROTATION, ICON_BLACKLIST, view);
+        activity.setThings.switches(battery, SLOT_BATTERY, ICON_BLACKLIST, view);
+        activity.setThings.switches(speakerphone, SLOT_SPEAKERPHONE, ICON_BLACKLIST, view);
+        activity.setThings.switches(cast, SLOT_CAST, ICON_BLACKLIST, view);
+        activity.setThings.switches(headset, SLOT_HEADSET, ICON_BLACKLIST, view);
+        activity.setThings.switches(location, SLOT_LOCATION, ICON_BLACKLIST, view);
+        activity.setThings.switches(su, SLOT_SU, ICON_BLACKLIST, view);
+        activity.setThings.switches(vpn, SLOT_VPN, ICON_BLACKLIST, view);
+        activity.setThings.switches(volume, SLOT_VOLUME, ICON_BLACKLIST, view);
 
-        activity.setThings.buttons(reset_blacklist, "reset_blacklist");
+        activity.setThings.buttons(reset_blacklist, RESET_BLACKLIST);
 
         BroadcastReceiver broadcast_reciever = new BroadcastReceiver() {
 

@@ -18,6 +18,7 @@ public class SetupActivity extends AppCompatActivity {
     private AppCompatActivity activity;
 
     private SetThings setThings;
+    private BroadcastReceiver finish_activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class SetupActivity extends AppCompatActivity {
         setThings.buttons(rooted, "root_setup");
         setThings.buttons(not_rooted, "no_root_setup");
 
-        BroadcastReceiver broadcast_receiver = new BroadcastReceiver() {
+        finish_activity = new BroadcastReceiver() {
 
             @Override
             public void onReceive(Context arg0, Intent intent) {
@@ -49,6 +50,15 @@ public class SetupActivity extends AppCompatActivity {
                 }
             }
         };
-        registerReceiver(broadcast_receiver, new IntentFilter("finish_activity"));
+        registerReceiver(finish_activity, new IntentFilter("finish_activity"));
+    }
+
+    @Override
+    protected void onStop() {
+        try {
+            unregisterReceiver(finish_activity);
+        } catch (IllegalArgumentException e) {}
+
+        super.onStop();
     }
 }

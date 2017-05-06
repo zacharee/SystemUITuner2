@@ -17,6 +17,8 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -127,8 +129,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onStop()
-    {
+    protected void onStop() {
         try {
             unregisterReceiver(finish_activity);
         } catch (IllegalArgumentException e) {}
@@ -255,6 +256,7 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(getApplicationContext(), SetupActivity.class);
         if (!setThings.setup) {
             startActivity(intent); //start setup activity if user hasn't run it (ie first launch)
+            finish();
         }
 
         if (Build.MANUFACTURER.toLowerCase().contains("samsung")) {

@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -86,23 +87,42 @@ public class SetThings {
                         case "setup":
                             intent = new Intent(currentActivity.getApplicationContext(), SetupActivity.class);
                             currentActivity.startActivity(intent);
+                            currentActivity.finish();
                             break;
                         case "enableDemo":
                             settings("global", "sysui_demo_allowed", "1");
                             break;
                         case "setupDoneRoot":
-                            new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    sudo("pm grant com.zacharee1.systemuituner android.permission.DUMP ; pm grant com.zacharee1.systemuituner android.permission.WRITE_SECURE_SETTINGS");
-                                }
-                            }).start();
+                            if (testSudo()) {
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        sudo("pm grant com.zacharee1.systemuituner android.permission.DUMP ; pm grant com.zacharee1.systemuituner android.permission.WRITE_SECURE_SETTINGS");
+                                    }
+                                }).start();
+                                editor.putBoolean("isRooted", true);
+                                editor.putBoolean("isSetup", true);
+                                editor.apply();
+                                break;
+                            } else {
+                                intent = new Intent(currentActivity.getApplicationContext(), NoRootActivity.class);
+                                currentActivity.startActivity(intent);
+                                currentActivity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(currentActivity.getApplicationContext(), currentActivity.getResources().getText(R.string.root_test_failed), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                currentActivity.finish();
+                                break;
+                            }
                         case "setupDone":
-                            editor.putBoolean("isRooted", name.equals("setupDoneRoot"));
+                            editor.putBoolean("isRooted", false);
                             editor.putBoolean("isSetup", true);
                             editor.apply();
                             intent = new Intent(currentActivity.getApplicationContext(), MainActivity.class);
                             currentActivity.startActivity(intent);
+                            currentActivity.finish();
                             break;
                         case "SystemSettingsPerms":
                             intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
@@ -121,10 +141,12 @@ public class SetThings {
                         case "root_setup":
                             intent = new Intent(currentActivity.getApplicationContext(), RootActivity.class);
                             currentActivity.startActivity(intent);
+                            currentActivity.finish();
                             break;
                         case "no_root_setup":
                             intent = new Intent(currentActivity.getApplicationContext(), NoRootActivity.class);
                             currentActivity.startActivity(intent);
+                            currentActivity.finish();
                             break;
                     }
                 } catch (Exception e) {
@@ -257,6 +279,7 @@ public class SetThings {
                         editor.apply();
                         Intent intent = new Intent(currentActivity.getApplicationContext(), NoRootSystemSettingsActivity.class);
                         currentActivity.startActivity(intent);
+                        currentActivity.finish();
                     }
             }
         } catch (Exception e) {
@@ -295,5 +318,35 @@ public class SetThings {
         } catch(IOException e){
             e.printStackTrace();
         }
+    }
+
+    public boolean testSudo() {
+        StackTraceElement[] stackTrace = new StackTraceElement[] { null };
+        try{
+            Process su = Runtime.getRuntime().exec("su");
+            DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
+            outputStream.writeBytes("exit\n");
+            outputStream.flush();
+            su.waitFor();
+
+            //    DataInputStream inputStream = new DataInputStream(su.getInputStream());
+            //    BufferedReader r = new BufferedReader(new InputStreamReader(inputStream));
+            //    StringBuilder total = new StringBuilder();
+            //    String line;
+            //            while ((line = r.readLine()) != null) {
+            //        total.append(line).append('\n');
+            //    }
+            //
+            //    inputStream = new DataInputStream(su.getErrorStream());
+            //    r = new BufferedReader(new InputStreamReader(inputStream));
+            //            while ((line = r.readLine()) != null) {
+            //        total.append(line).append('\n');
+            //    }
+        } catch (Exception e) {
+            stackTrace = e.getStackTrace();
+            e.printStackTrace();
+        }
+
+        return stackTrace[0] == null;
     }
 }

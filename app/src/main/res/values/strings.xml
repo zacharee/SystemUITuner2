@@ -198,4 +198,5 @@
     <string name="use_safer_statusbar_hide">Use Safer Statusbar Hide</string>
     <string name="enable_custom_settings_input">Enable Custom Settings Input</string>
     <string name="sharedprefs_id" translatable="false">com.zacharee1.sysuituner</string>
+    <string name="root_test_failed">Root test failed.</string>
 </resources>

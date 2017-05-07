@@ -122,9 +122,21 @@ public class SetThings {
                             editor.putBoolean("isRooted", false);
                             editor.putBoolean("isSetup", true);
                             editor.apply();
-                            intent = new Intent(currentActivity.getApplicationContext(), MainActivity.class);
-                            currentActivity.startActivity(intent);
-                            currentActivity.finish();
+                            try {
+                                Settings.Secure.putInt(currentActivity.getContentResolver(), "systemui_tuner_test", 1);
+
+                                intent = new Intent(currentActivity.getApplicationContext(), MainActivity.class);
+                                currentActivity.startActivity(intent);
+                                currentActivity.finish();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                currentActivity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(currentActivity, "Hmm. Something went wrong. Make sure you set the permissions correctly.", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
                             break;
                         case "SystemSettingsPerms":
                             intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);

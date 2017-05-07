@@ -37,9 +37,6 @@
                 <action android:name="android.intent.action.ACTION_SHUTDOWN" />
                 <action android:name="android.intent.action.QUICKBOOT_POWEROFF" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
-            </intent-filter>
         </receiver>
 
         <receiver android:name=".OnBootReceiver"
@@ -53,7 +50,9 @@
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_CHANGED" />
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
-                <data android:scheme="package" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+                <data android:scheme="package" android:host="com.zacharee1.systemuituner" />
             </intent-filter>
         </receiver>
 

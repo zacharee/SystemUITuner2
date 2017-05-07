@@ -33,65 +33,7 @@ public class StatBar extends Fragment {
     private View view;
     private MainActivity activity;
 
-    private boolean isDark;
-
-    private int drawable;
-
-    private Switch bluetooth;
-    private Switch wifi;
-    private Switch ethernet;
-    private Switch mobile;
-    private Switch airplane;
-    private Switch managed_profile;
-    private Switch zen;
-    private Switch alarm_clock;
-    private Switch hotspot;
-    private Switch data_saver;
-    private Switch nfc;
-    private Switch clock;
-    private Switch volume;
-    private Switch do_not_disturb;
-    private Switch rotate;
-    private Switch battery;
-    private Switch speakerphone;
-    private Switch cast;
-    private Switch headset;
-    private Switch location;
-    private Switch su;
-    private Switch vpn;
-
-    private String SLOT_BLUETOOTH = "bluetooth";
-    private String SLOT_DATA_SAVER = "data_saver";
-    private String SLOT_ETHERNET = "ethernet";
-    private String SLOT_HOTSPOT = "hotspot";
-    private String SLOT_MOBILE = "mobile";
-    private String SLOT_AIRPLANE = "airplane";
-    private String SLOT_WIFI = "wifi";
-    private String SLOT_VPN = "vpn";
-
-    private String SLOT_VOLUME = "volume";
-    private String SLOT_HEADSET = "headset";
-    private String SLOT_SPEAKERPHONE = "speakerphone";
-
-    private String SLOT_CLOCK = "clock";
-    private String SLOT_ALARM = "alarm_clock,alarm";
-    private String SLOT_ZEN = "zen";
-    private String SLOT_DND = "do_not_disturb";
-
-    private String SLOT_MAN_PROFILE = "managed_profile";
-    private String SLOT_BATTERY = "battery";
-    private String SLOT_CAST = "cast";
-    private String SLOT_ROTATION = "rotate";
-    private String SLOT_NFC = "nfc,nfc_on";
-    private String SLOT_LOCATION = "location";
-    private String SLOT_SU = "su";
-
-    private String ICON_BLACKLIST = "icon_blacklist";
-    private String RESET_BLACKLIST = "reset_blacklist";
-
-    private Button reset_blacklist;
-
-    private ArrayList<Switch> switches = new ArrayList<>();
+    private final ArrayList<Switch> switches = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -102,12 +44,11 @@ public class StatBar extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_statbar, container, false);
 
-        drawable = R.drawable.ic_warning_red;
-
-        isDark = activity.setThings.sharedPreferences.getBoolean("isDark", false);
+        int drawable = R.drawable.ic_warning_red;
 
         if (Build.MANUFACTURER.toUpperCase().contains("SAMSUNG") && !activity.setThings.sharedPreferences.getBoolean("samsungRisk", false)) { //show warning for Samsung users
             view.setVisibility(View.GONE);
+            //noinspection deprecation
             new AlertDialog.Builder(view.getContext())
                     .setIcon(drawable)
                     .setTitle(Html.fromHtml("<font color='#ff0000'>" + getResources().getText(R.string.warning) + "</font>"))
@@ -135,29 +76,29 @@ public class StatBar extends Fragment {
         }
 
         //define switches
-        bluetooth = (Switch) view.findViewById(R.id.bt_icon);
-        wifi = (Switch) view.findViewById(R.id.wifi_icon);
-        ethernet = (Switch) view.findViewById(R.id.ethernet_icon);
-        mobile = (Switch) view.findViewById(R.id.mobile_icon);
-        airplane = (Switch) view.findViewById(R.id.airplane_icon);
-        managed_profile = (Switch) view.findViewById(R.id.managed_profile_icon);
-        zen = (Switch) view.findViewById(R.id.zen_icon);
-        alarm_clock = (Switch) view.findViewById(R.id.alarm_clock_icon);
-        hotspot = (Switch) view.findViewById(R.id.hotspot_icon);
-        data_saver = (Switch) view.findViewById(R.id.data_saver);
-        nfc = (Switch) view.findViewById(R.id.nfc);
-        clock = (Switch) view.findViewById(R.id.clock);
-        volume = (Switch) view.findViewById(R.id.volume);
-        do_not_disturb = (Switch) view.findViewById(R.id.do_not_disturb);
-        rotate = (Switch) view.findViewById(R.id.rotate);
-        battery = (Switch) view.findViewById(R.id.battery);
-        speakerphone = (Switch) view.findViewById(R.id.speakerphone);
-        cast = (Switch) view.findViewById(R.id.cast);
-        headset = (Switch) view.findViewById(R.id.headset);
-        location = (Switch) view.findViewById(R.id.location);
-        su = (Switch) view.findViewById(R.id.su);
+        Switch bluetooth = (Switch) view.findViewById(R.id.bt_icon);
+        Switch wifi = (Switch) view.findViewById(R.id.wifi_icon);
+        Switch ethernet = (Switch) view.findViewById(R.id.ethernet_icon);
+        Switch mobile = (Switch) view.findViewById(R.id.mobile_icon);
+        Switch airplane = (Switch) view.findViewById(R.id.airplane_icon);
+        Switch managed_profile = (Switch) view.findViewById(R.id.managed_profile_icon);
+        Switch zen = (Switch) view.findViewById(R.id.zen_icon);
+        Switch alarm_clock = (Switch) view.findViewById(R.id.alarm_clock_icon);
+        Switch hotspot = (Switch) view.findViewById(R.id.hotspot_icon);
+        Switch data_saver = (Switch) view.findViewById(R.id.data_saver);
+        Switch nfc = (Switch) view.findViewById(R.id.nfc);
+        Switch clock = (Switch) view.findViewById(R.id.clock);
+        Switch volume = (Switch) view.findViewById(R.id.volume);
+        Switch do_not_disturb = (Switch) view.findViewById(R.id.do_not_disturb);
+        Switch rotate = (Switch) view.findViewById(R.id.rotate);
+        Switch battery = (Switch) view.findViewById(R.id.battery);
+        Switch speakerphone = (Switch) view.findViewById(R.id.speakerphone);
+        Switch cast = (Switch) view.findViewById(R.id.cast);
+        Switch headset = (Switch) view.findViewById(R.id.headset);
+        Switch location = (Switch) view.findViewById(R.id.location);
+        Switch su = (Switch) view.findViewById(R.id.su);
 
-        vpn = (Switch) view.findViewById(R.id.vpn_icon);
+        Switch vpn = (Switch) view.findViewById(R.id.vpn_icon);
 
         switches.add(bluetooth);
         switches.add(wifi);
@@ -182,32 +123,56 @@ public class StatBar extends Fragment {
         switches.add(su);
         switches.add(vpn);
 
-        reset_blacklist = (Button) view.findViewById(R.id.reset_blacklist);
+        Button reset_blacklist = (Button) view.findViewById(R.id.reset_blacklist);
 
         //set switch listeners
+        String ICON_BLACKLIST = "icon_blacklist";
+        String SLOT_BLUETOOTH = "bluetooth";
         activity.setThings.switches(bluetooth, SLOT_BLUETOOTH, ICON_BLACKLIST, view);
+        String SLOT_WIFI = "wifi";
         activity.setThings.switches(wifi, SLOT_WIFI, ICON_BLACKLIST, view);
+        String SLOT_ETHERNET = "ethernet";
         activity.setThings.switches(ethernet, SLOT_ETHERNET, ICON_BLACKLIST, view);
+        String SLOT_MOBILE = "mobile";
         activity.setThings.switches(mobile, SLOT_MOBILE, ICON_BLACKLIST, view);
+        String SLOT_AIRPLANE = "airplane";
         activity.setThings.switches(airplane, SLOT_AIRPLANE, ICON_BLACKLIST, view);
+        String SLOT_MAN_PROFILE = "managed_profile";
         activity.setThings.switches(managed_profile, SLOT_MAN_PROFILE, ICON_BLACKLIST, view);
+        String SLOT_ZEN = "zen";
         activity.setThings.switches(zen, SLOT_ZEN, ICON_BLACKLIST, view);
+        String SLOT_ALARM = "alarm_clock,alarm";
         activity.setThings.switches(alarm_clock, SLOT_ALARM, ICON_BLACKLIST, view);
+        String SLOT_HOTSPOT = "hotspot";
         activity.setThings.switches(hotspot, SLOT_HOTSPOT, ICON_BLACKLIST, view);
+        String SLOT_DATA_SAVER = "data_saver";
         activity.setThings.switches(data_saver, SLOT_DATA_SAVER, ICON_BLACKLIST, view);
+        String SLOT_NFC = "nfc,nfc_on";
         activity.setThings.switches(nfc, SLOT_NFC, ICON_BLACKLIST, view);
+        String SLOT_CLOCK = "clock";
         activity.setThings.switches(clock, SLOT_CLOCK, ICON_BLACKLIST, view);
+        String SLOT_DND = "do_not_disturb";
         activity.setThings.switches(do_not_disturb, SLOT_DND, ICON_BLACKLIST, view);
+        String SLOT_ROTATION = "rotate";
         activity.setThings.switches(rotate, SLOT_ROTATION, ICON_BLACKLIST, view);
+        String SLOT_BATTERY = "battery";
         activity.setThings.switches(battery, SLOT_BATTERY, ICON_BLACKLIST, view);
+        String SLOT_SPEAKERPHONE = "speakerphone";
         activity.setThings.switches(speakerphone, SLOT_SPEAKERPHONE, ICON_BLACKLIST, view);
+        String SLOT_CAST = "cast";
         activity.setThings.switches(cast, SLOT_CAST, ICON_BLACKLIST, view);
+        String SLOT_HEADSET = "headset";
         activity.setThings.switches(headset, SLOT_HEADSET, ICON_BLACKLIST, view);
+        String SLOT_LOCATION = "location";
         activity.setThings.switches(location, SLOT_LOCATION, ICON_BLACKLIST, view);
+        String SLOT_SU = "su";
         activity.setThings.switches(su, SLOT_SU, ICON_BLACKLIST, view);
+        String SLOT_VPN = "vpn";
         activity.setThings.switches(vpn, SLOT_VPN, ICON_BLACKLIST, view);
+        String SLOT_VOLUME = "volume";
         activity.setThings.switches(volume, SLOT_VOLUME, ICON_BLACKLIST, view);
 
+        String RESET_BLACKLIST = "reset_blacklist";
         activity.setThings.buttons(reset_blacklist, RESET_BLACKLIST);
 
         BroadcastReceiver broadcast_reciever = new BroadcastReceiver() {
@@ -225,7 +190,7 @@ public class StatBar extends Fragment {
         return view;
     }
 
-    private void checkBL(boolean tralse) {
+    private void checkBL(@SuppressWarnings("SameParameterValue") boolean tralse) {
         for (Switch toggle : switches) {
             toggle.setChecked(tralse);
         }

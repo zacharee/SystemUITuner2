@@ -3,7 +3,6 @@ package com.zacharee1.systemuituner.fragments;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
@@ -15,7 +14,6 @@ import android.widget.Switch;
 
 import com.zacharee1.systemuituner.MainActivity;
 import com.zacharee1.systemuituner.R;
-import com.zacharee1.systemuituner.SetThings;
 
 /**
  * Created by Zacha on 4/15/2017.
@@ -58,6 +56,7 @@ public class Settings extends Fragment {
                 switch (id) {
                      case R.id.safe_statbar_method:
                         if (!isChecked && Build.MANUFACTURER.toLowerCase().contains("samsung")) {
+                            //noinspection deprecation
                             new AlertDialog.Builder(view.getContext()) //warn about dangers of custom settings
                                     .setIcon(R.drawable.ic_warning_red)
                                     .setTitle(Html.fromHtml("<font color='#ff0000'>" + getResources().getText(R.string.warning) + "</font>"))
@@ -82,6 +81,7 @@ public class Settings extends Fragment {
                         break;
                     case R.id.custom_settings_input:
                         if (isChecked) {
+                            //noinspection deprecation
                             new AlertDialog.Builder(view.getContext()) //warn about dangers of custom settings
                                     .setIcon(R.drawable.ic_warning_red)
                                     .setTitle(Html.fromHtml("<font color='#ff0000'>" + getResources().getText(R.string.warning) + "</font>"))

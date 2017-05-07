@@ -30,7 +30,7 @@ public class SetThings {
     public final boolean setup;
 
     public final int titleText;
-    public final int style;
+    private final int style;
     final ColorStateList drawerItem;
 
     public final SharedPreferences sharedPreferences;
@@ -53,7 +53,9 @@ public class SetThings {
         setup = sharedPreferences.getBoolean("isSetup", false);
         exceptions = new Exceptions();
 
+        //noinspection deprecation
         titleText = activity.getResources().getColor(Dark ? android.R.color.primary_text_dark : android.R.color.primary_text_light);
+        //noinspection deprecation,deprecation
         drawerItem = Dark ? activity.getResources().getColorStateList(R.color.drawer_item_dark) : activity.getResources().getColorStateList(R.color.drawer_item_light);
 
 //        activity.setTheme(SetupActivity.class == activity.getClass() || NoRootSystemSettingsActivity.class == activity.getClass() ? Dark ? R.style.DARK : R.style.AppTheme : Dark ? R.style.DARK_NoAppBar : R.style.AppTheme_NoActionBar);
@@ -301,7 +303,7 @@ public class SetThings {
         }
     }
 
-    boolean isPackageInstalled(String packagename, PackageManager packageManager) { //check to see if a
+    boolean isPackageInstalled(@SuppressWarnings("SameParameterValue") String packagename, PackageManager packageManager) { //check to see if a
         try {
             packageManager.getPackageInfo(packagename, 0);
             return true;

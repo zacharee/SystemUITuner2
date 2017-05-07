@@ -17,8 +17,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.telephony.SubscriptionInfo;
-import android.telephony.SubscriptionManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,25 +37,19 @@ public class MainActivity extends AppCompatActivity
     private Fragment fragment;
     private FragmentManager fragmentManager;
 
-    private NavigationView navigationView;
-    private Menu navMenu;
-
     private Handler handler;
 
     private Context context;
 
-    public AppCompatActivity activity;
-
-    private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
 
-    public Fragment main;
-    public Fragment qs;
-    public Fragment statbar;
-    public Fragment demo;
-    public Fragment about;
-    public Fragment settings;
-    public Fragment misc;
+    private Fragment main;
+    private Fragment qs;
+    private Fragment statbar;
+    private Fragment demo;
+    private Fragment about;
+    private Fragment settings;
+    private Fragment misc;
 
     private CharSequence title;
     private BroadcastReceiver finish_activity;
@@ -71,7 +63,6 @@ public class MainActivity extends AppCompatActivity
         fragmentManager = getFragmentManager();
         handler = new Handler();
         context = this;
-        activity = this;
 
         main = new Main();
         qs = new QS();
@@ -95,12 +86,17 @@ public class MainActivity extends AppCompatActivity
 
         setTitle(title); //set default title just because
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
                 this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        //noinspection deprecation
         drawer.setDrawerListener(toggle);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+        }
+        //noinspection deprecation
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary2)));
         toggle.syncState();
 
@@ -279,9 +275,9 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        navMenu = navigationView.getMenu();
+        Menu navMenu = navigationView.getMenu();
 
         int id = setThings.sharedPreferences.getInt("navpage", R.id.nav_home); //nav item that was selected before last app close
 

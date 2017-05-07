@@ -10,18 +10,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class NoRootActivity extends AppCompatActivity {
-    private SetThings setThings;
 
-    private Button setupDone;
-
-    public AppCompatActivity activity;
+    // --Commented out by Inspection (5/7/2017 8:00 AM):private AppCompatActivity activity;
     private BroadcastReceiver finish_activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setThings = new SetThings(this);
-        activity = this;
+        SetThings setThings = new SetThings(this);
 
         setContentView(R.layout.activity_no_root);
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -32,7 +28,7 @@ public class NoRootActivity extends AppCompatActivity {
 
         title.setTextColor(setThings.titleText); //make sure title text color is right
 
-        setupDone = (Button) findViewById(R.id.no_root_done);
+        Button setupDone = (Button) findViewById(R.id.no_root_done);
 
         setThings.buttons(setupDone, "setupDone"); //button listener
 

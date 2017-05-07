@@ -10,16 +10,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class RootActivity extends AppCompatActivity {
-    private SetThings setThings;
 
-    public  AppCompatActivity activity;
+    // --Commented out by Inspection (5/7/2017 8:00 AM):private AppCompatActivity activity;
     private BroadcastReceiver finish_activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setThings = new SetThings(this);
-        activity = this;
+        SetThings setThings = new SetThings(this);
 
         setContentView(R.layout.activity_root);
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

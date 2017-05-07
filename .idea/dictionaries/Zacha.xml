@@ -22,11 +22,15 @@
       <w>packagename</w>
       <w>paypal</w>
       <w>permz</w>
+      <w>poweroff</w>
+      <w>poweron</w>
       <w>quickboot</w>
+      <w>reciever</w>
       <w>resetup</w>
       <w>rootbox</w>
       <w>samsung</w>
       <w>sharedpref</w>
+      <w>sharedprefs</w>
       <w>stackoverflow</w>
       <w>statbar</w>
       <w>statusbar</w>
@@ -40,6 +44,7 @@
       <w>unrooted</w>
       <w>vername</w>
       <w>vernum</w>
+      <w>webscr</w>
       <w>zacha</w>
       <w>zacharee</w>
     </words>

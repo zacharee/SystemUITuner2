@@ -11,12 +11,9 @@ import android.widget.TextView;
 
 public class SetupActivity extends AppCompatActivity {
 
-    private Button rooted;
-    private Button not_rooted;
-
     //private AppCompatActivity activity;
 
-    private SetThings setThings;
+    // --Commented out by Inspection (5/7/2017 8:00 AM):private SetThings setThings;
     private BroadcastReceiver finish_activity;
 
     @Override
@@ -25,15 +22,13 @@ public class SetupActivity extends AppCompatActivity {
         SetThings setThings = new SetThings(this);
         //activity = this;
 
-        setThings = new SetThings(this);
-
         setContentView(R.layout.activity_setup);
 
         TextView title = (TextView) findViewById(R.id.title_setup);
         title.setTextColor(setThings.titleText);
 
-        rooted = (Button) findViewById(R.id.rooted);
-        not_rooted = (Button) findViewById(R.id.not_rooted);
+        Button rooted = (Button) findViewById(R.id.rooted);
+        Button not_rooted = (Button) findViewById(R.id.not_rooted);
 
         //button listeners
         setThings.buttons(rooted, "root_setup");

@@ -3,7 +3,6 @@ package com.zacharee1.systemuituner;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.provider.Settings;
 import android.support.v4.content.WakefulBroadcastReceiver;
 import android.widget.Toast;

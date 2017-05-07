@@ -1,8 +1,6 @@
 package com.zacharee1.systemuituner.fragments;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
-import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -15,8 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import com.zacharee1.systemuituner.MainActivity;
@@ -27,15 +23,7 @@ import com.zacharee1.systemuituner.R;
  */
 
 public class Misc extends Fragment {
-    private View view;
     private MainActivity activity;
-
-    private Switch show_full_zen;
-    private Switch hu_notif;
-    private Switch vol_warn;
-    private Switch clock_seconds;
-    private Switch battery_percent;
-    private Switch power_notifs;
 
     private Button animApply;
     private Button transApply;
@@ -51,9 +39,7 @@ public class Misc extends Fragment {
     private TextInputEditText custom_secure;
     private TextInputEditText custom_system;
 
-    private CardView custom_settings;
-
-    private final int alertRed = R.drawable.ic_warning_red;
+    // --Commented out by Inspection (5/7/2017 8:00 AM):private final int alertRed = R.drawable.ic_warning_red;
 
     private String animScale;
     private String transScale;
@@ -62,10 +48,6 @@ public class Misc extends Fragment {
     private String secure;
     private String system;
 
-    private CardView power_notif_controls;
-
-    private boolean customSettingsEnabled;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -73,20 +55,20 @@ public class Misc extends Fragment {
             activity = (MainActivity) getActivity();
         }
 
-        customSettingsEnabled = activity.setThings.sharedPreferences.getBoolean("customSettings", false);
+        boolean customSettingsEnabled = activity.setThings.sharedPreferences.getBoolean("customSettings", false);
 
         global = "";
         secure = "";
         system = "";
 
-        view = inflater.inflate(R.layout.fragment_misc, container, false);
+        View view = inflater.inflate(R.layout.fragment_misc, container, false);
 
-        show_full_zen = (Switch) view.findViewById(R.id.show_full_zen);
-        hu_notif = (Switch) view.findViewById(R.id.hu_notif);
-        vol_warn = (Switch) view.findViewById(R.id.vol_warn);
-        power_notifs = (Switch) view.findViewById(R.id.power_notifications);
+        Switch show_full_zen = (Switch) view.findViewById(R.id.show_full_zen);
+        Switch hu_notif = (Switch) view.findViewById(R.id.hu_notif);
+        Switch vol_warn = (Switch) view.findViewById(R.id.vol_warn);
+        Switch power_notifs = (Switch) view.findViewById(R.id.power_notifications);
 
-        custom_settings = (CardView) view.findViewById(R.id.custom_settings);
+        CardView custom_settings = (CardView) view.findViewById(R.id.custom_settings);
         custom_settings.setVisibility(customSettingsEnabled ? View.VISIBLE : View.GONE);
 
         animApply = (Button) view.findViewById(R.id.apply_anim);
@@ -96,13 +78,14 @@ public class Misc extends Fragment {
         secureApply = (Button) view.findViewById(R.id.apply_secure);
         systemApply = (Button) view.findViewById(R.id.apply_system);
 
-        clock_seconds = (Switch) view.findViewById(R.id.clock_seconds);
-        battery_percent = (Switch) view.findViewById(R.id.battery_percent);
+        Switch clock_seconds = (Switch) view.findViewById(R.id.clock_seconds);
+        Switch battery_percent = (Switch) view.findViewById(R.id.battery_percent);
 
         //custom switch text
+        //noinspection deprecation
         battery_percent.setText(Html.fromHtml(getResources().getText(R.string.battery_percentage) + "<br /><small> <font color=\"#777777\">" + getResources().getText(R.string.reboot_required) + "</font></small>"));
 
-        power_notif_controls = (CardView) view.findViewById(R.id.power_notification_controls_card);
+        CardView power_notif_controls = (CardView) view.findViewById(R.id.power_notification_controls_card);
 
         if (Build.VERSION.SDK_INT > 23) {
             clock_seconds.setVisibility(View.VISIBLE); //only show switch if user is on Nougat or later
@@ -236,8 +219,8 @@ public class Misc extends Fragment {
                     else val = "";
                     type = "system";
                 } else {
-                    pref = new String();
-                    val = new String();
+                    pref = "";
+                    val = "";
                     type = "";
                 }
 

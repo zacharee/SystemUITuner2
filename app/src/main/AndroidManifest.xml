@@ -50,6 +50,11 @@
                 <action android:name="android.intent.action.REBOOT"/>
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_CHANGED" />
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <data android:scheme="package" />
+            </intent-filter>
         </receiver>
 
         <activity

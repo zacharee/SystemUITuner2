@@ -23,6 +23,14 @@ public class OnBootReceiver extends WakefulBroadcastReceiver {
                 Toast.makeText(context, context.getResources().getText(R.string.boot_message_icon_blacklist), Toast.LENGTH_SHORT).show();
                 startWakefulService(context, new Intent(context, ShutDownListen.class));
             }
+            if (intent.getData().toString().toLowerCase().contains("systemuituner")) {
+                if (intent.getAction().equals(Intent.ACTION_PACKAGE_ADDED) || intent.getAction().equals(Intent.ACTION_PACKAGE_CHANGED)) {
+                    String blacklist_bak = Settings.Secure.getString(context.getContentResolver(), "icon_blacklist2");
+                    Settings.Secure.putString(context.getContentResolver(), "icon_blacklist", blacklist_bak);
+                    Toast.makeText(context, context.getResources().getText(R.string.boot_message_icon_blacklist), Toast.LENGTH_SHORT).show();
+                    startWakefulService(context, new Intent(context, ShutDownListen.class));
+                }
+            }
         }
     }
 }

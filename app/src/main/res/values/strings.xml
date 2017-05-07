@@ -199,4 +199,5 @@
     <string name="enable_custom_settings_input">Enable Custom Settings Input</string>
     <string name="sharedprefs_id" translatable="false">com.zacharee1.sysuituner</string>
     <string name="root_test_failed">Root test failed.</string>
+    <string name="permissions_failed">Hmm. Something went wrong. Make sure you set the permissions correctly.</string>
 </resources>

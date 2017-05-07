@@ -133,7 +133,7 @@ public class SetThings {
                                 currentActivity.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast.makeText(currentActivity, "Hmm. Something went wrong. Make sure you set the permissions correctly.", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(currentActivity, currentActivity.getResources().getText(R.string.permissions_failed), Toast.LENGTH_LONG).show();
                                     }
                                 });
                             }

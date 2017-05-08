@@ -1,10 +1,12 @@
-package com.zacharee1.systemuituner;
+package com.zacharee1.systemuituner.services;
 
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
+
+import com.zacharee1.systemuituner.receivers.ShutDownReceiver;
 
 public class ShutDownListen extends Service {
     public ShutDownListen() {

@@ -12,10 +12,13 @@ import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
+
+import com.zacharee1.systemuituner.fragments.StatBar;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -30,6 +33,7 @@ public class SetThings {
     public final boolean setup;
 
     public final int titleText;
+    @SuppressWarnings({"FieldCanBeLocal", "unused"})
     private final int style;
     final ColorStateList drawerItem;
 

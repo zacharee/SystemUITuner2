@@ -28,6 +28,7 @@ import com.zacharee1.systemuituner.fragments.Misc;
 import com.zacharee1.systemuituner.fragments.QS;
 import com.zacharee1.systemuituner.fragments.Settings;
 import com.zacharee1.systemuituner.fragments.StatBar;
+import com.zacharee1.systemuituner.receivers.ShutDownReceiver;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

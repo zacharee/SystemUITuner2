@@ -30,7 +30,7 @@
         android:theme="@style/DARK"
         android:name=".AppService">
 
-        <receiver android:name=".ShutDownReceiver"
+        <receiver android:name=".receivers.ShutDownReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -39,7 +39,7 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".OnBootReceiver"
+        <receiver android:name=".receivers.OnBootReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -98,7 +98,7 @@
         </activity>
 
         <service
-            android:name=".ShutDownListen"
+            android:name=".services.ShutDownListen"
             android:enabled="true"
             android:exported="false" />
     </application>

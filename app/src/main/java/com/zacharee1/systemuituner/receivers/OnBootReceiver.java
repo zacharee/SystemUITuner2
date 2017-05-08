@@ -1,4 +1,4 @@
-package com.zacharee1.systemuituner;
+package com.zacharee1.systemuituner.receivers;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,6 +6,9 @@ import android.content.SharedPreferences;
 import android.provider.Settings;
 import android.support.v4.content.WakefulBroadcastReceiver;
 import android.widget.Toast;
+
+import com.zacharee1.systemuituner.R;
+import com.zacharee1.systemuituner.services.ShutDownListen;
 
 /**
  * Created by Zacha on 5/1/2017.
@@ -21,16 +24,26 @@ public class OnBootReceiver extends WakefulBroadcastReceiver {
             if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED) ||
                     intent.getAction().equals(Intent.ACTION_REBOOT) ||
                     intent.getAction().equals("android.intent.action.QUICKBOOT_POWERON")) {
-                Settings.Secure.putString(context.getContentResolver(), "icon_blacklist", blacklist_bak);
-                Toast.makeText(context, context.getResources().getText(R.string.boot_message_icon_blacklist), Toast.LENGTH_SHORT).show();
+                try {
+                    Settings.Secure.putString(context.getContentResolver(), "icon_blacklist", blacklist_bak);
+                    Toast.makeText(context, context.getResources().getText(R.string.boot_message_icon_blacklist), Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, context.getResources().getText(R.string.permissions_failed), Toast.LENGTH_LONG).show();
+                }
                 startWakefulService(context, new Intent(context, ShutDownListen.class));
             }
             if (intent.getAction().equals(Intent.ACTION_PACKAGE_ADDED) ||
                     intent.getAction().equals(Intent.ACTION_PACKAGE_CHANGED) ||
                     intent.getAction().equals(Intent.ACTION_MY_PACKAGE_REPLACED) ||
                     intent.getAction().equals(Intent.ACTION_PACKAGE_REPLACED)) {
-                Settings.Secure.putString(context.getContentResolver(), "icon_blacklist", blacklist_bak);
-                Toast.makeText(context, context.getResources().getText(R.string.boot_message_icon_blacklist), Toast.LENGTH_SHORT).show();
+                try {
+                    Settings.Secure.putString(context.getContentResolver(), "icon_blacklist", blacklist_bak);
+                    Toast.makeText(context, context.getResources().getText(R.string.boot_message_icon_blacklist), Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, context.getResources().getText(R.string.permissions_failed), Toast.LENGTH_LONG).show();
+                }
                 startWakefulService(context, new Intent(context, ShutDownListen.class));
             }
         }

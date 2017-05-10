@@ -159,4 +159,5 @@
     <string name="use_safer_statusbar_hide">Usar Ocultador de Barra de Estado Seguro</string>
     <string name="root_test_failed">No se pudo obtener root.</string>
     <string name="permissions_failed">Hmm. No se pudo completar. Los permisos están correctos? (SystemUI Tuner)</string>
+    <string name="enable">Permitir</string>
 </resources>

@@ -57,7 +57,7 @@
     <string name="sorry">Sorry…</string>
     <string name="android_issue">This is an issue in Android itself, and I can\'t do anything about it.</string>
     <string name="root_needed_toggle">To use this toggle from the phone, you need root.</string>
-    <string name="example_settings_adb" tools:ignore="Typos" translatable="false">adb shell settings put system SETTINGS_VALUE VALUE</string>
+    <string name="example_settings_adb" translatable="false" tools:ignore="Typos">adb shell settings put system SETTINGS_VALUE VALUE</string>
     <string name="non_root_info">Don\'t worry. It\'s fine if you aren\'t. There are just some extra things you need to do in that case.</string>
     <string name="i_am_not_rooted">I am not rooted</string>
     <string name="i_am_rooted">I am rooted</string>
@@ -200,4 +200,5 @@
     <string name="sharedprefs_id" translatable="false">com.zacharee1.sysuituner</string>
     <string name="root_test_failed">Root test failed.</string>
     <string name="permissions_failed">Hmm. Something went wrong. Make sure you set the permissions correctly. (SystemUI Tuner)</string>
+    <string name="enable">Enable</string>
 </resources>

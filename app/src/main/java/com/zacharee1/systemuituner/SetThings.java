@@ -223,8 +223,9 @@ public class SetThings {
 
                             if (isChecked) {
                                 for (String item : blacklistPref) {
-                                    if (blItems.contains(item))
-                                            blItems.remove(blItems.indexOf(item));
+                                    while (blItems.contains(item)) {
+                                        blItems.remove(blItems.indexOf(item));
+                                    }
                                 }
                             } else {
                                 for (String item : blacklistPref) {

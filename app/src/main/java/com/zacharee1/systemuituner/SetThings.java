@@ -8,21 +8,20 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.zacharee1.systemuituner.fragments.StatBar;
-
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by Zacha on 4/19/2017.
@@ -48,6 +47,8 @@ public class SetThings {
 
     private final Exceptions exceptions;
 
+    final int SDK_INT;
+
     SetThings(Activity activity) {
         //set all variables
         sharedPreferences = activity.getSharedPreferences(activity.getResources().getText(R.string.sharedprefs_id).toString(), Context.MODE_PRIVATE);
@@ -56,6 +57,8 @@ public class SetThings {
         Dark = sharedPreferences.getBoolean("isDark", false);
         setup = sharedPreferences.getBoolean("isSetup", false);
         exceptions = new Exceptions();
+
+        SDK_INT = Build.VERSION.SDK_INT;
 
         //noinspection deprecation
         titleText = activity.getResources().getColor(Dark ? android.R.color.primary_text_dark : android.R.color.primary_text_light);
@@ -178,6 +181,8 @@ public class SetThings {
 
     public void switches(final Switch toggle, final String pref, final String settingType, final View view) { //set switch listeners
 
+        final String blacklist = Settings.Secure.getString(currentActivity.getContentResolver(), "icon_blacklist");
+        final String[] blacklistItems = blacklist.split("[,]");
         //check to see if switch should be toggled
         int setting = 0;
         switch (settingType) {
@@ -191,10 +196,10 @@ public class SetThings {
                 setting = Settings.System.getInt(currentActivity.getContentResolver(), pref, 0);
                 break;
             case "icon_blacklist":
-                String blacklist = Settings.Secure.getString(currentActivity.getContentResolver(), "icon_blacklist") != null ? Settings.Secure.getString(currentActivity.getContentResolver(), "icon_blacklist") : "nada";
-                if (!blacklist.contains("," + pref + ",") && !blacklist.contains("," + pref)) {
-                    setting = 1;
-                } else setting = 0;
+                setting = 1;
+                for (String item : blacklistItems) {
+                    if (item.equals(pref)) setting = 0;
+                }
                 break;
             case "dark_mode":
                 setting = Dark ? 1 : 0;
@@ -209,24 +214,29 @@ public class SetThings {
                 try {
                     switch (settingType) {
                         case "icon_blacklist":
-                            String blacklist = Settings.Secure.getString(currentActivity.getContentResolver(), "icon_blacklist");
-                            if (!isChecked) {
-                                if (blacklist != null && !blacklist.equals("")) blacklist = blacklist.concat("," + pref);
-                                else blacklist = pref;
+                            ArrayList<String> blItems = new ArrayList<>();
+                            blItems.addAll(Arrays.asList(blacklistItems));
+
+                            if (isChecked) {
+                                if (blItems.contains(pref))
+                                    blItems.remove(blItems.indexOf(pref));
                             } else {
-                                if (blacklist != null) {
-                                    blacklist = blacklist.replace("," + pref, ",");
-                                    blacklist = blacklist.replace("," + pref + ",", ",");
-                                }
+                                blItems.add(pref);
                             }
 
-                            final String blacklist2 = blacklist;
+                            String bl = "";
+
+                            for (String item : blItems) {
+                                bl = bl.concat("," + item);
+                            }
+
+                            final String blacklist2 = bl;
                             new Thread(new Runnable() {
                                 @Override
                                 public void run() {
                                     Looper.prepare();
                                     try {
-                                        if (blacklist2 != null && !blacklist2.equals("")) {
+                                        if (!blacklist2.equals("")) {
                                             try {
                                                 Settings.Secure.putString(currentActivity.getContentResolver(), "icon_blacklist", blacklist2);
                                                 Settings.Secure.putString(currentActivity.getContentResolver(), "icon_blacklist2", blacklist2);

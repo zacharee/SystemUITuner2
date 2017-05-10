@@ -280,6 +280,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         Menu navMenu = navigationView.getMenu();
 
+        if (setThings.SDK_INT < 23) navMenu.findItem(R.id.nav_statusbar).setVisible(false);
+
         int id = setThings.sharedPreferences.getInt("navpage", R.id.nav_home); //nav item that was selected before last app close
 
         if (setThings.pages.contains(id))

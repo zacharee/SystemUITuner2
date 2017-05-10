@@ -46,7 +46,7 @@ public class StatBar extends Fragment {
 
         int drawable = R.drawable.ic_warning_red;
 
-        if (Build.MANUFACTURER.toUpperCase().contains("SAMSUNG") && !activity.setThings.sharedPreferences.getBoolean("samsungRisk", false)) { //show warning for Samsung users
+        if ((Build.MANUFACTURER.toUpperCase().contains("SAMSUNG") || Build.MANUFACTURER.toUpperCase().contains("VIVO")) && !activity.setThings.sharedPreferences.getBoolean("samsungRisk", false)) { //show warning for Samsung and Vivo users
             view.setVisibility(View.GONE);
             //noinspection deprecation
 

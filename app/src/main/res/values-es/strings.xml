@@ -131,7 +131,7 @@
     <string name="ok">OK</string>
     <string name="perms_not_set">Se parece que los permisos no son configurados correctamente. Aquí es el error:</string>
     <string name="prompt_setup">Quieres entrar en la configuración ahora?</string>
-    <string name="samsung_warning_message">Se parece que estás usando un Samsung. Si tienes Stock (TouchWiz), SystemUI puede romper después de reboot! He tratado evitar esta problema, pero no puedo garantizar la eficacia! Continuar?</string>
+    <string name="samsung_warning_message">Se parece que estás usando un aparato de Samsung o Vivo. Si tienes el SO Stock, SystemUI puede romper después de reboot! He tratado evitar esta problema, pero no puedo garantizar la eficacia! Continuar?</string>
     <string name="select_time_title">Seleccionar Tiempo para Exponer</string>
     <string name="system_settings_failed">Falló :/. Aquí es el error:</string>
     <string name="warning">CUIDADO</string>

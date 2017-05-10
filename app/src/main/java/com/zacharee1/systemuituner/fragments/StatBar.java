@@ -135,10 +135,12 @@ public class StatBar extends Fragment {
         String SLOT_AIRPLANE = "airplane";
         String SLOT_MAN_PROFILE = "managed_profile";
         String SLOT_ZEN = "zen";
-        String SLOT_ALARM = "alarm_clock,alarm";
+        String SLOT_ALARM = "alarm";
+        String SLOT_ALARM_CLOCK = "alarm_clock";
         String SLOT_HOTSPOT = "hotspot";
         String SLOT_DATA_SAVER = "data_saver";
-        String SLOT_NFC = "nfc,nfc_on";
+        String SLOT_NFC = "nfc";
+        String SLOT_NFC_ON = "nfc_on";
         String SLOT_CLOCK = "clock";
         String SLOT_DND = "do_not_disturb";
         String SLOT_ROTATION = "rotate";

@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -183,6 +184,9 @@ public class SetThings {
 
         final String blacklist = Settings.Secure.getString(currentActivity.getContentResolver(), "icon_blacklist");
         final String[] blacklistItems = blacklist.split("[,]");
+        final ArrayList<String> blacklistPref = new ArrayList<>();
+        blacklistPref.addAll(Arrays.asList(pref.split("[,]")));
+
         //check to see if switch should be toggled
         int setting = 0;
         switch (settingType) {
@@ -198,7 +202,7 @@ public class SetThings {
             case "icon_blacklist":
                 setting = 1;
                 for (String item : blacklistItems) {
-                    if (item.equals(pref)) setting = 0;
+                    if (blacklistPref.contains(item)) setting = 0;
                 }
                 break;
             case "dark_mode":
@@ -218,10 +222,14 @@ public class SetThings {
                             blItems.addAll(Arrays.asList(blacklistItems));
 
                             if (isChecked) {
-                                if (blItems.contains(pref))
-                                    blItems.remove(blItems.indexOf(pref));
+                                for (String item : blacklistPref) {
+                                    if (blItems.contains(item))
+                                            blItems.remove(blItems.indexOf(item));
+                                }
                             } else {
-                                blItems.add(pref);
+                                for (String item : blacklistPref) {
+                                    blItems.add(item);
+                                }
                             }
 
                             String bl = "";

@@ -16,83 +16,174 @@
         android:textSize="18sp"
         android:textStyle="italic" />
 
-    <Switch
-        android:id="@+id/bt_icon"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:checked="false"
-        android:switchMinWidth="50dp"
-        android:text="@string/bluetooth_icon"
-        android:textSize="18sp" />
+        android:layout_height="400dp">
 
-    <Switch
-        android:id="@+id/data_saver"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:checked="false"
-        android:switchMinWidth="50dp"
-        android:text="@string/data_saver_icon"
-        android:textSize="18sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <Switch
-        android:id="@+id/ethernet_icon"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:checked="false"
-        android:switchMinWidth="50dp"
-        android:text="@string/ethernet_icon"
-        android:textSize="18sp" />
+            <Switch
+                android:id="@+id/bt_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/bluetooth_icon"
+                android:textSize="18sp" />
 
-    <Switch
-        android:id="@+id/hotspot_icon"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:checked="false"
-        android:switchMinWidth="50dp"
-        android:text="@string/hotspot_icon"
-        android:textSize="18sp" />
+            <Switch
+                android:id="@+id/data_saver"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/data_saver_icon"
+                android:textSize="18sp" />
 
-    <Switch
-        android:id="@+id/mobile_icon"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:checked="false"
-        android:switchMinWidth="50dp"
-        android:text="@string/mobile_icon"
-        android:textSize="18sp" />
+            <Switch
+                android:id="@+id/ethernet_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/ethernet_icon"
+                android:textSize="18sp" />
 
-    <Switch
-        android:id="@+id/airplane_icon"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:checked="false"
-        android:switchMinWidth="50dp"
-        android:text="@string/airplane_icon"
-        android:textSize="18sp" />
+            <Switch
+                android:id="@+id/hotspot_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/hotspot_icon"
+                android:textSize="18sp" />
 
-    <Switch
-        android:id="@+id/wifi_icon"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:checked="false"
-        android:switchMinWidth="50dp"
-        android:text="@string/wifi_icon"
-        android:textSize="18sp" />
+            <Switch
+                android:id="@+id/mobile_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/mobile_icon"
+                android:textSize="18sp" />
 
-    <Switch
-        android:id="@+id/vpn_icon"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:checked="false"
-        android:switchMinWidth="50dp"
-        android:text="@string/vpn_icon"
-        android:textSize="18sp" />
+            <Switch
+                android:id="@+id/airplane_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/airplane_icon"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/wifi_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/wifi_icon"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/vpn_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/vpn_icon"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/volte"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/volte"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/vowifi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/vowifi"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/dmb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/dmb"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/wifi_calling"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/wifi_calling_icon"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/cdma_eri"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/cdma_eri_icon"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/data_connection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/data_connection_icon"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/phone_evdo_signal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/evdo_signal_icon"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/phone_signal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/phone_signal_icon"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

@@ -45,4 +45,24 @@
         android:switchMinWidth="50dp"
         android:text="@string/speakerphone_icon"
         android:textSize="18sp" />
+
+    <Switch
+        android:id="@+id/remote_call"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:checked="false"
+        android:switchMinWidth="50dp"
+        android:text="@string/remote_call_icon"
+        android:textSize="18sp" />
+
+    <Switch
+        android:id="@+id/tty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:checked="false"
+        android:switchMinWidth="50dp"
+        android:text="@string/tty_icon"
+        android:textSize="18sp" />
 </LinearLayout>

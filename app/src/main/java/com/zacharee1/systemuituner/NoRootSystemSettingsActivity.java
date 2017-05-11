@@ -42,12 +42,12 @@ public class NoRootSystemSettingsActivity extends AppCompatActivity {
             @Override
             public void onReceive(Context arg0, Intent intent) {
                 String action = intent.getAction();
-                if (action.equals("finish_activity")) {
+                if (action.equals("finish_systemuituner_activity")) {
                     finish();
                 }
             }
         };
-        registerReceiver(finish_activity, new IntentFilter("finish_activity"));
+        registerReceiver(finish_activity, new IntentFilter("finish_systemuituner_activity"));
     }
 
     @Override

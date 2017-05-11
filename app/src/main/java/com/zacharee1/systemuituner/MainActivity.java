@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         if (id == R.id.nav_exit) { //if exit button pressed, quit app (needs to be at end of method to avoid exceptions)
-            Intent intent = new Intent("finish_activity");
+            Intent intent = new Intent("finish_systemuituner_activity");
             sendBroadcast(intent);
             super.onBackPressed();
         }
@@ -255,12 +255,12 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onReceive(Context arg0, Intent intent) {
                 String action = intent.getAction();
-                if (action.equals("finish_activity")) {
+                if (action.equals("finish_systemuituner_activity")) {
                     finish();
                 }
             }
         };
-        registerReceiver(finish_activity, new IntentFilter("finish_activity"));
+        registerReceiver(finish_activity, new IntentFilter("finish_systemuituner_activity"));
 
         Intent intent = new Intent(getApplicationContext(), SetupActivity.class);
         if (!setThings.setup) {

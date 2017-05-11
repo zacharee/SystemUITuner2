@@ -183,9 +183,10 @@ public class SetThings {
 
         final String blacklist = Settings.Secure.getString(currentActivity.getContentResolver(), "icon_blacklist");
         final String[] blacklistItems;
-        if (blacklist != null) blacklistItems = blacklist.split("[,]");
+        if (blacklist != null && blacklist.length() > 0) blacklistItems = blacklist.split("[,]");
         else blacklistItems = new String[]{""};
         final ArrayList<String> blacklistPref = new ArrayList<>();
+        blacklistPref.addAll(Arrays.asList(pref.split("[,]")));
 
         //check to see if switch should be toggled
         int setting = 0;
@@ -200,7 +201,6 @@ public class SetThings {
                 setting = Settings.System.getInt(currentActivity.getContentResolver(), pref, 0);
                 break;
             case "icon_blacklist":
-                blacklistPref.addAll(Arrays.asList(pref.split("[,]")));
                 setting = 1;
                 for (String item : blacklistItems) {
                     if (blacklistPref.contains(item)) setting = 0;
@@ -237,7 +237,7 @@ public class SetThings {
                             String bl = "";
 
                             for (String item : blItems) {
-                                bl = bl.concat("," + item);
+                                bl = blacklist + "," + item;
                             }
 
                             final String blacklist2 = bl;

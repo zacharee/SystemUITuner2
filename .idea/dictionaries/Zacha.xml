@@ -4,9 +4,14 @@
       <w>aren</w>
       <w>bottommenu</w>
       <w>cardview</w>
+      <w>cdma</w>
       <w>datatype</w>
       <w>didn</w>
+      <w>evdo</w>
       <w>exitmenu</w>
+      <w>felica</w>
+      <w>femtocell</w>
+      <w>femtoicon</w>
       <w>github</w>
       <w>gplus</w>
       <w>hhmm</w>
@@ -15,6 +20,7 @@
       <w>mcurrent</w>
       <w>nadb</w>
       <w>navpage</w>
+      <w>nfclock</w>
       <w>noninfringement</w>
       <w>noroot</w>
       <w>notif</w>
@@ -28,6 +34,7 @@
       <w>reciever</w>
       <w>resetup</w>
       <w>rootbox</w>
+      <w>safezone</w>
       <w>samsung</w>
       <w>sharedpref</w>
       <w>sharedprefs</w>
@@ -45,7 +52,10 @@
       <w>vername</w>
       <w>vernum</w>
       <w>vivo</w>
+      <w>volte</w>
+      <w>vowifi</w>
       <w>webscr</w>
+      <w>wimax</w>
       <w>zacha</w>
       <w>zacharee</w>
     </words>

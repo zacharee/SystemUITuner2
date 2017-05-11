@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.LinkMovementMethod;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -25,8 +26,10 @@ public class NoRootActivity extends AppCompatActivity {
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         TextView title = (TextView) findViewById(R.id.noroot_title);
-
         title.setTextColor(setThings.titleText); //make sure title text color is right
+
+        TextView adb_instructions = (TextView) findViewById(R.id.adb_instructions);
+        adb_instructions.setMovementMethod(LinkMovementMethod.getInstance());
 
         Button setupDone = (Button) findViewById(R.id.no_root_done);
 

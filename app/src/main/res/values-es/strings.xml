@@ -9,7 +9,7 @@
     <string name="about">Descripción</string>
     <string name="abt_desc"> La primer página dice todo lo que hace esta app,(entonces no sé exactamente qué decir)?.</string>
     <string name="abt_warn">Esta app no funciona en todos los dispositivos. Recuerda esto cuando algo no tenga algún efecto.</string>
-    <string name="adb_instructions">Para hacer esto, necesitas una computadora, un cable de USB, y ADB (busques instrucciones si es necesario).</string>
+    <string name="adb_instructions">Para hacer esto, necesitas una computadora, un cable de USB, y ADB (<a href='https://developer.android.com/studio/command-line/adb.html'>Instrucciones</a>).</string>
     <string name="adb_perm_grant">Ejecutes los siguientes comandos(con su dispositivo conectado) en CMD o Terminal:</string>
     <string name="adb_reminder">Recuerda también permitir depurar USB en Developer Options, y autorizar en su computadora.</string>
     <string name="adb_set_up">¿ADB está listo? Bueno. Ahora, comenzamos.</string>

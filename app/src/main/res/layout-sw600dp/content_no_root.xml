@@ -52,7 +52,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/textView23"
+                android:id="@+id/adb_instructions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -125,6 +125,15 @@
                     </LinearLayout>
                 </HorizontalScrollView>
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView37"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/scroll_hint"
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/no_root_done"

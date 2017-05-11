@@ -69,7 +69,7 @@
     <string name="not_rooted_huh">Not rooted, huh?</string>
     <string name="adb_set_up">ADB all set up? Good. Now, let\'s get started.</string>
     <string name="bummer">Bummer…</string>
-    <string name="adb_instructions">For this to work, you\'ll need a computer, a USB cable and ADB (look up how to set that up).</string>
+    <string name="adb_instructions">For this to work, you\'ll need a computer, a USB cable and ADB (<a href='https://developer.android.com/studio/command-line/adb.html'>Instructions</a>).</string>
     <string name="workaround">I guess it\'s a good thing that there\'s a workaround, then.</string>
     <string name="finished">OK! I\'m done!</string>
     <string name="adb_reminder">Remember to also enable \"USB Debugging\" in Developer Options, and authorize your computer.</string>

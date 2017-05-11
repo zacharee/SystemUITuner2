@@ -202,4 +202,10 @@
     <string name="volte">VoLTE</string>
     <string name="vowifi">VoWiFi</string>
     <string name="wifi_calling_icon">Icono Llamar WiFi</string>
+    <string name="android_hasn_t_finished_booting_yet_which_means_this_app_won_t_work_properly">Android no ya ha completado boot. Por esto, SystemUI Tuner no funcionará bien.</string>
+    <string name="in_the_meantime_though_you_can_press_this_refresh_button_if_you_want">Pero, mientras tanto, puedes pulsar esto botón, si quieres.</string>
+    <string name="not_booted_yet">Boot todavía no ha completado.</string>
+    <string name="once_everything_is_ready_for_use_you_ll_see_a_toast_notification_telling_you">Cuándo todo está listo para usar, verás un mensaje.</string>
+    <string name="please_wait">Espera, Por Favor</string>
+    <string name="refresh">Actualizer</string>
 </resources>

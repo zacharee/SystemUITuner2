@@ -17,8 +17,9 @@ public class ShutDownReceiver extends WakefulBroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(context.getResources().getText(R.string.sharedprefs_id).toString(), Context.MODE_PRIVATE);
-            if (sharedPreferences.getBoolean("safeStatbar", false)) {
+        if (sharedPreferences.getBoolean("safeStatbar", false)) {
             if (intent.getAction().equals(Intent.ACTION_SHUTDOWN) || intent.getAction().equals("android.intent.action.QUICKBOOT_POWEROFF")) {
+                sharedPreferences.edit().putBoolean("isBooted", false).apply();
                 try {
                     Settings.Secure.putString(context.getContentResolver(), "icon_blacklist", "");
                 } catch (Exception e) {

@@ -268,6 +268,12 @@ public class MainActivity extends AppCompatActivity
             finish();
         }
 
+        intent = new Intent(getApplicationContext(), WaitForBootActivity.class);
+        if (!setThings.sharedPreferences.getBoolean("isBooted", true) && setThings.sharedPreferences.getBoolean("safeStatbar", false)) {
+            startActivity(intent);
+            finish();
+        }
+
         if (Build.MANUFACTURER.toLowerCase().contains("samsung")) {
             if (!setThings.sharedPreferences.getBoolean("samsungInitialized", false)) {
                 setThings.editor.putBoolean("safeStatbar", true);

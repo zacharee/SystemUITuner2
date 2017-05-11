@@ -245,4 +245,10 @@
     <string name="secure_icon">Secure Icon</string>
     <string name="sync_active_icon">Sync Active Icon</string>
     <string name="sync_failing_icon">Sync Failing Icon</string>
+    <string name="please_wait">Please Wait</string>
+    <string name="android_hasn_t_finished_booting_yet_which_means_this_app_won_t_work_properly">Android hasn\'t finished booting yet, which means this app won\'t work properly.</string>
+    <string name="in_the_meantime_though_you_can_press_this_refresh_button_if_you_want">In the meantime, though, you can press this refresh button, if you want.</string>
+    <string name="once_everything_is_ready_for_use_you_ll_see_a_toast_notification_telling_you">Once everything is ready for use, you\'ll see a toast notification telling you.</string>
+    <string name="refresh">Refresh</string>
+    <string name="not_booted_yet">Boot still hasn\'t finished.</string>
 </resources>

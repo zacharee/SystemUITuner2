@@ -103,6 +103,8 @@
             android:name=".services.ShutDownListen"
             android:enabled="true"
             android:exported="false" />
+
+        <activity android:name=".WaitForBootActivity"></activity>
     </application>
 
 </manifest>

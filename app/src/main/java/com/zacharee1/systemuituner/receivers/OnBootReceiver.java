@@ -27,6 +27,7 @@ public class OnBootReceiver extends WakefulBroadcastReceiver {
                 try {
                     Settings.Secure.putString(context.getContentResolver(), "icon_blacklist", blacklist_bak);
                     Toast.makeText(context, context.getResources().getText(R.string.boot_message_icon_blacklist), Toast.LENGTH_SHORT).show();
+                    sharedPreferences.edit().putBoolean("isBooted", true).apply();
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(context, context.getResources().getText(R.string.permissions_failed), Toast.LENGTH_LONG).show();
@@ -40,6 +41,7 @@ public class OnBootReceiver extends WakefulBroadcastReceiver {
                 try {
                     Settings.Secure.putString(context.getContentResolver(), "icon_blacklist", blacklist_bak);
                     Toast.makeText(context, context.getResources().getText(R.string.boot_message_icon_blacklist), Toast.LENGTH_SHORT).show();
+                    sharedPreferences.edit().putBoolean("isBooted", true).apply();
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(context, context.getResources().getText(R.string.permissions_failed), Toast.LENGTH_LONG).show();

@@ -186,7 +186,7 @@ public class SetThings {
         if (blacklist != null && blacklist.length() > 0) blacklistItems = blacklist.split("[,]");
         else blacklistItems = new String[]{""};
         final ArrayList<String> blacklistPref = new ArrayList<>();
-        blacklistPref.addAll(Arrays.asList(pref.split("[,]")));
+        if (pref != null) blacklistPref.addAll(Arrays.asList(pref.split("[,]")));
 
         //check to see if switch should be toggled
         int setting = 0;

@@ -181,13 +181,6 @@ public class SetThings {
 
     public void switches(final Switch toggle, final String pref, final String settingType, final View view) { //set switch listeners
 
-        final String blacklist = Settings.Secure.getString(currentActivity.getContentResolver(), "icon_blacklist");
-        final String[] blacklistItems;
-        if (blacklist != null && blacklist.length() > 0) blacklistItems = blacklist.split("[,]");
-        else blacklistItems = new String[]{""};
-        final ArrayList<String> blacklistPref = new ArrayList<>();
-        if (pref != null) blacklistPref.addAll(Arrays.asList(pref.split("[,]")));
-
         //check to see if switch should be toggled
         int setting = 0;
         switch (settingType) {
@@ -202,6 +195,13 @@ public class SetThings {
                 break;
             case "icon_blacklist":
                 setting = 1;
+                String blacklist = Settings.Secure.getString(currentActivity.getContentResolver(), "icon_blacklist");
+                String[] blacklistItems = new String[]{""};
+                if (blacklist != null && blacklist.length() > 0) blacklistItems = blacklist.split(",");
+
+                ArrayList<String> blacklistPref = new ArrayList<>();
+                if (pref != null) blacklistPref.addAll(Arrays.asList(pref.split(",")));
+
                 for (String item : blacklistItems) {
                     if (blacklistPref.contains(item)) setting = 0;
                 }
@@ -219,69 +219,51 @@ public class SetThings {
                 try {
                     switch (settingType) {
                         case "icon_blacklist":
+                            String blacklist = Settings.Secure.getString(currentActivity.getContentResolver(), "icon_blacklist");
+                            String[] blacklistItems = new String[] {""};
+                            if (blacklist != null && blacklist.length() > 0) blacklistItems = blacklist.split(",");
+
+                            Log.i("blacklistItems", Arrays.toString(blacklistItems));
+
+                            ArrayList<String> blacklistPref = new ArrayList<>();
+                            if (pref != null) blacklistPref.addAll(Arrays.asList(pref.split(",")));
+
                             ArrayList<String> blItems = new ArrayList<>();
                             blItems.addAll(Arrays.asList(blacklistItems));
 
                             if (isChecked) {
                                 for (String item : blacklistPref) {
-                                    while (blItems.contains(item)) {
-                                        blItems.remove(blItems.indexOf(item));
+                                    for (int i = 0; i < blItems.size(); i++) {
+                                        if (item.equals(blItems.get(i))) blItems.remove(i);
                                     }
                                 }
                             } else {
-                                for (String item : blacklistPref) {
-                                    blItems.add(item);
+                                for (String item: blacklistPref) {
+                                    if (item.length() > 0) blItems.add(item);
                                 }
                             }
 
-                            String bl = "";
+                            Log.i("blItems", blItems.toString());
 
-                            for (String item : blItems) {
-                                bl = blacklist + "," + item;
+                            StringBuilder bl = new StringBuilder();
+
+                            for (int i = 0; i < blItems.size(); i++) {
+                                if (bl.length() > 0) bl.append(",");
+                                bl.append(blItems.get(i));
                             }
 
-                            final String blacklist2 = bl;
-                            new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Looper.prepare();
-                                    try {
-                                        if (!blacklist2.equals("")) {
-                                            try {
-                                                Settings.Secure.putString(currentActivity.getContentResolver(), "icon_blacklist", blacklist2);
-                                                Settings.Secure.putString(currentActivity.getContentResolver(), "icon_blacklist2", blacklist2);
-                                            } catch (final Exception e) {
-                                                currentActivity.runOnUiThread(new Runnable() {
-                                                    @Override
-                                                    public void run() {
-                                                        exceptions.secureSettings(view.getContext(), currentActivity.getApplicationContext(), e.getMessage(), "icon_blacklist");
-                                                    }
-                                                });
-                                            }
-                                        } else {
-                                            try {
-                                                Settings.Secure.putString(currentActivity.getContentResolver(), "icon_blacklist", "");
-                                                Settings.Secure.putString(currentActivity.getContentResolver(), "icon_blacklist2", "");
-                                            } catch (final Exception e) {
-                                                currentActivity.runOnUiThread(new Runnable() {
-                                                    @Override
-                                                    public void run() {
-                                                        exceptions.secureSettings(view.getContext(), currentActivity.getApplicationContext(), e.getMessage(), "icon_blacklist");
-                                                    }
-                                                });
-                                            }
-                                        }
-                                    } catch (Exception e) {
-                                        Log.e("idk", e.getMessage());
-                                    }
-                                }
-                            }).start();
+                            Log.i("bl", bl.toString());
+
+                            try {
+                                Settings.Secure.putString(currentActivity.getContentResolver(), "icon_blacklist", bl.toString());
+                                Settings.Secure.putString(currentActivity.getContentResolver(), "icon_blacklist2", bl.toString());
+                            } catch (final Exception e) {
+                                exceptions.secureSettings(view.getContext(), currentActivity.getApplicationContext(), e.getMessage(), "icon_blacklist");
+                            }
                             break;
                         case "dark_mode":
                             editor.putBoolean("isDark", isChecked);
                             editor.apply();
-//                            currentActivity.finish();
-//                            currentActivity.startActivity(new Intent(currentActivity, currentActivity.getClass()));
                             currentActivity.recreate();
                             break;
                         default:

@@ -182,7 +182,9 @@ public class SetThings {
     public void switches(final Switch toggle, final String pref, final String settingType, final View view) { //set switch listeners
 
         final String blacklist = Settings.Secure.getString(currentActivity.getContentResolver(), "icon_blacklist");
-        final String[] blacklistItems = blacklist.split("[,]");
+        final String[] blacklistItems;
+        if (blacklist != null) blacklistItems = blacklist.split("[,]");
+        else blacklistItems = new String[]{""};
         final ArrayList<String> blacklistPref = new ArrayList<>();
 
         //check to see if switch should be toggled

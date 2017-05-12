@@ -208,4 +208,8 @@
     <string name="once_everything_is_ready_for_use_you_ll_see_a_toast_notification_telling_you">Cuándo todo está listo para usar, verás un mensaje.</string>
     <string name="please_wait">Espera, Por Favor</string>
     <string name="refresh">Actualizer</string>
+    <string name="night_mode">Modo Noche</string>
+    <string name="night_mode_auto">Modo Noche Auto</string>
+    <string name="night_mode_override">Modo Noche Manual</string>
+    <string name="night_mode_adjust_tint">Modo Noche Adjustar Tinte</string>
 </resources>

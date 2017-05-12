@@ -1,6 +1,7 @@
 package com.zacharee1.systemuituner.fragments;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.zacharee1.systemuituner.MainActivity;
@@ -47,6 +49,12 @@ public class Misc extends Fragment {
     private String global;
     private String secure;
     private String system;
+
+    private boolean mNightModeAuto;
+    private boolean mNightModeOverride;
+    private Switch night_mode_auto;
+    private Switch night_mode_override;
+    private Switch night_mode_adjust_tint;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -139,7 +147,86 @@ public class Misc extends Fragment {
         textFields(custom_secure);
         textFields(custom_system);
 
+        if (activity.setThings.SDK_INT > 23 && activity.setThings.SDK_INT < 25) {
+
+            night_mode_auto = (Switch) view.findViewById(R.id.night_mode_auto);
+            night_mode_override = (Switch) view.findViewById(R.id.night_mode_override);
+            night_mode_adjust_tint = (Switch) view.findViewById(R.id.night_mode_adjust_tint);
+
+            night_mode_auto.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    mNightModeAuto = isChecked;
+                    setNightMode();
+                }
+            });
+
+            night_mode_override.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    mNightModeOverride = isChecked;
+                    setNightMode();
+                }
+            });
+
+            night_mode_adjust_tint.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    activity.setThings.settings("secure", "tuner_night_mode_adjust_tint", isChecked ? 1 + "" : 0 + "");
+                }
+            });
+
+            night_mode_adjust_tint.setChecked(Settings.Secure.getInt(activity.getContentResolver(), "tuner_night_mode_adjust_tint", 0) == 1);
+
+            getNightMode();
+        } else {
+            CardView night_mode_card = (CardView) view.findViewById(R.id.night_mode_card);
+            night_mode_card.setVisibility(View.GONE);
+        }
+
         return view;
+    }
+
+    private void getNightMode() {
+        int val = Settings.Secure.getInt(activity.getContentResolver(), "twilight_mode", 0);
+
+        switch (val) {
+            case 0:
+                mNightModeAuto = false;
+                mNightModeOverride = false;
+                night_mode_auto.setChecked(false);
+                night_mode_override.setChecked(false);
+                break;
+            case 1:
+                mNightModeAuto = false;
+                mNightModeOverride = true;
+                night_mode_auto.setChecked(false);
+                night_mode_override.setChecked(true);
+                break;
+            case 2:
+                mNightModeAuto = true;
+                mNightModeOverride = false;
+                night_mode_auto.setChecked(true);
+                night_mode_override.setChecked(false);
+                break;
+            case 4:
+                mNightModeAuto = true;
+                mNightModeOverride = true;
+                night_mode_auto.setChecked(true);
+                night_mode_override.setChecked(true);
+                break;
+        }
+    }
+
+    private void setNightMode() {
+        int val;
+
+        if (mNightModeOverride && !mNightModeAuto) val = 1;
+        else if (!mNightModeOverride && mNightModeAuto) val = 2;
+        else if (mNightModeOverride) val = 4; //implied "&& mNightModeAuto == true"
+        else val = 0;
+
+        activity.setThings.settings("secure", "twilight_mode", val + "");
     }
 
     private void textFields(final TextInputEditText textInputEditText) {

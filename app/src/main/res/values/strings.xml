@@ -251,4 +251,8 @@
     <string name="once_everything_is_ready_for_use_you_ll_see_a_toast_notification_telling_you">Once everything is ready for use, you\'ll see a toast notification telling you.</string>
     <string name="refresh">Refresh</string>
     <string name="not_booted_yet">Boot still hasn\'t finished.</string>
+    <string name="night_mode">Night Mode</string>
+    <string name="night_mode_auto">Night Mode Auto</string>
+    <string name="night_mode_override">Night Mode Override</string>
+    <string name="night_mode_adjust_tint">Night Mode Adjust Tint</string>
 </resources>

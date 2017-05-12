@@ -45,9 +45,9 @@ public class SetThings {
 
     private final Context context;
 
-    private final Exceptions exceptions;
+    public final Exceptions exceptions;
 
-    final int SDK_INT;
+    public final int SDK_INT;
 
     SetThings(Activity activity) {
         //set all variables

@@ -217,7 +217,6 @@ public class Demo extends Fragment {
 
             }
         });
-
     }
 
     private void selectBatteryLevel(final Button button) {

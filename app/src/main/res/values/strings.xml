@@ -255,4 +255,10 @@
     <string name="night_mode_auto">Night Mode Auto</string>
     <string name="night_mode_override">Night Mode Override</string>
     <string name="night_mode_adjust_tint">Night Mode Adjust Tint</string>
+    <string name="night_display_auto">Night Display Auto</string>
+    <string name="custom_times">Custom Times</string>
+    <string name="night_display_activated">Night Display Activated</string>
+    <string name="night_display">Night Display</string>
+    <string name="custom_start_title">Select Start Time</string>
+    <string name="custom_end_title">Select End Time</string>
 </resources>

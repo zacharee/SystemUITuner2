@@ -1,7 +1,7 @@
 package com.zacharee1.systemuituner.fragments;
 
 import android.app.Fragment;
-import android.content.Context;
+import android.app.TimePickerDialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -10,15 +10,22 @@ import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.TimePicker;
 
 import com.zacharee1.systemuituner.MainActivity;
 import com.zacharee1.systemuituner.R;
+
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
+
+import android.widget.Toast;
 
 /**
  * Created by Zacha on 4/18/2017.
@@ -55,6 +62,9 @@ public class Misc extends Fragment {
     private Switch night_mode_auto;
     private Switch night_mode_override;
     private Switch night_mode_adjust_tint;
+    private boolean mNightDisplayAuto;
+    private boolean mNightDisplayActive;
+    private boolean mNightDisplayCustom;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -148,6 +158,8 @@ public class Misc extends Fragment {
         textFields(custom_system);
 
         if (activity.setThings.SDK_INT > 23 && activity.setThings.SDK_INT < 25) {
+            CardView night_display_card = (CardView) view.findViewById(R.id.night_display_card);
+            night_display_card.setVisibility(View.GONE);
 
             night_mode_auto = (Switch) view.findViewById(R.id.night_mode_auto);
             night_mode_override = (Switch) view.findViewById(R.id.night_mode_override);
@@ -179,9 +191,98 @@ public class Misc extends Fragment {
             night_mode_adjust_tint.setChecked(Settings.Secure.getInt(activity.getContentResolver(), "tuner_night_mode_adjust_tint", 0) == 1);
 
             getNightMode();
+        } else if (activity.setThings.SDK_INT > 24) {
+            CardView night_mode_card = (CardView) view.findViewById(R.id.night_mode_card);
+            night_mode_card.setVisibility(View.GONE);
+
+            Switch night_display_auto = (Switch) view.findViewById(R.id.night_display_auto);
+            Switch night_display_active = (Switch) view.findViewById(R.id.night_display_activated);
+            Switch night_display_custom = (Switch) view.findViewById(R.id.night_display_custom_times);
+
+            night_display_auto.setChecked(Settings.Secure.getInt(activity.getContentResolver(), "night_display_auto_mode", 0) == 1);
+            night_display_active.setChecked(Settings.Secure.getInt(activity.getContentResolver(), "night_display_activated", 0) == 1);
+
+            try {
+                night_display_custom.setChecked(Settings.Secure.getString(activity.getContentResolver(), "night_display_custom_start_time").length() > 0 ||
+                        Settings.Secure.getString(activity.getContentResolver(), "night_display_custom_end_time").length() > 0);
+            } catch (NullPointerException e) {}
+
+            night_display_auto.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    mNightDisplayAuto = isChecked;
+                    Settings.Secure.putInt(activity.getContentResolver(), "night_display_auto_mode", isChecked ? 1 : 0);
+                }
+            });
+
+            night_display_active.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    mNightDisplayActive = isChecked;
+                    Settings.Secure.putInt(activity.getContentResolver(), "night_display_activated", isChecked ? 1 : 0);
+                }
+            });
+
+            night_display_custom.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(final CompoundButton buttonView, boolean isChecked) {
+                    mNightDisplayCustom = isChecked;
+
+                    if (isChecked) {
+                        Calendar mcurrentTime = Calendar.getInstance();
+                        final int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                        final int minute = mcurrentTime.get(Calendar.MINUTE);
+
+                        long startTime = Long.decode(Settings.Secure.getString(activity.getContentResolver(), "night_display_custom_start_time"));
+                        long startHour = TimeUnit.MILLISECONDS.toHours(startTime);
+                        long startMinute = TimeUnit.MILLISECONDS.toMinutes(startTime);
+
+                        long endTime = Long.decode(Settings.Secure.getString(activity.getContentResolver(), "night_display_custom_end_time"));
+                        final long endHour = TimeUnit.MILLISECONDS.toHours(endTime);
+                        final long endMinute = TimeUnit.MILLISECONDS.toMinutes(endTime);
+
+                        TimePickerDialog customStart = new TimePickerDialog(buttonView.getContext(), new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute2) {
+                                long hrmil = TimeUnit.HOURS.toMillis(hourOfDay);
+                                long minmil = TimeUnit.MINUTES.toMillis(minute2);
+
+                                long time = hrmil + minmil;
+
+                                activity.setThings.settings("secure", "night_display_custom_start_time", time + "");
+
+                                TimePickerDialog customEnd = new TimePickerDialog(buttonView.getContext(), new TimePickerDialog.OnTimeSetListener() {
+                                    @Override
+                                    public void onTimeSet(TimePicker view, int hourOfDay, int minute3) {
+                                        long hrmil = TimeUnit.HOURS.toMillis(hourOfDay);
+                                        long minmil = TimeUnit.MINUTES.toMillis(minute3);
+
+                                        long time = hrmil + minmil;
+
+                                        activity.setThings.settings("secure", "night_display_custom_end_time", time + "");
+                                    }
+                                }, (int)endHour, (int)endMinute, true);
+                                customEnd.setTitle(getResources().getText(R.string.custom_end_title));
+                                Toast.makeText(activity.getApplicationContext(), getResources().getText(R.string.custom_end_title), Toast.LENGTH_SHORT).show();
+                                customEnd.show();
+                            }
+                        }, (int)startHour, (int)startMinute, true);
+                        customStart.setTitle(getResources().getText(R.string.custom_start_title));
+                        Toast.makeText(activity.getApplicationContext(), getResources().getText(R.string.custom_start_title), Toast.LENGTH_SHORT).show();
+                        customStart.show();
+
+
+                    } else {
+                        activity.setThings.settings("secure", "night_display_custom_start_time", "");
+                        activity.setThings.settings("secure", "night_display_custom_end_time", "");
+                    }
+                }
+            });
         } else {
             CardView night_mode_card = (CardView) view.findViewById(R.id.night_mode_card);
             night_mode_card.setVisibility(View.GONE);
+            CardView night_display_card = (CardView) view.findViewById(R.id.night_display_card);
+            night_display_card.setVisibility(View.GONE);
         }
 
         return view;

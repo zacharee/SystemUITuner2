@@ -212,4 +212,10 @@
     <string name="night_mode_auto">Modo Noche Auto</string>
     <string name="night_mode_override">Modo Noche Manual</string>
     <string name="night_mode_adjust_tint">Modo Noche Adjustar Tinte</string>
+    <string name="custom_end_title">Elegir Tiempo Final</string>
+    <string name="custom_start_title">Elegir Tiempo Primer</string>
+    <string name="custom_times">Tiempos A Medida</string>
+    <string name="night_display">Visualizador de Noche</string>
+    <string name="night_display_activated">Visualizador de Noche Activado</string>
+    <string name="night_display_auto">Visualizador de Noche Auto</string>
 </resources>

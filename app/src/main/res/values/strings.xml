@@ -261,4 +261,5 @@
     <string name="night_display">Night Display</string>
     <string name="custom_start_title">Select Start Time</string>
     <string name="custom_end_title">Select End Time</string>
+    <string name="to">TO</string>
 </resources>

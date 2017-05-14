@@ -218,4 +218,5 @@
     <string name="night_display">Visualizador de Noche</string>
     <string name="night_display_activated">Visualizador de Noche Activado</string>
     <string name="night_display_auto">Visualizador de Noche Auto</string>
+    <string name="to">A</string>
 </resources>

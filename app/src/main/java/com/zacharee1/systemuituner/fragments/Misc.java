@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.PagerSnapHelper;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TimePicker;
 
@@ -23,6 +25,7 @@ import com.zacharee1.systemuituner.MainActivity;
 import com.zacharee1.systemuituner.R;
 
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import android.widget.Toast;
@@ -65,6 +68,9 @@ public class Misc extends Fragment {
     private boolean mNightDisplayAuto;
     private boolean mNightDisplayActive;
     private boolean mNightDisplayCustom;
+    private Button set_start;
+    private Button set_end;
+    private LinearLayout custom_time;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -86,7 +92,7 @@ public class Misc extends Fragment {
         Switch vol_warn = (Switch) view.findViewById(R.id.vol_warn);
         Switch power_notifs = (Switch) view.findViewById(R.id.power_notifications);
 
-        CardView custom_settings = (CardView) view.findViewById(R.id.custom_settings);
+        final CardView custom_settings = (CardView) view.findViewById(R.id.custom_settings);
         custom_settings.setVisibility(customSettingsEnabled ? View.VISIBLE : View.GONE);
 
         animApply = (Button) view.findViewById(R.id.apply_anim);
@@ -192,6 +198,25 @@ public class Misc extends Fragment {
 
             getNightMode();
         } else if (activity.setThings.SDK_INT > 24) {
+            set_start = (Button) view.findViewById(R.id.set_start_time);
+            set_end = (Button) view.findViewById(R.id.set_end_time);
+            custom_time = (LinearLayout) view.findViewById(R.id.custom_time_layout);
+
+            String start = Settings.Secure.getString(activity.getContentResolver(), "night_display_custom_start_time");
+            if (start == null || start.length() < 1) start = "0";
+            long startTime = Long.decode(start);
+            final long startHour = TimeUnit.MILLISECONDS.toHours(startTime);
+            final long startMinute = TimeUnit.MILLISECONDS.toMinutes(startTime) % TimeUnit.HOURS.toMinutes(1);
+
+            String end = Settings.Secure.getString(activity.getContentResolver(), "night_display_custom_end_time");
+            if (end == null || end.length() < 1) end = "0";
+            long endTime = Long.decode(end);
+            final long endHour = TimeUnit.MILLISECONDS.toHours(endTime);
+            final long endMinute = TimeUnit.MILLISECONDS.toMinutes(endTime) % TimeUnit.HOURS.toMinutes(1);
+
+            set_start.setText(String.format(Locale.ENGLISH, "%02d:%02d", startHour, startMinute));
+            set_end.setText(String.format(Locale.ENGLISH, "%02d:%02d", endHour, endMinute));
+
             CardView night_mode_card = (CardView) view.findViewById(R.id.night_mode_card);
             night_mode_card.setVisibility(View.GONE);
 
@@ -205,7 +230,10 @@ public class Misc extends Fragment {
             try {
                 night_display_custom.setChecked(Settings.Secure.getString(activity.getContentResolver(), "night_display_custom_start_time").length() > 0 ||
                         Settings.Secure.getString(activity.getContentResolver(), "night_display_custom_end_time").length() > 0);
-            } catch (NullPointerException e) {}
+                custom_time.setVisibility(night_display_custom.isChecked() ? View.VISIBLE : View.GONE);
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
 
             night_display_auto.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -228,54 +256,86 @@ public class Misc extends Fragment {
                 public void onCheckedChanged(final CompoundButton buttonView, boolean isChecked) {
                     mNightDisplayCustom = isChecked;
 
-                    if (isChecked) {
-                        Calendar mcurrentTime = Calendar.getInstance();
-                        final int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-                        final int minute = mcurrentTime.get(Calendar.MINUTE);
+                    custom_time.setVisibility(isChecked ? View.VISIBLE : View.GONE);
 
-                        long startTime = Long.decode(Settings.Secure.getString(activity.getContentResolver(), "night_display_custom_start_time"));
-                        long startHour = TimeUnit.MILLISECONDS.toHours(startTime);
-                        long startMinute = TimeUnit.MILLISECONDS.toMinutes(startTime);
-
-                        long endTime = Long.decode(Settings.Secure.getString(activity.getContentResolver(), "night_display_custom_end_time"));
-                        final long endHour = TimeUnit.MILLISECONDS.toHours(endTime);
-                        final long endMinute = TimeUnit.MILLISECONDS.toMinutes(endTime);
-
-                        TimePickerDialog customStart = new TimePickerDialog(buttonView.getContext(), new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay, int minute2) {
-                                long hrmil = TimeUnit.HOURS.toMillis(hourOfDay);
-                                long minmil = TimeUnit.MINUTES.toMillis(minute2);
-
-                                long time = hrmil + minmil;
-
-                                activity.setThings.settings("secure", "night_display_custom_start_time", time + "");
-
-                                TimePickerDialog customEnd = new TimePickerDialog(buttonView.getContext(), new TimePickerDialog.OnTimeSetListener() {
-                                    @Override
-                                    public void onTimeSet(TimePicker view, int hourOfDay, int minute3) {
-                                        long hrmil = TimeUnit.HOURS.toMillis(hourOfDay);
-                                        long minmil = TimeUnit.MINUTES.toMillis(minute3);
-
-                                        long time = hrmil + minmil;
-
-                                        activity.setThings.settings("secure", "night_display_custom_end_time", time + "");
-                                    }
-                                }, (int)endHour, (int)endMinute, true);
-                                customEnd.setTitle(getResources().getText(R.string.custom_end_title));
-                                Toast.makeText(activity.getApplicationContext(), getResources().getText(R.string.custom_end_title), Toast.LENGTH_SHORT).show();
-                                customEnd.show();
-                            }
-                        }, (int)startHour, (int)startMinute, true);
-                        customStart.setTitle(getResources().getText(R.string.custom_start_title));
-                        Toast.makeText(activity.getApplicationContext(), getResources().getText(R.string.custom_start_title), Toast.LENGTH_SHORT).show();
-                        customStart.show();
-
-
-                    } else {
+                    if (!isChecked) {
+                        activity.setThings.editor.putString("night_display_custom_start_time", Settings.Secure.getString(activity.getContentResolver(), "night_display_custom_start_time"));
+                        activity.setThings.editor.putString("night_display_custom_end_time", Settings.Secure.getString(activity.getContentResolver(), "night_display_custom_end_time"));
+                        activity.setThings.editor.apply();
                         activity.setThings.settings("secure", "night_display_custom_start_time", "");
                         activity.setThings.settings("secure", "night_display_custom_end_time", "");
+                    } else {
+                        activity.setThings.settings("secure", "night_display_custom_start_time", activity.setThings.sharedPreferences.getString("night_display_custom_start_time", "0"));
+                        activity.setThings.settings("secure", "night_display_custom_end_time", activity.setThings.sharedPreferences.getString("night_display_custom_end_time", "0"));
+                        String start = Settings.Secure.getString(activity.getContentResolver(), "night_display_custom_start_time");
+                        if (start == null || start.length() < 1) start = "0";
+                        long startTime = Long.decode(start);
+                        final long startHour = TimeUnit.MILLISECONDS.toHours(startTime);
+                        final long startMinute = TimeUnit.MILLISECONDS.toMinutes(startTime) % TimeUnit.HOURS.toMinutes(1);
+
+                        String end = Settings.Secure.getString(activity.getContentResolver(), "night_display_custom_end_time");
+                        if (end == null || end.length() < 1) end = "0";
+                        long endTime = Long.decode(end);
+                        final long endHour = TimeUnit.MILLISECONDS.toHours(endTime);
+                        final long endMinute = TimeUnit.MILLISECONDS.toMinutes(endTime) % TimeUnit.HOURS.toMinutes(1);
+
+                        set_start.setText(String.format(Locale.ENGLISH, "%02d:%02d", startHour, startMinute));
+                        set_end.setText(String.format(Locale.ENGLISH, "%02d:%02d", endHour, endMinute));
                     }
+                }
+            });
+
+            set_start.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String start = Settings.Secure.getString(activity.getContentResolver(), "night_display_custom_start_time");
+                    if (start == null || start.length() < 1) start = "0";
+                    long startTime = Long.decode(start);
+                    final long startHour = TimeUnit.MILLISECONDS.toHours(startTime);
+                    final long startMinute = TimeUnit.MILLISECONDS.toMinutes(startTime) % TimeUnit.HOURS.toMinutes(1);
+
+                    TimePickerDialog customStart = new TimePickerDialog(v.getContext(), new TimePickerDialog.OnTimeSetListener() {
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay, int minute2) {
+                            long hrmil = TimeUnit.HOURS.toMillis(hourOfDay);
+                            long minmil = TimeUnit.MINUTES.toMillis(minute2);
+
+                            long time = hrmil + minmil;
+
+                            activity.setThings.settings("secure", "night_display_custom_start_time", time + "");
+                            set_start.setText(String.format(Locale.ENGLISH, "%02d:%02d", hourOfDay, minute2));
+                        }
+                    }, (int)startHour, (int)startMinute, true);
+                    customStart.setTitle(getResources().getText(R.string.custom_start_title));
+                    Toast.makeText(activity.getApplicationContext(), getResources().getText(R.string.custom_start_title), Toast.LENGTH_SHORT).show();
+                    customStart.show();
+                }
+            });
+
+            set_end.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String end = Settings.Secure.getString(activity.getContentResolver(), "night_display_custom_end_time");
+                    if (end == null || end.length() < 1) end = "0";
+                    long endTime = Long.decode(end);
+                    final long endHour = TimeUnit.MILLISECONDS.toHours(endTime);
+                    final long endMinute = TimeUnit.MILLISECONDS.toMinutes(endTime) % TimeUnit.HOURS.toMinutes(1);
+
+                    TimePickerDialog customEnd = new TimePickerDialog(v.getContext(), new TimePickerDialog.OnTimeSetListener() {
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay, int minute3) {
+                            long hrmil = TimeUnit.HOURS.toMillis(hourOfDay);
+                            long minmil = TimeUnit.MINUTES.toMillis(minute3);
+
+                            long time = hrmil + minmil;
+
+                            activity.setThings.settings("secure", "night_display_custom_end_time", time + "");
+                            set_end.setText(String.format(Locale.ENGLISH, "%02d:%02d", hourOfDay, minute3));
+                        }
+                    }, (int)endHour, (int)endMinute, true);
+                    customEnd.setTitle(getResources().getText(R.string.custom_end_title));
+                    Toast.makeText(activity.getApplicationContext(), getResources().getText(R.string.custom_end_title), Toast.LENGTH_SHORT).show();
+                    customEnd.show();
                 }
             });
         } else {

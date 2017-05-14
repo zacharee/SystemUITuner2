@@ -18,8 +18,11 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -45,7 +48,7 @@ public class SetThings {
 
     private final Context context;
 
-    public final Exceptions exceptions;
+    private final Exceptions exceptions;
 
     public final int SDK_INT;
 
@@ -101,7 +104,7 @@ public class SetThings {
                             settings("global", "sysui_demo_allowed", "1");
                             break;
                         case "setupDoneRoot":
-//                            if (testSudo()) {
+                            if (testSudo()) {
                                 new Thread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -115,18 +118,18 @@ public class SetThings {
                                 currentActivity.startActivity(intent);
                                 currentActivity.finish();
                                 break;
-//                            } else {
-//                                intent = new Intent(currentActivity.getApplicationContext(), NoRootActivity.class);
-//                                currentActivity.startActivity(intent);
-//                                currentActivity.runOnUiThread(new Runnable() {
-//                                    @Override
-//                                    public void run() {
-//                                        Toast.makeText(currentActivity.getApplicationContext(), currentActivity.getResources().getText(R.string.root_test_failed), Toast.LENGTH_SHORT).show();
-//                                    }
-//                                });
-//                                currentActivity.finish();
-//                                break;
-//                            }
+                            } else {
+                                intent = new Intent(currentActivity.getApplicationContext(), NoRootActivity.class);
+                                currentActivity.startActivity(intent);
+                                currentActivity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(currentActivity.getApplicationContext(), currentActivity.getResources().getText(R.string.root_test_failed), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                currentActivity.finish();
+                                break;
+                            }
                         case "setupDone":
                             editor.putBoolean("isRooted", false);
                             editor.putBoolean("isSetup", true);
@@ -343,32 +346,31 @@ public class SetThings {
     }
 
     private boolean testSudo() {
-        StackTraceElement[] stackTrace = new StackTraceElement[] { null };
+        StackTraceElement st = null;
+
         try{
             Process su = Runtime.getRuntime().exec("su");
             DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
+
             outputStream.writeBytes("exit\n");
             outputStream.flush();
-            su.waitFor();
 
-            //    DataInputStream inputStream = new DataInputStream(su.getInputStream());
-            //    BufferedReader r = new BufferedReader(new InputStreamReader(inputStream));
-            //    StringBuilder total = new StringBuilder();
-            //    String line;
-            //            while ((line = r.readLine()) != null) {
-            //        total.append(line).append('\n');
-            //    }
-            //
-            //    inputStream = new DataInputStream(su.getErrorStream());
-            //    r = new BufferedReader(new InputStreamReader(inputStream));
-            //            while ((line = r.readLine()) != null) {
-            //        total.append(line).append('\n');
-            //    }
+            DataInputStream inputStream = new DataInputStream(su.getInputStream());
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+            while (bufferedReader.readLine() != null) {
+                bufferedReader.readLine();
+            }
+
+            su.waitFor();
         } catch (Exception e) {
-            stackTrace = e.getStackTrace();
             e.printStackTrace();
+            for (StackTraceElement s : e.getStackTrace()) {
+                st = s;
+                if (st != null) break;
+            }
         }
 
-        return stackTrace[0] == null;
+        return st == null;
     }
 }

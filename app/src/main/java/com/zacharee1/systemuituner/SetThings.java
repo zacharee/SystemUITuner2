@@ -101,7 +101,7 @@ public class SetThings {
                             settings("global", "sysui_demo_allowed", "1");
                             break;
                         case "setupDoneRoot":
-                            if (testSudo()) {
+//                            if (testSudo()) {
                                 new Thread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -115,18 +115,18 @@ public class SetThings {
                                 currentActivity.startActivity(intent);
                                 currentActivity.finish();
                                 break;
-                            } else {
-                                intent = new Intent(currentActivity.getApplicationContext(), NoRootActivity.class);
-                                currentActivity.startActivity(intent);
-                                currentActivity.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(currentActivity.getApplicationContext(), currentActivity.getResources().getText(R.string.root_test_failed), Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                                currentActivity.finish();
-                                break;
-                            }
+//                            } else {
+//                                intent = new Intent(currentActivity.getApplicationContext(), NoRootActivity.class);
+//                                currentActivity.startActivity(intent);
+//                                currentActivity.runOnUiThread(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        Toast.makeText(currentActivity.getApplicationContext(), currentActivity.getResources().getText(R.string.root_test_failed), Toast.LENGTH_SHORT).show();
+//                                    }
+//                                });
+//                                currentActivity.finish();
+//                                break;
+//                            }
                         case "setupDone":
                             editor.putBoolean("isRooted", false);
                             editor.putBoolean("isSetup", true);

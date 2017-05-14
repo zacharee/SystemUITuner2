@@ -219,4 +219,10 @@
     <string name="night_display_activated">Visualizador de Noche Activado</string>
     <string name="night_display_auto">Visualizador de Noche Auto</string>
     <string name="to">A</string>
+    <string name="applied">Aplicado</string>
+    <string name="donate_dont_worry">No hay ningún obligación. Esta app es gratis y será siempre.</string>
+    <string name="donate_hook">Eh, veo que eres usuario de me app.</string>
+    <string name="donate_joke">Cómo, preguntas? Mágico.</string>
+    <string name="donate_request">Si pasa bien aquí, sería maravelloso que podrías darme un dólar o dos.</string>
+    <string name="setup_note">ATENCIÓN: No es necesario usar esto otra vez a menos que necesites!</string>
 </resources>

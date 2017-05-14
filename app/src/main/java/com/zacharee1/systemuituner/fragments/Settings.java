@@ -9,6 +9,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
@@ -40,6 +41,9 @@ public class Settings extends Fragment {
 
         safe_statbar.setChecked(activity.setThings.sharedPreferences.getBoolean("safeStatbar", false));
         custom_settings.setChecked(activity.setThings.sharedPreferences.getBoolean("customSettings", false));
+
+        Button setup = (Button) view.findViewById(R.id.setup);
+        activity.setThings.buttons(setup, "setup"); //button listener
 
         switches(safe_statbar);
         switches(custom_settings);

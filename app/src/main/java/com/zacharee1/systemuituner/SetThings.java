@@ -182,6 +182,13 @@ public class SetThings {
         });
     }
 
+    public void donate() {
+        boolean labsInstalled = isPackageInstalled("com.xda.labs", context.getPackageManager());
+        Uri uri = Uri.parse(labsInstalled ? "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=andywander@yahoo.com" : "https://forum.xda-developers.com/donatetome.php?u=7055541");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        currentActivity.startActivity(intent);
+    }
+
     public void switches(final Switch toggle, final String pref, final String settingType, final View view) { //set switch listeners
 
         //check to see if switch should be toggled

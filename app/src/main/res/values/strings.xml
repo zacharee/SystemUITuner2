@@ -262,4 +262,10 @@
     <string name="custom_start_title">Select Start Time</string>
     <string name="custom_end_title">Select End Time</string>
     <string name="to">TO</string>
+    <string name="applied">Applied</string>
+    <string name="donate_hook">Hey, I see you\'re using my app.</string>
+    <string name="donate_joke">How, you ask? Magic.</string>
+    <string name="donate_request">If you\'re enjoying your time here, it\'d be absolutely amazing if you could spare a dollar or two.</string>
+    <string name="donate_dont_worry">There\'s absolutely no obligation. This app is free and always will be.</string>
+    <string name="setup_note">NOTE: There is no need to do this again unless you need to!</string>
 </resources>

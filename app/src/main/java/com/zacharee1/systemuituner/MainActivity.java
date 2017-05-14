@@ -192,10 +192,7 @@ public class MainActivity extends AppCompatActivity
                 tralse = true;
                 break;
             case R.id.action_donate:
-                boolean labsInstalled = setThings.isPackageInstalled("com.xda.labs", context.getPackageManager());
-                uri = Uri.parse(labsInstalled ? "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=andywander@yahoo.com" : "https://forum.xda-developers.com/donatetome.php?u=7055541");
-                intent = new Intent(Intent.ACTION_VIEW, uri);
-                tralse = true;
+                setThings.donate();
                 break;
             case R.id.action_telegram:
                 uri = Uri.parse("https://t.me/joinchat/AAAAAEIB6WKWL-yphJbZwg");

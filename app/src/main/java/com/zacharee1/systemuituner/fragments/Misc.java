@@ -71,6 +71,33 @@ public class Misc extends Fragment {
     private Button set_start;
     private Button set_end;
     private LinearLayout custom_time;
+    private long startTime;
+    private long startHour;
+    private long startMinute;
+    private String start;
+    private String end;
+    private long endTime;
+    private long endHour;
+    private long endMinute;
+    private View view;
+    private Switch show_full_zen;
+    private Switch hu_notif;
+    private Switch vol_warn;
+    private Switch power_notifs;
+    private Switch clock_seconds;
+    private Switch battery_percent;
+    private CardView power_notif_controls;
+
+    String SHOW_FULL_ZEN = "sysui_show_full_zen";
+    String HUN_ENABLED = "heads_up_notifications_enabled";
+    String SAFE_AUDIO = "audio_safe_volume_state";
+    String CLOCK_SECONDS = "clock_seconds";
+    String BATTERY_PERCENT = "status_bar_show_battery_percent";
+    String POW_NOTIFS = "show_importance_slider";
+    String NIGHT_MODE_TINT = "tuner_night_mode_adjust_tint";
+    String TWILIGHT_MODE = "twilight_mode";
+
+    String SECURE = "secure";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -79,37 +106,54 @@ public class Misc extends Fragment {
             activity = (MainActivity) getActivity();
         }
 
-        boolean customSettingsEnabled = activity.setThings.sharedPreferences.getBoolean("customSettings", false);
-
         global = "";
         secure = "";
         system = "";
 
-        View view = inflater.inflate(R.layout.fragment_misc, container, false);
+        view = inflater.inflate(R.layout.fragment_misc, container, false);
 
-        Switch show_full_zen = (Switch) view.findViewById(R.id.show_full_zen);
-        Switch hu_notif = (Switch) view.findViewById(R.id.hu_notif);
-        Switch vol_warn = (Switch) view.findViewById(R.id.vol_warn);
-        Switch power_notifs = (Switch) view.findViewById(R.id.power_notifications);
+        setupCustomSettings();
+        setupSwitches();
+        setupScales();
+        setupSettings();
+        chooseNightType();
 
+        return view;
+    }
+
+    private void chooseNightType() {
+        if (activity.setThings.SDK_INT == 24) {
+            CardView night_display_card = (CardView) view.findViewById(R.id.night_display_card);
+            night_display_card.setVisibility(View.GONE);
+            setupNightMode();
+        } else if (activity.setThings.SDK_INT > 24) {
+            CardView night_mode_card = (CardView) view.findViewById(R.id.night_mode_card);
+            night_mode_card.setVisibility(View.GONE);
+            setupNightDisplay();
+        } else {
+            CardView night_mode_card = (CardView) view.findViewById(R.id.night_mode_card);
+            night_mode_card.setVisibility(View.GONE);
+            CardView night_display_card = (CardView) view.findViewById(R.id.night_display_card);
+            night_display_card.setVisibility(View.GONE);
+        }
+    }
+
+    private void setupCustomSettings() {
+        boolean customSettingsEnabled = activity.setThings.sharedPreferences.getBoolean("customSettings", false);
         final CardView custom_settings = (CardView) view.findViewById(R.id.custom_settings);
         custom_settings.setVisibility(customSettingsEnabled ? View.VISIBLE : View.GONE);
+    }
 
-        animApply = (Button) view.findViewById(R.id.apply_anim);
-        transApply = (Button) view.findViewById(R.id.apply_trans);
-        winApply = (Button) view.findViewById(R.id.apply_win);
-        globalApply = (Button) view.findViewById(R.id.apply_global);
-        secureApply = (Button) view.findViewById(R.id.apply_secure);
-        systemApply = (Button) view.findViewById(R.id.apply_system);
+    private void setupSwitches() {
+        show_full_zen = (Switch) view.findViewById(R.id.show_full_zen);
+        hu_notif = (Switch) view.findViewById(R.id.hu_notif);
+        vol_warn = (Switch) view.findViewById(R.id.vol_warn);
+        power_notifs = (Switch) view.findViewById(R.id.power_notifications);
+        clock_seconds = (Switch) view.findViewById(R.id.clock_seconds);
+        battery_percent = (Switch) view.findViewById(R.id.battery_percent);
+        power_notif_controls = (CardView) view.findViewById(R.id.power_notification_controls_card);
 
-        Switch clock_seconds = (Switch) view.findViewById(R.id.clock_seconds);
-        Switch battery_percent = (Switch) view.findViewById(R.id.battery_percent);
-
-        //custom switch text
-        //noinspection deprecation
         battery_percent.setText(Html.fromHtml(getResources().getText(R.string.battery_percentage) + "<br /><small> <font color=\"#777777\">" + getResources().getText(R.string.reboot_required) + "</font></small>"));
-
-        CardView power_notif_controls = (CardView) view.findViewById(R.id.power_notification_controls_card);
 
         if (Build.VERSION.SDK_INT > 23) {
             clock_seconds.setVisibility(View.VISIBLE); //only show switch if user is on Nougat or later
@@ -119,237 +163,208 @@ public class Misc extends Fragment {
             power_notif_controls.setVisibility(View.GONE);
         }
 
+        activity.setThings.switches(show_full_zen, SHOW_FULL_ZEN, "secure", view); //switch listener
+        activity.setThings.switches(hu_notif, HUN_ENABLED, "global", view);
+        activity.setThings.switches(vol_warn, SAFE_AUDIO, "global", view);
+
+        activity.setThings.switches(clock_seconds, CLOCK_SECONDS, "secure", view);
+        activity.setThings.switches(battery_percent, BATTERY_PERCENT, "system", view);
+
+        activity.setThings.switches(power_notifs, POW_NOTIFS, "secure", view);
+    }
+
+    private void setupScales() {
+        animApply = (Button) view.findViewById(R.id.apply_anim);
+        transApply = (Button) view.findViewById(R.id.apply_trans);
+        winApply = (Button) view.findViewById(R.id.apply_win);
+
         anim = (TextInputEditText) view.findViewById(R.id.anim_text);
         trans = (TextInputEditText) view.findViewById(R.id.trans_text);
         win = (TextInputEditText) view.findViewById(R.id.win_text);
-        custom_global = (TextInputEditText) view.findViewById(R.id.global_settings);
-        custom_secure = (TextInputEditText) view.findViewById(R.id.secure_settings);
-        custom_system = (TextInputEditText) view.findViewById(R.id.system_settings);
 
-        animScale = Settings.Global.getString(activity.getContentResolver(), "animator_duration_scale");
+        animScale = Settings.Global.getString(activity.getContentResolver(), Settings.Global.ANIMATOR_DURATION_SCALE);
         if (animScale == null) animScale = "1.0";
-        transScale = Settings.Global.getString(activity.getContentResolver(), "transition_animation_scale");
+        transScale = Settings.Global.getString(activity.getContentResolver(), Settings.Global.TRANSITION_ANIMATION_SCALE);
         if (transScale == null) transScale = "1.0";
-        winScale = Settings.Global.getString(activity.getContentResolver(), "window_animation_scale");
+        winScale = Settings.Global.getString(activity.getContentResolver(), Settings.Global.WINDOW_ANIMATION_SCALE);
         if (winScale == null) winScale = "1.0";
 
         anim.setHint(getResources().getText(R.string.animator_duration_scale) + " (" + String.valueOf(animScale) + ")");
         trans.setHint(getResources().getText(R.string.transition_animation_scale) + " (" + String.valueOf(transScale) + ")");
         win.setHint(getResources().getText(R.string.window_animation_scale) + " (" + String.valueOf(winScale) + ")");
-        custom_global.setHint(getResources().getText(R.string.global));
-        custom_secure.setHint(getResources().getText(R.string.secure));
-        custom_system.setHint(getResources().getText(R.string.system));
-
-        activity.setThings.switches(show_full_zen, "sysui_show_full_zen", "secure", view); //switch listener
-        activity.setThings.switches(hu_notif, "heads_up_notifications_enabled", "global", view);
-        activity.setThings.switches(vol_warn, "audio_safe_volume_state", "global", view);
-
-        activity.setThings.switches(clock_seconds, "clock_seconds", "secure", view);
-        activity.setThings.switches(battery_percent, "status_bar_show_battery_percent", "system", view);
-
-        activity.setThings.switches(power_notifs, "show_importance_slider", "secure", view);
 
         buttons(animApply);
         buttons(transApply);
         buttons(winApply);
-        buttons(globalApply);
-        buttons(secureApply);
-        buttons(systemApply);
 
         textFields(anim);
         textFields(trans);
         textFields(win);
+    }
+
+    private void setupSettings() {
+        globalApply = (Button) view.findViewById(R.id.apply_global);
+        secureApply = (Button) view.findViewById(R.id.apply_secure);
+        systemApply = (Button) view.findViewById(R.id.apply_system);
+
+        custom_global = (TextInputEditText) view.findViewById(R.id.global_settings);
+        custom_secure = (TextInputEditText) view.findViewById(R.id.secure_settings);
+        custom_system = (TextInputEditText) view.findViewById(R.id.system_settings);
+
+        custom_global.setHint(getResources().getText(R.string.global));
+        custom_secure.setHint(getResources().getText(R.string.secure));
+        custom_system.setHint(getResources().getText(R.string.system));
+
+        buttons(globalApply);
+        buttons(secureApply);
+        buttons(systemApply);
+
         textFields(custom_global);
         textFields(custom_secure);
         textFields(custom_system);
+    }
 
-        if (activity.setThings.SDK_INT > 23 && activity.setThings.SDK_INT < 25) {
-            CardView night_display_card = (CardView) view.findViewById(R.id.night_display_card);
-            night_display_card.setVisibility(View.GONE);
+    private void setupNightMode() {
+        night_mode_auto = (Switch) view.findViewById(R.id.night_mode_auto);
+        night_mode_override = (Switch) view.findViewById(R.id.night_mode_override);
+        night_mode_adjust_tint = (Switch) view.findViewById(R.id.night_mode_adjust_tint);
 
-            night_mode_auto = (Switch) view.findViewById(R.id.night_mode_auto);
-            night_mode_override = (Switch) view.findViewById(R.id.night_mode_override);
-            night_mode_adjust_tint = (Switch) view.findViewById(R.id.night_mode_adjust_tint);
-
-            night_mode_auto.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    mNightModeAuto = isChecked;
-                    setNightMode();
-                }
-            });
-
-            night_mode_override.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    mNightModeOverride = isChecked;
-                    setNightMode();
-                }
-            });
-
-            night_mode_adjust_tint.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    activity.setThings.settings("secure", "tuner_night_mode_adjust_tint", isChecked ? 1 + "" : 0 + "");
-                }
-            });
-
-            night_mode_adjust_tint.setChecked(Settings.Secure.getInt(activity.getContentResolver(), "tuner_night_mode_adjust_tint", 0) == 1);
-
-            getNightMode();
-        } else if (activity.setThings.SDK_INT > 24) {
-            set_start = (Button) view.findViewById(R.id.set_start_time);
-            set_end = (Button) view.findViewById(R.id.set_end_time);
-            custom_time = (LinearLayout) view.findViewById(R.id.custom_time_layout);
-
-            String start = Settings.Secure.getString(activity.getContentResolver(), "night_display_custom_start_time");
-            if (start == null || start.length() < 1) start = "0";
-            long startTime = Long.decode(start);
-            final long startHour = TimeUnit.MILLISECONDS.toHours(startTime);
-            final long startMinute = TimeUnit.MILLISECONDS.toMinutes(startTime) % TimeUnit.HOURS.toMinutes(1);
-
-            String end = Settings.Secure.getString(activity.getContentResolver(), "night_display_custom_end_time");
-            if (end == null || end.length() < 1) end = "0";
-            long endTime = Long.decode(end);
-            final long endHour = TimeUnit.MILLISECONDS.toHours(endTime);
-            final long endMinute = TimeUnit.MILLISECONDS.toMinutes(endTime) % TimeUnit.HOURS.toMinutes(1);
-
-            set_start.setText(String.format(Locale.ENGLISH, "%02d:%02d", startHour, startMinute));
-            set_end.setText(String.format(Locale.ENGLISH, "%02d:%02d", endHour, endMinute));
-
-            CardView night_mode_card = (CardView) view.findViewById(R.id.night_mode_card);
-            night_mode_card.setVisibility(View.GONE);
-
-            Switch night_display_auto = (Switch) view.findViewById(R.id.night_display_auto);
-            Switch night_display_active = (Switch) view.findViewById(R.id.night_display_activated);
-            Switch night_display_custom = (Switch) view.findViewById(R.id.night_display_custom_times);
-
-            night_display_auto.setChecked(Settings.Secure.getInt(activity.getContentResolver(), "night_display_auto_mode", 0) == 1);
-            night_display_active.setChecked(Settings.Secure.getInt(activity.getContentResolver(), "night_display_activated", 0) == 1);
-
-            try {
-                night_display_custom.setChecked(Settings.Secure.getString(activity.getContentResolver(), "night_display_custom_start_time").length() > 0 ||
-                        Settings.Secure.getString(activity.getContentResolver(), "night_display_custom_end_time").length() > 0);
-                custom_time.setVisibility(night_display_custom.isChecked() ? View.VISIBLE : View.GONE);
-            } catch (NullPointerException e) {
-                e.printStackTrace();
+        night_mode_auto.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mNightModeAuto = isChecked;
+                setNightMode();
             }
+        });
 
-            night_display_auto.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    mNightDisplayAuto = isChecked;
-                    Settings.Secure.putInt(activity.getContentResolver(), "night_display_auto_mode", isChecked ? 1 : 0);
-                }
-            });
+        night_mode_override.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mNightModeOverride = isChecked;
+                setNightMode();
+            }
+        });
 
-            night_display_active.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    mNightDisplayActive = isChecked;
-                    Settings.Secure.putInt(activity.getContentResolver(), "night_display_activated", isChecked ? 1 : 0);
-                }
-            });
+        night_mode_adjust_tint.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                activity.setThings.settings(SECURE, NIGHT_MODE_TINT, isChecked ? 1 + "" : 0 + "");
+            }
+        });
 
-            night_display_custom.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(final CompoundButton buttonView, boolean isChecked) {
-                    mNightDisplayCustom = isChecked;
+        night_mode_adjust_tint.setChecked(Settings.Secure.getInt(activity.getContentResolver(), NIGHT_MODE_TINT, 0) == 1);
 
-                    custom_time.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+        getNightMode();
+    }
 
-                    if (!isChecked) {
-                        activity.setThings.editor.putString("night_display_custom_start_time", Settings.Secure.getString(activity.getContentResolver(), "night_display_custom_start_time"));
-                        activity.setThings.editor.putString("night_display_custom_end_time", Settings.Secure.getString(activity.getContentResolver(), "night_display_custom_end_time"));
-                        activity.setThings.editor.apply();
-                        activity.setThings.settings("secure", "night_display_custom_start_time", "");
-                        activity.setThings.settings("secure", "night_display_custom_end_time", "");
-                    } else {
-                        activity.setThings.settings("secure", "night_display_custom_start_time", activity.setThings.sharedPreferences.getString("night_display_custom_start_time", "0"));
-                        activity.setThings.settings("secure", "night_display_custom_end_time", activity.setThings.sharedPreferences.getString("night_display_custom_end_time", "0"));
-                        String start = Settings.Secure.getString(activity.getContentResolver(), "night_display_custom_start_time");
-                        if (start == null || start.length() < 1) start = "0";
-                        long startTime = Long.decode(start);
-                        final long startHour = TimeUnit.MILLISECONDS.toHours(startTime);
-                        final long startMinute = TimeUnit.MILLISECONDS.toMinutes(startTime) % TimeUnit.HOURS.toMinutes(1);
+    private void setupNightDisplay() {
+        set_start = (Button) view.findViewById(R.id.set_start_time);
+        set_end = (Button) view.findViewById(R.id.set_end_time);
+        custom_time = (LinearLayout) view.findViewById(R.id.custom_time_layout);
 
-                        String end = Settings.Secure.getString(activity.getContentResolver(), "night_display_custom_end_time");
-                        if (end == null || end.length() < 1) end = "0";
-                        long endTime = Long.decode(end);
-                        final long endHour = TimeUnit.MILLISECONDS.toHours(endTime);
-                        final long endMinute = TimeUnit.MILLISECONDS.toMinutes(endTime) % TimeUnit.HOURS.toMinutes(1);
+        setTimes();
 
-                        set_start.setText(String.format(Locale.ENGLISH, "%02d:%02d", startHour, startMinute));
-                        set_end.setText(String.format(Locale.ENGLISH, "%02d:%02d", endHour, endMinute));
-                    }
-                }
-            });
+        Switch night_display_auto = (Switch) view.findViewById(R.id.night_display_auto);
+        Switch night_display_active = (Switch) view.findViewById(R.id.night_display_activated);
+        Switch night_display_custom = (Switch) view.findViewById(R.id.night_display_custom_times);
 
-            set_start.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String start = Settings.Secure.getString(activity.getContentResolver(), "night_display_custom_start_time");
-                    if (start == null || start.length() < 1) start = "0";
-                    long startTime = Long.decode(start);
-                    final long startHour = TimeUnit.MILLISECONDS.toHours(startTime);
-                    final long startMinute = TimeUnit.MILLISECONDS.toMinutes(startTime) % TimeUnit.HOURS.toMinutes(1);
+        night_display_auto.setChecked(Settings.Secure.getInt(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_AUTO_MODE, 0) == 1);
+        night_display_active.setChecked(Settings.Secure.getInt(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_ACTIVATED, 0) == 1);
 
-                    TimePickerDialog customStart = new TimePickerDialog(v.getContext(), new TimePickerDialog.OnTimeSetListener() {
-                        @Override
-                        public void onTimeSet(TimePicker view, int hourOfDay, int minute2) {
-                            long hrmil = TimeUnit.HOURS.toMillis(hourOfDay);
-                            long minmil = TimeUnit.MINUTES.toMillis(minute2);
-
-                            long time = hrmil + minmil;
-
-                            activity.setThings.settings("secure", "night_display_custom_start_time", time + "");
-                            set_start.setText(String.format(Locale.ENGLISH, "%02d:%02d", hourOfDay, minute2));
-                        }
-                    }, (int)startHour, (int)startMinute, true);
-                    customStart.setTitle(getResources().getText(R.string.custom_start_title));
-                    Toast.makeText(activity.getApplicationContext(), getResources().getText(R.string.custom_start_title), Toast.LENGTH_SHORT).show();
-                    customStart.show();
-                }
-            });
-
-            set_end.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String end = Settings.Secure.getString(activity.getContentResolver(), "night_display_custom_end_time");
-                    if (end == null || end.length() < 1) end = "0";
-                    long endTime = Long.decode(end);
-                    final long endHour = TimeUnit.MILLISECONDS.toHours(endTime);
-                    final long endMinute = TimeUnit.MILLISECONDS.toMinutes(endTime) % TimeUnit.HOURS.toMinutes(1);
-
-                    TimePickerDialog customEnd = new TimePickerDialog(v.getContext(), new TimePickerDialog.OnTimeSetListener() {
-                        @Override
-                        public void onTimeSet(TimePicker view, int hourOfDay, int minute3) {
-                            long hrmil = TimeUnit.HOURS.toMillis(hourOfDay);
-                            long minmil = TimeUnit.MINUTES.toMillis(minute3);
-
-                            long time = hrmil + minmil;
-
-                            activity.setThings.settings("secure", "night_display_custom_end_time", time + "");
-                            set_end.setText(String.format(Locale.ENGLISH, "%02d:%02d", hourOfDay, minute3));
-                        }
-                    }, (int)endHour, (int)endMinute, true);
-                    customEnd.setTitle(getResources().getText(R.string.custom_end_title));
-                    Toast.makeText(activity.getApplicationContext(), getResources().getText(R.string.custom_end_title), Toast.LENGTH_SHORT).show();
-                    customEnd.show();
-                }
-            });
-        } else {
-            CardView night_mode_card = (CardView) view.findViewById(R.id.night_mode_card);
-            night_mode_card.setVisibility(View.GONE);
-            CardView night_display_card = (CardView) view.findViewById(R.id.night_display_card);
-            night_display_card.setVisibility(View.GONE);
+        try {
+            night_display_custom.setChecked(Settings.Secure.getString(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_CUSTOM_START_TIME).length() > 0 ||
+                    Settings.Secure.getString(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_CUSTOM_END_TIME).length() > 0);
+            custom_time.setVisibility(night_display_custom.isChecked() ? View.VISIBLE : View.GONE);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
 
-        return view;
+        night_display_auto.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mNightDisplayAuto = isChecked;
+                Settings.Secure.putInt(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_AUTO_MODE, isChecked ? 1 : 0);
+            }
+        });
+
+        night_display_active.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mNightDisplayActive = isChecked;
+                Settings.Secure.putInt(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_ACTIVATED, isChecked ? 1 : 0);
+            }
+        });
+
+        night_display_custom.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(final CompoundButton buttonView, boolean isChecked) {
+                mNightDisplayCustom = isChecked;
+
+                custom_time.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+
+                if (!isChecked) {
+                    activity.setThings.editor.putString(Settings.Secure.NIGHT_DISPLAY_CUSTOM_START_TIME, Settings.Secure.getString(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_CUSTOM_START_TIME));
+                    activity.setThings.editor.putString(Settings.Secure.NIGHT_DISPLAY_CUSTOM_END_TIME, Settings.Secure.getString(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_CUSTOM_END_TIME));
+                    activity.setThings.editor.apply();
+                    activity.setThings.settings(SECURE, Settings.Secure.NIGHT_DISPLAY_CUSTOM_START_TIME, "");
+                    activity.setThings.settings(SECURE, Settings.Secure.NIGHT_DISPLAY_CUSTOM_END_TIME, "");
+                } else {
+                    activity.setThings.settings(SECURE, Settings.Secure.NIGHT_DISPLAY_CUSTOM_START_TIME, activity.setThings.sharedPreferences.getString(Settings.Secure.NIGHT_DISPLAY_CUSTOM_START_TIME, "0"));
+                    activity.setThings.settings(SECURE, Settings.Secure.NIGHT_DISPLAY_CUSTOM_END_TIME, activity.setThings.sharedPreferences.getString(Settings.Secure.NIGHT_DISPLAY_CUSTOM_END_TIME, "0"));
+                    setTimes();
+                }
+            }
+        });
+
+        set_start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setTimes();
+
+                TimePickerDialog customStart = new TimePickerDialog(v.getContext(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute2) {
+                        long hrmil = TimeUnit.HOURS.toMillis(hourOfDay);
+                        long minmil = TimeUnit.MINUTES.toMillis(minute2);
+
+                        long time = hrmil + minmil;
+
+                        activity.setThings.settings(SECURE, Settings.Secure.NIGHT_DISPLAY_CUSTOM_START_TIME, time + "");
+                        set_start.setText(String.format(Locale.ENGLISH, "%02d:%02d", hourOfDay, minute2));
+                    }
+                }, (int)startHour, (int)startMinute, true);
+                customStart.setTitle(getResources().getText(R.string.custom_start_title));
+                Toast.makeText(activity.getApplicationContext(), getResources().getText(R.string.custom_start_title), Toast.LENGTH_SHORT).show();
+                customStart.show();
+            }
+        });
+
+        set_end.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setTimes();
+
+                TimePickerDialog customEnd = new TimePickerDialog(v.getContext(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute3) {
+                        long hrmil = TimeUnit.HOURS.toMillis(hourOfDay);
+                        long minmil = TimeUnit.MINUTES.toMillis(minute3);
+
+                        long time = hrmil + minmil;
+
+                        activity.setThings.settings(SECURE, Settings.Secure.NIGHT_DISPLAY_CUSTOM_END_TIME, time + "");
+                        set_end.setText(String.format(Locale.ENGLISH, "%02d:%02d", hourOfDay, minute3));
+                    }
+                }, (int)endHour, (int)endMinute, true);
+                customEnd.setTitle(getResources().getText(R.string.custom_end_title));
+                Toast.makeText(activity.getApplicationContext(), getResources().getText(R.string.custom_end_title), Toast.LENGTH_SHORT).show();
+                customEnd.show();
+            }
+        });
     }
 
     private void getNightMode() {
-        int val = Settings.Secure.getInt(activity.getContentResolver(), "twilight_mode", 0);
+        int val = Settings.Secure.getInt(activity.getContentResolver(), TWILIGHT_MODE, 0);
 
         switch (val) {
             case 0:
@@ -387,7 +402,7 @@ public class Misc extends Fragment {
         else if (mNightModeOverride) val = 4; //implied "&& mNightModeAuto == true"
         else val = 0;
 
-        activity.setThings.settings("secure", "twilight_mode", val + "");
+        activity.setThings.settings(SECURE, TWILIGHT_MODE, val + "");
     }
 
     private void textFields(final TextInputEditText textInputEditText) {
@@ -428,21 +443,21 @@ public class Misc extends Fragment {
                 String[] parsedString;
 
                 if (button == animApply) {
-                    pref = "animator_duration_scale";
+                    pref = Settings.Global.ANIMATOR_DURATION_SCALE;
                     if (animScale.contains(".") && !animScale.contains("0.")) animScale = "0" + animScale;
                     if (animScale.indexOf(".") == animScale.length() - 1) animScale = animScale + "0";
                     if (Float.valueOf(animScale) > 10) animScale = "10";
                     val = animScale;
                     type = "global";
                 } else if (button == transApply) {
-                    pref = "transition_animation_scale";
+                    pref = Settings.Global.TRANSITION_ANIMATION_SCALE;
                     if (transScale.contains(".") && !transScale.contains("0.")) transScale = "0" + transScale;
                     if (transScale.indexOf(".") == transScale.length() - 1) transScale = transScale + "0";
                     if (Float.valueOf(transScale) > 10) transScale = "10";
                     val = transScale;
                     type = "global";
                 } else if (button == winApply) {
-                    pref = "window_animation_scale";
+                    pref = Settings.Global.WINDOW_ANIMATION_SCALE;
                     if (winScale.contains(".") && !winScale.contains("0.")) winScale = "0" + winScale;
                     if (winScale.indexOf(".") == winScale.length() - 1) winScale = winScale + "0";
                     if (Float.valueOf(winScale) > 10) winScale = "10";
@@ -473,7 +488,25 @@ public class Misc extends Fragment {
                 }
 
                 activity.setThings.settings(type, pref, val);
+                Toast.makeText(activity.getApplicationContext(), getResources().getText(R.string.applied), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void setTimes() {
+        start = Settings.Secure.getString(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_CUSTOM_START_TIME);
+        if (start == null || start.length() < 1) start = "0";
+        startTime = Long.decode(start);
+        startHour = TimeUnit.MILLISECONDS.toHours(startTime);
+        startMinute = TimeUnit.MILLISECONDS.toMinutes(startTime) % TimeUnit.HOURS.toMinutes(1);
+
+        end = Settings.Secure.getString(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_CUSTOM_END_TIME);
+        if (end == null || end.length() < 1) end = "0";
+        endTime = Long.decode(end);
+        endHour = TimeUnit.MILLISECONDS.toHours(endTime);
+        endMinute = TimeUnit.MILLISECONDS.toMinutes(endTime) % TimeUnit.HOURS.toMinutes(1);
+
+        set_start.setText(String.format(Locale.ENGLISH, "%02d:%02d", startHour, startMinute));
+        set_end.setText(String.format(Locale.ENGLISH, "%02d:%02d", endHour, endMinute));
     }
 }

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.zacharee1.systemuituner.BuildConfig;
@@ -55,6 +56,14 @@ public class About extends Fragment {
         } catch (Exception e) {
             Log.e("SysUITuner/E", e.getMessage());
         }
+
+        Button donate = (Button) view.findViewById(R.id.donate);
+        donate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.setThings.donate();
+            }
+        });
 
         return view;
     }

@@ -51,12 +51,9 @@ public class NoRootActivity extends AppCompatActivity {
     @Override
     protected void onStop()
     {
-        try
-        {
+        try {
             unregisterReceiver(finish_activity);
-        }
-        catch (IllegalArgumentException e)
-        {
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
 

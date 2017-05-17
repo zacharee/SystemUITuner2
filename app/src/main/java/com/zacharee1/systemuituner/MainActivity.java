@@ -127,23 +127,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onStop()
     {
-        try
-        {
+        try {
             unregisterReceiver(finish_activity);
-        }
-
-        catch (IllegalArgumentException e)
-        {
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
 
-        try
-        {
+        try {
             unregisterReceiver(shutDownReceiver);
-        }
-
-        catch (IllegalArgumentException e)
-        {
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
 

@@ -53,7 +53,12 @@ public class WaitForBootActivity extends AppCompatActivity {
 
     @Override
     public void onStop() {
-        unregisterReceiver(finish_activity);
+        try {
+            unregisterReceiver(finish_activity);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+
         super.onStop();
     }
 }

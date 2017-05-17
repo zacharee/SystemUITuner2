@@ -465,19 +465,22 @@ public class Misc extends Fragment {
                     type = "global";
                 } else if (button == globalApply) {
                     parsedString = global.split("[ ]");
-                    pref = parsedString[0];
+                    if (parsedString.length > 0) pref = parsedString[0];
+                    else pref = "";
                     if (parsedString.length > 1) val = parsedString[1];
                     else val = "";
                     type = "global";
                 } else if (button == secureApply) {
                     parsedString = secure.split("[ ]");
-                    pref = parsedString[0];
+                    if (parsedString.length > 0) pref = parsedString[0];
+                    else pref = "";
                     if (parsedString.length > 1) val = parsedString[1];
                     else val = "";
                     type = "secure";
                 } else if (button == systemApply) {
                     parsedString = system.split("[ ]");
-                    pref = parsedString[0];
+                    if (parsedString.length > 0) pref = parsedString[0];
+                    else pref = "";
                     if (parsedString.length > 1) val = parsedString[1];
                     else val = "";
                     type = "system";

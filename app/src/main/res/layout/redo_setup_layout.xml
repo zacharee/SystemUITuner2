@@ -6,7 +6,6 @@
     android:padding="10dp">
 
     <TextView
-        android:id="@+id/textView14"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/setup_ask"
@@ -14,7 +13,6 @@
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/textView17"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -31,7 +29,6 @@
         android:text="@string/setup" />
 
     <TextView
-        android:id="@+id/textView62"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/setup_note"

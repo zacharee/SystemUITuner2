@@ -57,7 +57,7 @@ public class About extends Fragment {
             Log.e("SysUITuner/E", e.getMessage());
         }
 
-        Button donate = (Button) view.findViewById(R.id.donate);
+        Button donate = (Button) view.findViewById(R.id.donate_paypal);
         donate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

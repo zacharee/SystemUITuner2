@@ -9,14 +9,12 @@ import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -103,53 +101,6 @@ public class SetThings {
                         case "enableDemo":
                             settings("global", "sysui_demo_allowed", "1");
                             break;
-                        case "setupDoneRoot":
-                            if (testSudo()) {
-                                new Thread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        sudo("pm grant com.zacharee1.systemuituner android.permission.DUMP ; pm grant com.zacharee1.systemuituner android.permission.WRITE_SECURE_SETTINGS");
-                                    }
-                                }).start();
-                                editor.putBoolean("isRooted", true);
-                                editor.putBoolean("isSetup", true);
-                                editor.apply();
-                                intent = new Intent(currentActivity.getApplicationContext(), MainActivity.class);
-                                currentActivity.startActivity(intent);
-                                currentActivity.finish();
-                                break;
-                            } else {
-                                intent = new Intent(currentActivity.getApplicationContext(), NoRootActivity.class);
-                                currentActivity.startActivity(intent);
-                                currentActivity.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(currentActivity.getApplicationContext(), currentActivity.getResources().getText(R.string.root_test_failed), Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                                currentActivity.finish();
-                                break;
-                            }
-                        case "setupDone":
-                            editor.putBoolean("isRooted", false);
-                            editor.putBoolean("isSetup", true);
-                            editor.apply();
-                            try {
-                                Settings.Secure.putInt(currentActivity.getContentResolver(), "systemui_tuner_test", 1);
-
-                                intent = new Intent(currentActivity.getApplicationContext(), MainActivity.class);
-                                currentActivity.startActivity(intent);
-                                currentActivity.finish();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                currentActivity.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(currentActivity, currentActivity.getResources().getText(R.string.permissions_failed), Toast.LENGTH_LONG).show();
-                                    }
-                                });
-                            }
-                            break;
                         case "SystemSettingsPerms":
                             intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
                             intent.setData(Uri.parse("package:" + currentActivity.getPackageName()));
@@ -163,16 +114,6 @@ public class SetThings {
                             Settings.Secure.putString(currentActivity.getContentResolver(), "icon_blacklist", "");
                             intent = new Intent("check_statbar_toggles");
                             currentActivity.sendBroadcast(intent);
-                            break;
-                        case "root_setup":
-                            intent = new Intent(currentActivity.getApplicationContext(), RootActivity.class);
-                            currentActivity.startActivity(intent);
-                            currentActivity.finish();
-                            break;
-                        case "no_root_setup":
-                            intent = new Intent(currentActivity.getApplicationContext(), NoRootActivity.class);
-                            currentActivity.startActivity(intent);
-                            currentActivity.finish();
                             break;
                     }
                 } catch (Exception e) {
@@ -319,7 +260,7 @@ public class SetThings {
         }
     }
 
-    boolean isPackageInstalled(@SuppressWarnings("SameParameterValue") String packagename, PackageManager packageManager) { //check to see if a
+    private boolean isPackageInstalled(@SuppressWarnings("SameParameterValue") String packagename, PackageManager packageManager) { //check to see if a
         try {
             packageManager.getPackageInfo(packagename, 0);
             return true;
@@ -352,6 +293,7 @@ public class SetThings {
         }
     }
 
+    @SuppressWarnings("unused")
     private boolean testSudo() {
         StackTraceElement st = null;
 

@@ -59,7 +59,6 @@
     <string name="root_needed_toggle">To use this toggle from the phone, you need root.</string>
     <string name="example_settings_adb" translatable="false" tools:ignore="Typos">adb shell settings put system SETTINGS_VALUE VALUE</string>
     <string name="non_root_info">Don\'t worry. It\'s fine if you aren\'t. There are just some extra things you need to do in that case.</string>
-    <string name="i_am_not_rooted">I am not rooted</string>
     <string name="i_am_rooted">I am rooted</string>
     <string name="necessary_steps">Just need to do a few things.....</string>
     <string name="getting_started">Let\'s Get This Party Started!</string>
@@ -71,15 +70,8 @@
     <string name="bummer">Bummer…</string>
     <string name="adb_instructions">For this to work, you\'ll need a computer, a USB cable and ADB (<a href='https://developer.android.com/studio/command-line/adb.html'>Instructions</a>).</string>
     <string name="workaround">I guess it\'s a good thing that there\'s a workaround, then.</string>
-    <string name="finished">OK! I\'m done!</string>
     <string name="adb_reminder">Remember to also enable \"USB Debugging\" in Developer Options, and authorize your computer.</string>
     <string name="adb_perm_grant">Run the following commands (with your device connected) in CMD or Terminal:</string>
-    <string name="rooted_title">Hey, you\'re rooted?</string>
-    <string name="great">That\'s great!</string>
-    <string name="rooted_is_easier">That makes things a lot easier.</string>
-    <string name="press_button_rooted">When you\'re ready, press the button.</string>
-    <string name="root_confirm">You\'ll need to confirm root access.</string>
-    <string name="get_perms_root">GET TEH PERMZ</string>
     <string name="created_by">App created by <a href='https://forum.xda-developers.com/member.php?u=7055541'>Zacharee1</a></string>
     <string name="images_from">Launcher icon made by <a href='https://forum.xda-developers.com/member.php?u=7385240'>immarcel</a></string>
     <string name="spanish_from">Spanish translation by <a href='https://es.stackoverflow.com/users/28567/aaron-romero'>Aaron Romero</a> and <a href='https://forum.xda-developers.com/member.php?u=7055541'>Zacharee1</a></string>
@@ -101,7 +93,6 @@
     <string name="systemui_tuner" translatable="false">SystemUI Tuner</string>
     <string name="system_settings">System Settings</string>
     <string name="no_root_setup">No-Root Setup</string>
-    <string name="root_setup">Root Setup</string>
     <string name="home_desc">For Devices without this Activity</string>
     <string name="home_joke">Or for devices with it, I\'m not your boss.</string>
     <string name="home_extra">(If you do have the stock SystemUI Tuner, this one provides some extra goodies.)</string>
@@ -268,4 +259,11 @@
     <string name="donate_request">If you\'re enjoying your time here, it\'d be absolutely amazing if you could spare a dollar or two.</string>
     <string name="donate_dont_worry">There\'s absolutely no obligation. This app is free and always will be.</string>
     <string name="setup_note">NOTE: There is no need to do this again unless you need to!</string>
+    <string name="donate_1" translatable="false">$1</string>
+    <string name="donate_10" translatable="false">$10</string>
+    <string name="donate_2" translatable="false">$2</string>
+    <string name="donate_5" translatable="false">$5</string>
+    <string name="welcome">Welcome!</string>
+    <string name="root_mode">Root Mode</string>
+    <string name="paypal" translatable="false">PayPal</string>
 </resources>

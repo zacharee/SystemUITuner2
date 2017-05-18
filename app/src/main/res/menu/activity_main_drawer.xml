@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group
-        android:id="@+id/topmenu"
-        android:checkableBehavior="single">
+    <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home_black"
@@ -27,9 +25,7 @@
             android:title="@string/miscellaneous" />
     </group>
 
-    <group
-        android:id="@+id/bottommenu"
-        android:checkableBehavior="single">
+    <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings_black"
@@ -40,9 +36,7 @@
             android:title="@string/about" />
     </group>
 
-    <group
-        android:id="@+id/exitmenu"
-        android:checkableBehavior="single">
+    <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_exit"
             android:icon="@drawable/ic_close_black"

@@ -7,11 +7,9 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.PagerSnapHelper;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +22,6 @@ import android.widget.TimePicker;
 import com.zacharee1.systemuituner.MainActivity;
 import com.zacharee1.systemuituner.R;
 
-import java.util.Calendar;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -64,40 +61,25 @@ public class Misc extends Fragment {
     private boolean mNightModeOverride;
     private Switch night_mode_auto;
     private Switch night_mode_override;
-    private Switch night_mode_adjust_tint;
-    private boolean mNightDisplayAuto;
-    private boolean mNightDisplayActive;
-    private boolean mNightDisplayCustom;
     private Button set_start;
     private Button set_end;
     private LinearLayout custom_time;
-    private long startTime;
     private long startHour;
     private long startMinute;
-    private String start;
-    private String end;
-    private long endTime;
     private long endHour;
     private long endMinute;
     private View view;
-    private Switch show_full_zen;
-    private Switch hu_notif;
-    private Switch vol_warn;
-    private Switch power_notifs;
-    private Switch clock_seconds;
-    private Switch battery_percent;
-    private CardView power_notif_controls;
 
-    String SHOW_FULL_ZEN = "sysui_show_full_zen";
-    String HUN_ENABLED = "heads_up_notifications_enabled";
-    String SAFE_AUDIO = "audio_safe_volume_state";
-    String CLOCK_SECONDS = "clock_seconds";
-    String BATTERY_PERCENT = "status_bar_show_battery_percent";
-    String POW_NOTIFS = "show_importance_slider";
-    String NIGHT_MODE_TINT = "tuner_night_mode_adjust_tint";
-    String TWILIGHT_MODE = "twilight_mode";
+    private final String SHOW_FULL_ZEN = "sysui_show_full_zen";
+    private final String HUN_ENABLED = "heads_up_notifications_enabled";
+    private final String SAFE_AUDIO = "audio_safe_volume_state";
+    private final String CLOCK_SECONDS = "clock_seconds";
+    private final String BATTERY_PERCENT = "status_bar_show_battery_percent";
+    private final String POW_NOTIFS = "show_importance_slider";
+    private final String NIGHT_MODE_TINT = "tuner_night_mode_adjust_tint";
+    private final String TWILIGHT_MODE = "twilight_mode";
 
-    String SECURE = "secure";
+    private final String SECURE = "secure";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -145,14 +127,15 @@ public class Misc extends Fragment {
     }
 
     private void setupSwitches() {
-        show_full_zen = (Switch) view.findViewById(R.id.show_full_zen);
-        hu_notif = (Switch) view.findViewById(R.id.hu_notif);
-        vol_warn = (Switch) view.findViewById(R.id.vol_warn);
-        power_notifs = (Switch) view.findViewById(R.id.power_notifications);
-        clock_seconds = (Switch) view.findViewById(R.id.clock_seconds);
-        battery_percent = (Switch) view.findViewById(R.id.battery_percent);
-        power_notif_controls = (CardView) view.findViewById(R.id.power_notification_controls_card);
+        Switch show_full_zen = (Switch) view.findViewById(R.id.show_full_zen);
+        Switch hu_notif = (Switch) view.findViewById(R.id.hu_notif);
+        Switch vol_warn = (Switch) view.findViewById(R.id.vol_warn);
+        Switch power_notifs = (Switch) view.findViewById(R.id.power_notifications);
+        Switch clock_seconds = (Switch) view.findViewById(R.id.clock_seconds);
+        Switch battery_percent = (Switch) view.findViewById(R.id.battery_percent);
+        CardView power_notif_controls = (CardView) view.findViewById(R.id.power_notification_controls_card);
 
+        //noinspection deprecation
         battery_percent.setText(Html.fromHtml(getResources().getText(R.string.battery_percentage) + "<br /><small> <font color=\"#777777\">" + getResources().getText(R.string.reboot_required) + "</font></small>"));
 
         if (Build.VERSION.SDK_INT > 23) {
@@ -227,7 +210,7 @@ public class Misc extends Fragment {
     private void setupNightMode() {
         night_mode_auto = (Switch) view.findViewById(R.id.night_mode_auto);
         night_mode_override = (Switch) view.findViewById(R.id.night_mode_override);
-        night_mode_adjust_tint = (Switch) view.findViewById(R.id.night_mode_adjust_tint);
+        Switch night_mode_adjust_tint = (Switch) view.findViewById(R.id.night_mode_adjust_tint);
 
         night_mode_auto.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -282,7 +265,6 @@ public class Misc extends Fragment {
         night_display_auto.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mNightDisplayAuto = isChecked;
                 Settings.Secure.putInt(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_AUTO_MODE, isChecked ? 1 : 0);
             }
         });
@@ -290,7 +272,6 @@ public class Misc extends Fragment {
         night_display_active.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mNightDisplayActive = isChecked;
                 Settings.Secure.putInt(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_ACTIVATED, isChecked ? 1 : 0);
             }
         });
@@ -298,8 +279,6 @@ public class Misc extends Fragment {
         night_display_custom.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(final CompoundButton buttonView, boolean isChecked) {
-                mNightDisplayCustom = isChecked;
-
                 custom_time.setVisibility(isChecked ? View.VISIBLE : View.GONE);
 
                 if (!isChecked) {
@@ -497,15 +476,15 @@ public class Misc extends Fragment {
     }
 
     private void setTimes() {
-        start = Settings.Secure.getString(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_CUSTOM_START_TIME);
+        String start = Settings.Secure.getString(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_CUSTOM_START_TIME);
         if (start == null || start.length() < 1) start = "0";
-        startTime = Long.decode(start);
+        long startTime = Long.decode(start);
         startHour = TimeUnit.MILLISECONDS.toHours(startTime);
         startMinute = TimeUnit.MILLISECONDS.toMinutes(startTime) % TimeUnit.HOURS.toMinutes(1);
 
-        end = Settings.Secure.getString(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_CUSTOM_END_TIME);
+        String end = Settings.Secure.getString(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_CUSTOM_END_TIME);
         if (end == null || end.length() < 1) end = "0";
-        endTime = Long.decode(end);
+        long endTime = Long.decode(end);
         endHour = TimeUnit.MILLISECONDS.toHours(endTime);
         endMinute = TimeUnit.MILLISECONDS.toMinutes(endTime) % TimeUnit.HOURS.toMinutes(1);
 

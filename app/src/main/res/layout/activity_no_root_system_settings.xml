@@ -27,7 +27,6 @@
                 android:textSize="26sp" />
 
             <TextView
-                android:id="@+id/textView18"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -36,7 +35,6 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/textView28"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -45,7 +43,6 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/textView30"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -54,7 +51,6 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/textView32"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -91,7 +87,6 @@
             </HorizontalScrollView>
 
             <TextView
-                android:id="@+id/textView34"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -100,7 +95,6 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/textView35"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"

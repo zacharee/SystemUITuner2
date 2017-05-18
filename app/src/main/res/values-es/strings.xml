@@ -43,13 +43,10 @@
     <string name="enabled">Permitido</string>
     <string name="ethernet_icon">Icono Ethernet</string>
     <string name="exit_app">Salir</string>
-    <string name="finished">OK! Estoy listo!</string>
     <string name="general">General</string>
-    <string name="get_perms_root">OBTENER LAS PREMISAS</string>
     <string name="getting_started">Empezemos Esta Fiesta!</string>
     <string name="global">Global</string>
     <string name="go">CONTINUAR</string>
-    <string name="great">Buenisimo!</string>
     <string name="headphone_volume_warning">Aviso del Volumen de Audífono</string>
     <string name="heads_up_notifications">Notificaciones Heads-Up</string>
     <string name="headset_icon">Icono Audífono</string>
@@ -58,7 +55,6 @@
     <string name="home_extra">(Si tiene el SystemUI Tuner del valor por defecto, esta app proveerá más funciones.)</string>
     <string name="home_joke">O para los aparatos con el, no estoy su jefe.</string> (No se que quisiste decir aquí)
     <string name="hotspot_icon">Icono Hotspot</string>
-    <string name="i_am_not_rooted">No soy usuario root</string>
     <string name="i_am_rooted">Sí soy usuario root</string>
     <string name="images_from">Icono del iniciador hecho por <a href="https://forum.xda-developers.com/member.php?u=7385240">immarcel</a></string>
     <string name="launcher_image">Imágina del Iniciador</string>
@@ -80,14 +76,10 @@
     <string name="non_lp_bypass">Si no está en Lollipop, puede usar esta característica. Toque \"Conceder Perms\", y luego \"CONTINUAR\".</string>
     <string name="non_root_info">No preocupe. Es bueno si no es usuario root. Solamente hay algunas medidas extras en este caso.</string>
     <string name="not_rooted_huh">No eres usuario root, eh?</string>
-    <string name="press_button_rooted">Cuando esté listo, toca el botón.</string>
     <string name="quick_settings">Preferencias Listas</string>
     <string name="reset_blacklist">Reajustar Lista Negra</string>
     <string name="resetup_instruction">Si se lo saltó, o lo olvidó, puede cambiar a root con este botón:</string>
-    <string name="root_confirm">Confirme su acceso a root.</string>
     <string name="root_needed_toggle">Para usar este switch es necesario ser usuario root.</string>
-    <string name="rooted_is_easier">Esto hace más fácil el proceso.</string>
-    <string name="rooted_title">Eh, tiene root?</string>
     <string name="rotation_lock_icon">Icono Cerradura de Rotación</string>
     <string name="secure">Seguro</string>
     <string name="select_battery_level">Elegir Nivel de Battería</string>
@@ -124,7 +116,6 @@
     <string name="build_date">Fecha de Construcción:</string>
     <string name="reboot_required">(Se Necesita Reboot)</string>
     <string name="no_root_setup">Configuración Sin Root</string>
-    <string name="root_setup">Configuración Con Root</string>
     <string name="system_settings">Preferencias de Sistema</string>
     <string name="error">ERROR</string>
     <string name="no">No</string>
@@ -225,4 +216,6 @@
     <string name="donate_joke">Cómo, preguntas? Mágico.</string>
     <string name="donate_request">Si pasa bien aquí, sería maravelloso que podrías darme un dólar o dos.</string>
     <string name="setup_note">ATENCIÓN: No es necesario usar esto otra vez a menos que necesites!</string>
+    <string name="welcome">Bienvenidos!</string>
+    <string name="root_mode">Modo Root</string>
 </resources>

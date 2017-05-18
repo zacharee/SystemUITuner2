@@ -2,11 +2,13 @@
   <dictionary name="Zacha">
     <words>
       <w>aren</w>
+      <w>bgkqhki</w>
       <w>bottommenu</w>
       <w>cardview</w>
       <w>cdma</w>
       <w>datatype</w>
       <w>didn</w>
+      <w>dont</w>
       <w>evdo</w>
       <w>exitmenu</w>
       <w>felica</w>
@@ -14,10 +16,17 @@
       <w>femtoicon</w>
       <w>github</w>
       <w>gplus</w>
+      <w>hasn</w>
       <w>hhmm</w>
+      <w>hrmil</w>
+      <w>iabhelper</w>
       <w>immarcel</w>
+      <w>inapp</w>
       <w>lockscreen</w>
       <w>mcurrent</w>
+      <w>mescellaneous</w>
+      <w>minmil</w>
+      <w>msgs</w>
       <w>nadb</w>
       <w>navpage</w>
       <w>nfclock</w>
@@ -30,14 +39,18 @@
       <w>permz</w>
       <w>poweroff</w>
       <w>poweron</w>
+      <w>purchashing</w>
       <w>quickboot</w>
       <w>reciever</w>
       <w>resetup</w>
+      <w>resultcode</w>
       <w>rootbox</w>
       <w>safezone</w>
       <w>samsung</w>
       <w>sharedpref</w>
       <w>sharedprefs</w>
+      <w>signup</w>
+      <w>skus</w>
       <w>stackoverflow</w>
       <w>statbar</w>
       <w>statusbar</w>

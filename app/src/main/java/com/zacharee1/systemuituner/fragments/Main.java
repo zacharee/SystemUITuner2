@@ -28,7 +28,7 @@ public class Main extends Fragment {
         TextView title = (TextView) view.findViewById(R.id.title_main);
         title.setTextColor(activity.setThings.titleText); //set title text to the correct color for dark/light mode
 
-        Button donate = (Button) view.findViewById(R.id.donate);
+        Button donate = (Button) view.findViewById(R.id.donate_paypal);
         donate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

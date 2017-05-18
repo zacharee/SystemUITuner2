@@ -1,83 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.zacharee1.systemuituner.SetupActivity">
 
-    <ScrollView
+    <include
+        layout="@layout/fragment_intro_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp"
-        tools:ignore="UselessParent">
+        android:layout_height="wrap_content" />
 
-        <LinearLayout
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <TextView
-                android:id="@+id/title_setup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/getting_started"
-                android:textAlignment="center"
-                android:textSize="40sp" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/necessary_steps"
-                android:textAlignment="center"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/are_you_rooted"
-                android:textAlignment="center"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/textView17"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="@string/non_root_info"
-                android:textAlignment="center"
-                android:textSize="20sp" />
+            android:layout_height="match_parent"
+            tools:ignore="UselessParent"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp">
 
             <LinearLayout
-                android:id="@+id/rootbox"
-                android:layout_width="600dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-                <Button
-                    android:id="@+id/rooted"
-                    style="@style/Widget.AppCompat.Button.Colored"
-                    android:layout_width="fill_parent"
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/i_am_rooted" />
+                    android:text="@string/getting_started"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/primary_text_dark"
+                    android:textSize="40sp" />
 
-                <Button
-                    android:id="@+id/not_rooted"
-                    style="@style/Widget.AppCompat.Button.Colored"
-                    android:layout_width="fill_parent"
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/i_am_not_rooted" />
+                    android:text="@string/necessary_steps"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/primary_text_dark"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/are_you_rooted"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/primary_text_dark"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/non_root_info"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/primary_text_dark"
+                    android:textSize="20sp" />
+
             </LinearLayout>
+        </ScrollView>
 
+        <LinearLayout
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/appIntro2BottomBarHeight">
+
+            <Button
+                android:id="@+id/rooted"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/i_am_rooted" />
+
+            <!--<Button-->
+            <!--android:id="@+id/not_rooted"-->
+            <!--style="@style/Widget.AppCompat.Button.Colored"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="@string/i_am_not_rooted" />-->
         </LinearLayout>
-    </ScrollView>
+    </FrameLayout>
+
 </LinearLayout>

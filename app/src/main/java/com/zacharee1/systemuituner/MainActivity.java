@@ -1,5 +1,6 @@
 package com.zacharee1.systemuituner;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.BroadcastReceiver;
@@ -17,6 +18,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,19 +30,22 @@ import com.zacharee1.systemuituner.fragments.Misc;
 import com.zacharee1.systemuituner.fragments.QS;
 import com.zacharee1.systemuituner.fragments.Settings;
 import com.zacharee1.systemuituner.fragments.StatBar;
+import com.zacharee1.systemuituner.iaps.IabBroadcastReceiver;
+import com.zacharee1.systemuituner.iaps.IabHelper;
+import com.zacharee1.systemuituner.iaps.IabResult;
+import com.zacharee1.systemuituner.iaps.Purchase;
 import com.zacharee1.systemuituner.receivers.ShutDownReceiver;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, IabBroadcastReceiver.IabBroadcastListener {
 
+    private static final int RC_REQUEST = 101;
     public SetThings setThings;
 
     private Fragment fragment;
     private FragmentManager fragmentManager;
 
     private Handler handler;
-
-    private Context context;
 
     private ActionBarDrawerToggle toggle;
 
@@ -52,9 +57,46 @@ public class MainActivity extends AppCompatActivity
     private Fragment settings;
     private Fragment misc;
 
+    private static final String donate_1 = "donate_1";
+    private static final String donate_2 = "donate_2";
+    private static final String donate_5 = "donate_5";
+    private static final String donate_10 = "donate_10";
+
     private CharSequence title;
     private BroadcastReceiver finish_activity;
     private BroadcastReceiver shutDownReceiver;
+
+    private IabHelper mHelper;
+
+    private final String TAG = "SystemUITuner";
+
+    private final IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
+        public void onIabPurchaseFinished(IabResult result, Purchase purchase) {
+            Log.d(TAG, "Purchase finished: " + result + ", purchase: " + purchase);
+
+            // if we were disposed of in the meantime, quit.
+            if (mHelper == null) return;
+
+            if (result.isFailure()) {
+                complain("Error purchasing: " + result);
+                return;
+            }
+            if (verifyDeveloperPayload(purchase)) {
+                complain("Error purchasing. Authenticity verification failed.");
+                return;
+            }
+
+            Log.d(TAG, "Purchase successful.");
+
+            try {
+                mHelper.consumeAsync(purchase, null);
+            } catch (IabHelper.IabAsyncInProgressException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+    private IabBroadcastReceiver mBroadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +105,7 @@ public class MainActivity extends AppCompatActivity
         fragment = new Fragment();
         fragmentManager = getFragmentManager();
         handler = new Handler();
-        context = this;
+        Context context = this;
 
         main = new Main();
         qs = new QS();
@@ -78,6 +120,36 @@ public class MainActivity extends AppCompatActivity
         registerReceiver(shutDownReceiver, filter);
 
         setContentView(R.layout.activity_main);
+
+        String base64EncodedPublicKey = getResources().getText(R.string.dev_id).toString();
+        mHelper = new IabHelper(this, base64EncodedPublicKey);
+
+        mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+            public void onIabSetupFinished(IabResult result) {
+                Log.d(TAG, "Setup finished.");
+
+                if (result.isSuccess()) {
+                    // Oh noes, there was a problem.
+                    complain("Problem setting up in-app billing: " + result);
+                    return;
+                }
+
+                // Have we been disposed of in the meantime? If so, quit.
+                if (mHelper == null) return;
+
+                // Important: Dynamically register for broadcast messages about updated purchases.
+                // We register the receiver here instead of as a <receiver> in the Manifest
+                // because we always call getPurchases() at startup, so therefore we can ignore
+                // any broadcasts sent while the app isn't running.
+                // Note: registering this listener in an Activity is a bad idea, but is done here
+                // because this is a SAMPLE. Regardless, the receiver must be registered after
+                // IabHelper is setup, but before first call to getPurchases().
+                mBroadcastReceiver = new IabBroadcastReceiver(MainActivity.this);
+                IntentFilter broadcastFilter = new IntentFilter(IabBroadcastReceiver.ACTION);
+                registerReceiver(mBroadcastReceiver, broadcastFilter);
+            }
+        });
+
         /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setPopupTheme(setThings.style);
@@ -317,6 +389,145 @@ public class MainActivity extends AppCompatActivity
             default:
                 title = getResources().getText(R.string.app_name);
                 return main;
+        }
+    }
+
+    @Override
+    public void receivedBroadcast() {
+
+    }
+
+    private void complain(String message) {
+        Log.e(TAG, "**** SystemUI Tuner Error: " + message);
+        alert("Error: " + message);
+    }
+
+    private void alert(String message) {
+        AlertDialog.Builder bld = new AlertDialog.Builder(this);
+        bld.setMessage(message);
+        bld.setNeutralButton("OK", null);
+        Log.d(TAG, "Showing alert dialog: " + message);
+        bld.create().show();
+    }
+
+    @SuppressWarnings("SameReturnValue")
+    private boolean verifyDeveloperPayload(Purchase p) {
+        @SuppressWarnings("UnusedAssignment") String payload = p.getDeveloperPayload();
+
+        /*
+         * TODO: verify that the developer payload of the purchase is correct. It will be
+         * the same one that you sent when initiating the purchase.
+         *
+         * WARNING: Locally generating a random string when starting a purchase and
+         * verifying it here might seem like a good approach, but this will fail in the
+         * case where the user purchases an item on one device and then uses your app on
+         * a different device, because on the other device you will not have access to the
+         * random string you originally generated.
+         *
+         * So a good developer payload has these characteristics:
+         *
+         * 1. If two different users purchase an item, the payload is different between them,
+         *    so that one user's purchase can't be replayed to another user.
+         *
+         * 2. The payload must be such that you can verify it even when the app wasn't the
+         *    one who initiated the purchase flow (so that items purchased by the user on
+         *    one device work on other devices owned by the user).
+         *
+         * Using your own server to store and verify developer payloads across app
+         * installations is recommended.
+         */
+
+        return false;
+    }
+
+    public void onDonate1Clicked(@SuppressWarnings("UnusedParameters") View arg0) {
+
+        /* TODO: for security, generate your payload here for verification. See the comments on
+         *        verifyDeveloperPayload() for more info. Since this is a SAMPLE, we just use
+         *        an empty string, but on a production app you should carefully generate this. */
+        String payload = "";
+
+        try {
+            if (mHelper != null) mHelper.flagEndAsync();
+            assert mHelper != null;
+            mHelper.launchPurchaseFlow(this, donate_1, RC_REQUEST,
+                    mPurchaseFinishedListener, payload);
+        } catch (IabHelper.IabAsyncInProgressException e) {
+            complain("Error launching purchase flow. Another async operation in progress.");
+        }
+    }
+
+    public void onDonate2Clicked(@SuppressWarnings("UnusedParameters") View arg0) {
+
+        /* TODO: for security, generate your payload here for verification. See the comments on
+         *        verifyDeveloperPayload() for more info. Since this is a SAMPLE, we just use
+         *        an empty string, but on a production app you should carefully generate this. */
+        String payload = "";
+
+        try {
+            if (mHelper != null) mHelper.flagEndAsync();
+            assert mHelper != null;
+            mHelper.launchPurchaseFlow(this, donate_2, RC_REQUEST,
+                    mPurchaseFinishedListener, payload);
+        } catch (IabHelper.IabAsyncInProgressException e) {
+            complain("Error launching purchase flow. Another async operation in progress.");
+        }
+    }
+
+    public void onDonate5Clicked(@SuppressWarnings("UnusedParameters") View arg0) {
+
+        /* TODO: for security, generate your payload here for verification. See the comments on
+         *        verifyDeveloperPayload() for more info. Since this is a SAMPLE, we just use
+         *        an empty string, but on a production app you should carefully generate this. */
+        String payload = "";
+
+        try {
+            if (mHelper != null) mHelper.flagEndAsync();
+            assert mHelper != null;
+            mHelper.launchPurchaseFlow(this, donate_5, RC_REQUEST,
+                    mPurchaseFinishedListener, payload);
+        } catch (IabHelper.IabAsyncInProgressException e) {
+            complain("Error launching purchase flow. Another async operation in progress.");
+        }
+    }
+    public void onDonate10Clicked(@SuppressWarnings("UnusedParameters") View arg0) {
+
+        /* TODO: for security, generate your payload here for verification. See the comments on
+         *        verifyDeveloperPayload() for more info. Since this is a SAMPLE, we just use
+         *        an empty string, but on a production app you should carefully generate this. */
+        String payload = "";
+
+        try {
+            if (mHelper != null) mHelper.flagEndAsync();
+            assert mHelper != null;
+            mHelper.launchPurchaseFlow(this, donate_10, RC_REQUEST,
+                    mPurchaseFinishedListener, payload);
+        } catch (IabHelper.IabAsyncInProgressException e) {
+            complain("Error launching purchase flow. Another async operation in progress.");
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        try {
+            if (mBroadcastReceiver != null) {
+                unregisterReceiver(mBroadcastReceiver);
+            }
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            // very important:
+            Log.d(TAG, "Destroying helper.");
+            if (mHelper != null) {
+                mHelper.disposeWhenFinished();
+                mHelper = null;
+            }
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
         }
     }
 }

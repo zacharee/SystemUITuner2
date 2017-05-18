@@ -6,8 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.zacharee1.systemuituner.NoRootActivity"
-    tools:showIn="@layout/activity_no_root">
+    android:id="@id/main">
+
+    <include layout="@layout/fragment_intro_content" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -27,28 +28,28 @@
             android:padding="16dp">
 
             <TextView
-                android:id="@+id/noroot_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/not_rooted_huh"
                 android:textAlignment="center"
+                android:textColor="@android:color/primary_text_dark"
                 android:textSize="40sp" />
 
             <TextView
-                android:id="@+id/textView21"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/bummer"
                 android:textAlignment="center"
+                android:textColor="@android:color/primary_text_dark"
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/textView22"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/workaround"
                 android:textAlignment="center"
+                android:textColor="@android:color/primary_text_dark"
                 android:textSize="20sp" />
 
             <TextView
@@ -58,33 +59,35 @@
                 android:layout_marginTop="5dp"
                 android:text="@string/adb_instructions"
                 android:textAlignment="center"
+                android:textColor="@android:color/primary_text_dark"
+                android:textColorLink="@color/primary_text_material_dark2"
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/textView24"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/adb_reminder"
                 android:textAlignment="center"
+                android:textColor="@android:color/primary_text_dark"
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/textView25"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/adb_set_up"
                 android:textAlignment="center"
+                android:textColor="@android:color/primary_text_dark"
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/textView26"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/adb_perm_grant"
                 android:textAlignment="center"
+                android:textColor="@android:color/primary_text_dark"
                 android:textSize="20sp" />
 
             <LinearLayout
@@ -110,7 +113,6 @@
                         android:paddingTop="16dp">
 
                         <TextView
-                            android:id="@+id/textView27"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="monospace"
@@ -127,22 +129,22 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView33"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/scroll_hint"
                 android:textAlignment="center"
+                android:textColor="@android:color/primary_text_dark"
                 android:textSize="20sp" />
 
-            <Button
-                android:id="@+id/no_root_done"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="400dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:text="@string/finished" />
+            <!--<Button-->
+                <!--android:id="@+id/no_root_done"-->
+                <!--style="@style/Widget.AppCompat.Button.Colored"-->
+                <!--android:layout_width="400dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:text="@string/finished" />-->
 
         </LinearLayout>
     </ScrollView>

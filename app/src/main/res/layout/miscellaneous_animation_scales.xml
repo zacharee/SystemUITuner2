@@ -37,11 +37,10 @@
 
         <Button
             android:id="@+id/apply_anim"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:background="?attr/colorAccent"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:text="@string/apply" />
@@ -68,11 +67,10 @@
 
         <Button
             android:id="@+id/apply_trans"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:background="?attr/colorAccent"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:text="@string/apply" />
@@ -97,13 +95,12 @@
                 android:textSize="12sp" />
         </android.support.design.widget.TextInputLayout>
 
-        <zButton
+        <Button
             android:id="@+id/apply_win"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:background="?attr/colorAccent"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:text="@string/apply" />

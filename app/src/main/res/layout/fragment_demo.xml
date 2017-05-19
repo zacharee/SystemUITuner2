@@ -30,21 +30,20 @@
 
                 <Button
                     android:id="@+id/enable_demo"
+                    style="@style/Base.Widget.AppCompat.Button.Colored"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="@dimen/activity_vertical_margin"
-                    android:background="?attr/colorAccent"
+                    android:layout_weight="1"
                     android:paddingLeft="@dimen/activity_horizontal_margin"
                     android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:text="@string/enable"
-                    android:layout_weight="1"/>
+                    android:text="@string/enable" />
 
                 <Switch
                     android:id="@+id/show_demo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
+                    android:layout_gravity="center_vertical|end"
                     android:layout_weight="1"
                     android:switchMinWidth="50dp"
                     android:switchPadding="10dp"
@@ -55,27 +54,25 @@
 
             <Button
                 android:id="@+id/select_time"
+                style="@style/Base.Widget.AppCompat.Button.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:background="?attr/colorAccent"
+                android:layout_weight="1"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
-                android:text="@string/select_time"
-                android:layout_weight="1"/>
+                android:text="@string/select_time" />
 
             <Button
                 android:id="@+id/select_battery_level_button"
+                style="@style/Base.Widget.AppCompat.Button.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:background="?attr/colorAccent"
+                android:layout_weight="1"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
-                android:text="@string/select_battery_level"
-                android:layout_weight="1"/>
+                android:text="@string/select_battery_level" />
 
             <LinearLayout
                 android:layout_width="match_parent"

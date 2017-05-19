@@ -38,7 +38,6 @@ public class SetupActivity extends AppIntro2 {
 
     private BroadcastReceiver finish_activity;
     private SetThings setThings;
-    private int backgroundColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +49,7 @@ public class SetupActivity extends AppIntro2 {
         Resources.Theme theme = getTheme();
         theme.resolveAttribute(R.attr.colorAccent, typedValue, true);
 
-        backgroundColor = typedValue.data;
+        int backgroundColor = typedValue.data;
 
         addSlide(AppIntroFragment.newInstance(getResources().getText(R.string.app_name).toString(), getResources().getText(R.string.welcome).toString(), R.drawable.ic_launcher_large, backgroundColor));
         addSlide(AskRoot.newInstance(getResources().getText(R.string.setup).toString(), getResources().getText(R.string.setup_ask).toString(), R.mipmap.ic_launcher, backgroundColor));

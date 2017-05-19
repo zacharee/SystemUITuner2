@@ -110,13 +110,11 @@
 
                 <Button
                     android:id="@+id/set_sys_perm"
+                    style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="@dimen/activity_vertical_margin"
-                    android:layout_marginRight="2dp"
                     android:layout_weight="1"
-                    android:background="?attr/colorAccent"
                     android:paddingLeft="@dimen/activity_horizontal_margin"
                     android:paddingRight="@dimen/activity_horizontal_margin"
                     android:text="@string/set_perms"
@@ -124,13 +122,11 @@
 
                 <Button
                     android:id="@+id/do_the_dirty"
+                    style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="@dimen/activity_vertical_margin"
-                    android:layout_marginLeft="2dp"
                     android:layout_weight="1"
-                    android:background="?attr/colorAccent"
                     android:paddingLeft="@dimen/activity_horizontal_margin"
                     android:paddingRight="@dimen/activity_horizontal_margin"
                     android:text="@string/go"

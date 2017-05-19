@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.github.paolorotolo.appintro.AppIntro2;
+import com.github.paolorotolo.appintro.AppIntroBase;
 import com.github.paolorotolo.appintro.AppIntroBaseFragment;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 
@@ -51,14 +52,18 @@ public class SetupActivity extends AppIntro2 {
 
         int backgroundColor = typedValue.data;
 
-        addSlide(AppIntroFragment.newInstance(getResources().getText(R.string.app_name).toString(), getResources().getText(R.string.welcome).toString(), R.drawable.ic_launcher_large, backgroundColor));
-        addSlide(AskRoot.newInstance(getResources().getText(R.string.setup).toString(), getResources().getText(R.string.setup_ask).toString(), R.mipmap.ic_launcher, backgroundColor));
-        addSlide(NoRoot.newInstance(getResources().getText(R.string.no_root_setup).toString(), getResources().getText(R.string.adb_instructions).toString(), R.mipmap.ic_launcher, backgroundColor));
-        addSlide(AppIntroFragment.newInstance(getResources().getText(R.string.done_button).toString(), "", R.drawable.ic_check_accent, backgroundColor));
+        AppIntroFragment introFrag = AppIntroFragment.newInstance(getResources().getText(R.string.app_name).toString(), getResources().getText(R.string.welcome).toString(), R.drawable.ic_launcher_large, backgroundColor);
+        AppIntroBaseFragment askRootFrag = AskRoot.newInstance(getResources().getText(R.string.setup).toString(), getResources().getText(R.string.setup_ask).toString(), 0, backgroundColor);
+        AppIntroBaseFragment noRootFrag = NoRoot.newInstance(getResources().getText(R.string.no_root_setup).toString(), getResources().getText(R.string.adb_instructions).toString(), 0, backgroundColor);
+        AppIntroFragment doneFrag = AppIntroFragment.newInstance(getResources().getText(R.string.done_button).toString(), "", R.drawable.ic_check_accent, backgroundColor);
+
+        addSlide(introFrag);
+        addSlide(askRootFrag);
+        addSlide(noRootFrag);
+        addSlide(doneFrag);
+
         showSkipButton(false);
         setSwipeLock(true);
-//        backButton.setVisibility(View.VISIBLE);
-
 
         finish_activity = new BroadcastReceiver() {
 

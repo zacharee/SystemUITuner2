@@ -266,4 +266,5 @@
     <string name="welcome">Welcome!</string>
     <string name="root_mode">Root Mode</string>
     <string name="paypal" translatable="false">PayPal</string>
+    <string name="iap_fail">Could not connect to Google Play billing.</string>
 </resources>

@@ -218,4 +218,5 @@
     <string name="setup_note">ATENCIÓN: No es necesario usar esto otra vez a menos que necesites!</string>
     <string name="welcome">Bienvenidos!</string>
     <string name="root_mode">Modo Root</string>
+    <string name="iap_fail">No se pudo conectar a facturación de Google Play.</string>
 </resources>

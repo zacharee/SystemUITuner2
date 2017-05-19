@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.zacharee1.systemuituner.fragments.About;
 import com.zacharee1.systemuituner.fragments.Demo;
@@ -399,7 +400,8 @@ public class MainActivity extends AppCompatActivity
 
     private void complain(String message) {
         Log.e(TAG, "**** SystemUI Tuner Error: " + message);
-        alert("Error: " + message);
+        Toast.makeText(this, R.string.iap_fail, Toast.LENGTH_LONG).show();
+//        alert("Error: " + message);
     }
 
     private void alert(String message) {

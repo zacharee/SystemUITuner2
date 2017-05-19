@@ -51,11 +51,15 @@
 
             <Button
                 android:id="@+id/refresh_boot"
-                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginTop="10dp"
                 android:layout_weight="1"
+                android:background="?attr/colorAccent"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
                 android:text="@string/refresh" />
         </LinearLayout>
     </ScrollView>

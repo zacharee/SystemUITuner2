@@ -5,10 +5,10 @@ android {
     buildToolsVersion "25.0.3"
     defaultConfig {
         applicationId "com.zacharee1.systemuituner"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 25
-        versionCode 89
-        versionName "1.14.3"
+        versionCode 90
+        versionName "1.15.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
     }

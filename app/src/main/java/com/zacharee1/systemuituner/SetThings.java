@@ -50,7 +50,7 @@ public class SetThings {
 
     public final int SDK_INT;
 
-    SetThings(Activity activity) {
+    public SetThings(Activity activity) {
         //set all variables
         sharedPreferences = activity.getSharedPreferences(activity.getResources().getText(R.string.sharedprefs_id).toString(), Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();

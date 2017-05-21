@@ -20,6 +20,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <uses-permission android:name="com.android.vending.BILLING" />
+    <uses-permission android:name="android.permission.BIND_QUICK_SETTINGS_TILE"/>
 
     <application
         android:name=".AppService"
@@ -69,6 +70,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".SetupActivity"
@@ -90,6 +95,16 @@
             android:name=".services.ShutDownListen"
             android:enabled="true"
             android:exported="false" />
+
+        <service
+            android:name=".services.QSService"
+            android:label="@string/night_mode"
+            android:icon="@drawable/ic_night_mode"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
 
         <activity android:name=".WaitForBootActivity" />
     </application>

@@ -1,5 +1,6 @@
 package com.zacharee1.systemuituner;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -36,6 +37,8 @@ import com.zacharee1.systemuituner.iaps.IabHelper;
 import com.zacharee1.systemuituner.iaps.IabResult;
 import com.zacharee1.systemuituner.iaps.Purchase;
 import com.zacharee1.systemuituner.receivers.ShutDownReceiver;
+
+import java.lang.ref.WeakReference;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, IabBroadcastReceiver.IabBroadcastListener {
@@ -106,7 +109,6 @@ public class MainActivity extends AppCompatActivity
         fragment = new Fragment();
         fragmentManager = getFragmentManager();
         handler = new Handler();
-        Context context = this;
 
         main = new Main();
         qs = new QS();
@@ -348,7 +350,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         Menu navMenu = navigationView.getMenu();
 
-        if (setThings.SDK_INT < 23) navMenu.findItem(R.id.nav_statusbar).setVisible(false);
+        /*if (setThings.SDK_INT < 23)*/ navMenu.findItem(R.id.nav_statusbar).setVisible(false);
 
         int id = setThings.sharedPreferences.getInt("navpage", R.id.nav_home); //nav item that was selected before last app close
 

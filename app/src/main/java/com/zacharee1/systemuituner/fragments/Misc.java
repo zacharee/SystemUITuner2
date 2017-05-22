@@ -1,10 +1,17 @@
 package com.zacharee1.systemuituner.fragments;
 
+import android.annotation.TargetApi;
 import android.app.Fragment;
 import android.app.TimePickerDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.service.quicksettings.Tile;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.CardView;
 import android.text.Editable;
@@ -21,6 +28,7 @@ import android.widget.TimePicker;
 
 import com.zacharee1.systemuituner.MainActivity;
 import com.zacharee1.systemuituner.R;
+import com.zacharee1.systemuituner.services.QSService;
 
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -81,6 +89,13 @@ public class Misc extends Fragment {
 
     private final String SECURE = "secure";
 
+    private BroadcastReceiver mToggleNight;
+    private Intent mToggleNightIntent;
+
+    private Switch night_display_auto;
+    private Switch night_display_active;
+    private Switch night_display_custom;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -99,6 +114,22 @@ public class Misc extends Fragment {
         setupScales();
         setupSettings();
         chooseNightType();
+
+        mToggleNightIntent = new Intent("toggle_night");
+
+        mToggleNight = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (intent.getAction().equals("toggle_night")) {
+                    boolean state = intent.getBooleanExtra("state", false);
+
+                    if (activity.setThings.SDK_INT == 24) night_mode_override.setChecked(state);
+                    else night_display_active.setChecked(state);
+                }
+            }
+        };
+        IntentFilter filter = new IntentFilter("toggle_night");
+        activity.registerReceiver(mToggleNight, filter);
 
         return view;
     }
@@ -224,6 +255,8 @@ public class Misc extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 mNightModeOverride = isChecked;
+                mToggleNightIntent.putExtra("state", isChecked);
+                activity.sendBroadcast(mToggleNightIntent);
                 setNightMode();
             }
         });
@@ -247,9 +280,9 @@ public class Misc extends Fragment {
 
         setTimes();
 
-        Switch night_display_auto = (Switch) view.findViewById(R.id.night_display_auto);
-        Switch night_display_active = (Switch) view.findViewById(R.id.night_display_activated);
-        Switch night_display_custom = (Switch) view.findViewById(R.id.night_display_custom_times);
+        night_display_auto = (Switch) view.findViewById(R.id.night_display_auto);
+        night_display_active = (Switch) view.findViewById(R.id.night_display_activated);
+        night_display_custom = (Switch) view.findViewById(R.id.night_display_custom_times);
 
         night_display_auto.setChecked(Settings.Secure.getInt(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_AUTO_MODE, 0) == 1);
         night_display_active.setChecked(Settings.Secure.getInt(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_ACTIVATED, 0) == 1);
@@ -272,6 +305,8 @@ public class Misc extends Fragment {
         night_display_active.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mToggleNightIntent.putExtra("state", isChecked);
+                activity.sendBroadcast(mToggleNightIntent);
                 Settings.Secure.putInt(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_ACTIVATED, isChecked ? 1 : 0);
             }
         });
@@ -373,6 +408,7 @@ public class Misc extends Fragment {
         }
     }
 
+    @TargetApi(24)
     private void setNightMode() {
         int val;
 
@@ -490,5 +526,11 @@ public class Misc extends Fragment {
 
         set_start.setText(String.format(Locale.ENGLISH, "%02d:%02d", startHour, startMinute));
         set_end.setText(String.format(Locale.ENGLISH, "%02d:%02d", endHour, endMinute));
+    }
+
+    @Override
+    public void onDestroy() {
+        activity.unregisterReceiver(mToggleNight);
+        super.onDestroy();
     }
 }

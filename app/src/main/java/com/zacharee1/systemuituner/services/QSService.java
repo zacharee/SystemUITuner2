@@ -1,19 +1,17 @@
 package com.zacharee1.systemuituner.services;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
-import android.os.IBinder;
 import android.provider.Settings;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
-import android.widget.Toast;
 
 import com.zacharee1.systemuituner.Exceptions;
-import com.zacharee1.systemuituner.SetThings;
-
-import java.util.Set;
+import com.zacharee1.systemuituner.R;
 
 /**
  * Created by Zacha on 5/21/2017.
@@ -22,24 +20,51 @@ import java.util.Set;
 @TargetApi(24)
 public class QSService extends TileService {
 
+    public static QSService service;
+    private Intent mToggleIntent;
+    private BroadcastReceiver mToggleReceiver;
+
     @Override
     public void onStartListening() {
-        Tile nightMode = getQsTile();
+        final Tile nightMode = getQsTile();
         boolean isActive;
 
         if (Build.VERSION.SDK_INT == 24) isActive = Settings.Secure.getInt(getContentResolver(), "twilight_mode", 0) == 1;
-        else isActive = Settings.Secure.getInt(getContentResolver(), Settings.Secure.NIGHT_DISPLAY_ACTIVATED, 0) == 1;
+        else {
+            isActive = Settings.Secure.getInt(getContentResolver(), Settings.Secure.NIGHT_DISPLAY_ACTIVATED, 0) == 1;
+            nightMode.setLabel(getResources().getText(R.string.night_display));
+        }
 
         nightMode.setState(isActive ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
         nightMode.updateTile();
+
+        service = this;
+
+        mToggleIntent = new Intent("toggle_night");
+
+        mToggleReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (intent.getAction().equals("toggle_night")) {
+                    boolean state = intent.getBooleanExtra("state", false);
+                    nightMode.setState(state ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
+                    nightMode.updateTile();
+                }
+            }
+        };
+
+        IntentFilter filter = new IntentFilter("toggle_night");
+        registerReceiver(mToggleReceiver, filter);
     }
 
     @Override
     public void onClick() {
         Tile nightMode = getQsTile();
+        int state;
 
         try {
-            if (nightMode.getState() == Tile.STATE_ACTIVE) {
+            state = nightMode.getState();
+            if (state == Tile.STATE_ACTIVE) {
                 if (Build.VERSION.SDK_INT == 24) {
                     Settings.Secure.putInt(getContentResolver(), "twilight_mode", 0);
                 } else {
@@ -54,11 +79,20 @@ public class QSService extends TileService {
                 }
                 nightMode.setState(Tile.STATE_ACTIVE);
             }
+
+            mToggleIntent.putExtra("state", state == Tile.STATE_INACTIVE);
+            sendBroadcast(mToggleIntent);
         } catch (Exception e) {
             Exceptions exceptions = new Exceptions();
             exceptions.secureSettings(this, getApplicationContext(), e.getMessage(), "QS");
         }
 
         nightMode.updateTile();
+    }
+
+    @Override
+    public void onDestroy() {
+        unregisterReceiver(mToggleReceiver);
+        super.onDestroy();
     }
 }

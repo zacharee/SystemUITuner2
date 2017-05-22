@@ -92,7 +92,11 @@ public class QSService extends TileService {
 
     @Override
     public void onDestroy() {
-        unregisterReceiver(mToggleReceiver);
+        try {
+            unregisterReceiver(mToggleReceiver);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
         super.onDestroy();
     }
 }

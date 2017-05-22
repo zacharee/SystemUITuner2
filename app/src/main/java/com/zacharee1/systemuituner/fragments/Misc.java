@@ -530,7 +530,11 @@ public class Misc extends Fragment {
 
     @Override
     public void onDestroy() {
-        activity.unregisterReceiver(mToggleNight);
+        try {
+            activity.unregisterReceiver(mToggleNight);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
         super.onDestroy();
     }
 }

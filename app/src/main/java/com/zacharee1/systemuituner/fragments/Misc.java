@@ -109,13 +109,13 @@ public class Misc extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_misc, container, false);
 
+        mToggleNightIntent = new Intent("toggle_night");
+
         setupCustomSettings();
         setupSwitches();
         setupScales();
         setupSettings();
         chooseNightType();
-
-        mToggleNightIntent = new Intent("toggle_night");
 
         mToggleNight = new BroadcastReceiver() {
             @Override

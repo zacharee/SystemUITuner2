@@ -61,9 +61,9 @@ public class Misc extends Fragment {
     private String animScale;
     private String transScale;
     private String winScale;
-    private String global;
-    private String secure;
-    private String system;
+    private String global = "";
+    private String secure = "";
+    private String system = "";
 
     private boolean mNightModeAuto;
     private boolean mNightModeOverride;
@@ -88,6 +88,8 @@ public class Misc extends Fragment {
     private final String TWILIGHT_MODE = "twilight_mode";
 
     private final String SECURE = "secure";
+    private final String GLOBAL = "global";
+    private final String SYSTEM = "system";
 
     private BroadcastReceiver mToggleNight;
     private Intent mToggleNightIntent;
@@ -102,10 +104,6 @@ public class Misc extends Fragment {
         if (getActivity() instanceof MainActivity) {
             activity = (MainActivity) getActivity();
         }
-
-        global = "";
-        secure = "";
-        system = "";
 
         view = inflater.inflate(R.layout.fragment_misc, container, false);
 
@@ -177,14 +175,14 @@ public class Misc extends Fragment {
             power_notif_controls.setVisibility(View.GONE);
         }
 
-        activity.setThings.switches(show_full_zen, SHOW_FULL_ZEN, "secure", view); //switch listener
-        activity.setThings.switches(hu_notif, HUN_ENABLED, "global", view);
-        activity.setThings.switches(vol_warn, SAFE_AUDIO, "global", view);
+        activity.setThings.switches(show_full_zen, SHOW_FULL_ZEN, SECURE, view); //switch listener
+        activity.setThings.switches(hu_notif, HUN_ENABLED, GLOBAL, view);
+        activity.setThings.switches(vol_warn, SAFE_AUDIO, GLOBAL, view);
 
-        activity.setThings.switches(clock_seconds, CLOCK_SECONDS, "secure", view);
-        activity.setThings.switches(battery_percent, BATTERY_PERCENT, "system", view);
+        activity.setThings.switches(clock_seconds, CLOCK_SECONDS, SECURE, view);
+        activity.setThings.switches(battery_percent, BATTERY_PERCENT, SYSTEM, view);
 
-        activity.setThings.switches(power_notifs, POW_NOTIFS, "secure", view);
+        activity.setThings.switches(power_notifs, POW_NOTIFS, SECURE, view);
     }
 
     private void setupScales() {
@@ -452,9 +450,9 @@ public class Misc extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String pref;
-                String val;
-                String type;
+                String pref = "";
+                String val = "";
+                String type = "";
                 String[] parsedString;
 
                 if (button == animApply) {
@@ -463,46 +461,42 @@ public class Misc extends Fragment {
                     if (animScale.indexOf(".") == animScale.length() - 1) animScale = animScale + "0";
                     if (Float.valueOf(animScale) > 10) animScale = "10";
                     val = animScale;
-                    type = "global";
+                    type = GLOBAL;
                 } else if (button == transApply) {
                     pref = Settings.Global.TRANSITION_ANIMATION_SCALE;
                     if (transScale.contains(".") && !transScale.contains("0.")) transScale = "0" + transScale;
                     if (transScale.indexOf(".") == transScale.length() - 1) transScale = transScale + "0";
                     if (Float.valueOf(transScale) > 10) transScale = "10";
                     val = transScale;
-                    type = "global";
+                    type = GLOBAL;
                 } else if (button == winApply) {
                     pref = Settings.Global.WINDOW_ANIMATION_SCALE;
                     if (winScale.contains(".") && !winScale.contains("0.")) winScale = "0" + winScale;
                     if (winScale.indexOf(".") == winScale.length() - 1) winScale = winScale + "0";
                     if (Float.valueOf(winScale) > 10) winScale = "10";
                     val = winScale;
-                    type = "global";
+                    type = GLOBAL;
                 } else if (button == globalApply) {
                     parsedString = global.split("[ ]");
                     if (parsedString.length > 0) pref = parsedString[0];
                     else pref = "";
                     if (parsedString.length > 1) val = parsedString[1];
                     else val = "";
-                    type = "global";
+                    type = GLOBAL;
                 } else if (button == secureApply) {
                     parsedString = secure.split("[ ]");
                     if (parsedString.length > 0) pref = parsedString[0];
                     else pref = "";
                     if (parsedString.length > 1) val = parsedString[1];
                     else val = "";
-                    type = "secure";
+                    type = SECURE;
                 } else if (button == systemApply) {
                     parsedString = system.split("[ ]");
                     if (parsedString.length > 0) pref = parsedString[0];
                     else pref = "";
                     if (parsedString.length > 1) val = parsedString[1];
                     else val = "";
-                    type = "system";
-                } else {
-                    pref = "";
-                    val = "";
-                    type = "";
+                    type = SYSTEM;
                 }
 
                 activity.setThings.settings(type, pref, val);

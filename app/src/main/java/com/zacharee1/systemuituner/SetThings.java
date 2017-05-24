@@ -50,7 +50,7 @@ public class SetThings {
 
     public final int SDK_INT;
 
-    public SetThings(Activity activity) {
+    SetThings(Activity activity) {
         //set all variables
         sharedPreferences = activity.getSharedPreferences(activity.getResources().getText(R.string.sharedprefs_id).toString(), Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -117,7 +117,7 @@ public class SetThings {
                             break;
                     }
                 } catch (Exception e) {
-                    exceptions.systemSettings(context, currentActivity.getApplicationContext(), e.getMessage(), "SetThings");
+                    exceptions.systemSettings(currentActivity, currentActivity.getApplicationContext(), e, "SetThings");
                 }
             }
         });
@@ -213,7 +213,7 @@ public class SetThings {
                                 Settings.Secure.putString(currentActivity.getContentResolver(), "icon_blacklist", bl.toString());
                                 Settings.Secure.putString(currentActivity.getContentResolver(), "icon_blacklist2", bl.toString());
                             } catch (final Exception e) {
-                                exceptions.secureSettings(view.getContext(), currentActivity.getApplicationContext(), e.getMessage(), "icon_blacklist");
+                                exceptions.secureSettings(currentActivity, currentActivity.getApplicationContext(), e, "icon_blacklist");
                             }
                             break;
                         case "dark_mode":
@@ -226,7 +226,7 @@ public class SetThings {
                             break;
                     }
                 } catch (Exception e) {
-                    exceptions.secureSettings(view.getContext(), currentActivity.getApplicationContext(), e.getMessage(), "Status Bar");
+                    exceptions.secureSettings(currentActivity, currentActivity.getApplicationContext(), e, "Status Bar");
                 }
             }
         });
@@ -260,7 +260,7 @@ public class SetThings {
                     }
             }
         } catch (Exception e) {
-            exceptions.secureSettings(context, currentActivity.getApplicationContext(), e.getMessage(), "SetThings");
+            exceptions.secureSettings(currentActivity, currentActivity.getApplicationContext(), e, "SetThings");
         }
     }
 

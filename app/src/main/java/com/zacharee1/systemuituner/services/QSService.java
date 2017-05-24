@@ -83,8 +83,7 @@ public class QSService extends TileService {
             mToggleIntent.putExtra("state", state == Tile.STATE_INACTIVE);
             sendBroadcast(mToggleIntent);
         } catch (Exception e) {
-            Exceptions exceptions = new Exceptions();
-            exceptions.secureSettings(this, getApplicationContext(), e.getMessage(), "QS");
+            e.printStackTrace();
         }
 
         nightMode.updateTile();

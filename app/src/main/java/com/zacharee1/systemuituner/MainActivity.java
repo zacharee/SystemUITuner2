@@ -5,14 +5,17 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -458,6 +461,8 @@ public class MainActivity extends AppCompatActivity
                     mPurchaseFinishedListener, payload);
         } catch (IabHelper.IabAsyncInProgressException e) {
             complain("Error launching purchase flow. Another async operation in progress.");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -475,6 +480,8 @@ public class MainActivity extends AppCompatActivity
                     mPurchaseFinishedListener, payload);
         } catch (IabHelper.IabAsyncInProgressException e) {
             complain("Error launching purchase flow. Another async operation in progress.");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -492,6 +499,8 @@ public class MainActivity extends AppCompatActivity
                     mPurchaseFinishedListener, payload);
         } catch (IabHelper.IabAsyncInProgressException e) {
             complain("Error launching purchase flow. Another async operation in progress.");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     public void onDonate10Clicked(@SuppressWarnings("UnusedParameters") View arg0) {
@@ -508,6 +517,8 @@ public class MainActivity extends AppCompatActivity
                     mPurchaseFinishedListener, payload);
         } catch (IabHelper.IabAsyncInProgressException e) {
             complain("Error launching purchase flow. Another async operation in progress.");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

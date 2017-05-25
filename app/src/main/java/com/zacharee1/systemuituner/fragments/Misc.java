@@ -115,6 +115,7 @@ public class Misc extends Fragment {
         setupSettings();
         chooseNightType();
 
+
         mToggleNight = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -162,6 +163,7 @@ public class Misc extends Fragment {
         Switch power_notifs = (Switch) view.findViewById(R.id.power_notifications);
         Switch clock_seconds = (Switch) view.findViewById(R.id.clock_seconds);
         Switch battery_percent = (Switch) view.findViewById(R.id.battery_percent);
+        Switch high_brightness_warning = (Switch) view.findViewById(R.id.high_brightness_warning);
         CardView power_notif_controls = (CardView) view.findViewById(R.id.power_notification_controls_card);
 
         //noinspection deprecation
@@ -183,6 +185,13 @@ public class Misc extends Fragment {
         activity.setThings.switches(battery_percent, BATTERY_PERCENT, SYSTEM, view);
 
         activity.setThings.switches(power_notifs, POW_NOTIFS, SECURE, view);
+
+        high_brightness_warning.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                activity.setThings.settings(GLOBAL, "limit_brightness_state", isChecked ? "80, 80" : null);
+            }
+        });
     }
 
     private void setupScales() {

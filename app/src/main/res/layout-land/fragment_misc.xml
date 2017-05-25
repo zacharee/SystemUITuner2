@@ -59,6 +59,19 @@
                     </android.support.v7.widget.CardView>
 
                     <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="16dp"
+                        app:cardElevation="1dp"
+                        app:cardUseCompatPadding="true">
+
+                        <include
+                            layout="@layout/switches_miscellaneous_samsung"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
                         android:id="@+id/power_notification_controls_card"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"

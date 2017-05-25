@@ -195,12 +195,16 @@ public class SetupActivity extends AppIntro2 {
 
                 outputStream.writeBytes("exit\n");
                 outputStream.flush();
+                outputStream.close();
 
                 DataInputStream inputStream = new DataInputStream(su.getInputStream());
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
-                while (bufferedReader.readLine() != null) {
-                    bufferedReader.readLine();
+                String out;
+
+                while (bufferedReader.ready()) {
+                    out = bufferedReader.readLine();
+                    Log.w("su_return", out);
                 }
 
                 try {
@@ -208,8 +212,6 @@ public class SetupActivity extends AppIntro2 {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
-                outputStream.close();
                 inputStream.close();
             } catch (Exception e) {
                 e.printStackTrace();

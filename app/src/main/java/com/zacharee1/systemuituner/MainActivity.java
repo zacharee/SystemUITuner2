@@ -169,8 +169,9 @@ public class MainActivity extends AppCompatActivity
         toggle = new ActionBarDrawerToggle(
                 this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         //noinspection deprecation
-        drawer.setDrawerListener(toggle);
+//        drawer.setDrawerListener(toggle);
 
+        drawer.addDrawerListener(toggle);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
@@ -458,6 +459,7 @@ public class MainActivity extends AppCompatActivity
                     mPurchaseFinishedListener, payload);
         } catch (IabHelper.IabAsyncInProgressException e) {
             complain("Error launching purchase flow. Another async operation in progress.");
+            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -477,6 +479,7 @@ public class MainActivity extends AppCompatActivity
                     mPurchaseFinishedListener, payload);
         } catch (IabHelper.IabAsyncInProgressException e) {
             complain("Error launching purchase flow. Another async operation in progress.");
+            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -496,6 +499,7 @@ public class MainActivity extends AppCompatActivity
                     mPurchaseFinishedListener, payload);
         } catch (IabHelper.IabAsyncInProgressException e) {
             complain("Error launching purchase flow. Another async operation in progress.");
+            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -514,6 +518,7 @@ public class MainActivity extends AppCompatActivity
                     mPurchaseFinishedListener, payload);
         } catch (IabHelper.IabAsyncInProgressException e) {
             complain("Error launching purchase flow. Another async operation in progress.");
+            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }

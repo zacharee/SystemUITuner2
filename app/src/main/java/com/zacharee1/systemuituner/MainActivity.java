@@ -261,9 +261,6 @@ public class MainActivity extends AppCompatActivity
                 intent = new Intent(Intent.ACTION_VIEW, uri);
                 tralse = true;
                 break;
-            case R.id.action_donate:
-                setThings.donate();
-                break;
             case R.id.action_telegram:
                 uri = Uri.parse("https://t.me/joinchat/AAAAAEIB6WKWL-yphJbZwg");
                 intent = new Intent(Intent.ACTION_VIEW, uri);

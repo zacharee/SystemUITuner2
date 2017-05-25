@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.provider.Settings;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
@@ -137,6 +138,7 @@ public class SetupActivity extends AppIntro2 {
             final Fragment fragment = this;
 
             Button rooted = (Button) (view != null ? view.findViewById(R.id.rooted) : null);
+            Button not_rooted = (Button) (view != null ? view.findViewById(R.id.not_rooted) : null);
 
             if (rooted != null) rooted.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -155,6 +157,13 @@ public class SetupActivity extends AppIntro2 {
                         activity.setThings.editor.putBoolean("isRooted", false);
                         activity.nextButton.performClick();
                     }
+                }
+            });
+
+            if (not_rooted != null) not_rooted.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    activity.nextButton.performClick();
                 }
             });
 
@@ -194,26 +203,14 @@ public class SetupActivity extends AppIntro2 {
                     bufferedReader.readLine();
                 }
 
-                TimerTask task = new TimerTask() {
-                    @Override
-                    public void run() {
-                        su.destroy();
+                try {
+                    su.waitFor();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(getContext(), getResources().getText(R.string.root_test_failed), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                };
-
-                Timer timer = new Timer();
-                timer.schedule(task, 10000);
-
-                su.waitFor();
-                timer.cancel();
-                timer.purge();
+                outputStream.close();
+                inputStream.close();
             } catch (Exception e) {
                 e.printStackTrace();
                 for (StackTraceElement s : e.getStackTrace()) {
@@ -241,7 +238,6 @@ public class SetupActivity extends AppIntro2 {
                     su.waitFor();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                    Log.e("No Root?", e.getMessage());
                 }
                 outputStream.close();
             } catch(IOException e){
@@ -255,8 +251,19 @@ public class SetupActivity extends AppIntro2 {
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             View view = super.onCreateView(inflater, container, savedInstanceState);
-            TextView adb_instructions = (TextView) (view != null ? view.findViewById(R.id.adb_instructions) : null);
-            adb_instructions.setMovementMethod(LinkMovementMethod.getInstance());
+//            TextView adb_instructions = (TextView) (view != null ? view.findViewById(R.id.adb_instructions) : null);
+//            if (adb_instructions != null) adb_instructions.setMovementMethod(LinkMovementMethod.getInstance());
+
+            Button instructions = (Button) (view != null ? view.findViewById(R.id.adb_instructions_button) : null);
+            if (instructions != null) instructions.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Uri uri = Uri.parse("https://developer.android.com/studio/command-line/adb.html");
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(intent);
+                }
+            });
+
             return view;
         }
 

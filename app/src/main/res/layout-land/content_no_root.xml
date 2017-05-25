@@ -90,6 +90,20 @@
                 android:textColor="@android:color/primary_text_dark"
                 android:textSize="20sp" />
 
+            <Button
+                android:id="@+id/adb_instructions_button"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="400dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:background="?attr/colorPrimaryDark"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:text="@string/adb_instructions_button" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"

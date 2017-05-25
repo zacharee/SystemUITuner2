@@ -68,7 +68,7 @@
     <string name="not_rooted_huh">Not rooted, huh?</string>
     <string name="adb_set_up">ADB all set up? Good. Now, let\'s get started.</string>
     <string name="bummer">Bummer…</string>
-    <string name="adb_instructions">For this to work, you\'ll need a computer, a USB cable and ADB (<a href='https://developer.android.com/studio/command-line/adb.html'>Instructions</a>).</string>
+    <string name="adb_instructions">For this to work, you\'ll need a computer, a USB cable and ADB.</string>
     <string name="workaround">I guess it\'s a good thing that there\'s a workaround, then.</string>
     <string name="adb_reminder">Remember to also enable \"USB Debugging\" in Developer Options, and authorize your computer.</string>
     <string name="adb_perm_grant">Run the following commands (with your device connected) in CMD or Terminal:</string>
@@ -267,4 +267,6 @@
     <string name="root_mode">Root Mode</string>
     <string name="paypal" translatable="false">PayPal</string>
     <string name="iap_fail">Could not connect to Google Play billing.</string>
+    <string name="i_am_not_rooted">I am not rooted</string>
+    <string name="adb_instructions_button">ADB Instructions</string>
 </resources>

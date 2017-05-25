@@ -68,12 +68,14 @@
         </ScrollView>
 
         <LinearLayout
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
             android:layout_marginTop="16dp"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/appIntro2BottomBarHeight">
+            android:paddingBottom="@dimen/appIntro2BottomBarHeight"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp">
 
             <Button
                 android:id="@+id/rooted"
@@ -82,11 +84,28 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
                 android:background="?attr/colorPrimaryDark"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:text="@string/i_am_rooted" />
+
+            <Button
+                android:id="@+id/not_rooted"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginStart="4dp"
+                android:layout_weight="1"
+                android:background="?attr/colorPrimaryDark"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:text="@string/i_am_not_rooted" />
         </LinearLayout>
+
     </FrameLayout>
 
 </LinearLayout>

@@ -222,4 +222,5 @@
     <string name="i_am_not_rooted">No soy usuario root</string>
     <string name="adb_instructions_button">Instrucciones por ADB</string>
     <string name="high_brightness_warning">Aviso del brillo alto</string>
+    <string name="qs_header_tile_count">Cabecera QS Cuenta</string>
 </resources>

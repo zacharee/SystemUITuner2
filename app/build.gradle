@@ -7,8 +7,8 @@ android {
         applicationId "com.zacharee1.systemuituner"
         minSdkVersion 23
         targetSdkVersion 25
-        versionCode 98
-        versionName "1.16.0"
+        versionCode 99
+        versionName "1.17.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
     }

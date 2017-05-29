@@ -270,4 +270,5 @@
     <string name="i_am_not_rooted">I am not rooted</string>
     <string name="adb_instructions_button">ADB Instructions</string>
     <string name="high_brightness_warning">High brightness warning</string>
+    <string name="qs_header_tile_count">QS Header Tile Count</string>
 </resources>

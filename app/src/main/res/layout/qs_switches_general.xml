@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="@string/general"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="italic" />
+
+    <Switch
+        android:id="@+id/allow_fancy_animation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:switchMinWidth="50dp"
+        android:text="@string/fancy_pulldown_animation"
+        android:textSize="18sp" />
+
+    <Switch
+        android:id="@+id/move_full_rows"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:checked="false"
+        android:switchMinWidth="50dp"
+        android:text="@string/move_full_rows"
+        android:textSize="18sp" />
+</LinearLayout>

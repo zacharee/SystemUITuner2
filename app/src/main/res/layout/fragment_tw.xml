@@ -17,6 +17,12 @@
             android:padding="16dp"
             tools:ignore="UselessLeaf">
 
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Soon...." />
+
             <android.support.v7.widget.CardView
                 android:id="@+id/switches_general_qs"
                 android:layout_width="match_parent"
@@ -25,23 +31,18 @@
                 app:cardElevation="1dp"
                 app:cardUseCompatPadding="true">
 
-                <include
-                    layout="@layout/qs_switches_general"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
                 android:id="@+id/sysui_qqs_count_card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="16dp"
                 app:cardElevation="1dp"
                 app:cardUseCompatPadding="true">
 
-                <include
-                    layout="@layout/qs_custom_qqs"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+
             </android.support.v7.widget.CardView>
 
         </LinearLayout>

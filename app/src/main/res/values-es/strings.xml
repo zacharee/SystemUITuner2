@@ -147,7 +147,7 @@
     <string name="show_at_top_of_notification_list">- Mostrar en parte superior de lista de notificaciones</string>
     <string name="danger_zone">Zona Peligrosa</string>
     <string name="enable_custom_settings_input">Permitir Input para Preferencias a Medidas</string>
-    <string name="use_safer_statusbar_hide">Usar Ocultador de Barra de Estado Seguro</string>
+    <string name="use_safer_statusbar_hide">Modo Seguro</string>
     <string name="root_test_failed">No se pudo obtener root.</string>
     <string name="permissions_failed">Hmm. No se pudo completar. Los permisos están correctos? (SystemUI Tuner)</string>
     <string name="enable">Permitir</string>
@@ -223,4 +223,6 @@
     <string name="adb_instructions_button">Instrucciones por ADB</string>
     <string name="high_brightness_warning">Aviso del brillo alto</string>
     <string name="qs_header_tile_count">Cabecera QS Cuenta</string>
+    <string name="fancy_pulldown_animation">Animación elaborado desplegable</string>
+    <string name="move_full_rows">Mover Filas Enteras</string>
 </resources>

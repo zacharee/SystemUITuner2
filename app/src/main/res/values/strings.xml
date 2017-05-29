@@ -186,7 +186,7 @@
     <string name="level_2">Level 2</string>
     <string name="level_3">Level 3</string>
     <string name="danger_zone">Danger Zone</string>
-    <string name="use_safer_statusbar_hide">Use Safer Statusbar Hide</string>
+    <string name="use_safer_statusbar_hide">Safe Mode</string>
     <string name="enable_custom_settings_input">Enable Custom Settings Input</string>
     <string name="sharedprefs_id" translatable="false">com.zacharee1.sysuituner</string>
     <string name="root_test_failed">Root test failed.</string>
@@ -271,4 +271,7 @@
     <string name="adb_instructions_button">ADB Instructions</string>
     <string name="high_brightness_warning">High brightness warning</string>
     <string name="qs_header_tile_count">QS Header Tile Count</string>
+    <string name="fancy_pulldown_animation">Fancy Pulldown Animation</string>
+    <string name="move_full_rows">Move Full Rows</string>
+    <string name="touchwiz" translatable="false">TouchWiz</string>
 </resources>

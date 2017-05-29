@@ -1,32 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:id="@+id/nav_top"
+    <group android:id="@+id/nav_1"
         android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home_black"
             android:title="@string/home" />
         <item
-            android:id="@+id/nav_quick_settings"
-            android:icon="@drawable/ic_settings_black"
-            android:title="@string/quick_settings"
-            android:visible="false" />
-        <item
             android:id="@+id/nav_statusbar"
             android:icon="@drawable/ic_visibility_off_black"
             android:title="@string/status_bar" />
         <item
+            android:id="@+id/nav_quick_settings"
+            android:icon="@drawable/ic_settings_black"
+            android:title="@string/quick_settings" />
+        <item
             android:id="@+id/nav_demo_mode"
             android:icon="@drawable/ic_tv_black"
             android:title="@string/demo_mode" />
+    </group>
+
+    <group android:id="@+id/nav_2"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_touchwiz"
+            android:icon="@drawable/ic_phone_android"
+            android:title="@string/touchwiz" />
         <item
             android:id="@+id/nav_misc"
             android:icon="@drawable/ic_brush_black"
             android:title="@string/miscellaneous" />
     </group>
 
-    <group android:id="@+id/nav_mid"
+    <group android:id="@+id/nav_3"
         android:checkableBehavior="single">
         <item
             android:id="@+id/nav_settings"
@@ -38,7 +45,7 @@
             android:title="@string/about" />
     </group>
 
-    <group android:id="@+id/nav_bottom"
+    <group android:id="@+id/nav_4"
         android:checkableBehavior="single">
         <item
             android:id="@+id/nav_exit"

@@ -35,6 +35,7 @@ import com.zacharee1.systemuituner.fragments.Misc;
 import com.zacharee1.systemuituner.fragments.QS;
 import com.zacharee1.systemuituner.fragments.Settings;
 import com.zacharee1.systemuituner.fragments.StatBar;
+import com.zacharee1.systemuituner.fragments.TouchWiz;
 import com.zacharee1.systemuituner.iaps.IabBroadcastReceiver;
 import com.zacharee1.systemuituner.iaps.IabHelper;
 import com.zacharee1.systemuituner.iaps.IabResult;
@@ -104,6 +105,7 @@ public class MainActivity extends AppCompatActivity
     };
 
     private IabBroadcastReceiver mBroadcastReceiver;
+    private Fragment touchwiz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +122,7 @@ public class MainActivity extends AppCompatActivity
         about = new About();
         settings = new Settings();
         misc = new Misc();
+        touchwiz = new TouchWiz();
 
         IntentFilter filter = new IntentFilter(Intent.ACTION_SHUTDOWN);
         shutDownReceiver = new ShutDownReceiver();
@@ -161,7 +164,7 @@ public class MainActivity extends AppCompatActivity
         toolbar.setPopupTheme(setThings.style);
 
         Toolbar toolbar = new Toolbar(this);*/
-        title = getResources().getText(R.string.app_name);
+        title = setThings.sharedPreferences.getString("currentTitle", getResources().getText(R.string.app_name).toString());
 
         setTitle(title); //set default title just because
 
@@ -298,6 +301,7 @@ public class MainActivity extends AppCompatActivity
                 public void run() {
                     fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
                     setTitle(title);
+                    setThings.editor.putString("currentTitle", title.toString()).apply();
                 }
             }, 350);
 
@@ -390,6 +394,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_misc:
                 title = getResources().getText(R.string.miscellaneous);
                 return misc;
+            case R.id.nav_touchwiz:
+                title = getResources().getText(R.string.touchwiz);
+                return touchwiz;
             default:
                 title = getResources().getText(R.string.app_name);
                 return main;

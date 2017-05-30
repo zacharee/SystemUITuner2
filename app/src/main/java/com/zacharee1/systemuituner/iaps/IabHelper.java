@@ -34,6 +34,7 @@ import com.android.vending.billing.IInAppBillingService;
 
 import org.json.JSONException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -1127,7 +1128,7 @@ public class IabHelper {
             ArrayList<String> responseList = skuDetails.getStringArrayList(
                     RESPONSE_GET_SKU_DETAILS_LIST);
 
-            for (String thisResponse : responseList != null ? responseList : null) {
+            for (String thisResponse : responseList != null ? responseList : new ArrayList<String>()) {
                 SkuDetails d = new SkuDetails(itemType, thisResponse);
                 logDebug("Got sku details: " + d);
                 inv.addSkuDetails(d);

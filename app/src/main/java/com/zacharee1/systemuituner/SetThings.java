@@ -134,7 +134,7 @@ public class SetThings {
         }
     }
 
-    public void switches(final Switch toggle, final String pref, final String settingType, final View view) { //set switch listeners
+    public void switches(final Switch toggle, final String pref, final String settingType, @SuppressWarnings("UnusedParameters") final View view) { //set switch listeners
 
         //check to see if switch should be toggled
         int setting = 0;

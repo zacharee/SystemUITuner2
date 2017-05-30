@@ -10,7 +10,6 @@ import android.provider.Settings;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 
-import com.zacharee1.systemuituner.Exceptions;
 import com.zacharee1.systemuituner.R;
 
 /**
@@ -20,7 +19,7 @@ import com.zacharee1.systemuituner.R;
 @TargetApi(24)
 public class QSService extends TileService {
 
-    public static QSService service;
+//    private static QSService service;
     private Intent mToggleIntent;
     private BroadcastReceiver mToggleReceiver;
 
@@ -38,7 +37,7 @@ public class QSService extends TileService {
         nightMode.setState(isActive ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
         nightMode.updateTile();
 
-        service = this;
+//        service = this;
 
         mToggleIntent = new Intent("toggle_night");
 

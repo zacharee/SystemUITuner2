@@ -1,21 +1,17 @@
 package com.zacharee1.systemuituner;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.ServiceConnection;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -41,8 +37,6 @@ import com.zacharee1.systemuituner.iaps.IabHelper;
 import com.zacharee1.systemuituner.iaps.IabResult;
 import com.zacharee1.systemuituner.iaps.Purchase;
 import com.zacharee1.systemuituner.receivers.ShutDownReceiver;
-
-import java.lang.ref.WeakReference;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, IabBroadcastReceiver.IabBroadcastListener {
@@ -89,6 +83,7 @@ public class MainActivity extends AppCompatActivity
                 complain("Error purchasing: " + result);
                 return;
             }
+            //noinspection ConstantConditions
             if (verifyDeveloperPayload(purchase)) {
                 complain("Error purchasing. Authenticity verification failed.");
                 return;
@@ -414,13 +409,15 @@ public class MainActivity extends AppCompatActivity
 //        alert("Error: " + message);
     }
 
-    private void alert(String message) {
-        AlertDialog.Builder bld = new AlertDialog.Builder(this);
-        bld.setMessage(message);
-        bld.setNeutralButton("OK", null);
-        Log.d(TAG, "Showing alert dialog: " + message);
-        bld.create().show();
-    }
+// --Commented out by Inspection START (5/30/2017 10:46 AM):
+//    private void alert(String message) {
+//        AlertDialog.Builder bld = new AlertDialog.Builder(this);
+//        bld.setMessage(message);
+//        bld.setNeutralButton("OK", null);
+//        Log.d(TAG, "Showing alert dialog: " + message);
+//        bld.create().show();
+//    }
+// --Commented out by Inspection STOP (5/30/2017 10:46 AM)
 
     @SuppressWarnings("SameReturnValue")
     private boolean verifyDeveloperPayload(Purchase p) {

@@ -10,8 +10,6 @@ import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.service.quicksettings.Tile;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.CardView;
 import android.text.Editable;
@@ -23,14 +21,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
-import android.widget.SeekBar;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.zacharee1.systemuituner.MainActivity;
 import com.zacharee1.systemuituner.R;
-import com.zacharee1.systemuituner.services.QSService;
 
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -80,11 +75,17 @@ public class Misc extends Fragment {
     private long endMinute;
     private View view;
 
+    @SuppressWarnings("FieldCanBeLocal")
     private final String SHOW_FULL_ZEN = "sysui_show_full_zen";
+    @SuppressWarnings("FieldCanBeLocal")
     private final String HUN_ENABLED = "heads_up_notifications_enabled";
+    @SuppressWarnings("FieldCanBeLocal")
     private final String SAFE_AUDIO = "audio_safe_volume_state";
+    @SuppressWarnings("FieldCanBeLocal")
     private final String CLOCK_SECONDS = "clock_seconds";
+    @SuppressWarnings("FieldCanBeLocal")
     private final String BATTERY_PERCENT = "status_bar_show_battery_percent";
+    @SuppressWarnings("FieldCanBeLocal")
     private final String POW_NOTIFS = "show_importance_slider";
     private final String NIGHT_MODE_TINT = "tuner_night_mode_adjust_tint";
     private final String TWILIGHT_MODE = "twilight_mode";
@@ -96,8 +97,10 @@ public class Misc extends Fragment {
     private BroadcastReceiver mToggleNight;
     private Intent mToggleNightIntent;
 
+    @SuppressWarnings("FieldCanBeLocal")
     private Switch night_display_auto;
     private Switch night_display_active;
+    @SuppressWarnings("FieldCanBeLocal")
     private Switch night_display_custom;
 
     @Override
@@ -164,7 +167,6 @@ public class Misc extends Fragment {
         Switch power_notifs = (Switch) view.findViewById(R.id.power_notifications);
         Switch clock_seconds = (Switch) view.findViewById(R.id.clock_seconds);
         Switch battery_percent = (Switch) view.findViewById(R.id.battery_percent);
-        Switch high_brightness_warning = (Switch) view.findViewById(R.id.high_brightness_warning);
         CardView power_notif_controls = (CardView) view.findViewById(R.id.power_notification_controls_card);
 
         //noinspection deprecation
@@ -186,13 +188,6 @@ public class Misc extends Fragment {
         activity.setThings.switches(battery_percent, BATTERY_PERCENT, SYSTEM, view);
 
         activity.setThings.switches(power_notifs, POW_NOTIFS, SECURE, view);
-
-        high_brightness_warning.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                activity.setThings.settings(GLOBAL, "limit_brightness_state", isChecked ? "80, 80" : null);
-            }
-        });
     }
 
     private void setupScales() {

@@ -29,12 +29,61 @@ import java.util.ArrayList;
  */
 
 //@SuppressWarnings("ALL")
+@SuppressWarnings("FieldCanBeLocal")
 public class StatBar extends Fragment {
     private View view;
     private MainActivity activity;
 
     private final ArrayList<Switch> switches = new ArrayList<>();
     private BroadcastReceiver check_toggles_receiver;
+
+    private final String ICON_BLACKLIST = "icon_blacklist";
+    private final String SLOT_BLUETOOTH = "bluetooth";
+    private final String SLOT_WIFI = "wifi";
+    private final String SLOT_ETHERNET = "ethernet";
+    private final String SLOT_MOBILE = "mobile";
+    private final String SLOT_AIRPLANE = "airplane";
+    private final String SLOT_MAN_PROFILE = "managed_profile";
+    private final String SLOT_ZEN = "zen";
+    private final String SLOT_ALARM = "alarm,alarm_clock";
+    private final String SLOT_HOTSPOT = "hotspot";
+    private final String SLOT_DATA_SAVER = "data_saver";
+    private final String SLOT_NFC = "nfc,nfc_on";
+    private final String SLOT_CLOCK = "clock";
+    private final String SLOT_DND = "do_not_disturb";
+    private final String SLOT_ROTATION = "rotate";
+    private final String SLOT_BATTERY = "battery";
+    private final String SLOT_SPEAKERPHONE = "speakerphone";
+    private final String SLOT_CAST = "cast";
+    private final String SLOT_HEADSET = "headset";
+    private final String SLOT_LOCATION = "location";
+    private final String SLOT_SU = "su";
+    private final String SLOT_VPN = "vpn";
+    private final String SLOT_VOLUME = "volume";
+
+    private final String SLOT_REMOTE_CALL = "remote_call";
+    private final String SLOT_OTG_MOUSE = "otg_mouse";
+    private final String SLOT_OTG_KEYBOARD = "otg_keyboard";
+    private final String SLOT_DMB = "dmb";
+    private final String SLOT_FELICA_LOCK = "felica_lock";
+    private final String SLOT_ANSWERING_MEMO = "answering_memo";
+    private final String SLOT_IME = "ime";
+    private final String SLOT_SYNC_FAILING = "sync_failing";
+    private final String SLOT_SYNC_ACTIVE = "sync_active";
+    private final String SLOT_NFCLOCK = "nfclock";
+    private final String SLOT_TTY = "tty";
+    private final String SLOT_WIFI_CALLING = "wifi_calling";
+    private final String SLOT_CDMA_ERI = "cdma_eri";
+    private final String SLOT_DATA_CONNECTION = "data_connection";
+    private final String SLOT_PHONE_EVDO_SIGNAL = "phone_evdo_signal";
+    private final String SLOT_PHONE_SIGNAL = "phone_signal";
+    private final String SLOT_SECURE = "secure";
+    private final String SLOT_VOLTE = "volte";
+
+    private final String SLOT_VOWIFI = "vowifi";
+    private final String SLOT_POWER_SAVER = "power_saver";
+
+    private final String RESET_BLACKLIST = "reset_blacklist";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -102,29 +151,6 @@ public class StatBar extends Fragment {
 
         Switch vpn = (Switch) view.findViewById(R.id.vpn_icon);
 
-        Switch knox_container = (Switch) view.findViewById(R.id.knox_container);
-        Switch smart_network = (Switch) view.findViewById(R.id.smart_network);
-        Switch glove = (Switch) view.findViewById(R.id.glove);
-        Switch gesture = (Switch) view.findViewById(R.id.gesture);
-        Switch smart_scroll = (Switch) view.findViewById(R.id.smart_scroll);
-        Switch face = (Switch) view.findViewById(R.id.face);
-        Switch gps = (Switch) view.findViewById(R.id.gps);
-        Switch lbs = (Switch) view.findViewById(R.id.lbs);
-        Switch wearable_gear = (Switch) view.findViewById(R.id.wearable_gear);
-        Switch femtoicon = (Switch) view.findViewById(R.id.femtoicon);
-        Switch rcs = (Switch) view.findViewById(R.id.rcs);
-        Switch wifi_p2p = (Switch) view.findViewById(R.id.wifi_p2p);
-        Switch wifi_ap = (Switch) view.findViewById(R.id.wifi_ap);
-        Switch wifi_oxygen = (Switch) view.findViewById(R.id.wifi_oxygen);
-        Switch phone_signal_second_stub = (Switch) view.findViewById(R.id.phone_signal_second_stub);
-        Switch toddler = (Switch) view.findViewById(R.id.toddler);
-        Switch ims_volte = (Switch) view.findViewById(R.id.ims_volte);
-        Switch keyguard_wakeup = (Switch) view.findViewById(R.id.keyguard_wakeup);
-        Switch safezone = (Switch) view.findViewById(R.id.safezone);
-        Switch wimax = (Switch) view.findViewById(R.id.wimax);
-        Switch smart_bonding = (Switch) view.findViewById(R.id.smart_bonding);
-        Switch private_mode = (Switch) view.findViewById(R.id.private_mode);
-
         Switch remote_call = (Switch) view.findViewById(R.id.remote_call);
         Switch volte = (Switch) view.findViewById(R.id.volte);
         Switch vowifi = (Switch) view.findViewById(R.id.vowifi);
@@ -169,29 +195,6 @@ public class StatBar extends Fragment {
         switches.add(su);
         switches.add(vpn);
 
-        switches.add(knox_container);
-        switches.add(smart_network);
-        switches.add(glove);
-        switches.add(gesture);
-        switches.add(smart_scroll);
-        switches.add(face);
-        switches.add(gps);
-        switches.add(lbs);
-        switches.add(wearable_gear);
-        switches.add(femtoicon);
-        switches.add(rcs);
-        switches.add(wifi_p2p);
-        switches.add(wifi_ap);
-        switches.add(wifi_oxygen);
-        switches.add(phone_signal_second_stub);
-        switches.add(toddler);
-        switches.add(ims_volte);
-        switches.add(keyguard_wakeup);
-        switches.add(safezone);
-        switches.add(wimax);
-        switches.add(smart_bonding);
-        switches.add(private_mode);
-
         switches.add(remote_call);
         switches.add(volte);
         switches.add(vowifi);
@@ -216,76 +219,6 @@ public class StatBar extends Fragment {
         Button reset_blacklist = (Button) view.findViewById(R.id.reset_blacklist);
 
         //set switch listeners
-        String ICON_BLACKLIST = "icon_blacklist";
-        String SLOT_BLUETOOTH = "bluetooth";
-        String SLOT_WIFI = "wifi";
-        String SLOT_ETHERNET = "ethernet";
-        String SLOT_MOBILE = "mobile";
-        String SLOT_AIRPLANE = "airplane";
-        String SLOT_MAN_PROFILE = "managed_profile";
-        String SLOT_ZEN = "zen";
-        String SLOT_ALARM = "alarm,alarm_clock";
-        String SLOT_HOTSPOT = "hotspot";
-        String SLOT_DATA_SAVER = "data_saver";
-        String SLOT_NFC = "nfc,nfc_on";
-        String SLOT_CLOCK = "clock";
-        String SLOT_DND = "do_not_disturb";
-        String SLOT_ROTATION = "rotate";
-        String SLOT_BATTERY = "battery";
-        String SLOT_SPEAKERPHONE = "speakerphone";
-        String SLOT_CAST = "cast";
-        String SLOT_HEADSET = "headset";
-        String SLOT_LOCATION = "location";
-        String SLOT_SU = "su";
-        String SLOT_VPN = "vpn";
-        String SLOT_VOLUME = "volume";
-
-        String SLOT_REMOTE_CALL = "remote_call";
-        String SLOT_OTG_MOUSE = "otg_mouse";
-        String SLOT_OTG_KEYBOARD = "otg_keyboard";
-        String SLOT_DMB = "dmb";
-        String SLOT_FELICA_LOCK = "felica_lock";
-        String SLOT_ANSWERING_MEMO = "answering_memo";
-        String SLOT_IME = "ime";
-        String SLOT_SYNC_FAILING = "sync_failing";
-        String SLOT_SYNC_ACTIVE = "sync_active";
-        String SLOT_NFCLOCK = "nfclock";
-        String SLOT_TTY = "tty";
-        String SLOT_WIFI_CALLING = "wifi_calling";
-        String SLOT_CDMA_ERI = "cdma_eri";
-        String SLOT_DATA_CONNECTION = "data_connection";
-        String SLOT_PHONE_EVDO_SIGNAL = "phone_evdo_signal";
-        String SLOT_PHONE_SIGNAL = "phone_signal";
-        String SLOT_SECURE = "secure";
-        String SLOT_VOLTE = "volte";
-
-        String SLOT_VOWIFI = "vowifi";
-        String SLOT_POWER_SAVER = "power_saver";
-
-        String SLOT_KNOX_CONTAINER = "knox_container";
-        String SLOT_SMART_NETWORK = "smart_network";
-        String SLOT_GLOVE = "glove";
-        String SLOT_GESTURE = "gesture";
-        String SLOT_SMART_SCROLL = "smart_scroll";
-        String SLOT_FACE = "face";
-        String SLOT_GPS = "gps";
-        String SLOT_LBS = "lbs";
-        String SLOT_WEARABLE_GEAR = "wearable_gear";
-        String SLOT_FEMTOICON = "femtoicon";
-        String SLOT_RCS = "com.samsung.rcs";
-        String SLOT_WIFI_P2P = "wifi_p2p";
-        String SLOT_WIFI_AP = "wifi_ap";
-        String SLOT_WIFI_OXYGEN = "wifi_oxygen";
-        String SLOT_PHONE_SIGNAL_SECOND_STUB = "phone_signal_second_stub";
-        String SLOT_TODDLER = "toddler";
-        String SLOT_IMS_VOLTE = "ims_volte";
-        String SLOT_KEYGUARD_WAKEUP = "keyguard_wakeup";
-        String SLOT_SAFEZONE = "safezone";
-        String SLOT_WIMAX = "wimax";
-        String SLOT_SMART_BONDING = "smart_bonding";
-        String SLOT_PRIVATE_MODE = "private_mode";
-
-        String RESET_BLACKLIST = "reset_blacklist";
 
         activity.setThings.switches(bluetooth, SLOT_BLUETOOTH, ICON_BLACKLIST, view);
         activity.setThings.switches(wifi, SLOT_WIFI, ICON_BLACKLIST, view);
@@ -309,29 +242,6 @@ public class StatBar extends Fragment {
         activity.setThings.switches(su, SLOT_SU, ICON_BLACKLIST, view);
         activity.setThings.switches(vpn, SLOT_VPN, ICON_BLACKLIST, view);
         activity.setThings.switches(volume, SLOT_VOLUME, ICON_BLACKLIST, view);
-
-        activity.setThings.switches(knox_container, SLOT_KNOX_CONTAINER, ICON_BLACKLIST, view);
-        activity.setThings.switches(smart_network, SLOT_SMART_NETWORK, ICON_BLACKLIST, view);
-        activity.setThings.switches(glove, SLOT_GLOVE, ICON_BLACKLIST, view);
-        activity.setThings.switches(gesture, SLOT_GESTURE, ICON_BLACKLIST, view);
-        activity.setThings.switches(smart_scroll, SLOT_SMART_SCROLL, ICON_BLACKLIST, view);
-        activity.setThings.switches(face, SLOT_FACE, ICON_BLACKLIST, view);
-        activity.setThings.switches(gps, SLOT_GPS, ICON_BLACKLIST, view);
-        activity.setThings.switches(lbs, SLOT_LBS, ICON_BLACKLIST, view);
-        activity.setThings.switches(wearable_gear, SLOT_WEARABLE_GEAR, ICON_BLACKLIST, view);
-        activity.setThings.switches(femtoicon, SLOT_FEMTOICON, ICON_BLACKLIST, view);
-        activity.setThings.switches(rcs, SLOT_RCS, ICON_BLACKLIST, view);
-        activity.setThings.switches(wifi_p2p, SLOT_WIFI_P2P, ICON_BLACKLIST, view);
-        activity.setThings.switches(wifi_ap, SLOT_WIFI_AP, ICON_BLACKLIST, view);
-        activity.setThings.switches(wifi_oxygen, SLOT_WIFI_OXYGEN, ICON_BLACKLIST, view);
-        activity.setThings.switches(phone_signal_second_stub, SLOT_PHONE_SIGNAL_SECOND_STUB, ICON_BLACKLIST, view);
-        activity.setThings.switches(toddler, SLOT_TODDLER, ICON_BLACKLIST, view);
-        activity.setThings.switches(ims_volte, SLOT_IMS_VOLTE, ICON_BLACKLIST, view);
-        activity.setThings.switches(keyguard_wakeup, SLOT_KEYGUARD_WAKEUP, ICON_BLACKLIST, view);
-        activity.setThings.switches(safezone, SLOT_SAFEZONE, ICON_BLACKLIST, view);
-        activity.setThings.switches(wimax, SLOT_WIMAX, ICON_BLACKLIST, view);
-        activity.setThings.switches(smart_bonding, SLOT_SMART_BONDING, ICON_BLACKLIST, view);
-        activity.setThings.switches(private_mode, SLOT_PRIVATE_MODE, ICON_BLACKLIST, view);
 
         activity.setThings.switches(volte, SLOT_VOLTE, ICON_BLACKLIST, view);
         activity.setThings.switches(vowifi, SLOT_VOWIFI, ICON_BLACKLIST, view);

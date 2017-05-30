@@ -2,7 +2,6 @@ package com.zacharee1.systemuituner.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.provider.*;
 import android.provider.Settings;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;

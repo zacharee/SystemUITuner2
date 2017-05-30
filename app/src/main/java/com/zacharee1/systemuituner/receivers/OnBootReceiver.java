@@ -35,7 +35,7 @@ public class OnBootReceiver extends WakefulBroadcastReceiver {
         }
     }
 
-    public static void runReceive(final Context context) {
+    private static void runReceive(final Context context) {
         final SharedPreferences sharedPreferences = context.getSharedPreferences(context.getResources().getText(R.string.sharedprefs_id).toString(), Context.MODE_PRIVATE);
         final String blacklist_bak = Settings.Secure.getString(context.getContentResolver(), "icon_blacklist2");
 

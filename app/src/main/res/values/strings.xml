@@ -274,4 +274,6 @@
     <string name="fancy_pulldown_animation">Fancy Pulldown Animation</string>
     <string name="move_full_rows">Move Full Rows</string>
     <string name="touchwiz" translatable="false">TouchWiz</string>
+    <string name="battery">Battery</string>
+    <string name="enable_fabric_io_analytics">Fabric.io Analytics</string>
 </resources>

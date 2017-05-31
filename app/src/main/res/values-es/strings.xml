@@ -225,4 +225,6 @@
     <string name="qs_header_tile_count">Cabecera QS Cuenta</string>
     <string name="fancy_pulldown_animation">Animación elaborado desplegable</string>
     <string name="move_full_rows">Mover Filas Enteras</string>
+    <string name="battery">Batería</string>
+    <string name="enable_fabric_io_analytics">Analíticos de Fabric.io</string>
 </resources>

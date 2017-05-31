@@ -17,9 +17,8 @@ import com.zacharee1.systemuituner.R;
  */
 
 @TargetApi(24)
-public class QSService extends TileService {
+public class NightModeTileService extends TileService {
 
-//    private static QSService service;
     private Intent mToggleIntent;
     private BroadcastReceiver mToggleReceiver;
 

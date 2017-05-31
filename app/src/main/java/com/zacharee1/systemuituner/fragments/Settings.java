@@ -37,12 +37,14 @@ public class Settings extends Fragment {
         Switch safe_statbar = (Switch) view.findViewById(R.id.safe_statbar_method);
         Switch custom_settings = (Switch) view.findViewById(R.id.custom_settings_input);
         Switch rootMode = (Switch) view.findViewById(R.id.root_mode);
+        Switch useFabric = (Switch) view.findViewById(R.id.use_fabric);
 
         activity.setThings.switches(darkMode, null, "dark_mode", view);
 
         safe_statbar.setChecked(activity.setThings.sharedPreferences.getBoolean("safeStatbar", false));
         custom_settings.setChecked(activity.setThings.sharedPreferences.getBoolean("customSettings", false));
         rootMode.setChecked(activity.setThings.sharedPreferences.getBoolean("isRooted", false));
+        useFabric.setChecked(activity.setThings.sharedPreferences.getBoolean("useFabric", true));
 
         Button setup = (Button) view.findViewById(R.id.setup);
         activity.setThings.buttons(setup, "setup"); //button listener
@@ -50,6 +52,7 @@ public class Settings extends Fragment {
         switches(safe_statbar);
         switches(custom_settings);
         switches(rootMode);
+        switches(useFabric);
 
         return view;
     }
@@ -113,6 +116,9 @@ public class Settings extends Fragment {
                         break;
                     case R.id.root_mode:
                         activity.setThings.editor.putBoolean("isRooted", isChecked);
+                        break;
+                    case R.id.use_fabric:
+                        activity.setThings.editor.putBoolean("useFabric", isChecked);
                         break;
                 }
 

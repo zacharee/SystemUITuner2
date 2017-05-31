@@ -20,6 +20,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.android.vending.BILLING" />
     <uses-permission android:name="android.permission.BIND_QUICK_SETTINGS_TILE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".AppService"
@@ -93,13 +94,26 @@
             android:name=".services.ShutDownListen"
             android:enabled="true"
             android:exported="false" />
+
         <service
-            android:name=".services.QSService"
+            android:name=".services.NightModeTileService"
             android:icon="@drawable/ic_night_mode"
             android:label="@string/night_mode"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".services.BatteryTileService"
+            android:icon="@drawable/ic_battery"
+            android:label="@string/battery"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
             </intent-filter>
         </service>
 
@@ -109,6 +123,4 @@
             android:name="io.fabric.ApiKey"
             android:value="96d80cfeac7fcf7aec8fc104086331c45258ab0e" />
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

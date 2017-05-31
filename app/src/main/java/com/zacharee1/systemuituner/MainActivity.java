@@ -72,6 +72,8 @@ public class MainActivity extends AppCompatActivity
 
     private final String TAG = "SystemUITuner";
 
+    private Intent mIntent;
+
     private final IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
         public void onIabPurchaseFinished(IabResult result, Purchase purchase) {
             Log.d(TAG, "Purchase finished: " + result + ", purchase: " + purchase);
@@ -109,6 +111,9 @@ public class MainActivity extends AppCompatActivity
         fragment = new Fragment();
         fragmentManager = getFragmentManager();
         handler = new Handler();
+
+        mIntent = getIntent();
+        Log.e("hue", mIntent.toString());
 
         main = new Main();
         qs = new QS();

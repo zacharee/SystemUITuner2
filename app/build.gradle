@@ -22,8 +22,8 @@ android {
         applicationId "com.zacharee1.systemuituner"
         minSdkVersion 23
         targetSdkVersion 25
-        versionCode 104
-        versionName "1.19.0"
+        versionCode 105
+        versionName "1.19.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
     }

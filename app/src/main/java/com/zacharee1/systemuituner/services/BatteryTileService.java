@@ -7,12 +7,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.Icon;
+import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.provider.Settings;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 import android.support.annotation.IntDef;
+import android.util.Log;
 
 import com.zacharee1.systemuituner.R;
 
@@ -24,6 +26,7 @@ import com.zacharee1.systemuituner.R;
 public class BatteryTileService extends TileService {
 
     private IntentFilter mFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+
     private BC mReceiver;
     private Intent mBatteryStatus;
 
@@ -50,11 +53,18 @@ public class BatteryTileService extends TileService {
     public void onClick() {
         Intent intentBatteryUsage = new Intent(Intent.ACTION_POWER_USAGE_SUMMARY);
         startActivity(intentBatteryUsage);
+
+        Intent it = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
+        sendBroadcast(it);
     }
 
     @Override
     public void onDestroy() {
-        unregisterReceiver(mReceiver);
+        try {
+            unregisterReceiver(mReceiver);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         super.onDestroy();
     }
 

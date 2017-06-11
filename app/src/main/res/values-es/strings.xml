@@ -227,4 +227,5 @@
     <string name="move_full_rows">Mover Filas Enteras</string>
     <string name="battery">Batería</string>
     <string name="enable_fabric_io_analytics">Analíticos de Fabric.io</string>
+    <string name="start_app_anyway">Bien, Lanzar App</string>
 </resources>

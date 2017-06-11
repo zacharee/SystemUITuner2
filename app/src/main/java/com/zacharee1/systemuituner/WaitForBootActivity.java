@@ -16,6 +16,8 @@ public class WaitForBootActivity extends AppCompatActivity {
     private BroadcastReceiver finish_activity;
     private Context context;
 
+    private int pressCount = 7;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,18 @@ public class WaitForBootActivity extends AppCompatActivity {
         };
         registerReceiver(finish_activity, new IntentFilter("finish_systemuituner_activity"));
 
+        final Button enough = (Button) findViewById(R.id.enough_already);
+        enough.setVisibility(View.GONE);
+        enough.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setThings.editor.putBoolean("isBooted", true).apply();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         Button refresh = (Button) findViewById(R.id.refresh_boot);
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +59,11 @@ public class WaitForBootActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else {
-                    Toast.makeText(context, getResources().getText(R.string.not_booted_yet), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, getResources().getText(R.string.not_booted_yet) + " " + pressCount, Toast.LENGTH_SHORT).show();
+                    pressCount--;
+                    if (pressCount == 0) {
+                        enough.setVisibility(View.VISIBLE);
+                    }
                 }
             }
         });

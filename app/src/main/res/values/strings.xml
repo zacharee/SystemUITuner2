@@ -276,4 +276,5 @@
     <string name="touchwiz" translatable="false">TouchWiz</string>
     <string name="battery">Battery</string>
     <string name="enable_fabric_io_analytics">Fabric.io Analytics</string>
+    <string name="start_app_anyway">Start App Anyway</string>
 </resources>

@@ -22,6 +22,8 @@ public class ShutDownReceiver extends WakefulBroadcastReceiver {
                 sharedPreferences.edit().putBoolean("isBooted", false).apply();
                 try {
                     Settings.Secure.putString(context.getContentResolver(), "icon_blacklist", "");
+                    Settings.Secure.putInt(context.getContentResolver(), "sysui_qs_fancy_anim2", Settings.Secure.getInt(context.getContentResolver(), "sysui_qs_fancy_anim", 1));
+                    Settings.Secure.putInt(context.getContentResolver(), "sysui_qs_fancy_anim", 1);
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(context, context.getResources().getText(R.string.permissions_failed), Toast.LENGTH_LONG).show();

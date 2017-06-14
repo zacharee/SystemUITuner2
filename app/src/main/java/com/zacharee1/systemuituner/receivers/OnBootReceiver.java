@@ -25,8 +25,7 @@ public class OnBootReceiver extends WakefulBroadcastReceiver {
                 intent.getAction().equals(Intent.ACTION_REBOOT) ||
                 intent.getAction().equals("android.intent.action.QUICKBOOT_POWERON") ||
                 intent.getAction().equals(Intent.ACTION_MY_PACKAGE_REPLACED) ||
-                intent.getAction().equals("com.htc.intent.action.QUICKBOOT_POWERON") ||
-                intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
+                intent.getAction().equals("com.htc.intent.action.QUICKBOOT_POWERON")) {
 
             if (sharedPreferences.getBoolean("safeStatbar", false)) {
                 runReceive(context);

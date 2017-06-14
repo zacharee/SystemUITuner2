@@ -17,13 +17,20 @@ public class ShutDownReceiver extends WakefulBroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(context.getResources().getText(R.string.sharedprefs_id).toString(), Context.MODE_PRIVATE);
-        if (sharedPreferences.getBoolean("safeStatbar", false)) {
-            if (intent.getAction().equals(Intent.ACTION_SHUTDOWN) || intent.getAction().equals("android.intent.action.QUICKBOOT_POWEROFF")) {
-                sharedPreferences.edit().putBoolean("isBooted", false).apply();
+
+        if (intent.getAction().equals(Intent.ACTION_SHUTDOWN) || intent.getAction().equals("android.intent.action.QUICKBOOT_POWEROFF")) {
+            sharedPreferences.edit().putBoolean("isBooted", false).apply();
+
+            if (sharedPreferences.getBoolean("safeStatbar", false)) {
                 try {
                     Settings.Secure.putString(context.getContentResolver(), "icon_blacklist", "");
-                    Settings.Secure.putInt(context.getContentResolver(), "sysui_qs_fancy_anim2", Settings.Secure.getInt(context.getContentResolver(), "sysui_qs_fancy_anim", 1));
-                    Settings.Secure.putInt(context.getContentResolver(), "sysui_qs_fancy_anim", 1);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, context.getResources().getText(R.string.permissions_failed), Toast.LENGTH_LONG).show();
+                }
+                try {
+                    int anim = Settings.Secure.getInt(context.getContentResolver(), "sysui_qs_fancy_anim");
+                    Settings.Secure.putInt(context.getContentResolver(), "sysui_qs_fancy_anim2", anim);
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(context, context.getResources().getText(R.string.permissions_failed), Toast.LENGTH_LONG).show();

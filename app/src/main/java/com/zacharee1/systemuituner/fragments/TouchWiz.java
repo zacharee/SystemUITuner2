@@ -63,7 +63,7 @@ public class TouchWiz extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         if (getActivity() instanceof MainActivity) {
-            activity = (MainActivity) getActivity();
+            activity = (MainActivity)getActivity();
         }
 
         view = inflater.inflate(R.layout.fragment_tw, container, false);
@@ -82,30 +82,30 @@ public class TouchWiz extends Fragment {
     }
 
     private void setupSwitches() {
-        Switch high_brightness_warning = (Switch) view.findViewById(R.id.high_brightness_warning);
+        Switch high_brightness_warning = view.findViewById(R.id.high_brightness_warning);
 
-        Switch knox_container = (Switch) view.findViewById(R.id.knox_container);
-        Switch smart_network = (Switch) view.findViewById(R.id.smart_network);
-        Switch glove = (Switch) view.findViewById(R.id.glove);
-        Switch gesture = (Switch) view.findViewById(R.id.gesture);
-        Switch smart_scroll = (Switch) view.findViewById(R.id.smart_scroll);
-        Switch face = (Switch) view.findViewById(R.id.face);
-        Switch gps = (Switch) view.findViewById(R.id.gps);
-        Switch lbs = (Switch) view.findViewById(R.id.lbs);
-        Switch wearable_gear = (Switch) view.findViewById(R.id.wearable_gear);
-        Switch femtoicon = (Switch) view.findViewById(R.id.femtoicon);
-        Switch rcs = (Switch) view.findViewById(R.id.rcs);
-        Switch wifi_p2p = (Switch) view.findViewById(R.id.wifi_p2p);
-        Switch wifi_ap = (Switch) view.findViewById(R.id.wifi_ap);
-        Switch wifi_oxygen = (Switch) view.findViewById(R.id.wifi_oxygen);
-        Switch phone_signal_second_stub = (Switch) view.findViewById(R.id.phone_signal_second_stub);
-        Switch toddler = (Switch) view.findViewById(R.id.toddler);
-        Switch ims_volte = (Switch) view.findViewById(R.id.ims_volte);
-        Switch keyguard_wakeup = (Switch) view.findViewById(R.id.keyguard_wakeup);
-        Switch safezone = (Switch) view.findViewById(R.id.safezone);
-        Switch wimax = (Switch) view.findViewById(R.id.wimax);
-        Switch smart_bonding = (Switch) view.findViewById(R.id.smart_bonding);
-        Switch private_mode = (Switch) view.findViewById(R.id.private_mode);
+        Switch knox_container = view.findViewById(R.id.knox_container);
+        Switch smart_network = view.findViewById(R.id.smart_network);
+        Switch glove = view.findViewById(R.id.glove);
+        Switch gesture = view.findViewById(R.id.gesture);
+        Switch smart_scroll = view.findViewById(R.id.smart_scroll);
+        Switch face = view.findViewById(R.id.face);
+        Switch gps = view.findViewById(R.id.gps);
+        Switch lbs = view.findViewById(R.id.lbs);
+        Switch wearable_gear = view.findViewById(R.id.wearable_gear);
+        Switch femtoicon = view.findViewById(R.id.femtoicon);
+        Switch rcs = view.findViewById(R.id.rcs);
+        Switch wifi_p2p = view.findViewById(R.id.wifi_p2p);
+        Switch wifi_ap = view.findViewById(R.id.wifi_ap);
+        Switch wifi_oxygen = view.findViewById(R.id.wifi_oxygen);
+        Switch phone_signal_second_stub = view.findViewById(R.id.phone_signal_second_stub);
+        Switch toddler = view.findViewById(R.id.toddler);
+        Switch ims_volte = view.findViewById(R.id.ims_volte);
+        Switch keyguard_wakeup = view.findViewById(R.id.keyguard_wakeup);
+        Switch safezone = view.findViewById(R.id.safezone);
+        Switch wimax = view.findViewById(R.id.wimax);
+        Switch smart_bonding = view.findViewById(R.id.smart_bonding);
+        Switch private_mode = view.findViewById(R.id.private_mode);
 
         switches.add(knox_container);
         switches.add(smart_network);
@@ -162,7 +162,7 @@ public class TouchWiz extends Fragment {
     }
 
     private void setupButtons() {
-        Button reset_blacklist = (Button) view.findViewById(R.id.reset_blacklist);
+        Button reset_blacklist = view.findViewById(R.id.reset_blacklist);
 
         activity.setThings.buttons(reset_blacklist, RESET_BLACKLIST);
     }

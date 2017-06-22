@@ -103,6 +103,11 @@ public class Misc extends Fragment {
     @SuppressWarnings("FieldCanBeLocal")
     private Switch night_display_custom;
 
+    private static final String NIGHT_DISPLAY_AUTO_MODE = "night_display_auto_mode";
+    private static final String NIGHT_DISPLAY_ACTIVATED = "night_display_activated";
+    private static final String NIGHT_DISPLAY_CUSTOM_START_TIME = "night_display_custom_start_time";
+    private static final String NIGHT_DISPLAY_CUSTOM_END_TIME = "night_display_custom_end_time";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -139,35 +144,35 @@ public class Misc extends Fragment {
 
     private void chooseNightType() {
         if (activity.setThings.SDK_INT == 24) {
-            CardView night_display_card = (CardView) view.findViewById(R.id.night_display_card);
+            CardView night_display_card = view.findViewById(R.id.night_display_card);
             night_display_card.setVisibility(View.GONE);
             setupNightMode();
         } else if (activity.setThings.SDK_INT > 24) {
-            CardView night_mode_card = (CardView) view.findViewById(R.id.night_mode_card);
+            CardView night_mode_card = view.findViewById(R.id.night_mode_card);
             night_mode_card.setVisibility(View.GONE);
             setupNightDisplay();
         } else {
-            CardView night_mode_card = (CardView) view.findViewById(R.id.night_mode_card);
+            CardView night_mode_card = view.findViewById(R.id.night_mode_card);
             night_mode_card.setVisibility(View.GONE);
-            CardView night_display_card = (CardView) view.findViewById(R.id.night_display_card);
+            CardView night_display_card = view.findViewById(R.id.night_display_card);
             night_display_card.setVisibility(View.GONE);
         }
     }
 
     private void setupCustomSettings() {
         boolean customSettingsEnabled = activity.setThings.sharedPreferences.getBoolean("customSettings", false);
-        final CardView custom_settings = (CardView) view.findViewById(R.id.custom_settings);
+        final CardView custom_settings = view.findViewById(R.id.custom_settings);
         custom_settings.setVisibility(customSettingsEnabled ? View.VISIBLE : View.GONE);
     }
 
     private void setupSwitches() {
-        Switch show_full_zen = (Switch) view.findViewById(R.id.show_full_zen);
-        Switch hu_notif = (Switch) view.findViewById(R.id.hu_notif);
-        Switch vol_warn = (Switch) view.findViewById(R.id.vol_warn);
-        Switch power_notifs = (Switch) view.findViewById(R.id.power_notifications);
-        Switch clock_seconds = (Switch) view.findViewById(R.id.clock_seconds);
-        Switch battery_percent = (Switch) view.findViewById(R.id.battery_percent);
-        CardView power_notif_controls = (CardView) view.findViewById(R.id.power_notification_controls_card);
+        Switch show_full_zen = view.findViewById(R.id.show_full_zen);
+        Switch hu_notif = view.findViewById(R.id.hu_notif);
+        Switch vol_warn = view.findViewById(R.id.vol_warn);
+        Switch power_notifs = view.findViewById(R.id.power_notifications);
+        Switch clock_seconds = view.findViewById(R.id.clock_seconds);
+        Switch battery_percent = view.findViewById(R.id.battery_percent);
+        CardView power_notif_controls = view.findViewById(R.id.power_notification_controls_card);
 
         //noinspection deprecation
         battery_percent.setText(Html.fromHtml(getResources().getText(R.string.battery_percentage) + "<br /><small> <font color=\"#777777\">" + getResources().getText(R.string.reboot_required) + "</font></small>"));
@@ -191,13 +196,13 @@ public class Misc extends Fragment {
     }
 
     private void setupScales() {
-        animApply = (Button) view.findViewById(R.id.apply_anim);
-        transApply = (Button) view.findViewById(R.id.apply_trans);
-        winApply = (Button) view.findViewById(R.id.apply_win);
+        animApply = view.findViewById(R.id.apply_anim);
+        transApply = view.findViewById(R.id.apply_trans);
+        winApply = view.findViewById(R.id.apply_win);
 
-        anim = (TextInputEditText) view.findViewById(R.id.anim_text);
-        trans = (TextInputEditText) view.findViewById(R.id.trans_text);
-        win = (TextInputEditText) view.findViewById(R.id.win_text);
+        anim = view.findViewById(R.id.anim_text);
+        trans = view.findViewById(R.id.trans_text);
+        win = view.findViewById(R.id.win_text);
 
         animScale = Settings.Global.getString(activity.getContentResolver(), Settings.Global.ANIMATOR_DURATION_SCALE);
         if (animScale == null) animScale = "1.0";
@@ -220,13 +225,13 @@ public class Misc extends Fragment {
     }
 
     private void setupSettings() {
-        globalApply = (Button) view.findViewById(R.id.apply_global);
-        secureApply = (Button) view.findViewById(R.id.apply_secure);
-        systemApply = (Button) view.findViewById(R.id.apply_system);
+        globalApply = view.findViewById(R.id.apply_global);
+        secureApply = view.findViewById(R.id.apply_secure);
+        systemApply = view.findViewById(R.id.apply_system);
 
-        custom_global = (TextInputEditText) view.findViewById(R.id.global_settings);
-        custom_secure = (TextInputEditText) view.findViewById(R.id.secure_settings);
-        custom_system = (TextInputEditText) view.findViewById(R.id.system_settings);
+        custom_global = view.findViewById(R.id.global_settings);
+        custom_secure = view.findViewById(R.id.secure_settings);
+        custom_system = view.findViewById(R.id.system_settings);
 
         custom_global.setHint(getResources().getText(R.string.global));
         custom_secure.setHint(getResources().getText(R.string.secure));
@@ -242,9 +247,9 @@ public class Misc extends Fragment {
     }
 
     private void setupNightMode() {
-        night_mode_auto = (Switch) view.findViewById(R.id.night_mode_auto);
-        night_mode_override = (Switch) view.findViewById(R.id.night_mode_override);
-        Switch night_mode_adjust_tint = (Switch) view.findViewById(R.id.night_mode_adjust_tint);
+        night_mode_auto = view.findViewById(R.id.night_mode_auto);
+        night_mode_override = view.findViewById(R.id.night_mode_override);
+        Switch night_mode_adjust_tint = view.findViewById(R.id.night_mode_adjust_tint);
 
         night_mode_auto.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -277,22 +282,22 @@ public class Misc extends Fragment {
     }
 
     private void setupNightDisplay() {
-        set_start = (Button) view.findViewById(R.id.set_start_time);
-        set_end = (Button) view.findViewById(R.id.set_end_time);
-        custom_time = (LinearLayout) view.findViewById(R.id.custom_time_layout);
+        set_start = view.findViewById(R.id.set_start_time);
+        set_end = view.findViewById(R.id.set_end_time);
+        custom_time = view.findViewById(R.id.custom_time_layout);
 
         setTimes();
 
-        night_display_auto = (Switch) view.findViewById(R.id.night_display_auto);
-        night_display_active = (Switch) view.findViewById(R.id.night_display_activated);
-        night_display_custom = (Switch) view.findViewById(R.id.night_display_custom_times);
+        night_display_auto = view.findViewById(R.id.night_display_auto);
+        night_display_active = view.findViewById(R.id.night_display_activated);
+        night_display_custom = view.findViewById(R.id.night_display_custom_times);
 
-        night_display_auto.setChecked(Settings.Secure.getInt(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_AUTO_MODE, 0) == 1);
-        night_display_active.setChecked(Settings.Secure.getInt(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_ACTIVATED, 0) == 1);
+        night_display_auto.setChecked(Settings.Secure.getInt(activity.getContentResolver(), NIGHT_DISPLAY_AUTO_MODE, 0) == 1);
+        night_display_active.setChecked(Settings.Secure.getInt(activity.getContentResolver(), NIGHT_DISPLAY_ACTIVATED, 0) == 1);
 
         try {
-            night_display_custom.setChecked(Settings.Secure.getString(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_CUSTOM_START_TIME).length() > 0 ||
-                    Settings.Secure.getString(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_CUSTOM_END_TIME).length() > 0);
+            night_display_custom.setChecked(Settings.Secure.getString(activity.getContentResolver(), NIGHT_DISPLAY_CUSTOM_START_TIME).length() > 0 ||
+                    Settings.Secure.getString(activity.getContentResolver(), NIGHT_DISPLAY_CUSTOM_END_TIME).length() > 0);
             custom_time.setVisibility(night_display_custom.isChecked() ? View.VISIBLE : View.GONE);
         } catch (NullPointerException e) {
             e.printStackTrace();
@@ -301,7 +306,7 @@ public class Misc extends Fragment {
         night_display_auto.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Settings.Secure.putInt(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_AUTO_MODE, isChecked ? 1 : 0);
+                Settings.Secure.putInt(activity.getContentResolver(), NIGHT_DISPLAY_AUTO_MODE, isChecked ? 1 : 0);
             }
         });
 
@@ -310,7 +315,7 @@ public class Misc extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 mToggleNightIntent.putExtra("state", isChecked);
                 activity.sendBroadcast(mToggleNightIntent);
-                Settings.Secure.putInt(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_ACTIVATED, isChecked ? 1 : 0);
+                Settings.Secure.putInt(activity.getContentResolver(), NIGHT_DISPLAY_ACTIVATED, isChecked ? 1 : 0);
             }
         });
 
@@ -320,14 +325,14 @@ public class Misc extends Fragment {
                 custom_time.setVisibility(isChecked ? View.VISIBLE : View.GONE);
 
                 if (!isChecked) {
-                    activity.setThings.editor.putString(Settings.Secure.NIGHT_DISPLAY_CUSTOM_START_TIME, Settings.Secure.getString(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_CUSTOM_START_TIME));
-                    activity.setThings.editor.putString(Settings.Secure.NIGHT_DISPLAY_CUSTOM_END_TIME, Settings.Secure.getString(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_CUSTOM_END_TIME));
+                    activity.setThings.editor.putString(NIGHT_DISPLAY_CUSTOM_START_TIME, Settings.Secure.getString(activity.getContentResolver(), NIGHT_DISPLAY_CUSTOM_START_TIME));
+                    activity.setThings.editor.putString(NIGHT_DISPLAY_CUSTOM_END_TIME, Settings.Secure.getString(activity.getContentResolver(), NIGHT_DISPLAY_CUSTOM_END_TIME));
                     activity.setThings.editor.apply();
-                    activity.setThings.settings(SECURE, Settings.Secure.NIGHT_DISPLAY_CUSTOM_START_TIME, "");
-                    activity.setThings.settings(SECURE, Settings.Secure.NIGHT_DISPLAY_CUSTOM_END_TIME, "");
+                    activity.setThings.settings(SECURE, NIGHT_DISPLAY_CUSTOM_START_TIME, "");
+                    activity.setThings.settings(SECURE, NIGHT_DISPLAY_CUSTOM_END_TIME, "");
                 } else {
-                    activity.setThings.settings(SECURE, Settings.Secure.NIGHT_DISPLAY_CUSTOM_START_TIME, activity.setThings.sharedPreferences.getString(Settings.Secure.NIGHT_DISPLAY_CUSTOM_START_TIME, "0"));
-                    activity.setThings.settings(SECURE, Settings.Secure.NIGHT_DISPLAY_CUSTOM_END_TIME, activity.setThings.sharedPreferences.getString(Settings.Secure.NIGHT_DISPLAY_CUSTOM_END_TIME, "0"));
+                    activity.setThings.settings(SECURE, NIGHT_DISPLAY_CUSTOM_START_TIME, activity.setThings.sharedPreferences.getString(NIGHT_DISPLAY_CUSTOM_START_TIME, "0"));
+                    activity.setThings.settings(SECURE, NIGHT_DISPLAY_CUSTOM_END_TIME, activity.setThings.sharedPreferences.getString(NIGHT_DISPLAY_CUSTOM_END_TIME, "0"));
                     setTimes();
                 }
             }
@@ -346,7 +351,7 @@ public class Misc extends Fragment {
 
                         long time = hrmil + minmil;
 
-                        activity.setThings.settings(SECURE, Settings.Secure.NIGHT_DISPLAY_CUSTOM_START_TIME, time + "");
+                        activity.setThings.settings(SECURE, NIGHT_DISPLAY_CUSTOM_START_TIME, time + "");
                         set_start.setText(String.format(Locale.ENGLISH, "%02d:%02d", hourOfDay, minute2));
                     }
                 }, (int)startHour, (int)startMinute, true);
@@ -369,7 +374,7 @@ public class Misc extends Fragment {
 
                         long time = hrmil + minmil;
 
-                        activity.setThings.settings(SECURE, Settings.Secure.NIGHT_DISPLAY_CUSTOM_END_TIME, time + "");
+                        activity.setThings.settings(SECURE, NIGHT_DISPLAY_CUSTOM_END_TIME, time + "");
                         set_end.setText(String.format(Locale.ENGLISH, "%02d:%02d", hourOfDay, minute3));
                     }
                 }, (int)endHour, (int)endMinute, true);
@@ -511,13 +516,13 @@ public class Misc extends Fragment {
     }
 
     private void setTimes() {
-        String start = Settings.Secure.getString(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_CUSTOM_START_TIME);
+        String start = Settings.Secure.getString(activity.getContentResolver(), NIGHT_DISPLAY_CUSTOM_START_TIME);
         if (start == null || start.length() < 1) start = "0";
         long startTime = Long.decode(start);
         startHour = TimeUnit.MILLISECONDS.toHours(startTime);
         startMinute = TimeUnit.MILLISECONDS.toMinutes(startTime) % TimeUnit.HOURS.toMinutes(1);
 
-        String end = Settings.Secure.getString(activity.getContentResolver(), Settings.Secure.NIGHT_DISPLAY_CUSTOM_END_TIME);
+        String end = Settings.Secure.getString(activity.getContentResolver(), NIGHT_DISPLAY_CUSTOM_END_TIME);
         if (end == null || end.length() < 1) end = "0";
         long endTime = Long.decode(end);
         endHour = TimeUnit.MILLISECONDS.toHours(endTime);

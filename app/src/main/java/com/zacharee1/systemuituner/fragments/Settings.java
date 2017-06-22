@@ -33,11 +33,11 @@ public class Settings extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        Switch darkMode = (Switch) view.findViewById(R.id.dark_mode);
-        Switch safe_statbar = (Switch) view.findViewById(R.id.safe_statbar_method);
-        Switch custom_settings = (Switch) view.findViewById(R.id.custom_settings_input);
-        Switch rootMode = (Switch) view.findViewById(R.id.root_mode);
-        Switch useFabric = (Switch) view.findViewById(R.id.use_fabric);
+        Switch darkMode = view.findViewById(R.id.dark_mode);
+        Switch safe_statbar = view.findViewById(R.id.safe_statbar_method);
+        Switch custom_settings = view.findViewById(R.id.custom_settings_input);
+        Switch rootMode = view.findViewById(R.id.root_mode);
+        Switch useFabric = view.findViewById(R.id.use_fabric);
 
         activity.setThings.switches(darkMode, null, "dark_mode", view);
 
@@ -46,7 +46,7 @@ public class Settings extends Fragment {
         rootMode.setChecked(activity.setThings.sharedPreferences.getBoolean("isRooted", false));
         useFabric.setChecked(activity.setThings.sharedPreferences.getBoolean("useFabric", true));
 
-        Button setup = (Button) view.findViewById(R.id.setup);
+        Button setup = view.findViewById(R.id.setup);
         activity.setThings.buttons(setup, "setup"); //button listener
 
         switches(safe_statbar);

@@ -1,6 +1,5 @@
 package com.zacharee1.systemuituner;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.BroadcastReceiver;
@@ -72,6 +71,7 @@ public class MainActivity extends AppCompatActivity
 
     private final String TAG = "SystemUITuner";
 
+    @SuppressWarnings("FieldCanBeLocal")
     private Intent mIntent;
 
     private final IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        /*Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setPopupTheme(setThings.style);
 
@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity
 
         setTitle(title); //set default title just because
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
                 this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         //noinspection deprecation
@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() { //the drawer is annoying to drag out, so let's open it on back press instead
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else if (!drawer.isDrawerOpen(GravityCompat.START)) {
@@ -305,7 +305,7 @@ public class MainActivity extends AppCompatActivity
                 }
             }, 350);
 
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
         }
 
@@ -351,7 +351,7 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         Menu navMenu = navigationView.getMenu();
 
@@ -426,7 +426,7 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("SameReturnValue")
     private boolean verifyDeveloperPayload(Purchase p) {
-        @SuppressWarnings("UnusedAssignment") String payload = p.getDeveloperPayload();
+        @SuppressWarnings({"UnusedAssignment", "unused"}) String payload = p.getDeveloperPayload();
 
         /*
          * TODO: verify that the developer payload of the purchase is correct. It will be

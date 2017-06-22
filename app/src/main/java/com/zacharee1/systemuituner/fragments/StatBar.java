@@ -118,7 +118,7 @@ public class StatBar extends Fragment {
                             Main fragment = new Main();
                             FragmentManager fragmentManager = getFragmentManager();
                             fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-                            NavigationView navigationView = (NavigationView) activity.findViewById(R.id.nav_view);
+                            NavigationView navigationView = activity.findViewById(R.id.nav_view);
                             Menu navMenu = navigationView.getMenu();
                             navMenu.findItem(R.id.nav_home).setChecked(true);
                         }
@@ -127,50 +127,50 @@ public class StatBar extends Fragment {
         }
 
         //define switches
-        Switch bluetooth = (Switch) view.findViewById(R.id.bt_icon);
-        Switch wifi = (Switch) view.findViewById(R.id.wifi_icon);
-        Switch ethernet = (Switch) view.findViewById(R.id.ethernet_icon);
-        Switch mobile = (Switch) view.findViewById(R.id.mobile_icon);
-        Switch airplane = (Switch) view.findViewById(R.id.airplane_icon);
-        Switch managed_profile = (Switch) view.findViewById(R.id.managed_profile_icon);
-        Switch zen = (Switch) view.findViewById(R.id.zen_icon);
-        Switch alarm_clock = (Switch) view.findViewById(R.id.alarm_clock_icon);
-        Switch hotspot = (Switch) view.findViewById(R.id.hotspot_icon);
-        Switch data_saver = (Switch) view.findViewById(R.id.data_saver);
-        Switch nfc = (Switch) view.findViewById(R.id.nfc);
-        Switch clock = (Switch) view.findViewById(R.id.clock);
-        Switch volume = (Switch) view.findViewById(R.id.volume);
-        Switch do_not_disturb = (Switch) view.findViewById(R.id.do_not_disturb);
-        Switch rotate = (Switch) view.findViewById(R.id.rotate);
-        Switch battery = (Switch) view.findViewById(R.id.battery);
-        Switch speakerphone = (Switch) view.findViewById(R.id.speakerphone);
-        Switch cast = (Switch) view.findViewById(R.id.cast);
-        Switch headset = (Switch) view.findViewById(R.id.headset);
-        Switch location = (Switch) view.findViewById(R.id.location);
-        Switch su = (Switch) view.findViewById(R.id.su);
+        Switch bluetooth = view.findViewById(R.id.bt_icon);
+        Switch wifi = view.findViewById(R.id.wifi_icon);
+        Switch ethernet = view.findViewById(R.id.ethernet_icon);
+        Switch mobile = view.findViewById(R.id.mobile_icon);
+        Switch airplane = view.findViewById(R.id.airplane_icon);
+        Switch managed_profile = view.findViewById(R.id.managed_profile_icon);
+        Switch zen = view.findViewById(R.id.zen_icon);
+        Switch alarm_clock = view.findViewById(R.id.alarm_clock_icon);
+        Switch hotspot = view.findViewById(R.id.hotspot_icon);
+        Switch data_saver = view.findViewById(R.id.data_saver);
+        Switch nfc = view.findViewById(R.id.nfc);
+        Switch clock = view.findViewById(R.id.clock);
+        Switch volume = view.findViewById(R.id.volume);
+        Switch do_not_disturb = view.findViewById(R.id.do_not_disturb);
+        Switch rotate = view.findViewById(R.id.rotate);
+        Switch battery = view.findViewById(R.id.battery);
+        Switch speakerphone = view.findViewById(R.id.speakerphone);
+        Switch cast = view.findViewById(R.id.cast);
+        Switch headset = view.findViewById(R.id.headset);
+        Switch location = view.findViewById(R.id.location);
+        Switch su = view.findViewById(R.id.su);
 
-        Switch vpn = (Switch) view.findViewById(R.id.vpn_icon);
+        Switch vpn = view.findViewById(R.id.vpn_icon);
 
-        Switch remote_call = (Switch) view.findViewById(R.id.remote_call);
-        Switch volte = (Switch) view.findViewById(R.id.volte);
-        Switch vowifi = (Switch) view.findViewById(R.id.vowifi);
-        Switch dmb = (Switch) view.findViewById(R.id.dmb);
-        Switch tty = (Switch) view.findViewById(R.id.tty);
-        Switch wifi_calling = (Switch) view.findViewById(R.id.wifi_calling);
-        Switch cdma_eri = (Switch) view.findViewById(R.id.cdma_eri);
-        Switch data_connection = (Switch) view.findViewById(R.id.data_connection);
-        Switch phone_evdo_signal = (Switch) view.findViewById(R.id.phone_evdo_signal);
-        Switch phone_signal = (Switch) view.findViewById(R.id.phone_signal);
-        Switch otg_mouse = (Switch) view.findViewById(R.id.otg_mouse);
-        Switch otg_keyboard = (Switch) view.findViewById(R.id.otg_keyboard);
-        Switch felica_lock = (Switch) view.findViewById(R.id.felica_lock);
-        Switch answering_memo = (Switch) view.findViewById(R.id.answering_memo);
-        Switch ime = (Switch) view.findViewById(R.id.ime);
-        Switch sync_failing = (Switch) view.findViewById(R.id.sync_failing);
-        Switch sync_active = (Switch) view.findViewById(R.id.sync_active);
-        Switch nfclock = (Switch) view.findViewById(R.id.nfclock);
-        Switch secure = (Switch) view.findViewById(R.id.secure);
-        Switch power_saver = (Switch) view.findViewById(R.id.power_saver);
+        Switch remote_call = view.findViewById(R.id.remote_call);
+        Switch volte = view.findViewById(R.id.volte);
+        Switch vowifi = view.findViewById(R.id.vowifi);
+        Switch dmb = view.findViewById(R.id.dmb);
+        Switch tty = view.findViewById(R.id.tty);
+        Switch wifi_calling = view.findViewById(R.id.wifi_calling);
+        Switch cdma_eri = view.findViewById(R.id.cdma_eri);
+        Switch data_connection = view.findViewById(R.id.data_connection);
+        Switch phone_evdo_signal = view.findViewById(R.id.phone_evdo_signal);
+        Switch phone_signal = view.findViewById(R.id.phone_signal);
+        Switch otg_mouse = view.findViewById(R.id.otg_mouse);
+        Switch otg_keyboard = view.findViewById(R.id.otg_keyboard);
+        Switch felica_lock = view.findViewById(R.id.felica_lock);
+        Switch answering_memo = view.findViewById(R.id.answering_memo);
+        Switch ime = view.findViewById(R.id.ime);
+        Switch sync_failing = view.findViewById(R.id.sync_failing);
+        Switch sync_active = view.findViewById(R.id.sync_active);
+        Switch nfclock = view.findViewById(R.id.nfclock);
+        Switch secure = view.findViewById(R.id.secure);
+        Switch power_saver = view.findViewById(R.id.power_saver);
 
         switches.add(bluetooth);
         switches.add(wifi);
@@ -216,7 +216,7 @@ public class StatBar extends Fragment {
         switches.add(secure);
         switches.add(power_saver);
 
-        Button reset_blacklist = (Button) view.findViewById(R.id.reset_blacklist);
+        Button reset_blacklist = view.findViewById(R.id.reset_blacklist);
 
         //set switch listeners
 

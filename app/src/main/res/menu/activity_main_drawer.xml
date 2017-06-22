@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:id="@+id/nav_0"
-        android:checkableBehavior="single">
+    <group android:checkableBehavior="single"
+        android:id="@+id/one">
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home_black"
             android:title="@string/home" />
     </group>
 
-    <group android:id="@+id/nav_1"
-        android:checkableBehavior="single">
+    <group android:checkableBehavior="single"
+        android:id="@+id/two">
         <item
             android:id="@+id/nav_statusbar"
             android:icon="@drawable/ic_visibility_off_black"
@@ -24,8 +24,8 @@
             android:title="@string/demo_mode" />
     </group>
 
-    <group android:id="@+id/nav_2"
-        android:checkableBehavior="single">
+    <group android:checkableBehavior="single"
+        android:id="@+id/three">
         <item
             android:id="@+id/nav_touchwiz"
             android:icon="@drawable/ic_phone_android"
@@ -36,8 +36,8 @@
             android:title="@string/miscellaneous" />
     </group>
 
-    <group android:id="@+id/nav_3"
-        android:checkableBehavior="single">
+    <group android:checkableBehavior="single"
+        android:id="@+id/four">
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings_black"
@@ -48,8 +48,8 @@
             android:title="@string/about" />
     </group>
 
-    <group android:id="@+id/nav_4"
-        android:checkableBehavior="single">
+    <group android:checkableBehavior="single"
+        android:id="@+id/five">
         <item
             android:id="@+id/nav_exit"
             android:icon="@drawable/ic_close_black"

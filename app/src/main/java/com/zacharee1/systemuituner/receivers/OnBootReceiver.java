@@ -15,6 +15,7 @@ import com.zacharee1.systemuituner.services.ShutDownListen;
  * Created by Zacha on 5/1/2017.
  */
 
+@SuppressWarnings("deprecation")
 public class OnBootReceiver extends WakefulBroadcastReceiver {
 
     @Override

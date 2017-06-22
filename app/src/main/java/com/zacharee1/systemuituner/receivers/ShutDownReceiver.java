@@ -13,6 +13,7 @@ import com.zacharee1.systemuituner.R;
  * Created by Zacha on 5/1/2017.
  */
 
+@SuppressWarnings("deprecation")
 public class ShutDownReceiver extends WakefulBroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {

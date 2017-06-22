@@ -46,17 +46,31 @@
             android:exported="true">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.REBOOT" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
-                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
-                <!--<action android:name="android.intent.action.USER_PRESENT" />-->
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+                <!-- <action android:name="android.intent.action.USER_PRESENT" /> -->
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+
                 <data
                     android:host="com.zacharee1.systemuituner"
                     android:scheme="package" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".receivers.SettingsReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <action android:name="com.zacharee1.systemuituner.CUSTOM_SETTINGS_GLOBAL"/>
+                <action android:name="com.zacharee1.systemuituner.CUSTOM_SETTINGS_SECURE"/>
+                <action android:name="com.zacharee1.systemuituner.CUSTOM_SETTINGS_SYSTEM"/>
             </intent-filter>
         </receiver>
 
@@ -93,7 +107,6 @@
             android:name=".services.ShutDownListen"
             android:enabled="true"
             android:exported="false" />
-
         <service
             android:name=".services.NightModeTileService"
             android:icon="@drawable/ic_night_mode"
@@ -103,7 +116,6 @@
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
         </service>
-
         <service
             android:name=".services.BatteryTileService"
             android:icon="@drawable/ic_battery"
@@ -111,8 +123,8 @@
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
-                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
-                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
             </intent-filter>
         </service>
 
@@ -122,4 +134,5 @@
             android:name="io.fabric.ApiKey"
             android:value="96d80cfeac7fcf7aec8fc104086331c45258ab0e" />
     </application>
+
 </manifest>

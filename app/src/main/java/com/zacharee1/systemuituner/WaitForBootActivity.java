@@ -38,7 +38,7 @@ public class WaitForBootActivity extends AppCompatActivity {
         };
         registerReceiver(finish_activity, new IntentFilter("finish_systemuituner_activity"));
 
-        final Button enough = (Button) findViewById(R.id.enough_already);
+        final Button enough = findViewById(R.id.enough_already);
         enough.setVisibility(View.GONE);
         enough.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +50,7 @@ public class WaitForBootActivity extends AppCompatActivity {
             }
         });
 
-        Button refresh = (Button) findViewById(R.id.refresh_boot);
+        Button refresh = findViewById(R.id.refresh_boot);
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

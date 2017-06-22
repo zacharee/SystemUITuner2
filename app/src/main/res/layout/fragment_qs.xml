@@ -18,7 +18,6 @@
             tools:ignore="UselessLeaf">
 
             <android.support.v7.widget.CardView
-                android:id="@+id/switches_general_qs"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="16dp"

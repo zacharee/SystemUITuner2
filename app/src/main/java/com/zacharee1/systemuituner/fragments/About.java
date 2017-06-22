@@ -33,12 +33,12 @@ public class About extends Fragment {
         }
 
         //define version TextViews
-        TextView versionName = (TextView) view.findViewById(R.id.vername);
-        TextView versionNum = (TextView) view.findViewById(R.id.vernum);
-        TextView buildDate = (TextView) view.findViewById(R.id.build_date);
-        TextView imageCredit = (TextView) view.findViewById(R.id.image_credit);
-        TextView appCredit = (TextView) view.findViewById(R.id.app_credit);
-        TextView spanishCredit = (TextView) view.findViewById(R.id.spanish_credit);
+        TextView versionName = view.findViewById(R.id.vername);
+        TextView versionNum = view.findViewById(R.id.vernum);
+        TextView buildDate = view.findViewById(R.id.build_date);
+        TextView imageCredit = view.findViewById(R.id.image_credit);
+        TextView appCredit = view.findViewById(R.id.app_credit);
+        TextView spanishCredit = view.findViewById(R.id.spanish_credit);
 
         imageCredit.setMovementMethod(LinkMovementMethod.getInstance());
         appCredit.setMovementMethod(LinkMovementMethod.getInstance());
@@ -57,7 +57,7 @@ public class About extends Fragment {
             Log.e("SysUITuner/E", e.getMessage());
         }
 
-        Button donate = (Button) view.findViewById(R.id.donate_paypal);
+        Button donate = view.findViewById(R.id.donate_paypal);
         donate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

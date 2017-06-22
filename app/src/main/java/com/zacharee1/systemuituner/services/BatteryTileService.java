@@ -1,20 +1,14 @@
 package com.zacharee1.systemuituner.services;
 
 import android.annotation.TargetApi;
-import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.Icon;
-import android.net.Uri;
 import android.os.BatteryManager;
-import android.os.Build;
-import android.provider.Settings;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
-import android.support.annotation.IntDef;
-import android.util.Log;
 
 import com.zacharee1.systemuituner.R;
 
@@ -25,12 +19,14 @@ import com.zacharee1.systemuituner.R;
 @TargetApi(24)
 public class BatteryTileService extends TileService {
 
-    private IntentFilter mFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+    private final IntentFilter mFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
 
     private BC mReceiver;
     private Intent mBatteryStatus;
 
+    @SuppressWarnings("FieldCanBeLocal")
     private boolean mIsCharging;
+    @SuppressWarnings("FieldCanBeLocal")
     private int mBatteryPercent;
 
     @Override

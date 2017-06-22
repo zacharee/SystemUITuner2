@@ -61,21 +61,21 @@ public class Demo extends Fragment {
         demo = new Demo();
 
         //spinners
-        Spinner wifi = (Spinner) view.findViewById(R.id.wifi_strength);
-        Spinner mobile = (Spinner) view.findViewById(R.id.mobile_strength);
-        Spinner mobileTypeSpinner = (Spinner) view.findViewById(R.id.mobile_type);
-        Spinner statStyleSpinner = (Spinner) view.findViewById(R.id.stat_bar_style);
+        Spinner wifi = view.findViewById(R.id.wifi_strength);
+        Spinner mobile = view.findViewById(R.id.mobile_strength);
+        Spinner mobileTypeSpinner = view.findViewById(R.id.mobile_type);
+        Spinner statStyleSpinner = view.findViewById(R.id.stat_bar_style);
 
         //switches
-        Switch showDemo = (Switch) view.findViewById(R.id.show_demo);
-        Switch batteryPluggedSwitch = (Switch) view.findViewById(R.id.battery_plugged);
-        Switch airplaneMode = (Switch) view.findViewById(R.id.show_airplane);
-        Switch showNotifSwitch = (Switch) view.findViewById(R.id.show_notifs);
+        Switch showDemo = view.findViewById(R.id.show_demo);
+        Switch batteryPluggedSwitch = view.findViewById(R.id.battery_plugged);
+        Switch airplaneMode = view.findViewById(R.id.show_airplane);
+        Switch showNotifSwitch = view.findViewById(R.id.show_notifs);
 
         //buttons
-        Button selectTime = (Button) view.findViewById(R.id.select_time);
-        Button enableDemo = (Button) view.findViewById(R.id.enable_demo);
-        Button selectBatteryLevel = (Button) view.findViewById(R.id.select_battery_level_button);
+        Button selectTime = view.findViewById(R.id.select_time);
+        Button enableDemo = view.findViewById(R.id.enable_demo);
+        Button selectBatteryLevel = view.findViewById(R.id.select_battery_level_button);
 
         //set spinner adapters
         setSpinnerAdapters(wifi, R.array.wifi_strength);
@@ -90,7 +90,7 @@ public class Demo extends Fragment {
         statStyleSpinner.setSelection(activity.setThings.sharedPreferences.getInt("statBarStyle1", 0));
 
         //set proper values from sharedPrefs
-        statBarStyle = (String) statStyleSpinner.getItemAtPosition(activity.setThings.sharedPreferences.getInt("statBarStyle1", 0));
+        statBarStyle = statStyleSpinner.getItemAtPosition(activity.setThings.sharedPreferences.getInt("statBarStyle1", 0)).toString();
 
         showDemo.setChecked(activity.setThings.sharedPreferences.getBoolean("demoOn", false));
         batteryPluggedSwitch.setChecked(activity.setThings.sharedPreferences.getBoolean("isCharging", false));
@@ -106,7 +106,7 @@ public class Demo extends Fragment {
             showNotifs = "true";
         }
 
-        mobileType = (String) mobileTypeSpinner.getItemAtPosition(activity.setThings.sharedPreferences.getInt("mobileType1", 0));
+        mobileType = mobileTypeSpinner.getItemAtPosition(activity.setThings.sharedPreferences.getInt("mobileType1", 0)).toString();
 
         hour = activity.setThings.sharedPreferences.getInt("hour", 12);
         minute = activity.setThings.sharedPreferences.getInt("minute", 00);
@@ -226,9 +226,9 @@ public class Demo extends Fragment {
                 final Dialog d = new Dialog(button.getContext());
                 d.setTitle("NumberPicker");
                 d.setContentView(R.layout.battery_level_dialog);
-                Button b1 = (Button) d.findViewById(R.id.button_cancel);
-                Button b2 = (Button) d.findViewById(R.id.button_set);
-                final NumberPicker np = (NumberPicker) d.findViewById(R.id.select_battery_level);
+                Button b1 = d.findViewById(R.id.button_cancel);
+                Button b2 = d.findViewById(R.id.button_set);
+                final NumberPicker np = d.findViewById(R.id.select_battery_level);
                 np.setMaxValue(100);
                 np.setMinValue(0);
                 np.setValue(activity.setThings.sharedPreferences.getInt("batteryLevel", 50));

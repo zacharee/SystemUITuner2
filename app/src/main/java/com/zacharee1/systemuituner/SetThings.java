@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.net.Uri;
@@ -108,7 +110,10 @@ public class SetThings {
                             currentActivity.startActivity(intent);
                             break;
                         case "WriteSystemSettings":
-                            Settings.System.putString(currentActivity.getContentResolver(), sharedPreferences.getString("systemSettingKey", ""), sharedPreferences.getString("isSystemSwitchEnabled", "0"));
+//                            Settings.System.putInt(currentActivity.getContentResolver(), sharedPreferences.getString("systemSettingKey", ""), Integer.decode(sharedPreferences.getString("isSystemSwitchEnabled", "0")));
+                            WriteSettings writeSettings = new WriteSettings(currentActivity);
+
+                            writeSettings.writeSystem(sharedPreferences.getString("systemSettingKey", ""), sharedPreferences.getString("isSystemSwitchEnabled", "0"));
                             break;
                         case "reset_blacklist":
                             Settings.Secure.putString(currentActivity.getContentResolver(), "icon_blacklist", "");
@@ -242,24 +247,29 @@ public class SetThings {
                     Settings.Secure.putString(currentActivity.getContentResolver(), pref, value);
                     break;
                 case "system":
-                    if (sharedPreferences.getBoolean("isRooted", true)) {
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                sudo("settings put system " + pref + " " + value);
-                            }
-                        }).start();
-                    }
-                    else {
-                        editor.putString("isSystemSwitchEnabled", value);
-                        editor.putString("systemSettingKey", pref);
-                        editor.apply();
-                        Intent intent = new Intent(currentActivity.getApplicationContext(), NoRootSystemSettingsActivity.class);
-                        currentActivity.startActivity(intent);
-                        currentActivity.finish();
+                    try {
+                        Settings.System.putString(currentActivity.getContentResolver(), pref, value);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.e("HALP", e.getMessage());
+                        if (sharedPreferences.getBoolean("isRooted", true)) {
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    sudo("settings put system " + pref + " " + value);
+                                }
+                            }).start();
+                        } else {
+                            editor.putString("isSystemSwitchEnabled", value);
+                            editor.putString("systemSettingKey", pref);
+                            editor.apply();
+                            Intent intent = new Intent(currentActivity.getApplicationContext(), NoRootSystemSettingsActivity.class);
+                            currentActivity.startActivity(intent);
+                        }
                     }
             }
         } catch (Exception e) {
+            e.printStackTrace();
             exceptions.secureSettings(currentActivity, currentActivity.getApplicationContext(), e, "SetThings");
         }
     }

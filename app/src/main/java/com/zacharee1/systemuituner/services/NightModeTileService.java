@@ -22,6 +22,8 @@ public class NightModeTileService extends TileService {
     private Intent mToggleIntent;
     private BroadcastReceiver mToggleReceiver;
 
+    private static final String NIGHT_DISPLAY_ACTIVATED = "night_display_activated";
+
     @Override
     public void onStartListening() {
         final Tile nightMode = getQsTile();
@@ -29,7 +31,7 @@ public class NightModeTileService extends TileService {
 
         if (Build.VERSION.SDK_INT == 24) isActive = Settings.Secure.getInt(getContentResolver(), "twilight_mode", 0) == 1;
         else {
-            isActive = Settings.Secure.getInt(getContentResolver(), Settings.Secure.NIGHT_DISPLAY_ACTIVATED, 0) == 1;
+            isActive = Settings.Secure.getInt(getContentResolver(), NIGHT_DISPLAY_ACTIVATED, 0) == 1;
             nightMode.setLabel(getResources().getText(R.string.night_display));
         }
 
@@ -66,14 +68,14 @@ public class NightModeTileService extends TileService {
                 if (Build.VERSION.SDK_INT == 24) {
                     Settings.Secure.putInt(getContentResolver(), "twilight_mode", 0);
                 } else {
-                    Settings.Secure.putInt(getContentResolver(), Settings.Secure.NIGHT_DISPLAY_ACTIVATED, 0);
+                    Settings.Secure.putInt(getContentResolver(), NIGHT_DISPLAY_ACTIVATED, 0);
                 }
                 nightMode.setState(Tile.STATE_INACTIVE);
             } else {
                 if (Build.VERSION.SDK_INT == 24) {
                     Settings.Secure.putInt(getContentResolver(), "twilight_mode", 1);
                 } else {
-                    Settings.Secure.putInt(getContentResolver(), Settings.Secure.NIGHT_DISPLAY_ACTIVATED, 1);
+                    Settings.Secure.putInt(getContentResolver(), NIGHT_DISPLAY_ACTIVATED, 1);
                 }
                 nightMode.setState(Tile.STATE_ACTIVE);
             }

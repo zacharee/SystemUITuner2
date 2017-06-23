@@ -1,4 +1,4 @@
-package com.zacharee1.systemuituner;
+package com.zacharee1.systemuituner.activities;
 
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
@@ -9,6 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.zacharee1.systemuituner.R;
+import com.zacharee1.systemuituner.SetThings;
 
 public class NoRootSystemSettingsActivity extends AppCompatActivity {
 

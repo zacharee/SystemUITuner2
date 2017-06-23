@@ -1,4 +1,4 @@
-package com.zacharee1.systemuituner;
+package com.zacharee1.systemuituner.activities;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -22,6 +22,9 @@ import android.widget.Button;
 import com.github.paolorotolo.appintro.AppIntro2;
 import com.github.paolorotolo.appintro.AppIntroBaseFragment;
 import com.github.paolorotolo.appintro.AppIntroFragment;
+import com.zacharee1.systemuituner.MainActivity;
+import com.zacharee1.systemuituner.R;
+import com.zacharee1.systemuituner.SetThings;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;

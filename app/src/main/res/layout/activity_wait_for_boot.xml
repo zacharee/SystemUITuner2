@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.zacharee1.systemuituner.WaitForBootActivity">
+    tools:context="com.zacharee1.systemuituner.activities.WaitForBootActivity">
 
     <ScrollView
         android:layout_width="match_parent"

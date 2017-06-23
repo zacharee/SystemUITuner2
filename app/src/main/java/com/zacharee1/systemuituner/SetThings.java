@@ -5,8 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.net.Uri;
@@ -17,6 +15,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+
+import com.zacharee1.systemuituner.activities.NoRootSystemSettingsActivity;
+import com.zacharee1.systemuituner.activities.SetupActivity;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -52,7 +53,7 @@ public class SetThings {
 
     public final int SDK_INT;
 
-    SetThings(Activity activity) {
+    public SetThings(Activity activity) {
         //set all variables
         sharedPreferences = activity.getSharedPreferences(activity.getResources().getText(R.string.sharedprefs_id).toString(), Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -80,6 +81,8 @@ public class SetThings {
                 add(R.id.nav_about);
                 add(R.id.nav_settings);
                 add(R.id.nav_misc);
+                add(R.id.nav_quick_settings);
+                add(R.id.nav_touchwiz);
             }};
 
         currentActivity = activity;

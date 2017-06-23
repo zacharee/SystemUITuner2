@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.zacharee1.systemuituner.NoRootSystemSettingsActivity">
+    tools:context="com.zacharee1.systemuituner.activities.NoRootSystemSettingsActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -65,7 +65,6 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_horizontal"
                     android:background="#555"
                     android:orientation="vertical"
                     android:paddingBottom="16dp"

@@ -1,4 +1,4 @@
-package com.zacharee1.systemuituner;
+package com.zacharee1.systemuituner.activities;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -10,6 +10,10 @@ import android.view.View;
 import android.widget.Button;
 
 import android.widget.Toast;
+
+import com.zacharee1.systemuituner.MainActivity;
+import com.zacharee1.systemuituner.R;
+import com.zacharee1.systemuituner.SetThings;
 
 public class WaitForBootActivity extends AppCompatActivity {
     private SetThings setThings;

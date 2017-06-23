@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.text.Html;
 import android.util.Log;
 
+import com.zacharee1.systemuituner.activities.SetupActivity;
+
 /**
  * Created by Zacha on 4/18/2017.
  */

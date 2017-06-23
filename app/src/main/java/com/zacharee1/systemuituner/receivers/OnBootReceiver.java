@@ -3,6 +3,7 @@ package com.zacharee1.systemuituner.receivers;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.v4.content.WakefulBroadcastReceiver;
@@ -31,7 +32,7 @@ public class OnBootReceiver extends WakefulBroadcastReceiver {
             if (sharedPreferences.getBoolean("safeStatbar", false)) {
                 runReceive(context);
             }
-            startWakefulService(context, new Intent(context, ShutDownListen.class));
+            startWakefulService(context, new Intent(context, ShutDownListen.class).setData(Uri.parse("http://test.com")));
         }
     }
 

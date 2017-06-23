@@ -3,6 +3,7 @@ package com.zacharee1.systemuituner.fragments;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
@@ -15,6 +16,7 @@ import android.widget.Switch;
 
 import com.zacharee1.systemuituner.MainActivity;
 import com.zacharee1.systemuituner.R;
+import com.zacharee1.systemuituner.activities.TaskerInstructionsActivity;
 
 /**
  * Created by Zacha on 4/15/2017.
@@ -53,6 +55,15 @@ public class Settings extends Fragment {
         switches(custom_settings);
         switches(rootMode);
         switches(useFabric);
+
+        Button tasker = view.findViewById(R.id.tasker_instructions);
+        tasker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), TaskerInstructionsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }

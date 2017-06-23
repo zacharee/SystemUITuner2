@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorAccent_Dark"
     android:orientation="vertical"
-    tools:context="com.zacharee1.systemuituner.SetupActivity"
+    tools:context="com.zacharee1.systemuituner.activities.SetupActivity"
     tools:ignore="Overdraw">
 
     <include layout="@layout/fragment_intro_content" />

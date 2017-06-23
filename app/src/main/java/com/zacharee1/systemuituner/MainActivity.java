@@ -23,6 +23,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.zacharee1.systemuituner.activities.SetupActivity;
+import com.zacharee1.systemuituner.activities.WaitForBootActivity;
 import com.zacharee1.systemuituner.fragments.About;
 import com.zacharee1.systemuituner.fragments.Demo;
 import com.zacharee1.systemuituner.fragments.Main;

@@ -54,7 +54,7 @@
     <string name="lp_info">On Lollipop, it may be possible to do this without a computer or root.</string>
     <string name="adb_switch_replacement">Run the command below in an ADB shell to do what the switch would:</string>
     <string name="set_perms">Set Perms</string>
-    <string name="sorry">Sorry…</string>
+    <string name="sorry">Sorry...</string>
     <string name="android_issue">This is an issue in Android itself, and I can\'t do anything about it.</string>
     <string name="root_needed_toggle">To use this toggle from the phone, you need root.</string>
     <string name="example_settings_adb" translatable="false" tools:ignore="Typos">adb shell settings put system SETTINGS_VALUE VALUE</string>

@@ -238,4 +238,8 @@
     <string name="desired_setting_key">Clave querido</string>
     <string name="desired_setting_value">Valor querido</string>
     <string name="tasker_intro">Aquí hay algos instrucciones simples para Tasker. No sé como usar Tasker, entonces solamente puedo añadir suporte para \"intent broadcasts\"</string>
+    <string name="back_up_blacklist">Guardar Lista Negra</string>
+    <string name="restore_blacklist">Restaurar Lista Negra</string>
+    <string name="blacklist_backed_up">Lista Negra Guardado</string>
+    <string name="blacklist_restored">Lista Negra Restaurado</string>
 </resources>

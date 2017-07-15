@@ -69,9 +69,8 @@
 
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
-                        android:layout_weight="1"
                         app:cardElevation="1dp"
                         app:cardUseCompatPadding="true">
 
@@ -83,8 +82,7 @@
 
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
                         app:cardElevation="1dp"
                         app:cardUseCompatPadding="true"
                         tools:ignore="NestedWeights">

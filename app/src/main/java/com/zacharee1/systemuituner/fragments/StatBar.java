@@ -1,8 +1,9 @@
 package com.zacharee1.systemuituner.fragments;
 
 import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.support.v4.app.Fragment;
+
+import android.support.v4.app.FragmentManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -37,53 +38,53 @@ public class StatBar extends Fragment {
     private final ArrayList<Switch> switches = new ArrayList<>();
     private BroadcastReceiver check_toggles_receiver;
 
-    private final String ICON_BLACKLIST = "icon_blacklist";
-    private final String SLOT_BLUETOOTH = "bluetooth";
-    private final String SLOT_WIFI = "wifi";
-    private final String SLOT_ETHERNET = "ethernet";
-    private final String SLOT_MOBILE = "mobile";
-    private final String SLOT_AIRPLANE = "airplane";
-    private final String SLOT_MAN_PROFILE = "managed_profile";
-    private final String SLOT_ZEN = "zen";
-    private final String SLOT_ALARM = "alarm,alarm_clock";
-    private final String SLOT_HOTSPOT = "hotspot";
-    private final String SLOT_DATA_SAVER = "data_saver";
-    private final String SLOT_NFC = "nfc,nfc_on";
-    private final String SLOT_CLOCK = "clock";
-    private final String SLOT_DND = "do_not_disturb";
-    private final String SLOT_ROTATION = "rotate";
-    private final String SLOT_BATTERY = "battery";
-    private final String SLOT_SPEAKERPHONE = "speakerphone";
-    private final String SLOT_CAST = "cast";
-    private final String SLOT_HEADSET = "headset";
-    private final String SLOT_LOCATION = "location";
-    private final String SLOT_SU = "su";
-    private final String SLOT_VPN = "vpn";
-    private final String SLOT_VOLUME = "volume";
+    private static final String ICON_BLACKLIST = "icon_blacklist";
+    private static final String SLOT_BLUETOOTH = "bluetooth";
+    private static final String SLOT_WIFI = "wifi";
+    private static final String SLOT_ETHERNET = "ethernet";
+    private static final String SLOT_MOBILE = "mobile";
+    private static final String SLOT_AIRPLANE = "airplane";
+    private static final String SLOT_MAN_PROFILE = "managed_profile";
+    private static final String SLOT_ZEN = "zen";
+    private static final String SLOT_ALARM = "alarm,alarm_clock";
+    private static final String SLOT_HOTSPOT = "hotspot";
+    private static final String SLOT_DATA_SAVER = "data_saver";
+    private static final String SLOT_NFC = "nfc,nfc_on";
+    private static final String SLOT_CLOCK = "clock";
+    private static final String SLOT_DND = "do_not_disturb";
+    private static final String SLOT_ROTATION = "rotate";
+    private static final String SLOT_BATTERY = "battery";
+    private static final String SLOT_SPEAKERPHONE = "speakerphone";
+    private static final String SLOT_CAST = "cast";
+    private static final String SLOT_HEADSET = "headset";
+    private static final String SLOT_LOCATION = "location";
+    private static final String SLOT_SU = "su";
+    private static final String SLOT_VPN = "vpn";
+    private static final String SLOT_VOLUME = "volume";
 
-    private final String SLOT_REMOTE_CALL = "remote_call";
-    private final String SLOT_OTG_MOUSE = "otg_mouse";
-    private final String SLOT_OTG_KEYBOARD = "otg_keyboard";
-    private final String SLOT_DMB = "dmb";
-    private final String SLOT_FELICA_LOCK = "felica_lock";
-    private final String SLOT_ANSWERING_MEMO = "answering_memo";
-    private final String SLOT_IME = "ime";
-    private final String SLOT_SYNC_FAILING = "sync_failing";
-    private final String SLOT_SYNC_ACTIVE = "sync_active";
-    private final String SLOT_NFCLOCK = "nfclock";
-    private final String SLOT_TTY = "tty";
-    private final String SLOT_WIFI_CALLING = "wifi_calling";
-    private final String SLOT_CDMA_ERI = "cdma_eri";
-    private final String SLOT_DATA_CONNECTION = "data_connection";
-    private final String SLOT_PHONE_EVDO_SIGNAL = "phone_evdo_signal";
-    private final String SLOT_PHONE_SIGNAL = "phone_signal";
-    private final String SLOT_SECURE = "secure";
-    private final String SLOT_VOLTE = "volte";
+    private static final String SLOT_REMOTE_CALL = "remote_call";
+    private static final String SLOT_OTG_MOUSE = "otg_mouse";
+    private static final String SLOT_OTG_KEYBOARD = "otg_keyboard";
+    private static final String SLOT_DMB = "dmb";
+    private static final String SLOT_FELICA_LOCK = "felica_lock";
+    private static final String SLOT_ANSWERING_MEMO = "answering_memo";
+    private static final String SLOT_IME = "ime";
+    private static final String SLOT_SYNC_FAILING = "sync_failing";
+    private static final String SLOT_SYNC_ACTIVE = "sync_active";
+    private static final String SLOT_NFCLOCK = "nfclock";
+    private static final String SLOT_TTY = "tty";
+    private static final String SLOT_WIFI_CALLING = "wifi_calling";
+    private static final String SLOT_CDMA_ERI = "cdma_eri";
+    private static final String SLOT_DATA_CONNECTION = "data_connection";
+    private static final String SLOT_PHONE_EVDO_SIGNAL = "phone_evdo_signal";
+    private static final String SLOT_PHONE_SIGNAL = "phone_signal";
+    private static final String SLOT_SECURE = "secure";
+    private static final String SLOT_VOLTE = "volte";
 
-    private final String SLOT_VOWIFI = "vowifi";
-    private final String SLOT_POWER_SAVER = "power_saver";
+    private static final String SLOT_VOWIFI = "vowifi";
+    private static final String SLOT_POWER_SAVER = "power_saver";
 
-    private final String RESET_BLACKLIST = "reset_blacklist";
+    private static final String RESET_BLACKLIST = "reset_blacklist";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

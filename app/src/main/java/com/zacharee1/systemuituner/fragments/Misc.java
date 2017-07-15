@@ -1,7 +1,8 @@
 package com.zacharee1.systemuituner.fragments;
 
 import android.annotation.TargetApi;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
+
 import android.app.TimePickerDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;

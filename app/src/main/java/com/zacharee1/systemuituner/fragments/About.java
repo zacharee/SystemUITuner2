@@ -1,6 +1,6 @@
 package com.zacharee1.systemuituner.fragments;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.pm.PackageInfo;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;

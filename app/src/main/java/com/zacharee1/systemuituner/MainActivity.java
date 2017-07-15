@@ -1,7 +1,7 @@
 package com.zacharee1.systemuituner;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setThings = new SetThings(this);
         fragment = new Fragment();
-        fragmentManager = getFragmentManager();
+        fragmentManager = getSupportFragmentManager();
         handler = new Handler();
 
         mIntent = getIntent();
@@ -557,5 +557,19 @@ public class MainActivity extends AppCompatActivity
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
+    }
+
+    public void backupIconBlacklist(View v) {
+        String icon_blacklist_orig = android.provider.Settings.Secure.getString(getContentResolver(), "icon_blacklist");
+        setThings.editor.putString("ibbak", icon_blacklist_orig).apply();
+
+        Toast.makeText(this, getResources().getString(R.string.blacklist_backed_up), Toast.LENGTH_SHORT).show();
+    }
+
+    public void restoreIconBlacklist(View v) {
+        String icon_blacklist_bak = setThings.sharedPreferences.getString("ibbak", "");
+        setThings.settings("secure", "icon_blacklist", icon_blacklist_bak);
+
+        Toast.makeText(this, getResources().getString(R.string.blacklist_restored), Toast.LENGTH_SHORT).show();
     }
 }

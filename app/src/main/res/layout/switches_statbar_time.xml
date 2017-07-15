@@ -16,16 +16,6 @@
         android:textStyle="italic" />
 
     <Switch
-        android:id="@+id/clock"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:checked="false"
-        android:switchMinWidth="50dp"
-        android:text="@string/clock"
-        android:textSize="18sp" />
-
-    <Switch
         android:id="@+id/alarm_clock_icon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,13 +26,13 @@
         android:textSize="18sp" />
 
     <Switch
-        android:id="@+id/zen_icon"
+        android:id="@+id/clock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:checked="false"
         android:switchMinWidth="50dp"
-        android:text="@string/zen_icon"
+        android:text="@string/clock"
         android:textSize="18sp" />
 
     <Switch
@@ -53,6 +43,16 @@
         android:checked="false"
         android:switchMinWidth="50dp"
         android:text="@string/do_not_disturb"
+        android:textSize="18sp" />
+
+    <Switch
+        android:id="@+id/zen_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:checked="false"
+        android:switchMinWidth="50dp"
+        android:text="@string/zen_icon"
         android:textSize="18sp" />
 
 

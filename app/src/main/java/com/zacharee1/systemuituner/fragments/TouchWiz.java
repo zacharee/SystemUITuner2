@@ -1,12 +1,20 @@
 package com.zacharee1.systemuituner.fragments;
 
-import android.app.Fragment;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.os.Build;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -67,6 +75,37 @@ public class TouchWiz extends Fragment {
         }
 
         view = inflater.inflate(R.layout.fragment_tw, container, false);
+
+        int drawable = R.drawable.ic_warning_red;
+        if ((Build.MANUFACTURER.toUpperCase().contains("SAMSUNG") || Build.MANUFACTURER.toUpperCase().contains("VIVO")) && !activity.setThings.sharedPreferences.getBoolean("samsungRisk", false)) { //show warning for Samsung and Vivo users
+            view.setVisibility(View.GONE);
+            //noinspection deprecation
+
+            new AlertDialog.Builder(view.getContext())
+                    .setIcon(drawable)
+                    .setTitle(Html.fromHtml("<font color='#ff0000'>" + getResources().getText(R.string.warning) + "</font>"))
+                    .setMessage(getResources().getText(R.string.samsung_warning_message))
+                    .setPositiveButton(getResources().getText(R.string.yes), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            activity.setThings.editor.putBoolean("samsungRisk", true);
+                            activity.setThings.editor.apply();
+                            view.setVisibility(View.VISIBLE);
+                        }
+                    })
+                    .setNegativeButton(getResources().getText(R.string.no), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Main fragment = new Main();
+                            FragmentManager fragmentManager = getFragmentManager();
+                            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+                            NavigationView navigationView = activity.findViewById(R.id.nav_view);
+                            Menu navMenu = navigationView.getMenu();
+                            navMenu.findItem(R.id.nav_home).setChecked(true);
+                        }
+                    })
+                    .show();
+        }
 
         setupSwitches();
         setupButtons();

@@ -25,13 +25,13 @@
             android:orientation="vertical">
 
             <Switch
-                android:id="@+id/managed_profile_icon"
+                android:id="@+id/answering_memo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:checked="false"
                 android:switchMinWidth="50dp"
-                android:text="@string/managed_profile_icon"
+                android:text="@string/answering_memo_icon"
                 android:textSize="18sp" />
 
             <Switch
@@ -55,23 +55,23 @@
                 android:textSize="18sp" />
 
             <Switch
-                android:id="@+id/rotate"
+                android:id="@+id/felica_lock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:checked="false"
                 android:switchMinWidth="50dp"
-                android:text="@string/rotation_lock_icon"
+                android:text="@string/felica_lock_icon"
                 android:textSize="18sp" />
 
             <Switch
-                android:id="@+id/nfc"
+                android:id="@+id/ime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:checked="false"
                 android:switchMinWidth="50dp"
-                android:text="@string/nfc_icon"
+                android:text="@string/ime_icon"
                 android:textSize="18sp" />
 
             <Switch
@@ -85,13 +85,33 @@
                 android:textSize="18sp" />
 
             <Switch
-                android:id="@+id/su"
+                android:id="@+id/managed_profile_icon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:checked="false"
                 android:switchMinWidth="50dp"
-                android:text="@string/su_icon"
+                android:text="@string/managed_profile_icon"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/nfc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/nfc_icon"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/nfclock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/nfc_lock_icon"
                 android:textSize="18sp" />
 
             <Switch
@@ -115,63 +135,23 @@
                 android:textSize="18sp" />
 
             <Switch
-                android:id="@+id/felica_lock"
+                android:id="@+id/power_saver"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:checked="false"
                 android:switchMinWidth="50dp"
-                android:text="@string/felica_lock_icon"
+                android:text="@string/power_saver_icon"
                 android:textSize="18sp" />
 
             <Switch
-                android:id="@+id/answering_memo"
+                android:id="@+id/rotate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:checked="false"
                 android:switchMinWidth="50dp"
-                android:text="@string/answering_memo_icon"
-                android:textSize="18sp" />
-
-            <Switch
-                android:id="@+id/ime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checked="false"
-                android:switchMinWidth="50dp"
-                android:text="@string/ime_icon"
-                android:textSize="18sp" />
-
-            <Switch
-                android:id="@+id/sync_failing"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checked="false"
-                android:switchMinWidth="50dp"
-                android:text="@string/sync_failing_icon"
-                android:textSize="18sp" />
-
-            <Switch
-                android:id="@+id/sync_active"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checked="false"
-                android:switchMinWidth="50dp"
-                android:text="@string/sync_active_icon"
-                android:textSize="18sp" />
-
-            <Switch
-                android:id="@+id/nfclock"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checked="false"
-                android:switchMinWidth="50dp"
-                android:text="@string/nfc_lock_icon"
+                android:text="@string/rotation_lock_icon"
                 android:textSize="18sp" />
 
             <Switch
@@ -185,14 +165,35 @@
                 android:textSize="18sp" />
 
             <Switch
-                android:id="@+id/power_saver"
+                android:id="@+id/su"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:checked="false"
                 android:switchMinWidth="50dp"
-                android:text="@string/power_saver_icon"
+                android:text="@string/su_icon"
                 android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/sync_active"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/sync_active_icon"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/sync_failing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/sync_failing_icon"
+                android:textSize="18sp" />
+
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

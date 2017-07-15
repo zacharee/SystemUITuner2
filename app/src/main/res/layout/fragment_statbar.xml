@@ -35,6 +35,11 @@
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:text="@string/reset_blacklist" />
 
+            <include
+                layout="@layout/statbar_icon_button_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

@@ -25,6 +25,16 @@
             android:orientation="vertical">
 
             <Switch
+                android:id="@+id/airplane_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/airplane_icon"
+                android:textSize="18sp" />
+
+            <Switch
                 android:id="@+id/bt_icon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -35,6 +45,26 @@
                 android:textSize="18sp" />
 
             <Switch
+                android:id="@+id/cdma_eri"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/cdma_eri_icon"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/data_connection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/data_connection_icon"
+                android:textSize="18sp" />
+
+            <Switch
                 android:id="@+id/data_saver"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -42,6 +72,16 @@
                 android:checked="false"
                 android:switchMinWidth="50dp"
                 android:text="@string/data_saver_icon"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/dmb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/dmb"
                 android:textSize="18sp" />
 
             <Switch
@@ -75,33 +115,23 @@
                 android:textSize="18sp" />
 
             <Switch
-                android:id="@+id/airplane_icon"
+                android:id="@+id/phone_evdo_signal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:checked="false"
                 android:switchMinWidth="50dp"
-                android:text="@string/airplane_icon"
+                android:text="@string/evdo_signal_icon"
                 android:textSize="18sp" />
 
             <Switch
-                android:id="@+id/wifi_icon"
+                android:id="@+id/phone_signal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:checked="false"
                 android:switchMinWidth="50dp"
-                android:text="@string/wifi_icon"
-                android:textSize="18sp" />
-
-            <Switch
-                android:id="@+id/vpn_icon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checked="false"
-                android:switchMinWidth="50dp"
-                android:text="@string/vpn_icon"
+                android:text="@string/phone_signal_icon"
                 android:textSize="18sp" />
 
             <Switch
@@ -125,13 +155,13 @@
                 android:textSize="18sp" />
 
             <Switch
-                android:id="@+id/dmb"
+                android:id="@+id/vpn_icon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:checked="false"
                 android:switchMinWidth="50dp"
-                android:text="@string/dmb"
+                android:text="@string/vpn_icon"
                 android:textSize="18sp" />
 
             <Switch
@@ -145,44 +175,15 @@
                 android:textSize="18sp" />
 
             <Switch
-                android:id="@+id/cdma_eri"
+                android:id="@+id/wifi_icon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:checked="false"
                 android:switchMinWidth="50dp"
-                android:text="@string/cdma_eri_icon"
+                android:text="@string/wifi_icon"
                 android:textSize="18sp" />
 
-            <Switch
-                android:id="@+id/data_connection"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checked="false"
-                android:switchMinWidth="50dp"
-                android:text="@string/data_connection_icon"
-                android:textSize="18sp" />
-
-            <Switch
-                android:id="@+id/phone_evdo_signal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checked="false"
-                android:switchMinWidth="50dp"
-                android:text="@string/evdo_signal_icon"
-                android:textSize="18sp" />
-
-            <Switch
-                android:id="@+id/phone_signal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checked="false"
-                android:switchMinWidth="50dp"
-                android:text="@string/phone_signal_icon"
-                android:textSize="18sp" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

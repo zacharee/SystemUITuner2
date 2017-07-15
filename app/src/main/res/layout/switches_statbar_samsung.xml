@@ -21,10 +21,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="10dp"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:text="@string/reset_blacklist" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/statbar_icon_button_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -36,56 +48,6 @@
             android:orientation="vertical">
 
             <Switch
-                android:id="@+id/knox_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checked="false"
-                android:switchMinWidth="50dp"
-                android:text="@string/knox_icon"
-                android:textSize="18sp" />
-
-            <Switch
-                android:id="@+id/smart_network"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checked="false"
-                android:switchMinWidth="50dp"
-                android:text="@string/smart_network_icon"
-                android:textSize="18sp" />
-
-            <Switch
-                android:id="@+id/glove"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checked="false"
-                android:switchMinWidth="50dp"
-                android:text="@string/glove_icon"
-                android:textSize="18sp" />
-
-            <Switch
-                android:id="@+id/gesture"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checked="false"
-                android:switchMinWidth="50dp"
-                android:text="@string/gesture_icon"
-                android:textSize="18sp" />
-
-            <Switch
-                android:id="@+id/smart_scroll"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checked="false"
-                android:switchMinWidth="50dp"
-                android:text="@string/smart_scroll_icon"
-                android:textSize="18sp" />
-
-            <Switch
                 android:id="@+id/face"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -93,36 +55,6 @@
                 android:checked="false"
                 android:switchMinWidth="50dp"
                 android:text="@string/face_icon"
-                android:textSize="18sp" />
-
-            <Switch
-                android:id="@+id/gps"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checked="false"
-                android:switchMinWidth="50dp"
-                android:text="@string/gps_icon"
-                android:textSize="18sp" />
-
-            <Switch
-                android:id="@+id/lbs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checked="false"
-                android:switchMinWidth="50dp"
-                android:text="@string/lbs_icon"
-                android:textSize="18sp" />
-
-            <Switch
-                android:id="@+id/wearable_gear"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checked="false"
-                android:switchMinWidth="50dp"
-                android:text="@string/wearable_icon"
                 android:textSize="18sp" />
 
             <Switch
@@ -136,63 +68,33 @@
                 android:textSize="18sp" />
 
             <Switch
-                android:id="@+id/rcs"
+                android:id="@+id/gesture"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:checked="false"
                 android:switchMinWidth="50dp"
-                android:text="@string/rcs_icon"
+                android:text="@string/gesture_icon"
                 android:textSize="18sp" />
 
             <Switch
-                android:id="@+id/wifi_p2p"
+                android:id="@+id/glove"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:checked="false"
                 android:switchMinWidth="50dp"
-                android:text="@string/wifi_p2p_icon"
+                android:text="@string/glove_icon"
                 android:textSize="18sp" />
 
             <Switch
-                android:id="@+id/wifi_ap"
+                android:id="@+id/gps"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:checked="false"
                 android:switchMinWidth="50dp"
-                android:text="@string/wifi_ap_icon"
-                android:textSize="18sp" />
-
-            <Switch
-                android:id="@+id/wifi_oxygen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checked="false"
-                android:switchMinWidth="50dp"
-                android:text="@string/wifi_oxygen_icon"
-                android:textSize="18sp" />
-
-            <Switch
-                android:id="@+id/phone_signal_second_stub"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checked="false"
-                android:switchMinWidth="50dp"
-                android:text="@string/phone_signal_second_stub"
-                android:textSize="18sp" />
-
-            <Switch
-                android:id="@+id/toddler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checked="false"
-                android:switchMinWidth="50dp"
-                android:text="@string/toddler_icon"
+                android:text="@string/gps_icon"
                 android:textSize="18sp" />
 
             <Switch
@@ -216,6 +118,56 @@
                 android:textSize="18sp" />
 
             <Switch
+                android:id="@+id/knox_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/knox_icon"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/lbs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/lbs_icon"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/phone_signal_second_stub"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/phone_signal_second_stub"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/private_mode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/private_mode_icon"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/rcs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/rcs_icon"
+                android:textSize="18sp" />
+
+            <Switch
                 android:id="@+id/safezone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -223,16 +175,6 @@
                 android:checked="false"
                 android:switchMinWidth="50dp"
                 android:text="@string/safezone_icon"
-                android:textSize="18sp" />
-
-            <Switch
-                android:id="@+id/wimax"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checked="false"
-                android:switchMinWidth="50dp"
-                android:text="@string/wimax_icon"
                 android:textSize="18sp" />
 
             <Switch
@@ -246,14 +188,85 @@
                 android:textSize="18sp" />
 
             <Switch
-                android:id="@+id/private_mode"
+                android:id="@+id/smart_network"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:checked="false"
                 android:switchMinWidth="50dp"
-                android:text="@string/private_mode_icon"
+                android:text="@string/smart_network_icon"
                 android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/smart_scroll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/smart_scroll_icon"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/toddler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/toddler_icon"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/wearable_gear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/wearable_icon"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/wifi_ap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/wifi_ap_icon"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/wifi_oxygen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/wifi_oxygen_icon"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/wifi_p2p"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/wifi_p2p_icon"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/wimax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checked="false"
+                android:switchMinWidth="50dp"
+                android:text="@string/wimax_icon"
+                android:textSize="18sp" />
+
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

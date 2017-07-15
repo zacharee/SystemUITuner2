@@ -158,15 +158,31 @@ public class SetThings {
                 break;
             case "icon_blacklist":
                 setting = 1;
+
                 String blacklist = Settings.Secure.getString(currentActivity.getContentResolver(), "icon_blacklist");
-                String[] blacklistItems = new String[]{""};
-                if (blacklist != null && blacklist.length() > 0) blacklistItems = blacklist.split(",");
+
+                ArrayList<String> blacklistItems = new ArrayList<>();
+                if (blacklist != null) blacklistItems.addAll(Arrays.asList(blacklist.split(",")));
 
                 ArrayList<String> blacklistPref = new ArrayList<>();
                 if (pref != null) blacklistPref.addAll(Arrays.asList(pref.split(",")));
 
-                for (String item : blacklistItems) {
-                    if (blacklistPref.contains(item)) setting = 0;
+//                for (String item : blacklistItems) {
+//                    if (blacklistItems.contains(item)) setting = 0;
+//                    Log.e("SETTING_BL", blacklistItems.toString());
+//                    Log.e("SETTING_PR", blacklistPref.toString());
+//                    Log.e("SETTING_IT", item.concat(" ").concat(setting + ""));
+//                }
+
+                for (String i : blacklistItems)
+                {
+                    for (String j : blacklistPref)
+                    {
+                        if (i.equals(j)) {
+                            setting = 0;
+                            Log.e("SETTING", i);
+                        }
+                    }
                 }
                 break;
             case "dark_mode":

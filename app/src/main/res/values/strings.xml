@@ -294,4 +294,8 @@
     <string name="desired_setting_value">Desired setting value</string>
     <string name="value" translatable="false">value</string>
     <string name="tasker_intro">Here\'s a quick set of instructions for Tasker. Since I don\'t know how to use Tasker, I can only build in support for intent broadcasts.</string>
+    <string name="back_up_blacklist">Back Up Blacklist</string>
+    <string name="restore_blacklist">Restore Blacklist</string>
+    <string name="blacklist_backed_up">Blacklist Backed Up</string>
+    <string name="blacklist_restored">Blacklist Restored</string>
 </resources>
